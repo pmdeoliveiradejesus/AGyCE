@@ -1,0 +1,120 @@
+
+--- Job M1_4_E6c.gms Start 11/08/25 19:39:21 51.2.1 5fb43f63 DEX-DEG x86 64bit/macOS
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/51/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/pm.deoliveiradejes/Desktop/M2_AGPE_models/Ejemplo_6_MILP/gams/M1_4_E6c.gms
+    PageSize 0
+    ScrDir /Users/pm.deoliveiradejes/Desktop/M2_AGPE_models/Ejemplo_6_MILP/gams/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/51/Resources/
+    LogOption 3
+    AppendLog 1
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+Licensee: GAMS Demo, for EULA and demo limitations see   G250826+0003Cc-GEN
+          https://www.gams.com/latest/docs/UG%5FLicense.html         DC0000
+          /Users/pm.deoliveiradejes/Library/Application Support/GAMS/gamslice.txt
+          v:2                                                              
+          Demo license for demonstration and instructional purposes only
+System information: 4 physical cores and 16 Gb physical memory detected
+GAMS 51.2.1   Copyright (C) 1987-2025 GAMS Development. All rights reserved
+--- Starting compilation
+--- M1_4_E6c.gms(121) 3 Mb
+--- Starting execution: elapsed 0:00:00.007
+--- M1_4_E6c.gms(118) 4 Mb
+--- Generating MIP model modelAGPEcolombia
+--- M1_4_E6c.gms(121) 4 Mb
+---   186 rows  185 columns  582 non-zeroes
+---   48 discrete-columns
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 1.691E+01, 1.297E+06] - Zero values observed as well
+--- Bound     [min, max] : [ 1.000E+00, 1.900E+03] - Zero values observed as well
+--- Matrix    [min, max] : [ 9.937E-02, 6.000E+02]
+--- Executing GUROBI (Solvelink=2): elapsed 0:00:00.014
+
+    Gurobi           51.2.1 5fb43f63 Oct 13, 2025          DEG x86 64bit/macOS    
+
+... GAMS/Gurobi demo/community requires a Gurobi license from Gurobi Optimization.
+... This solver runs with a demo license. No commercial use.
+
+    Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (mac64[x86] - Darwin 21.6.0 21H1320)
+    
+    CPU model: Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz
+    Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+    
+    Non-default parameters:
+    MIPGapAbs  0
+    LogToConsole  0
+    
+    Optimize a model with 186 rows, 185 columns and 582 nonzeros
+    Model fingerprint: 0xb05766e7
+    Variable types: 137 continuous, 48 integer (0 binary)
+    Coefficient statistics:
+      Matrix range     [1e-01, 6e+02]
+      Objective range  [1e+00, 1e+00]
+      Bounds range     [1e+00, 2e+03]
+      RHS range        [2e+01, 1e+06]
+    Presolve removed 56 rows and 33 columns
+    Presolve time: 0.00s
+    Presolved: 130 rows, 152 columns, 390 nonzeros
+    Variable types: 109 continuous, 43 integer (43 binary)
+    Found heuristic solution: objective 6185.8051564
+    Found heuristic solution: objective 9602.0108754
+    
+    Root relaxation: objective 1.959730e+04, 84 iterations, 0.00 seconds (0.00 work units)
+    
+        Nodes    |    Current Node    |     Objective Bounds      |     Work
+     Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+    
+    *    0     0               0    19597.302428 19597.3024  0.00%     -    0s
+    
+    Explored 1 nodes (84 simplex iterations) in 0.01 seconds (0.00 work units)
+    Thread count was 8 (of 8 available processors)
+    
+    Solution count 3: 19597.3 9602.01 6185.81 
+    
+    Optimal solution found (tolerance 1.00e-04)
+    Best objective 1.959730242837e+04, best bound 1.959730242837e+04, gap 0.0000%
+    
+    User-callback calls 477, time in user-callback 0.00 sec
+
+... Solving fixed model...
+... This solver runs with a demo license. No commercial use.
+
+    Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (mac64[x86] - Darwin 21.6.0 21H1320)
+    
+    CPU model: Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz
+    Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+    
+    Non-default parameters:
+    MIPGapAbs  0
+    LogToConsole  0
+    
+    Optimize a model with 186 rows, 185 columns and 582 nonzeros
+    Model fingerprint: 0x6756a91f
+    Coefficient statistics:
+      Matrix range     [1e-01, 6e+02]
+      Objective range  [1e+00, 1e+00]
+      Bounds range     [1e+00, 2e+03]
+      RHS range        [2e+01, 1e+06]
+    Presolve removed 182 rows and 177 columns
+    Presolve time: 0.00s
+    Presolved: 4 rows, 8 columns, 11 nonzeros
+    
+    Iteration    Objective       Primal Inf.    Dual Inf.      Time
+           0    1.1477281e+05   4.350774e+02   0.000000e+00      0s
+    Extra simplex iterations after uncrush: 1
+           2    1.9597302e+04   0.000000e+00   0.000000e+00      0s
+    
+    Solved in 2 iterations and 0.00 seconds (0.00 work units)
+    Optimal objective  1.959730243e+04
+    
+    User-callback calls 85, time in user-callback 0.00 sec
+
+--- Reading solution for model modelAGPEcolombia
+--- Executing after solve: elapsed 0:00:00.083
+--- GDX File (execute_unload) /Users/pm.deoliveiradejes/Desktop/M2_AGPE_models/Ejemplo_6_MILP/gams/Results M1_4_E6c.gdx
+*** Status: Normal completion
+--- Job M1_4_E6c.gms Stop 11/08/25 19:39:21 elapsed 0:00:00.085
