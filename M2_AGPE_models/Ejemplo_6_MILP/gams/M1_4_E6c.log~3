@@ -1,5 +1,5 @@
 
---- Job M1_4_E6c.gms Start 11/08/25 19:38:45 51.2.1 5fb43f63 DEX-DEG x86 64bit/macOS
+--- Job M1_4_E6c.gms Start 11/08/25 19:39:10 51.2.1 5fb43f63 DEX-DEG x86 64bit/macOS
 --- Applying:
     /Library/Frameworks/GAMS.framework/Versions/51/Resources/gmsprmun.txt
 --- GAMS Parameters defined
@@ -29,7 +29,7 @@ GAMS 51.2.1   Copyright (C) 1987-2025 GAMS Development. All rights reserved
 ---   186 rows  185 columns  582 non-zeroes
 ---   48 discrete-columns
 --- Range statistics (absolute non-zero finite values)
---- RHS       [min, max] : [ 1.699E+00, 9.596E+05] - Zero values observed as well
+--- RHS       [min, max] : [ 7.296E+00, 9.596E+05] - Zero values observed as well
 --- Bound     [min, max] : [ 1.000E+00, 1.900E+03] - Zero values observed as well
 --- Matrix    [min, max] : [ 9.937E-02, 6.000E+02]
 --- Executing GUROBI (Solvelink=2): elapsed 0:00:00.013
@@ -49,71 +49,43 @@ GAMS 51.2.1   Copyright (C) 1987-2025 GAMS Development. All rights reserved
     LogToConsole  0
     
     Optimize a model with 186 rows, 185 columns and 582 nonzeros
-    Model fingerprint: 0x6efd66a5
+    Model fingerprint: 0x00e24d31
     Variable types: 137 continuous, 48 integer (0 binary)
     Coefficient statistics:
       Matrix range     [1e-01, 6e+02]
       Objective range  [1e+00, 1e+00]
       Bounds range     [1e+00, 2e+03]
-      RHS range        [2e+00, 1e+06]
+      RHS range        [7e+00, 1e+06]
     Presolve removed 51 rows and 28 columns
     Presolve time: 0.00s
     Presolved: 135 rows, 157 columns, 404 nonzeros
     Variable types: 112 continuous, 45 integer (45 binary)
-    Found heuristic solution: objective 106487.94921
     
-    Root relaxation: objective 1.085720e+05, 90 iterations, 0.00 seconds (0.00 work units)
+    Root relaxation: infeasible, 111 iterations, 0.00 seconds (0.00 work units)
     
         Nodes    |    Current Node    |     Objective Bounds      |     Work
      Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
     
-    *    0     0               0    108572.01363 108572.014  0.00%     -    0s
+         0     0 infeasible    0               - infeasible      -     -    0s
     
-    Explored 1 nodes (90 simplex iterations) in 0.01 seconds (0.00 work units)
+    Explored 1 nodes (111 simplex iterations) in 0.01 seconds (0.00 work units)
     Thread count was 8 (of 8 available processors)
     
-    Solution count 2: 108572 106488 
+    Solution count 0
+    No other solutions better than -1e+100
     
-    Optimal solution found (tolerance 1.00e-04)
-    Best objective 1.085720136286e+05, best bound 1.085720136286e+05, gap 0.0000%
+    Model is infeasible or unbounded
+    Best objective -, best bound -, gap -
     
-    User-callback calls 474, time in user-callback 0.00 sec
+    User-callback calls 472, time in user-callback 0.00 sec
 
-... Solving fixed model...
-... This solver runs with a demo license. No commercial use.
-
-    Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (mac64[x86] - Darwin 21.6.0 21H1320)
-    
-    CPU model: Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz
-    Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
-    
-    Non-default parameters:
-    MIPGapAbs  0
-    LogToConsole  0
-    
-    Optimize a model with 186 rows, 185 columns and 582 nonzeros
-    Model fingerprint: 0xfa65b7aa
-    Coefficient statistics:
-      Matrix range     [1e-01, 6e+02]
-      Objective range  [1e+00, 1e+00]
-      Bounds range     [1e+00, 2e+03]
-      RHS range        [2e+00, 1e+06]
-    Presolve removed 184 rows and 181 columns
-    Presolve time: 0.00s
-    Presolved: 2 rows, 4 columns, 5 nonzeros
-    
-    Iteration    Objective       Primal Inf.    Dual Inf.      Time
-           0    1.3409696e+05   5.759391e+01   0.000000e+00      0s
-    Extra simplex iterations after uncrush: 1
-           2    1.0857201e+05   0.000000e+00   0.000000e+00      0s
-    
-    Solved in 2 iterations and 0.00 seconds (0.00 work units)
-    Optimal objective  1.085720136e+05
-    
-    User-callback calls 85, time in user-callback 0.00 sec
+... Solver returned solve status InfeasibleOrUnbounded. Using InfeasibleNoSolution instead.
 
 --- Reading solution for model modelAGPEcolombia
---- Executing after solve: elapsed 0:00:00.093
+***
+*** Solver did not provide marginals for model modelAGPEcolombia
+***
+--- Executing after solve: elapsed 0:00:00.079
 --- GDX File (execute_unload) /Users/pm.deoliveiradejes/Desktop/M2_AGPE_models/Ejemplo_6_MILP/gams/Results M1_4_E6c.gdx
 *** Status: Normal completion
---- Job M1_4_E6c.gms Stop 11/08/25 19:38:45 elapsed 0:00:00.095
+--- Job M1_4_E6c.gms Stop 11/08/25 19:39:10 elapsed 0:00:00.081

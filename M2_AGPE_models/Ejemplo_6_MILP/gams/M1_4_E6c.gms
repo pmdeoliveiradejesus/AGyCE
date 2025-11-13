@@ -60,7 +60,7 @@ Binary Variable
 *   w2          'defines if Exp < Imp (w2=1) or Exp > Imp (w2=0)' 
    w3(t)       'defines if the AGPE is exporting or importing energy from the system';   
 Scalar 
-   Ppvmax    / 569/   
+   Ppvmax    /969/   
    Plmax     / 231.241369863014 /
    SOC0      / 100  /
    C         / 2000  /

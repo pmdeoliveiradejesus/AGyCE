@@ -1,4 +1,4 @@
-GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/08/25 19:39:21 Page 1
+GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/09/25 08:39:56 Page 1
 Despacho óptimo Industria+BESS+PV OnGrid (Caso Colombia ,24H)
 C o m p i l a t i o n
 
@@ -64,7 +64,7 @@ C o m p i l a t i o n
   60  *   w2          'defines if Exp < Imp (w2=1) or Exp > Imp (w2=0)'
   61     w3(t)       'defines if the AGPE is exporting or importing energy from the system';
   62  Scalar
-  63     Ppvmax    / 769/
+  63     Ppvmax    /969/
   64     Plmax     / 231.241369863014 /
   65     SOC0      / 100  /
   66     C         / 2000  /
@@ -125,8 +125,8 @@ C o m p i l a t i o n
  121  execute_unload 'Results M1_4_E6c.gdx';
 
 
-COMPILATION TIME     =        0.002 SECONDS      3 MB  51.2.1 5fb43f63 DEX-DEG
-GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/08/25 19:39:21 Page 2
+COMPILATION TIME     =        0.001 SECONDS      3 MB  51.2.1 5fb43f63 DEX-DEG
+GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/09/25 08:39:56 Page 2
 Despacho óptimo Industria+BESS+PV OnGrid (Caso Colombia ,24H)
 Equation Listing    SOLVE modelAGPEcolombia Using MIP From line 121
 
@@ -255,7 +255,7 @@ r13..  - Benefit + CashFlow + Base =E= 0 ; (LHS = 0)
 
 ---- r14  =E=  
 
-r14..  Investment =E= 1067330 ; (LHS = 0, INFES = 1067330 ****)
+r14..  Investment =E= 1221330 ; (LHS = 0, INFES = 1221330 ****)
      
 
 ---- r15  =E=  
@@ -275,7 +275,7 @@ r17..  Wload =E= 959636.71 ; (LHS = 0, INFES = 959636.71 ****)
 
 ---- r18  =E=  
 
-r18..  Wpvtot =E= 1296933.34490417 ; (LHS = 0, INFES = 1296933.34490417 ****)
+r18..  Wpvtot =E= 1634237.2057375 ; (LHS = 0, INFES = 1634237.2057375 ****)
      
 
 ---- r19  =E=  
@@ -297,7 +297,7 @@ r21..  - 365*Pc(t1) - 365*Pc(t2) - 365*Pc(t3) - 365*Pc(t4) - 365*Pc(t5) - 365*Pc
 
 r22..  - 365*Pd(t1) - 365*Pd(t2) - 365*Pd(t3) - 365*Pd(t4) - 365*Pd(t5) - 365*Pd(t6) - 365*Pd(t7) - 365*Pd(t8) - 365*Pd(t9) - 365*Pd(t10) - 365*Pd(t11) - 365*Pd(t12) - 365*Pd(t13) - 365*Pd(t14) - 365*Pd(t15) - 365*Pd(t16) - 365*Pd(t17) - 365*Pd(t18) - 365*Pd(t19) - 365*Pd(t20) - 365*Pd(t21) - 365*Pd(t22) - 365*Pd(t23) - 365*Pd(t24) + WdescargaBESS =E= 0 ; (LHS = 0)
      
-GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/08/25 19:39:21 Page 3
+GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/09/25 08:39:56 Page 3
 Despacho óptimo Industria+BESS+PV OnGrid (Caso Colombia ,24H)
 Column Listing      SOLVE modelAGPEcolombia Using MIP From line 121
 
@@ -597,18 +597,18 @@ w3(t3)
       600       r10(t3)
 
 REMAINING 21 ENTRIES SKIPPED
-GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/08/25 19:39:21 Page 4
+GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/09/25 08:39:56 Page 4
 Despacho óptimo Industria+BESS+PV OnGrid (Caso Colombia ,24H)
 Range Statistics    SOLVE modelAGPEcolombia Using MIP From line 121
 
 
 RANGE STATISTICS (ABSOLUTE NON-ZERO FINITE VALUES)
 
-RHS       [min, max] : [ 1.691E+01, 1.297E+06] - Zero values observed as well
+RHS       [min, max] : [ 1.691E+01, 1.634E+06] - Zero values observed as well
 Bound     [min, max] : [ 1.000E+00, 1.900E+03] - Zero values observed as well
 Matrix    [min, max] : [ 9.937E-02, 6.000E+02]
 
-GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/08/25 19:39:21 Page 5
+GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/09/25 08:39:56 Page 5
 Despacho óptimo Industria+BESS+PV OnGrid (Caso Colombia ,24H)
 Model Statistics    SOLVE modelAGPEcolombia Using MIP From line 121
 
@@ -620,8 +620,8 @@ BLOCKS OF VARIABLES          24     SINGLE VARIABLES          185  23 projected
 NON ZERO ELEMENTS           582     DISCRETE VARIABLES         48
 
 
-GENERATION TIME      =        0.007 SECONDS      4 MB  51.2.1 5fb43f63 DEX-DEG
-GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/08/25 19:39:21 Page 6
+GENERATION TIME      =        0.010 SECONDS      4 MB  51.2.1 5fb43f63 DEX-DEG
+GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/09/25 08:39:56 Page 6
 Despacho óptimo Industria+BESS+PV OnGrid (Caso Colombia ,24H)
 Solution Report     SOLVE modelAGPEcolombia Using MIP From line 121
 
@@ -634,10 +634,10 @@ Solution Report     SOLVE modelAGPEcolombia Using MIP From line 121
 
 **** SOLVER STATUS     1 Normal Completion
 **** MODEL STATUS      1 Optimal
-**** OBJECTIVE VALUE            19597.3024
+**** OBJECTIVE VALUE            71974.2259
 
- RESOURCE USAGE, LIMIT          0.010 10000000000.000
- ITERATION COUNT, LIMIT        86    2147483647
+ RESOURCE USAGE, LIMIT          0.012 10000000000.000
+ ITERATION COUNT, LIMIT        90    2147483647
 
     Gurobi           51.2.1 5fb43f63 Oct 13, 2025          DEG x86 64bit/macOS    
 
@@ -654,36 +654,35 @@ Solution Report     SOLVE modelAGPEcolombia Using MIP From line 121
     LogToConsole  0
     
     Optimize a model with 186 rows, 185 columns and 582 nonzeros
-    Model fingerprint: 0xb05766e7
+    Model fingerprint: 0x8e4070e0
     Variable types: 137 continuous, 48 integer (0 binary)
     Coefficient statistics:
       Matrix range     [1e-01, 6e+02]
       Objective range  [1e+00, 1e+00]
       Bounds range     [1e+00, 2e+03]
-      RHS range        [2e+01, 1e+06]
-    Presolve removed 56 rows and 33 columns
+      RHS range        [2e+01, 2e+06]
+    Presolve removed 62 rows and 40 columns
     Presolve time: 0.00s
-    Presolved: 130 rows, 152 columns, 390 nonzeros
-    Variable types: 109 continuous, 43 integer (43 binary)
-    Found heuristic solution: objective 6185.8051564
-    Found heuristic solution: objective 9602.0108754
+    Presolved: 124 rows, 145 columns, 372 nonzeros
+    Variable types: 104 continuous, 41 integer (41 binary)
+    Found heuristic solution: objective 71098.666956
     
-    Root relaxation: objective 1.959730e+04, 84 iterations, 0.00 seconds (0.00 work units)
+    Root relaxation: objective 7.197423e+04, 84 iterations, 0.00 seconds (0.00 work units)
     
         Nodes    |    Current Node    |     Objective Bounds      |     Work
      Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
     
-    *    0     0               0    19597.302428 19597.3024  0.00%     -    0s
+    *    0     0               0    71974.225855 71974.2259  0.00%     -    0s
     
     Explored 1 nodes (84 simplex iterations) in 0.01 seconds (0.00 work units)
     Thread count was 8 (of 8 available processors)
     
-    Solution count 3: 19597.3 9602.01 6185.81 
+    Solution count 2: 71974.2 71098.7 
     
     Optimal solution found (tolerance 1.00e-04)
-    Best objective 1.959730242837e+04, best bound 1.959730242837e+04, gap 0.0000%
+    Best objective 7.197422585488e+04, best bound 7.197422585488e+04, gap 0.0000%
     
-    User-callback calls 477, time in user-callback 0.00 sec
+    User-callback calls 547, time in user-callback 0.00 sec
 
 ... Solving fixed model...
 ... This solver runs with a demo license. No commercial use.
@@ -698,25 +697,25 @@ Solution Report     SOLVE modelAGPEcolombia Using MIP From line 121
     LogToConsole  0
     
     Optimize a model with 186 rows, 185 columns and 582 nonzeros
-    Model fingerprint: 0x6756a91f
+    Model fingerprint: 0x4138bcf3
     Coefficient statistics:
       Matrix range     [1e-01, 6e+02]
       Objective range  [1e+00, 1e+00]
       Bounds range     [1e+00, 2e+03]
-      RHS range        [2e+01, 1e+06]
-    Presolve removed 182 rows and 177 columns
+      RHS range        [2e+01, 2e+06]
+    Presolve removed 181 rows and 174 columns
     Presolve time: 0.00s
-    Presolved: 4 rows, 8 columns, 11 nonzeros
+    Presolved: 5 rows, 11 columns, 15 nonzeros
     
     Iteration    Objective       Primal Inf.    Dual Inf.      Time
-           0    1.1477281e+05   4.350774e+02   0.000000e+00      0s
+           0    1.7863613e+05   2.486789e+02   0.000000e+00      0s
     Extra simplex iterations after uncrush: 1
-           2    1.9597302e+04   0.000000e+00   0.000000e+00      0s
+           6    7.1974226e+04   0.000000e+00   0.000000e+00      0s
     
-    Solved in 2 iterations and 0.00 seconds (0.00 work units)
-    Optimal objective  1.959730243e+04
+    Solved in 6 iterations and 0.00 seconds (0.00 work units)
+    Optimal objective  7.197422585e+04
     
-    User-callback calls 85, time in user-callback 0.00 sec
+    User-callback calls 89, time in user-callback 0.00 sec
 
 
                            LOWER          LEVEL          UPPER         MARGINAL
@@ -733,18 +732,18 @@ t3         17.6538        17.6538        17.6538       -89.6071
 t4         17.3950        17.3950        17.3950       -89.6071      
 t5         17.1830        17.1830        17.1830       -89.6071      
 t6         16.9050        16.9050        16.9050       -89.6071      
-t7        -19.5474       -19.5474       -19.5474       -56.3703      
-t8       -134.0515      -134.0515      -134.0515       -56.3703      
-t9        -81.6843       -81.6843       -81.6843       -56.3703      
-t10      -162.6299      -162.6299      -162.6299       -56.3703      
-t11      -241.6753      -241.6753      -241.6753       -56.3703      
-t12      -272.7692      -272.7692      -272.7692       -56.3703      
-t13      -453.9537      -453.9537      -453.9537       -56.3703      
-t14      -231.0984      -231.0984      -231.0984       -56.3703      
-t15      -139.8531      -139.8531      -139.8531       -56.3703      
-t16       -37.4732       -37.4732       -37.4732       -56.3703      
-t17        74.0423        74.0423        74.0423       -62.4879      
-t18       116.2181       116.2181       116.2181       -62.4879      
+t7        -29.0459       -29.0459       -29.0459       -56.3703      
+t8       -174.0583      -174.0583      -174.0583       -56.3703      
+t9       -156.0729      -156.0729      -156.0729       -56.3703      
+t10      -265.0671      -265.0671      -265.0671       -56.3703      
+t11      -362.7006      -362.7006      -362.7006       -56.3703      
+t12      -401.8312      -401.8312      -401.8312       -56.3703      
+t13      -579.4053      -579.4053      -579.4053       -56.3703      
+t14      -344.8584      -344.8584      -344.8584       -56.3703      
+t15      -234.4941      -234.4941      -234.4941       -56.3703      
+t16      -104.9055      -104.9055      -104.9055       -56.3703      
+t17        36.3283        36.3283        36.3283       -62.4879      
+t18       107.5153       107.5153       107.5153       -62.4879      
 t19       145.2123       145.2123       145.2123       -62.4879      
 t20       152.4657       152.4657       152.4657       -62.4879      
 t21       134.4877       134.4877       134.4877       -62.4879      
@@ -800,16 +799,16 @@ t3         -INF             .              .              .
 t4         -INF             .              .              .          
 t5         -INF             .              .              .          
 t6         -INF             .              .              .          
-t7         -INF             .              .              .          
-t8         -INF         -265.9485          .              .          
-t9         -INF         -318.3157          .              .          
-t10        -INF             .              .              .          
+t7         -INF         -400.0000          .              .          
+t8         -INF         -400.0000          .              .          
+t9         -INF         -400.0000          .              .          
+t10        -INF         -400.0000          .              .          
 t11        -INF             .              .              .          
-t12        -INF         -400.0000          .              .          
-t13        -INF             .              .             EPS         
-t14        -INF         -244.7705          .              .          
+t12        -INF             .              .             EPS         
+t13        -INF         -147.9211          .              .          
+t14        -INF             .              .              .          
 t15        -INF             .              .              .          
-t16        -INF         -362.5268          .              .          
+t16        -INF         -295.0945          .              .          
 t17        -INF             .              .              .          
 t18        -INF             .              .              .          
 t19        -INF             .              .              .          
@@ -829,18 +828,18 @@ t3         -INF             .           400.0000          .
 t4         -INF             .           400.0000          .          
 t5         -INF             .           400.0000          .          
 t6         -INF             .           400.0000          .          
-t7         -INF             .           400.0000          .          
+t7         -INF          400.0000       400.0000          .          
 t8         -INF          400.0000       400.0000          .          
 t9         -INF          400.0000       400.0000          .          
-t10        -INF             .           400.0000          .          
+t10        -INF          400.0000       400.0000          .          
 t11        -INF             .           400.0000          .          
 t12        -INF          400.0000       400.0000          .          
 t13        -INF          400.0000       400.0000          .          
-t14        -INF          400.0000       400.0000          .          
+t14        -INF             .           400.0000          .          
 t15        -INF             .           400.0000          .          
 t16        -INF          400.0000       400.0000          .          
-t17        -INF           74.0423       400.0000          .          
-t18        -INF          116.2181       400.0000          .          
+t17        -INF           36.3283       400.0000          .          
+t18        -INF          107.5153       400.0000          .          
 t19        -INF          145.2123       400.0000          .          
 t20        -INF          152.4657       400.0000          .          
 t21        -INF          134.4877       400.0000          .          
@@ -887,15 +886,15 @@ t3         -INF          600.0000       600.0000          .
 t4         -INF          600.0000       600.0000          .          
 t5         -INF          600.0000       600.0000          .          
 t6         -INF          600.0000       600.0000          .          
-t7         -INF           19.5474       600.0000          .          
-t8         -INF             .           600.0000          .          
-t9         -INF             .           600.0000          .          
-t10        -INF          162.6299       600.0000          .          
-t11        -INF          241.6753       600.0000          .          
-t12        -INF          272.7692       600.0000          .          
-t13        -INF           53.9537       600.0000          .          
-t14        -INF           75.8689       600.0000          .          
-t15        -INF          139.8531       600.0000          .          
+t7         -INF           29.0459       600.0000          .          
+t8         -INF          174.0583       600.0000          .          
+t9         -INF          156.0729       600.0000          .          
+t10        -INF          265.0671       600.0000          .          
+t11        -INF          362.7006       600.0000          .          
+t12        -INF            1.8312       600.0000          .          
+t13        -INF          327.3264       600.0000          .          
+t14        -INF          344.8584       600.0000          .          
+t15        -INF          234.4941       600.0000          .          
 t16        -INF             .           600.0000          .          
 t17        -INF             .           600.0000          .          
 t18        -INF             .           600.0000          .          
@@ -920,15 +919,15 @@ t3         -INF             .           400.0000          .
 t4         -INF             .           400.0000          .          
 t5         -INF             .           400.0000          .          
 t6         -INF             .           400.0000          .          
-t7         -INF           19.5474       400.0000          .          
-t8         -INF             .           400.0000          .          
-t9         -INF             .           400.0000          .          
-t10        -INF          162.6299       400.0000          .          
-t11        -INF          241.6753       400.0000          .          
-t12        -INF          272.7692       400.0000          .          
-t13        -INF           53.9537       400.0000          .          
-t14        -INF           75.8689       400.0000          .          
-t15        -INF          139.8531       400.0000          .          
+t7         -INF           29.0459       400.0000          .          
+t8         -INF          174.0583       400.0000          .          
+t9         -INF          156.0729       400.0000          .          
+t10        -INF          265.0671       400.0000          .          
+t11        -INF          362.7006       400.0000          .          
+t12        -INF            1.8312       400.0000          .          
+t13        -INF          327.3264       400.0000          .          
+t14        -INF          344.8584       400.0000          .          
+t15        -INF          234.4941       400.0000          .          
 t16        -INF             .           400.0000          .          
 t17        -INF             .           400.0000          .          
 t18        -INF             .           400.0000          .          
@@ -942,11 +941,11 @@ t24        -INF             .           400.0000          .
                            LOWER          LEVEL          UPPER         MARGINAL
 
 ---- EQU r13                 .              .              .             EPS         
----- EQU r14          1067330.0000   1067330.0000   1067330.0000         EPS         
+---- EQU r14          1221330.0000   1221330.0000   1221330.0000         EPS         
 ---- EQU r15                 .              .              .             EPS         
 ---- EQU r16          -207685.0187   -207685.0187   -207685.0187         EPS         
 ---- EQU r17           959636.7100    959636.7100    959636.7100         EPS         
----- EQU r18          1296933.3449   1296933.3449   1296933.3449         EPS         
+---- EQU r18          1634237.2057   1634237.2057   1634237.2057         EPS         
 ---- EQU r19                 .              .              .             EPS         
 ---- EQU r20                 .              .              .             EPS         
 ---- EQU r21                 .              .              .             EPS         
@@ -954,10 +953,10 @@ t24        -INF             .           400.0000          .
 
                            LOWER          LEVEL          UPPER         MARGINAL
 
----- VAR Benefit           -INF        19597.3024        +INF             .          
----- VAR VE                -INF        43597.3024        +INF             .          
----- VAR CashFlow          -INF       227282.3212        +INF             .          
----- VAR npv               -INF      1765110.0936        +INF             .          
+---- VAR Benefit           -INF        71974.2259        +INF             .          
+---- VAR VE                -INF        95974.2259        +INF             .          
+---- VAR CashFlow          -INF       279659.2446        +INF             .          
+---- VAR npv               -INF      2263842.3304        +INF             .          
 ---- VAR Base              -INF      -207685.0187        +INF             .          
 ---- VAR Backup              .         24000.0000        +INF             .          
 
@@ -979,16 +978,16 @@ t4        100.0000       100.0000      1900.0000          .
 t5        100.0000       100.0000      1900.0000          .          
 t6        100.0000       100.0000      1900.0000       -26.3056      
 t7        100.0000       100.0000      1900.0000          .          
-t8        100.0000       224.6679      1900.0000          .          
-t9        100.0000       300.6343      1900.0000          .          
-t10       100.0000       300.6343      1900.0000          .          
-t11       100.0000       300.6343      1900.0000          .          
-t12       100.0000       300.6343      1900.0000          .          
-t13       100.0000       672.6343      1900.0000          .          
-t14       100.0000       816.9977      1900.0000          .          
-t15       100.0000       816.9977      1900.0000          .          
-t16       100.0000       851.8478      1900.0000          .          
-t17       100.0000       775.5155      1900.0000          .          
+t8        100.0000       100.0000      1900.0000          .          
+t9        100.0000       100.0000      1900.0000          .          
+t10       100.0000       100.0000      1900.0000          .          
+t11       100.0000       100.0000      1900.0000         EPS         
+t12       100.0000       472.0000      1900.0000          .          
+t13       100.0000       706.4334      1900.0000          .          
+t14       100.0000       706.4334      1900.0000          .          
+t15       100.0000       706.4334      1900.0000          .          
+t16       100.0000       803.9955      1900.0000          .          
+t17       100.0000       766.5437      1900.0000          .          
 t18       100.0000       655.7031      1900.0000          .          
 t19       100.0000       505.9997      1900.0000          .          
 t20       100.0000       348.8186      1900.0000          .          
@@ -1017,8 +1016,8 @@ t13          .              .            +INF           -6.1176
 t14          .              .            +INF           -6.1176      
 t15          .              .            +INF           -6.1176      
 t16          .              .            +INF           -6.1176      
-t17          .            74.0423        +INF             .          
-t18          .           116.2181        +INF             .          
+t17          .            36.3283        +INF             .          
+t18          .           107.5153        +INF             .          
 t19          .           145.2123        +INF             .          
 t20          .           152.4657        +INF             .          
 t21          .           134.4877        +INF             .          
@@ -1037,15 +1036,15 @@ t4           .              .            +INF           -8.7725
 t5           .              .            +INF           -8.7725      
 t6           .              .            +INF           -8.7725      
 t7           .              .            +INF            EPS         
-t8           .           134.0515        +INF             .          
-t9           .            81.6843        +INF             .          
+t8           .              .            +INF             .          
+t9           .              .            +INF            EPS         
 t10          .              .            +INF            EPS         
 t11          .              .            +INF            EPS         
-t12          .              .            +INF            EPS         
-t13          .           400.0000        +INF             .          
-t14          .           155.2295        +INF             .          
+t12          .           400.0000        +INF             .          
+t13          .           252.0789        +INF             .          
+t14          .              .            +INF            EPS         
 t15          .              .            +INF            EPS         
-t16          .            37.4732        +INF             .          
+t16          .           104.9055        +INF             .          
 t17          .              .            +INF           -6.1176      
 t18          .              .            +INF           -6.1176      
 t19          .              .            +INF           -6.1176      
@@ -1094,15 +1093,15 @@ t3           .              .            +INF          -33.2367
 t4           .              .            +INF          -33.2367      
 t5           .              .            +INF          -33.2367      
 t6           .              .            +INF          -33.2367      
-t7           .            19.5474        +INF             .          
-t8           .              .            +INF            EPS         
-t9           .              .            +INF            EPS         
-t10          .           162.6299        +INF             .          
-t11          .           241.6753        +INF             .          
-t12          .           272.7692        +INF             .          
-t13          .            53.9537        +INF             .          
-t14          .            75.8689        +INF             .          
-t15          .           139.8531        +INF             .          
+t7           .            29.0459        +INF             .          
+t8           .           174.0583        +INF             .          
+t9           .           156.0729        +INF             .          
+t10          .           265.0671        +INF             .          
+t11          .           362.7006        +INF             .          
+t12          .             1.8312        +INF             .          
+t13          .           327.3264        +INF             .          
+t14          .           344.8584        +INF             .          
+t15          .           234.4941        +INF             .          
 t16          .              .            +INF            EPS         
 t17          .              .            +INF           -6.1176      
 t18          .              .            +INF           -6.1176      
@@ -1115,17 +1114,17 @@ t24          .              .            +INF           -6.1176
 
                            LOWER          LEVEL          UPPER         MARGINAL
 
----- VAR Investment          .       1067330.0000        +INF             .          
+---- VAR Investment          .       1221330.0000        +INF             .          
 ---- VAR Exc1                .         44290.2700        +INF             .          
----- VAR Exc2                .        308408.2977        +INF             .          
+---- VAR Exc2                .        647550.7932        +INF             .          
 ---- VAR Imp                 .         44290.2700        +INF             .          
----- VAR expo                .        352698.5677        +INF             .          
+---- VAR expo                .        691841.0632        +INF             .          
 ---- VAR Wload               .        959636.7100        +INF             .          
----- VAR Wpvtot              .       1296933.3449        +INF             .          
+---- VAR Wpvtot              .       1634237.2057        +INF             .          
 ---- VAR Wimport             .         44290.2700        +INF             .          
----- VAR Wexport             .        352698.5677        +INF             .          
----- VAR WcargaBESS          .        295080.0532        +INF             .          
----- VAR Wdescarga~          .        266191.7160        +INF             .          
+---- VAR Wexport             .        691841.0632        +INF             .          
+---- VAR WcargaBESS          .        276299.3109        +INF             .          
+---- VAR Wdescarga~          .        249249.6084        +INF             .          
 
   Investment  Project initial investment Eur
   Exc1  Exported energy Type 1 (Energy Credit) USD/day
@@ -1149,14 +1148,14 @@ t3           .              .             1.0000         EPS
 t4           .              .             1.0000         EPS         
 t5           .              .             1.0000         EPS         
 t6           .              .             1.0000         EPS         
-t7           .              .             1.0000         EPS         
+t7           .             1.0000         1.0000         EPS         
 t8           .             1.0000         1.0000         EPS         
 t9           .             1.0000         1.0000         EPS         
-t10          .              .             1.0000         EPS         
+t10          .             1.0000         1.0000         EPS         
 t11          .              .             1.0000         EPS         
 t12          .             1.0000         1.0000         EPS         
 t13          .             1.0000         1.0000         EPS         
-t14          .             1.0000         1.0000         EPS         
+t14          .              .             1.0000         EPS         
 t15          .              .             1.0000         EPS         
 t16          .             1.0000         1.0000         EPS         
 t17          .              .             1.0000         EPS         
@@ -1201,12 +1200,12 @@ t24          .              .             1.0000         EPS
 **** REPORT SUMMARY :        0     NONOPT
                              0 INFEASIBLE
                              0  UNBOUNDED
-GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/08/25 19:39:21 Page 7
+GAMS 51.2.1  5fb43f63 Oct 13, 2025          DEX-DEG x86 64bit/macOS - 11/09/25 08:39:56 Page 7
 Despacho óptimo Industria+BESS+PV OnGrid (Caso Colombia ,24H)
 E x e c u t i o n
 
 
-EXECUTION TIME       =        0.077 SECONDS      4 MB  51.2.1 5fb43f63 DEX-DEG
+EXECUTION TIME       =        0.089 SECONDS      4 MB  51.2.1 5fb43f63 DEX-DEG
 
 
 USER: GAMS Demo, for EULA and demo limitations see   G250826+0003Cc-GEN
