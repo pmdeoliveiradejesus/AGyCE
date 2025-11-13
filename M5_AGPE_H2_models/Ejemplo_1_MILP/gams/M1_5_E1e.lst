@@ -1,0 +1,2334 @@
+GAMS 47.5.0  d6b95593 Aug 29, 2024          DEX-DEG x86 64bit/macOS - 06/06/25 21:25:57 Page 1
+Despacho óptimo Industria + BESS + PV + Electrolizador (España)
+C o m p i l a t i o n
+
+
+   2  *---------------------------------------------------------------------------
+   3  * 1  CONJUNTOS
+   4  *---------------------------------------------------------------------------
+   5  SET t  'horas del día' / t1*t24 / ;
+   6  *---------------------------------------------------------------------------
+   7  * 2  DATOS
+   8  *---------------------------------------------------------------------------
+   9  TABLE data(t,*)  'λ   psi  Ppvu Plu '
+  10  *    Eur/kWh            Eur/kWh             per unit            per unit            kW
+  11      lambda               psi                Ppvu                 Plu                Pbmax
+  12  t1  0.068746794520548   0.0228205053080510  0.000000000000000   0.135388629090637   564.30000000000
+  13  t2  0.064382931506849   0.0228205053080510  0.000000000000000   0.090377249176867   564.30000000000
+  14  t3  0.062238410958904   0.0228205053080510  0.000000000000000   0.076343641406536   564.30000000000
+  15  t4  0.060464136986301   0.0228205053080510  0.000000000000000   0.075224251241957   564.30000000000
+  16  t5  0.060655534246575   0.0228205053080510  0.000000000000000   0.074307578750070   564.30000000000
+  17  t6  0.065132136986301   0.0228205053080510  0.000000000000000   0.073105608680250   564.30000000000
+  18  t7  0.073826082191781   0.0228205053080510  0.047492750000000   0.073406190057000   564.30000000000
+  19  t8  0.076148794520548   0.0228205053080510  0.200034333333333   0.085516408757498   564.30000000000
+  20  t9  0.069382712328767   0.0210743713052406  0.371942916666667   0.883664344082149   338.05515300000
+  21  t10 0.056760082191781   0.0319883482993510  0.512186250000000   1.000000000000000   404.47000000000
+  22  t11 0.046949369863014   0.0221906474349675  0.605126833333333   0.967245871300936   442.91000000000
+  23  t12 0.041846739726027   0.0221906474349675  0.645309833333333   0.966410238486499   442.91000000000
+  24  t13 0.039593726027397   0.0221906474349675  0.627257666666667   0.122847383567665   442.91000000000
+  25  t14 0.037885123287671   0.0221906474349675  0.568799916666667   0.892179315688642   442.91000000000
+  26  t15 0.036840931506849   0.0210743713052406  0.473205250000000   0.968865480059381   338.05515300000
+  27  t16 0.038253698630137   0.0210743713052406  0.337161416666667   0.959187873431187   338.05515300000
+  28  t17 0.046423205479452   0.0210743713052406  0.188570083333333   0.947290206165413   338.05515300000
+  29  t18 0.059484767123288   0.0210743713052406  0.043513583333333   0.647289021374806   338.05515300000
+  30  t19 0.076155178082192   0.0720344854462120  0.000000000000000   0.627968640962237   504.43000000000
+  31  t20 0.090286438356164   0.0512182441617940  0.000000000000000   0.659335616819762   453.96686700000
+  32  t21 0.099023506849315   0.0512182441617940  0.000000000000000   0.581590012689108   453.96686700000
+  33  t22 0.090372109589041   0.0512182441617940  0.000000000000000   0.179217943416770   453.96686700000
+  34  t23 0.081188794520548   0.0210743713052406  0.000000000000000   0.144883067091137   338.05515300000
+  35  t24 0.074767232876712   0.0210743713052406  0.000000000000000   0.138041019820362   338.05515300000;  ;
+  36   
+  37  PARAMETER
+  38  lam(t)           'precio spot Eur/kWh'
+  39  Plu(t)           'perfil de carga'
+  40  tariff(t)        'peajes y cargos Eur/kWh'
+  41  Ppvu(t)          'perfil fotovoltaico pu'
+  42  pbmax(t)         'demanda máxima contratada kW';
+  43  pbmax(t) = data(t,'Pbmax');
+  44  lam(t)   = data(t,'lambda');
+  45  Plu(t)   = data(t,'Plu');
+  46  tariff(t)= data(t,'psi');
+  47  Ppvu(t)  = data(t,'Ppvu');
+  48  *---------------------------------------------------------------------------
+  49  * 3  ESCALARES
+  50  *---------------------------------------------------------------------------
+  51  SCALAR
+  52     Ppvmax / 569 / ,    Plmax / 231.241369863014 /
+  53     SOC0   / 100  / ,   C     / 2000 /
+  54     eff_c  / 0.93 / ,   eff_d / 0.97 /
+  55     R_c    / 0.20 / ,   R_d   / 0.20 / ,  DoD / 0.90 /
+  56     Pmax   / 600  /
+  57  * cargos de capacidad
+  58     kappaP1 /28.79187/, kappaP2 /15.07764/, kappaP3 /6.55917/,
+  59     kappaP4 /5.17209/,  kappaP5 /1.93281/, kappaP6 /0.91609/,
+  60     CAPEXpv   /700/,
+  61     CAPEX_BESS /200/,
+  62     CAPEX_BESS_inverter /80/,
+  63     CAPEX_H2   /400/,
+  64     crf       /0.08024258719069/,
+  65     Capacity0    /-31713.9/
+  66  * electrolizador
+  67     SH2 /90/, PH2_prod /90/, PH2_sb /4.5/, PH2_idle /0.45/,
+  68     CMP /0.15/, IA /11/,
+  69     eta_H2 /50/, H2_max_dia /43.2/, H2_max_hora /1.800/, eta_H2O /0.015/,
+  70     H2_price /4/, H2O_price /2.5/ ;
+  71  SCALAR SOCLO, SOCHI ;
+  72  SOCLO = ((1-DoD)/2)*C ;
+  73  SOCHI = SOCLO + DoD*C ;
+  74  *---------------------------------------------------------------------------
+  75  * 4  VARIABLES
+  76  *---------------------------------------------------------------------------
+  77  POSITIVE VARIABLE
+  78     SOC(t), Pc(t), Pd(t), Pb(t), Ps(t),
+  79     P_E(t), P_E_prod(t), rh(t),
+  80     H2_prod(t), H2_total_dia,H2_total_anual, H2O_total_dia,H2O_total_anual,Investment;
+  81  BINARY VARIABLE
+  82     w1(t), w3(t),  aE(t), bE(t), csE(t), dE(t), fE(t) ;
+  83  VARIABLE Benefit
+  84     Capacity     'Cargos de Poyencia, Eur/kWh'
+  85     Arbitraje    'arbitraje con la red'
+  86     Hidrogeno    'balance de hidrogeno'
+  87     CashFlow     'Project CashFlow Eur/yr'
+  88     npv          'Net Present Value Eur'
+  89     Base         'Load payment with no PV and no BESS Eur'
+  90     Wload       'Energia total load kWh/año'
+  91     Wpvtot      'Producción Energia PV kWh/año'
+  92     Wimport      'Importación Energia kWh/año'
+  93     Wexport      'Exportación Energia kWh/año'
+  94     WcargaBESS    'Energia carga BESS kWh/año'
+  95     WdescargaBESS  'Energia carga BESS kWh/año'
+  96     Welectrolizador 'Energia consumida por el electrolizador kWh/año';
+  97  * límites directos
+  98  SOC.LO(t) = SOCLO ; SOC.UP(t) = SOCHI ; SOC.FX('t24') = SOC0 ;
+  99  *---------------------------------------------------------------------------
+ 100  * 5  ECUACIONES
+ 101  *---------------------------------------------------------------------------
+ 102  EQUATION
+ 103     obj
+ 104  r1  ,
+ 105  r2  ,
+ 106  r3  ,
+ 107  r4  ,
+ 108  r5  ,
+ 109  r6  ,
+ 110  r7  ,
+ 111  r8  ,
+ 112  r9  ,
+ 113  r10 ,
+ 114  r11 ,
+ 115  r12 ,
+ 116  r13 ,
+ 117  r14 ,
+ 118  r15 ,
+ 119  r16 ,
+ 120  r17 ,
+ 121  r18 ,
+ 122  r19 ,
+ 123  r20 ,
+ 124  r21 ,
+ 125  r22 ,
+ 126  r23 ,
+ 127  r24 ,
+ 128  r25 ,
+ 129  r26 ,
+ 130  r27 ,
+ 131  r28 ,
+ 132  r29 ,
+ 133  r30 ,
+ 134  r31 ,
+ 135  r32 ,
+ 136  r33 ,
+ 137  r34 ,
+ 138  r35 ,
+ 139  r36 ,
+ 140  r37 ,
+ 141  r38 ,
+ 142  r39 ,
+ 143  r40 ,
+ 144  r41 ,
+ 145  r42 ,
+ 146  r43 ,
+ 147  r44 ,
+ 148  r45 ;
+ 149  *––– OBJETIVO (beneficio mensual) ––––––––––––––––––––––––––––––––––––––––
+ 150  obj..       Benefit =E=  Capacity + Arbitraje + Hidrogeno;
+ 151  r1..        Capacity =e= -kappaP1*pbmax('t19')-kappaP2*pbmax('t20')-kappaP3*pbmax('t10')-kappaP4*pbmax('t11')-kappaP5*pbmax('t24')-kappaP6*pbmax('t1');;
+ 152  r2..        Arbitraje =e= 365*(SUM(t,  lam(t)*Ps(t)- (lam(t)+tariff(t))*Pb(t)));
+ 153  r3..        Hidrogeno =e= 365*(H2_price*H2_total_dia- H2O_price*H2O_total_dia);
+ 154  *––– Balance de potencia ––––––––––––––––––––––––––––––––––––––––––––––––––
+ 155  r4(t)..                 Pd(t) + Pb(t) + Ppvmax*Ppvu(t) =E= Pc(t) + Ps(t) + Plmax*Plu(t) + P_E(t) ;
+ 156  *––– Dinámica del SOC ––––––––––––––––––––––––––––––––––––––––––––––––––––
+ 157  r5..                    SOC('t1') =E= SOC0 + Pc('t1')*eff_c - Pd('t1')/eff_d ;
+ 158  r6(t)$(ORD(t)>1)..      SOC(t) =E= SOC(t-1) + Pc(t)*eff_c - Pd(t)/eff_d ;
+ 159  *––– Exclusión carga-descarga / import-export ––––––––––––––––––––––––––––
+ 160  r7(t)..                 Pc(t) =L= R_c*C*w1(t) ;
+ 161  r8(t)..                 Pd(t) =L= R_d*C*(1-w1(t)) ;
+ 162  r9(t)..                 Pb(t) =L= Pmax*w3(t) ;
+ 163  r10(t)..                Ps(t) =L= Pmax*(1-w3(t)) ;
+ 164  *––– Electrolizador ––––––––––––––––––––––––––––––––––––––––––––––––––––––
+ 165  r11(t)..                aE(t)+bE(t)+csE(t) =E= 1 ;
+ 166  r12..                   aE('t1')=E= 1 ;
+ 167  r13..                   bE('t1')=E= 0 ;
+ 168  r14..                   csE('t1')=E= 0 ;
+ 169  r15..                   rh('t1')=E= 0 ;
+ 170  r16(t)..                rh(t) =L= bE(t) ;
+ 171  r17(t)..                rh(t) =G= CMP*bE(t) ;
+ 172  r18(t)..                P_E_prod(t) =E= PH2_prod*rh(t) ;
+ 173  r19(t)..                P_E(t) =E= P_E_prod(t) + PH2_sb*csE(t) + PH2_idle*aE(t) ;
+ 174  r20(t)..                P_E(t) =L= SH2 ;
+ 175  r21(t)..                H2_prod(t)*eta_H2 =E= P_E_prod(t) ;
+ 176  r22(t)..                H2_prod(t) =L=  H2_max_hora;
+ 177  r23..                   H2_total_dia =E= SUM(t, H2_prod(t)) ;
+ 178  r24..                   H2_total_anual =E= H2_total_dia*365 ;
+ 179  r25..                   H2O_total_dia =E= eta_H2O*H2_total_dia;
+ 180  r26..                   H2O_total_anual =E= 365*H2O_total_dia;
+ 181  * arranques y transiciones
+ 182  r27(t)$(ORD(t)>1)..     dE(t) =L= bE(t) ;
+ 183  r28(t)$(ORD(t)>1)..     dE(t) =L= aE(t-1) ;
+ 184  r29(t)$(ORD(t)>1)..     dE(t) =G= bE(t)+aE(t-1)-1 ;
+ 185  r30(t)$(ORD(t)>1)..     fE(t) =L= bE(t) ;
+ 186  r31(t)$(ORD(t)>1)..     fE(t) =L= csE(t-1) ;
+ 187  r32(t)$(ORD(t)>1)..     fE(t) =G= bE(t)+csE(t-1)-1 ;
+ 188  r33..                   SUM(t$(ORD(t)>1), dE(t)) =L= IA ;
+ 189  r34..                   CashFlow =e= Capacity+Arbitraje+Hidrogeno-Base;
+ 190  r35..                   Investment =e=    CAPEXpv*Ppvmax+CAPEX_BESS*C+CAPEX_BESS_inverter*C*R_c+CAPEX_H2*SH2;
+ 191  r36..                   npv=e=CashFlow/crf-Investment;
+ 192  r37..                   Base =e=365*sum((t), -(data(t,'lambda')+data(t,'psi'))* Plmax*data(t,'Plu'))+Capacity0;
+ 193  r38(t)..                data(t,'Pbmax') =g= Pb(t);
+ 194  r39..                   Wload=e=365*sum((t),data(t,'Plu'))*Plmax;
+ 195  r40..                   Wpvtot=e=365*sum((t),data(t,'Ppvu'))*Ppvmax;
+ 196  r41..                   Wimport=e= 365*sum((t),Pb(t));
+ 197  r42..                   Wexport=e= 365*sum((t),Ps(t));
+ 198  r43..                   WcargaBESS =e= 365*sum((t),Pc(t));
+ 199  r44..                   WdescargaBESS =e= 365*sum((t),Pd(t));
+ 200  r45..                   Welectrolizador =e= 365*sum((t),P_E(t));
+ 201  option mip=gurobi minlp=gurobi, miqcp=gurobi;
+ 202  *option mip=lindo;
+ 203  *option mip=clpex;
+ 204  *---------------------------------------------------------------------------
+ 205  * 6  MODELO Y SOLUCIÓN
+ 206  *---------------------------------------------------------------------------
+ 207  MODEL AGPE_ES_H2 / ALL / ;
+ 208  SOLVE AGPE_ES_H2 USING MIP MAXIMIZING Benefit;
+ 209   
+ 210  EXECUTE_UNLOAD 'Results_M1_5_E1e.gdx' ;
+
+
+COMPILATION TIME     =        0.003 SECONDS      3 MB  47.5.0 d6b95593 DEX-DEG
+GAMS 47.5.0  d6b95593 Aug 29, 2024          DEX-DEG x86 64bit/macOS - 06/06/25 21:25:57 Page 2
+Despacho óptimo Industria + BESS + PV + Electrolizador (España)
+Equation Listing    SOLVE AGPE_ES_H2 Using MIP From line 208
+
+
+---- obj  =E=  
+
+obj..  Benefit - Capacity - Arbitraje - Hidrogeno =E= 0 ; (LHS = 0)
+     
+
+---- r1  =E=  
+
+r1..  Capacity =E= -27482.3358157238 ; (LHS = 0, INFES = 27482.3358157238 ****)
+     
+
+---- r2  =E=  
+
+r2..  33.4220644374386*Pb(t1) + 31.8292544374385*Pb(t2) + 31.0465044374386*Pb(t3) + 30.3988944374385*Pb(t4) + 30.4687544374385*Pb(t5) + 32.1027144374385*Pb(t6) + 35.2760044374387*Pb(t7) + 36.1237944374386*Pb(t8) + 33.0168355264128*Pb(t9) + 32.3931771292632*Pb(t10) + 25.2361063137632*Pb(t11) + 23.373646313763*Pb(t12) + 22.551296313763*Pb(t13) + 21.9276563137631*Pb(t14) + 21.1390855264127*Pb(t15) + 21.6547455264128*Pb(t16) + 24.6366155264128*Pb(t17) + 29.4040855264129*Pb(t18) + 54.0892271878675*Pb(t19) + 51.6492091190547*Pb(t20) + 54.8382391190548*Pb(t21) + 51.6804791190548*Pb(t22) + 37.3260555264128*Pb(t23) + 34.9821855264127*Pb(t24) - 25.09258*Ps(t1) - 23.4997699999999*Ps(t2) - 22.71702*Ps(t3) - 22.0694099999999*Ps(t4) - 22.1392699999999*Ps(t5) - 23.7732299999999*Ps(t6) - 26.9465200000001*Ps(t7) - 27.79431*Ps(t8) - 25.32469*Ps(t9) - 20.7174300000001*Ps(t10) - 17.1365200000001*Ps(t11) - 15.2740599999999*Ps(t12) - 14.4517099999999*Ps(t13) - 13.8280699999999*Ps(t14) - 13.4469399999999*Ps(t15) - 13.9626*Ps(t16) - 16.94447*Ps(t17) - 21.7119400000001*Ps(t18) - 27.7966400000001*Ps(t19) - 32.9545499999999*Ps(t20) - 36.14358*Ps(t21) - 32.98582*Ps(t22) - 29.63391*Ps(t23) - 27.2900399999999*Ps(t24) + Arbitraje =E= 0 ; (LHS = 0)
+     
+
+---- r3  =E=  
+
+r3..  - 1460*H2_total_dia + 912.5*H2O_total_dia + Hidrogeno =E= 0 ; (LHS = 0)
+     
+
+---- r4  =E=  
+
+r4(t1)..  - Pc(t1) + Pd(t1) + Pb(t1) - Ps(t1) - P_E(t1) =E= 31.3074520547944 ; (LHS = 0, INFES = 31.3074520547944 ****)
+     
+r4(t2)..  - Pc(t2) + Pd(t2) + Pb(t2) - Ps(t2) - P_E(t2) =E= 20.8989589041097 ; (LHS = 0, INFES = 20.8989589041097 ****)
+     
+r4(t3)..  - Pc(t3) + Pd(t3) + Pb(t3) - Ps(t3) - P_E(t3) =E= 17.6538082191781 ; (LHS = 0, INFES = 17.6538082191781 ****)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r5  =E=  
+
+r5..  SOC(t1) - 0.93*Pc(t1) + 1.03092783505155*Pd(t1) =E= 100 ; (LHS = 100)
+     
+
+---- r6  =E=  
+
+r6(t2)..  - SOC(t1) + SOC(t2) - 0.93*Pc(t2) + 1.03092783505155*Pd(t2) =E= 0 ; (LHS = 0)
+     
+r6(t3)..  - SOC(t2) + SOC(t3) - 0.93*Pc(t3) + 1.03092783505155*Pd(t3) =E= 0 ; (LHS = 0)
+     
+r6(t4)..  - SOC(t3) + SOC(t4) - 0.93*Pc(t4) + 1.03092783505155*Pd(t4) =E= 0 ; (LHS = 0)
+     
+REMAINING 20 ENTRIES SKIPPED
+
+
+---- r7  =L=  
+
+r7(t1)..  Pc(t1) - 400*w1(t1) =L= 0 ; (LHS = 0)
+     
+r7(t2)..  Pc(t2) - 400*w1(t2) =L= 0 ; (LHS = 0)
+     
+r7(t3)..  Pc(t3) - 400*w1(t3) =L= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r8  =L=  
+
+r8(t1)..  Pd(t1) + 400*w1(t1) =L= 400 ; (LHS = 0)
+     
+r8(t2)..  Pd(t2) + 400*w1(t2) =L= 400 ; (LHS = 0)
+     
+r8(t3)..  Pd(t3) + 400*w1(t3) =L= 400 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r9  =L=  
+
+r9(t1)..  Pb(t1) - 600*w3(t1) =L= 0 ; (LHS = 0)
+     
+r9(t2)..  Pb(t2) - 600*w3(t2) =L= 0 ; (LHS = 0)
+     
+r9(t3)..  Pb(t3) - 600*w3(t3) =L= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r10  =L=  
+
+r10(t1)..  Ps(t1) + 600*w3(t1) =L= 600 ; (LHS = 0)
+     
+r10(t2)..  Ps(t2) + 600*w3(t2) =L= 600 ; (LHS = 0)
+     
+r10(t3)..  Ps(t3) + 600*w3(t3) =L= 600 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r11  =E=  
+
+r11(t1)..  aE(t1) + bE(t1) + csE(t1) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+r11(t2)..  aE(t2) + bE(t2) + csE(t2) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+r11(t3)..  aE(t3) + bE(t3) + csE(t3) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r12  =E=  
+
+r12..  aE(t1) =E= 1 ; (LHS = 0, INFES = 1 ****)
+     
+
+---- r13  =E=  
+
+r13..  bE(t1) =E= 0 ; (LHS = 0)
+     
+
+---- r14  =E=  
+
+r14..  csE(t1) =E= 0 ; (LHS = 0)
+     
+
+---- r15  =E=  
+
+r15..  rh(t1) =E= 0 ; (LHS = 0)
+     
+
+---- r16  =L=  
+
+r16(t1)..  rh(t1) - bE(t1) =L= 0 ; (LHS = 0)
+     
+r16(t2)..  rh(t2) - bE(t2) =L= 0 ; (LHS = 0)
+     
+r16(t3)..  rh(t3) - bE(t3) =L= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r17  =G=  
+
+r17(t1)..  rh(t1) - 0.15*bE(t1) =G= 0 ; (LHS = 0)
+     
+r17(t2)..  rh(t2) - 0.15*bE(t2) =G= 0 ; (LHS = 0)
+     
+r17(t3)..  rh(t3) - 0.15*bE(t3) =G= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r18  =E=  
+
+r18(t1)..  P_E_prod(t1) - 90*rh(t1) =E= 0 ; (LHS = 0)
+     
+r18(t2)..  P_E_prod(t2) - 90*rh(t2) =E= 0 ; (LHS = 0)
+     
+r18(t3)..  P_E_prod(t3) - 90*rh(t3) =E= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r19  =E=  
+
+r19(t1)..  P_E(t1) - P_E_prod(t1) - 0.45*aE(t1) - 4.5*csE(t1) =E= 0 ; (LHS = 0)
+     
+r19(t2)..  P_E(t2) - P_E_prod(t2) - 0.45*aE(t2) - 4.5*csE(t2) =E= 0 ; (LHS = 0)
+     
+r19(t3)..  P_E(t3) - P_E_prod(t3) - 0.45*aE(t3) - 4.5*csE(t3) =E= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r20  =L=  
+
+r20(t1)..  P_E(t1) =L= 90 ; (LHS = 0)
+     
+r20(t2)..  P_E(t2) =L= 90 ; (LHS = 0)
+     
+r20(t3)..  P_E(t3) =L= 90 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r21  =E=  
+
+r21(t1)..  - P_E_prod(t1) + 50*H2_prod(t1) =E= 0 ; (LHS = 0)
+     
+r21(t2)..  - P_E_prod(t2) + 50*H2_prod(t2) =E= 0 ; (LHS = 0)
+     
+r21(t3)..  - P_E_prod(t3) + 50*H2_prod(t3) =E= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r22  =L=  
+
+r22(t1)..  H2_prod(t1) =L= 1.8 ; (LHS = 0)
+     
+r22(t2)..  H2_prod(t2) =L= 1.8 ; (LHS = 0)
+     
+r22(t3)..  H2_prod(t3) =L= 1.8 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r23  =E=  
+
+r23..  - H2_prod(t1) - H2_prod(t2) - H2_prod(t3) - H2_prod(t4) - H2_prod(t5) - H2_prod(t6) - H2_prod(t7) - H2_prod(t8) - H2_prod(t9) - H2_prod(t10) - H2_prod(t11) - H2_prod(t12) - H2_prod(t13) - H2_prod(t14) - H2_prod(t15) - H2_prod(t16) - H2_prod(t17) - H2_prod(t18) - H2_prod(t19) - H2_prod(t20) - H2_prod(t21) - H2_prod(t22) - H2_prod(t23) - H2_prod(t24) + H2_total_dia =E= 0 ; (LHS = 0)
+     
+
+---- r24  =E=  
+
+r24..  - 365*H2_total_dia + H2_total_anual =E= 0 ; (LHS = 0)
+     
+
+---- r25  =E=  
+
+r25..  - 0.015*H2_total_dia + H2O_total_dia =E= 0 ; (LHS = 0)
+     
+
+---- r26  =E=  
+
+r26..  - 365*H2O_total_dia + H2O_total_anual =E= 0 ; (LHS = 0)
+     
+
+---- r27  =L=  
+
+r27(t2)..  - bE(t2) + dE(t2) =L= 0 ; (LHS = 0)
+     
+r27(t3)..  - bE(t3) + dE(t3) =L= 0 ; (LHS = 0)
+     
+r27(t4)..  - bE(t4) + dE(t4) =L= 0 ; (LHS = 0)
+     
+REMAINING 20 ENTRIES SKIPPED
+
+
+---- r28  =L=  
+
+r28(t2)..  - aE(t1) + dE(t2) =L= 0 ; (LHS = 0)
+     
+r28(t3)..  - aE(t2) + dE(t3) =L= 0 ; (LHS = 0)
+     
+r28(t4)..  - aE(t3) + dE(t4) =L= 0 ; (LHS = 0)
+     
+REMAINING 20 ENTRIES SKIPPED
+
+
+---- r29  =G=  
+
+r29(t2)..  - aE(t1) - bE(t2) + dE(t2) =G= -1 ; (LHS = 0)
+     
+r29(t3)..  - aE(t2) - bE(t3) + dE(t3) =G= -1 ; (LHS = 0)
+     
+r29(t4)..  - aE(t3) - bE(t4) + dE(t4) =G= -1 ; (LHS = 0)
+     
+REMAINING 20 ENTRIES SKIPPED
+
+
+---- r30  =L=  
+
+r30(t2)..  - bE(t2) + fE(t2) =L= 0 ; (LHS = 0)
+     
+r30(t3)..  - bE(t3) + fE(t3) =L= 0 ; (LHS = 0)
+     
+r30(t4)..  - bE(t4) + fE(t4) =L= 0 ; (LHS = 0)
+     
+REMAINING 20 ENTRIES SKIPPED
+
+
+---- r31  =L=  
+
+r31(t2)..  - csE(t1) + fE(t2) =L= 0 ; (LHS = 0)
+     
+r31(t3)..  - csE(t2) + fE(t3) =L= 0 ; (LHS = 0)
+     
+r31(t4)..  - csE(t3) + fE(t4) =L= 0 ; (LHS = 0)
+     
+REMAINING 20 ENTRIES SKIPPED
+
+
+---- r32  =G=  
+
+r32(t2)..  - bE(t2) - csE(t1) + fE(t2) =G= -1 ; (LHS = 0)
+     
+r32(t3)..  - bE(t3) - csE(t2) + fE(t3) =G= -1 ; (LHS = 0)
+     
+r32(t4)..  - bE(t4) - csE(t3) + fE(t4) =G= -1 ; (LHS = 0)
+     
+REMAINING 20 ENTRIES SKIPPED
+
+
+---- r33  =L=  
+
+r33..  dE(t2) + dE(t3) + dE(t4) + dE(t5) + dE(t6) + dE(t7) + dE(t8) + dE(t9) + dE(t10) + dE(t11) + dE(t12) + dE(t13) + dE(t14) + dE(t15) + dE(t16) + dE(t17) + dE(t18) + dE(t19) + dE(t20) + dE(t21) + dE(t22) + dE(t23) + dE(t24) =L= 11 ; (LHS = 0)
+     
+
+---- r34  =E=  
+
+r34..  - Capacity - Arbitraje - Hidrogeno + CashFlow + Base =E= 0 ; (LHS = 0)
+     
+
+---- r35  =E=  
+
+r35..  Investment =E= 866300 ; (LHS = 0, INFES = 866300 ****)
+     
+
+---- r36  =E=  
+
+r36..  Investment - 12.4622103425402*CashFlow + npv =E= 0 ; (LHS = 0)
+     
+
+---- r37  =E=  
+
+r37..  Base =E= -114101.649035551 ; (LHS = 0, INFES = 114101.649035551 ****)
+     
+
+---- r38  =G=  
+
+r38(t1)..  - Pb(t1) =G= -564.3 ; (LHS = 0)
+     
+r38(t2)..  - Pb(t2) =G= -564.3 ; (LHS = 0)
+     
+r38(t3)..  - Pb(t3) =G= -564.3 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r39  =E=  
+
+r39..  Wload =E= 959636.71 ; (LHS = 0, INFES = 959636.71 ****)
+     
+
+---- r40  =E=  
+
+r40..  Wpvtot =E= 959629.484070833 ; (LHS = 0, INFES = 959629.484070833 ****)
+     
+
+---- r41  =E=  
+
+r41..  - 365*Pb(t1) - 365*Pb(t2) - 365*Pb(t3) - 365*Pb(t4) - 365*Pb(t5) - 365*Pb(t6) - 365*Pb(t7) - 365*Pb(t8) - 365*Pb(t9) - 365*Pb(t10) - 365*Pb(t11) - 365*Pb(t12) - 365*Pb(t13) - 365*Pb(t14) - 365*Pb(t15) - 365*Pb(t16) - 365*Pb(t17) - 365*Pb(t18) - 365*Pb(t19) - 365*Pb(t20) - 365*Pb(t21) - 365*Pb(t22) - 365*Pb(t23) - 365*Pb(t24) + Wimport =E= 0 ; (LHS = 0)
+     
+
+---- r42  =E=  
+
+r42..  - 365*Ps(t1) - 365*Ps(t2) - 365*Ps(t3) - 365*Ps(t4) - 365*Ps(t5) - 365*Ps(t6) - 365*Ps(t7) - 365*Ps(t8) - 365*Ps(t9) - 365*Ps(t10) - 365*Ps(t11) - 365*Ps(t12) - 365*Ps(t13) - 365*Ps(t14) - 365*Ps(t15) - 365*Ps(t16) - 365*Ps(t17) - 365*Ps(t18) - 365*Ps(t19) - 365*Ps(t20) - 365*Ps(t21) - 365*Ps(t22) - 365*Ps(t23) - 365*Ps(t24) + Wexport =E= 0 ; (LHS = 0)
+     
+
+---- r43  =E=  
+
+r43..  - 365*Pc(t1) - 365*Pc(t2) - 365*Pc(t3) - 365*Pc(t4) - 365*Pc(t5) - 365*Pc(t6) - 365*Pc(t7) - 365*Pc(t8) - 365*Pc(t9) - 365*Pc(t10) - 365*Pc(t11) - 365*Pc(t12) - 365*Pc(t13) - 365*Pc(t14) - 365*Pc(t15) - 365*Pc(t16) - 365*Pc(t17) - 365*Pc(t18) - 365*Pc(t19) - 365*Pc(t20) - 365*Pc(t21) - 365*Pc(t22) - 365*Pc(t23) - 365*Pc(t24) + WcargaBESS =E= 0 ; (LHS = 0)
+     
+
+---- r44  =E=  
+
+r44..  - 365*Pd(t1) - 365*Pd(t2) - 365*Pd(t3) - 365*Pd(t4) - 365*Pd(t5) - 365*Pd(t6) - 365*Pd(t7) - 365*Pd(t8) - 365*Pd(t9) - 365*Pd(t10) - 365*Pd(t11) - 365*Pd(t12) - 365*Pd(t13) - 365*Pd(t14) - 365*Pd(t15) - 365*Pd(t16) - 365*Pd(t17) - 365*Pd(t18) - 365*Pd(t19) - 365*Pd(t20) - 365*Pd(t21) - 365*Pd(t22) - 365*Pd(t23) - 365*Pd(t24) + WdescargaBESS =E= 0 ; (LHS = 0)
+     
+
+---- r45  =E=  
+
+r45..  - 365*P_E(t1) - 365*P_E(t2) - 365*P_E(t3) - 365*P_E(t4) - 365*P_E(t5) - 365*P_E(t6) - 365*P_E(t7) - 365*P_E(t8) - 365*P_E(t9) - 365*P_E(t10) - 365*P_E(t11) - 365*P_E(t12) - 365*P_E(t13) - 365*P_E(t14) - 365*P_E(t15) - 365*P_E(t16) - 365*P_E(t17) - 365*P_E(t18) - 365*P_E(t19) - 365*P_E(t20) - 365*P_E(t21) - 365*P_E(t22) - 365*P_E(t23) - 365*P_E(t24) + Welectrolizador =E= 0 ; (LHS = 0)
+     
+GAMS 47.5.0  d6b95593 Aug 29, 2024          DEX-DEG x86 64bit/macOS - 06/06/25 21:25:57 Page 3
+Despacho óptimo Industria + BESS + PV + Electrolizador (España)
+Column Listing      SOLVE AGPE_ES_H2 Using MIP From line 208
+
+
+---- SOC  
+
+SOC(t1)
+                (.LO, .L, .UP, .M = 100, 100, 1900, 0)
+        1       r5
+       -1       r6(t2)
+        0       (OLD LEVEL ****)
+
+SOC(t2)
+                (.LO, .L, .UP, .M = 100, 100, 1900, 0)
+        1       r6(t2)
+       -1       r6(t3)
+        0       (OLD LEVEL ****)
+
+SOC(t3)
+                (.LO, .L, .UP, .M = 100, 100, 1900, 0)
+        1       r6(t3)
+       -1       r6(t4)
+        0       (OLD LEVEL ****)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Pc  
+
+Pc(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       r4(t1)
+       -0.93    r5
+        1       r7(t1)
+     -365       r43
+
+Pc(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       r4(t2)
+       -0.93    r6(t2)
+        1       r7(t2)
+     -365       r43
+
+Pc(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       r4(t3)
+       -0.93    r6(t3)
+        1       r7(t3)
+     -365       r43
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Pd  
+
+Pd(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r4(t1)
+        1.0309  r5
+        1       r8(t1)
+     -365       r44
+
+Pd(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r4(t2)
+        1.0309  r6(t2)
+        1       r8(t2)
+     -365       r44
+
+Pd(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r4(t3)
+        1.0309  r6(t3)
+        1       r8(t3)
+     -365       r44
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Pb  
+
+Pb(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       33.4221  r2
+        1       r4(t1)
+        1       r9(t1)
+       -1       r38(t1)
+     -365       r41
+
+Pb(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       31.8293  r2
+        1       r4(t2)
+        1       r9(t2)
+       -1       r38(t2)
+     -365       r41
+
+Pb(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       31.0465  r2
+        1       r4(t3)
+        1       r9(t3)
+       -1       r38(t3)
+     -365       r41
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Ps  
+
+Ps(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -25.0926  r2
+       -1       r4(t1)
+        1       r10(t1)
+     -365       r42
+
+Ps(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -23.4998  r2
+       -1       r4(t2)
+        1       r10(t2)
+     -365       r42
+
+Ps(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -22.717   r2
+       -1       r4(t3)
+        1       r10(t3)
+     -365       r42
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- P_E  
+
+P_E(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       r4(t1)
+        1       r19(t1)
+        1       r20(t1)
+     -365       r45
+
+P_E(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       r4(t2)
+        1       r19(t2)
+        1       r20(t2)
+     -365       r45
+
+P_E(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       r4(t3)
+        1       r19(t3)
+        1       r20(t3)
+     -365       r45
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- P_E_prod  
+
+P_E_prod(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r18(t1)
+       -1       r19(t1)
+       -1       r21(t1)
+
+P_E_prod(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r18(t2)
+       -1       r19(t2)
+       -1       r21(t2)
+
+P_E_prod(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r18(t3)
+       -1       r19(t3)
+       -1       r21(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- rh  
+
+rh(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r15
+        1       r16(t1)
+        1       r17(t1)
+      -90       r18(t1)
+
+rh(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r16(t2)
+        1       r17(t2)
+      -90       r18(t2)
+
+rh(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r16(t3)
+        1       r17(t3)
+      -90       r18(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- H2_prod  
+
+H2_prod(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       50       r21(t1)
+        1       r22(t1)
+       -1       r23
+
+H2_prod(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       50       r21(t2)
+        1       r22(t2)
+       -1       r23
+
+H2_prod(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       50       r21(t3)
+        1       r22(t3)
+       -1       r23
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- H2_total_dia  
+
+H2_total_dia
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+    -1460       r3
+        1       r23
+     -365       r24
+       -0.015   r25
+
+
+---- H2_total_anual  
+
+H2_total_anual
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r24
+
+
+---- H2O_total_dia  
+
+H2O_total_dia
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      912.5     r3
+        1       r25
+     -365       r26
+
+
+---- H2O_total_anual  
+
+H2O_total_anual
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r26
+
+
+---- Investment  
+
+Investment
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r35
+        1       r36
+
+
+---- w1  
+
+w1(t1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -400       r7(t1)
+      400       r8(t1)
+
+w1(t2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -400       r7(t2)
+      400       r8(t2)
+
+w1(t3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -400       r7(t3)
+      400       r8(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- w3  
+
+w3(t1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -600       r9(t1)
+      600       r10(t1)
+
+w3(t2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -600       r9(t2)
+      600       r10(t2)
+
+w3(t3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -600       r9(t3)
+      600       r10(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- aE  
+
+aE(t1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r11(t1)
+        1       r12
+       -0.45    r19(t1)
+       -1       r28(t2)
+       -1       r29(t2)
+
+aE(t2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r11(t2)
+       -0.45    r19(t2)
+       -1       r28(t3)
+       -1       r29(t3)
+
+aE(t3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r11(t3)
+       -0.45    r19(t3)
+       -1       r28(t4)
+       -1       r29(t4)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- bE  
+
+bE(t1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r11(t1)
+        1       r13
+       -1       r16(t1)
+       -0.15    r17(t1)
+
+bE(t2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r11(t2)
+       -1       r16(t2)
+       -0.15    r17(t2)
+       -1       r27(t2)
+       -1       r29(t2)
+       -1       r30(t2)
+       -1       r32(t2)
+
+bE(t3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r11(t3)
+       -1       r16(t3)
+       -0.15    r17(t3)
+       -1       r27(t3)
+       -1       r29(t3)
+       -1       r30(t3)
+       -1       r32(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- csE  
+
+csE(t1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r11(t1)
+        1       r14
+       -4.5     r19(t1)
+       -1       r31(t2)
+       -1       r32(t2)
+
+csE(t2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r11(t2)
+       -4.5     r19(t2)
+       -1       r31(t3)
+       -1       r32(t3)
+
+csE(t3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r11(t3)
+       -4.5     r19(t3)
+       -1       r31(t4)
+       -1       r32(t4)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- dE  
+
+dE(t2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r27(t2)
+        1       r28(t2)
+        1       r29(t2)
+        1       r33
+
+dE(t3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r27(t3)
+        1       r28(t3)
+        1       r29(t3)
+        1       r33
+
+dE(t4)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r27(t4)
+        1       r28(t4)
+        1       r29(t4)
+        1       r33
+
+REMAINING 20 ENTRIES SKIPPED
+
+---- fE  
+
+fE(t2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r30(t2)
+        1       r31(t2)
+        1       r32(t2)
+
+fE(t3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r30(t3)
+        1       r31(t3)
+        1       r32(t3)
+
+fE(t4)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+        1       r30(t4)
+        1       r31(t4)
+        1       r32(t4)
+
+REMAINING 20 ENTRIES SKIPPED
+
+---- Benefit  
+
+Benefit
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       obj
+
+
+---- Capacity  Cargos de Poyencia, Eur/kWh
+
+Capacity
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       obj
+        1       r1
+       -1       r34
+
+
+---- Arbitraje  arbitraje con la red
+
+Arbitraje
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       obj
+        1       r2
+       -1       r34
+
+
+---- Hidrogeno  balance de hidrogeno
+
+Hidrogeno
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       obj
+        1       r3
+       -1       r34
+
+
+---- CashFlow  Project CashFlow Eur/yr
+
+CashFlow
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r34
+      -12.4622  r36
+
+
+---- npv  Net Present Value Eur
+
+npv
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r36
+
+
+---- Base  Load payment with no PV and no BESS Eur
+
+Base
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r34
+        1       r37
+
+
+---- Wload  Energia total load kWh/año
+
+Wload
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r39
+
+
+---- Wpvtot  Producción Energia PV kWh/año
+
+Wpvtot
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r40
+
+
+---- Wimport  Importación Energia kWh/año
+
+Wimport
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r41
+
+
+---- Wexport  Exportación Energia kWh/año
+
+Wexport
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r42
+
+
+---- WcargaBESS  Energia carga BESS kWh/año
+
+WcargaBESS
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r43
+
+
+---- WdescargaBESS  Energia carga BESS kWh/año
+
+WdescargaBESS
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r44
+
+
+---- Welectrolizador  Energia consumida por el electrolizador kWh/año
+
+Welectrolizador
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r45
+
+GAMS 47.5.0  d6b95593 Aug 29, 2024          DEX-DEG x86 64bit/macOS - 06/06/25 21:25:57 Page 4
+Despacho óptimo Industria + BESS + PV + Electrolizador (España)
+Range Statistics    SOLVE AGPE_ES_H2 Using MIP From line 208
+
+
+RANGE STATISTICS (ABSOLUTE NON-ZERO FINITE VALUES)
+
+RHS       [min, max] : [ 1.000E+00, 9.596E+05] - Zero values observed as well
+Bound     [min, max] : [ 1.000E+00, 1.900E+03] - Zero values observed as well
+Matrix    [min, max] : [ 1.500E-02, 1.460E+03]
+
+GAMS 47.5.0  d6b95593 Aug 29, 2024          DEX-DEG x86 64bit/macOS - 06/06/25 21:25:57 Page 5
+Despacho óptimo Industria + BESS + PV + Electrolizador (España)
+Model Statistics    SOLVE AGPE_ES_H2 Using MIP From line 208
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS          46     SINGLE EQUATIONS          522
+BLOCKS OF VARIABLES          35     SINGLE VARIABLES          401  23 projected
+NON ZERO ELEMENTS         1,413     DISCRETE VARIABLES        166
+
+
+GENERATION TIME      =        0.173 SECONDS      4 MB  47.5.0 d6b95593 DEX-DEG
+GAMS 47.5.0  d6b95593 Aug 29, 2024          DEX-DEG x86 64bit/macOS - 06/06/25 21:25:57 Page 6
+Despacho óptimo Industria + BESS + PV + Electrolizador (España)
+Solution Report     SOLVE AGPE_ES_H2 Using MIP From line 208
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   AGPE_ES_H2          OBJECTIVE  Benefit
+     TYPE    MIP                 DIRECTION  MAXIMIZE
+     SOLVER  GUROBI              FROM LINE  208
+
+**** SOLVER STATUS     1 Normal Completion
+**** MODEL STATUS      1 Optimal
+**** OBJECTIVE VALUE           -16651.9085
+
+ RESOURCE USAGE, LIMIT          0.463 10000000000.000
+ ITERATION COUNT, LIMIT        83    2147483647
+*** This solver runs with a community license. No commercial use.
+Gurobi library version 11.0.2
+GAMS/Gurobi demo/community requires a Gurobi license from Gurobi Optimization.
+Space for names approximately 0.01 Mb
+MIP status(2): Model was solved to optimality (subject to tolerances).
+
+Fixed MIP status(2): Model was solved to optimality (subject to tolerances).
+
+Final Solve:        -16651.908454    (23 iterations)
+Best possible:      -16651.908454
+Absolute gap:            0.000000
+Relative gap:            0.000000
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU obj                 .              .              .             1.0000      
+---- EQU r1            -27482.3358    -27482.3358    -27482.3358         1.0000      
+---- EQU r2                  .              .              .             1.0000      
+---- EQU r3                  .              .              .             1.0000      
+
+---- EQU r4  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1         31.3075        31.3075        31.3075       -33.4221      
+t2         20.8990        20.8990        20.8990       -31.8293      
+t3         17.6538        17.6538        17.6538       -31.0465      
+t4         17.3950        17.3950        17.3950       -30.3989      
+t5         17.1830        17.1830        17.1830       -30.4688      
+t6         16.9050        16.9050        16.9050       -32.1027      
+t7        -10.0488       -10.0488       -10.0488       -33.6979      
+t8        -94.0446       -94.0446       -94.0446       -28.9262      
+t9         -7.2958        -7.2958        -7.2958       -32.0655      
+t10       -60.1926       -60.1926       -60.1926       -28.9262      
+t11      -120.6499      -120.6499      -120.6499       -25.2361      
+t12      -143.7073      -143.7073      -143.7073       -23.3736      
+t13      -328.5022      -328.5022      -328.5022       -22.5513      
+t14      -117.3384      -117.3384      -117.3384       -21.9277      
+t15       -45.2120       -45.2120       -45.2120       -25.2361      
+t16        29.9591        29.9591        29.9591       -25.2361      
+t17       111.7563       111.7563       111.7563       -25.2361      
+t18       124.9208       124.9208       124.9208       -29.4041      
+t19       145.2123       145.2123       145.2123       -29.6339      
+t20       152.4657       152.4657       152.4657       -32.9545      
+t21       134.4877       134.4877       134.4877       -36.1436      
+t22        41.4426        41.4426        41.4426       -32.9858      
+t23        33.5030        33.5030        33.5030       -29.6339      
+t24        31.9208        31.9208        31.9208       -29.6339      
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU r5               100.0000       100.0000       100.0000        32.6870      
+
+---- EQU r6  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t2           .              .              .            32.6870      
+t3           .              .              .            32.6870      
+t4           .              .              .            32.6870      
+t5           .              .              .            32.6870      
+t6           .              .              .            32.6870      
+t7           .              .              .            32.6870      
+t8           .              .              .            31.1035      
+t9           .              .              .            31.1035      
+t10          .              .              .            31.1035      
+t11          .              .              .            27.1356      
+t12          .              .              .            27.1356      
+t13          .              .              .            27.1356      
+t14          .              .              .            27.1356      
+t15          .              .              .            27.1356      
+t16          .              .              .            27.1356      
+t17          .              .              .            27.1356      
+t18          .              .              .            28.7449      
+t19          .              .              .            28.7449      
+t20          .              .              .            28.7449      
+t21          .              .              .            28.7449      
+t22          .              .              .            28.7449      
+t23          .              .              .            28.7449      
+t24          .              .              .            28.7449      
+
+---- EQU r7  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1         -INF         -400.0000          .              .          
+t2         -INF             .              .              .          
+t3         -INF             .              .              .          
+t4         -INF         -396.1743          .              .          
+t5         -INF             .              .              .          
+t6         -INF             .              .              .          
+t7         -INF             .              .              .          
+t8         -INF         -393.1225          .              .          
+t9         -INF             .              .              .          
+t10        -INF             .              .              .          
+t11        -INF         -312.1782          .              .          
+t12        -INF             .              .             1.8625      
+t13        -INF             .              .             2.6848      
+t14        -INF             .              .             3.3085      
+t15        -INF         -106.7328          .              .          
+t16        -INF         -181.9039          .              .          
+t17        -INF         -263.7012          .              .          
+t18        -INF             .              .              .          
+t19        -INF             .              .              .          
+t20        -INF             .              .              .          
+t21        -INF             .              .              .          
+t22        -INF             .              .              .          
+t23        -INF             .              .              .          
+t24        -INF             .              .              .          
+
+---- EQU r8  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1         -INF          400.0000       400.0000          .          
+t2         -INF             .           400.0000          .          
+t3         -INF             .           400.0000          .          
+t4         -INF          400.0000       400.0000          .          
+t5         -INF             .           400.0000          .          
+t6         -INF             .           400.0000          .          
+t7         -INF            3.4512       400.0000          .          
+t8         -INF          400.0000       400.0000          .          
+t9         -INF            6.2042       400.0000          .          
+t10        -INF             .           400.0000          .          
+t11        -INF          400.0000       400.0000          .          
+t12        -INF          400.0000       400.0000          .          
+t13        -INF          400.0000       400.0000          .          
+t14        -INF          400.0000       400.0000          .          
+t15        -INF          400.0000       400.0000          .          
+t16        -INF          400.0000       400.0000          .          
+t17        -INF          400.0000       400.0000          .          
+t18        -INF             .           400.0000          .          
+t19        -INF          158.7123       400.0000          .          
+t20        -INF          400.0000       400.0000         3.3206      
+t21        -INF          400.0000       400.0000         6.5097      
+t22        -INF          400.0000       400.0000         3.3519      
+t23        -INF          341.8669       400.0000          .          
+t24        -INF           45.4208       400.0000          .          
+
+---- EQU r9  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1         -INF         -568.2425          .              .          
+t2         -INF         -578.6510          .              .          
+t3         -INF         -581.8962          .              .          
+t4         -INF         -578.3293          .              .          
+t5         -INF         -582.3670          .              .          
+t6         -INF         -582.6450          .              .          
+t7         -INF             .              .              .          
+t8         -INF             .              .              .          
+t9         -INF             .              .              .          
+t10        -INF             .              .              .          
+t11        -INF         -542.8281          .              .          
+t12        -INF         -253.7073          .              .          
+t13        -INF         -438.5022          .              .          
+t14        -INF         -227.3384          .              .          
+t15        -INF         -261.9448          .              .          
+t16        -INF         -261.9448          .              .          
+t17        -INF         -261.9448          .              .          
+t18        -INF         -461.5792          .              .          
+t19        -INF             .              .              .          
+t20        -INF             .              .              .          
+t21        -INF             .              .              .          
+t22        -INF             .              .              .          
+t23        -INF             .              .              .          
+t24        -INF             .              .              .          
+
+---- EQU r10  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1         -INF          600.0000       600.0000          .          
+t2         -INF          600.0000       600.0000          .          
+t3         -INF          600.0000       600.0000          .          
+t4         -INF          600.0000       600.0000          .          
+t5         -INF          600.0000       600.0000          .          
+t6         -INF          600.0000       600.0000          .          
+t7         -INF             .           600.0000          .          
+t8         -INF             .           600.0000          .          
+t9         -INF             .           600.0000          .          
+t10        -INF             .           600.0000          .          
+t11        -INF          600.0000       600.0000          .          
+t12        -INF          600.0000       600.0000          .          
+t13        -INF          600.0000       600.0000          .          
+t14        -INF          600.0000       600.0000          .          
+t15        -INF          600.0000       600.0000          .          
+t16        -INF          600.0000       600.0000          .          
+t17        -INF          600.0000       600.0000          .          
+t18        -INF          600.0000       600.0000          .          
+t19        -INF             .           600.0000          .          
+t20        -INF          247.0843       600.0000          .          
+t21        -INF          265.0623       600.0000          .          
+t22        -INF          358.1074       600.0000          .          
+t23        -INF          294.8639       600.0000          .          
+t24        -INF             .           600.0000          .          
+
+---- EQU r11  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1          1.0000         1.0000         1.0000          .          
+t2          1.0000         1.0000         1.0000          .          
+t3          1.0000         1.0000         1.0000          .          
+t4          1.0000         1.0000         1.0000          .          
+t5          1.0000         1.0000         1.0000          .          
+t6          1.0000         1.0000         1.0000          .          
+t7          1.0000         1.0000         1.0000          .          
+t8          1.0000         1.0000         1.0000          .          
+t9          1.0000         1.0000         1.0000          .          
+t10         1.0000         1.0000         1.0000          .          
+t11         1.0000         1.0000         1.0000          .          
+t12         1.0000         1.0000         1.0000          .          
+t13         1.0000         1.0000         1.0000          .          
+t14         1.0000         1.0000         1.0000          .          
+t15         1.0000         1.0000         1.0000          .          
+t16         1.0000         1.0000         1.0000          .          
+t17         1.0000         1.0000         1.0000          .          
+t18         1.0000         1.0000         1.0000          .          
+t19         1.0000         1.0000         1.0000          .          
+t20         1.0000         1.0000         1.0000          .          
+t21         1.0000         1.0000         1.0000          .          
+t22         1.0000         1.0000         1.0000          .          
+t23         1.0000         1.0000         1.0000          .          
+t24         1.0000         1.0000         1.0000          .          
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU r12                1.0000         1.0000         1.0000          .          
+---- EQU r13                 .              .              .              .          
+---- EQU r14                 .              .              .              .          
+---- EQU r15                 .              .              .              .          
+
+---- EQU r16  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1         -INF             .              .              .          
+t2         -INF             .              .              .          
+t3         -INF             .              .              .          
+t4         -INF             .              .              .          
+t5         -INF             .              .              .          
+t6         -INF             .              .              .          
+t7         -INF           -0.8500          .              .          
+t8         -INF           -0.0315          .              .          
+t9         -INF           -0.8500          .              .          
+t10        -INF           -0.3312          .              .          
+t11        -INF             .              .              .          
+t12        -INF             .              .              .          
+t13        -INF             .              .              .          
+t14        -INF             .              .              .          
+t15        -INF             .              .              .          
+t16        -INF             .              .              .          
+t17        -INF             .              .              .          
+t18        -INF           -0.8500          .              .          
+t19        -INF           -0.8500          .              .          
+t20        -INF             .              .              .          
+t21        -INF             .              .              .          
+t22        -INF             .              .              .          
+t23        -INF           -0.8500          .              .          
+t24        -INF           -0.8500          .              .          
+
+---- EQU r17  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .              .            +INF             .          
+t2           .              .            +INF             .          
+t3           .              .            +INF             .          
+t4           .              .            +INF             .          
+t5           .              .            +INF             .          
+t6           .              .            +INF             .          
+t7           .              .            +INF         -429.4504      
+t8           .             0.8185        +INF             .          
+t9           .              .            +INF         -282.5288      
+t10          .             0.5188        +INF             .          
+t11          .             0.8500        +INF             .          
+t12          .             0.8500        +INF             .          
+t13          .             0.8500        +INF             .          
+t14          .             0.8500        +INF             .          
+t15          .             0.8500        +INF             .          
+t16          .             0.8500        +INF             .          
+t17          .             0.8500        +INF             .          
+t18          .              .            +INF          -43.0052      
+t19          .              .            +INF          -63.6894      
+t20          .              .            +INF             .          
+t21          .              .            +INF             .          
+t22          .              .            +INF             .          
+t23          .              .            +INF          -63.6894      
+t24          .              .            +INF          -63.6894      
+
+---- EQU r18  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .              .              .              .          
+t2           .              .              .              .          
+t3           .              .              .              .          
+t4           .              .              .              .          
+t5           .              .              .              .          
+t6           .              .              .              .          
+t7           .              .              .            -4.7717      
+t8           .              .              .             EPS         
+t9           .              .              .            -3.1392      
+t10          .              .              .             EPS         
+t11          .              .              .             EPS         
+t12          .              .              .             EPS         
+t13          .              .              .             EPS         
+t14          .              .              .             EPS         
+t15          .              .              .             EPS         
+t16          .              .              .             EPS         
+t17          .              .              .             EPS         
+t18          .              .              .            -0.4778      
+t19          .              .              .            -0.7077      
+t20          .              .              .              .          
+t21          .              .              .              .          
+t22          .              .              .              .          
+t23          .              .              .            -0.7077      
+t24          .              .              .            -0.7077      
+
+---- EQU r19  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .              .              .           -33.4221      
+t2           .              .              .           -31.8293      
+t3           .              .              .           -31.0465      
+t4           .              .              .           -30.3989      
+t5           .              .              .           -30.4688      
+t6           .              .              .           -32.1027      
+t7           .              .              .           -33.6979      
+t8           .              .              .           -28.9262      
+t9           .              .              .           -32.0655      
+t10          .              .              .           -28.9262      
+t11          .              .              .           -28.9262      
+t12          .              .              .           -28.9262      
+t13          .              .              .           -28.9262      
+t14          .              .              .           -28.9262      
+t15          .              .              .           -28.9262      
+t16          .              .              .           -28.9262      
+t17          .              .              .           -28.9262      
+t18          .              .              .           -29.4041      
+t19          .              .              .           -29.6339      
+t20          .              .              .           -32.9545      
+t21          .              .              .           -36.1436      
+t22          .              .              .           -32.9858      
+t23          .              .              .           -29.6339      
+t24          .              .              .           -29.6339      
+
+---- EQU r20  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1         -INF            0.4500        90.0000          .          
+t2         -INF            0.4500        90.0000          .          
+t3         -INF            0.4500        90.0000          .          
+t4         -INF            0.4500        90.0000          .          
+t5         -INF            0.4500        90.0000          .          
+t6         -INF            0.4500        90.0000          .          
+t7         -INF           13.5000        90.0000          .          
+t8         -INF           87.1671        90.0000          .          
+t9         -INF           13.5000        90.0000          .          
+t10        -INF           60.1926        90.0000          .          
+t11        -INF           90.0000        90.0000         3.6901      
+t12        -INF           90.0000        90.0000         5.5526      
+t13        -INF           90.0000        90.0000         6.3750      
+t14        -INF           90.0000        90.0000         6.9986      
+t15        -INF           90.0000        90.0000         3.6901      
+t16        -INF           90.0000        90.0000         3.6901      
+t17        -INF           90.0000        90.0000         3.6901      
+t18        -INF           13.5000        90.0000          .          
+t19        -INF           13.5000        90.0000          .          
+t20        -INF            0.4500        90.0000          .          
+t21        -INF            0.4500        90.0000          .          
+t22        -INF            0.4500        90.0000          .          
+t23        -INF           13.5000        90.0000          .          
+t24        -INF           13.5000        90.0000          .          
+
+---- EQU r21  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .              .              .            28.9262      
+t2           .              .              .            28.9262      
+t3           .              .              .            28.9262      
+t4           .              .              .            28.9262      
+t5           .              .              .            28.9262      
+t6           .              .              .            28.9262      
+t7           .              .              .            28.9262      
+t8           .              .              .            28.9262      
+t9           .              .              .            28.9262      
+t10          .              .              .            28.9262      
+t11          .              .              .            28.9262      
+t12          .              .              .            28.9262      
+t13          .              .              .            28.9262      
+t14          .              .              .            28.9262      
+t15          .              .              .            28.9262      
+t16          .              .              .            28.9262      
+t17          .              .              .            28.9262      
+t18          .              .              .            28.9262      
+t19          .              .              .            28.9262      
+t20          .              .              .            28.9262      
+t21          .              .              .            28.9262      
+t22          .              .              .            28.9262      
+t23          .              .              .            28.9262      
+t24          .              .              .            28.9262      
+
+---- EQU r22  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1         -INF             .             1.8000          .          
+t2         -INF             .             1.8000          .          
+t3         -INF             .             1.8000          .          
+t4         -INF             .             1.8000          .          
+t5         -INF             .             1.8000          .          
+t6         -INF             .             1.8000          .          
+t7         -INF            0.2700         1.8000          .          
+t8         -INF            1.7433         1.8000          .          
+t9         -INF            0.2700         1.8000          .          
+t10        -INF            1.2039         1.8000          .          
+t11        -INF            1.8000         1.8000          .          
+t12        -INF            1.8000         1.8000          .          
+t13        -INF            1.8000         1.8000          .          
+t14        -INF            1.8000         1.8000          .          
+t15        -INF            1.8000         1.8000          .          
+t16        -INF            1.8000         1.8000          .          
+t17        -INF            1.8000         1.8000          .          
+t18        -INF            0.2700         1.8000          .          
+t19        -INF            0.2700         1.8000          .          
+t20        -INF             .             1.8000          .          
+t21        -INF             .             1.8000          .          
+t22        -INF             .             1.8000          .          
+t23        -INF            0.2700         1.8000          .          
+t24        -INF            0.2700         1.8000          .          
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU r23                 .              .              .          1446.3125      
+---- EQU r24                 .              .              .             EPS         
+---- EQU r25                 .              .              .          -912.5000      
+---- EQU r26                 .              .              .             EPS         
+
+---- EQU r27  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t2         -INF             .              .              .          
+t3         -INF             .              .              .          
+t4         -INF             .              .              .          
+t5         -INF             .              .              .          
+t6         -INF             .              .              .          
+t7         -INF             .              .              .          
+t8         -INF           -1.0000          .              .          
+t9         -INF           -1.0000          .              .          
+t10        -INF           -1.0000          .              .          
+t11        -INF           -1.0000          .              .          
+t12        -INF           -1.0000          .              .          
+t13        -INF           -1.0000          .              .          
+t14        -INF           -1.0000          .              .          
+t15        -INF           -1.0000          .              .          
+t16        -INF           -1.0000          .              .          
+t17        -INF           -1.0000          .              .          
+t18        -INF           -1.0000          .              .          
+t19        -INF           -1.0000          .              .          
+t20        -INF             .              .              .          
+t21        -INF             .              .              .          
+t22        -INF             .              .              .          
+t23        -INF             .              .              .          
+t24        -INF           -1.0000          .              .          
+
+---- EQU r28  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t2         -INF           -1.0000          .              .          
+t3         -INF           -1.0000          .              .          
+t4         -INF           -1.0000          .              .          
+t5         -INF           -1.0000          .              .          
+t6         -INF           -1.0000          .              .          
+t7         -INF             .              .              .          
+t8         -INF             .              .              .          
+t9         -INF             .              .              .          
+t10        -INF             .              .              .          
+t11        -INF             .              .              .          
+t12        -INF             .              .              .          
+t13        -INF             .              .              .          
+t14        -INF             .              .              .          
+t15        -INF             .              .              .          
+t16        -INF             .              .              .          
+t17        -INF             .              .              .          
+t18        -INF             .              .              .          
+t19        -INF             .              .              .          
+t20        -INF             .              .              .          
+t21        -INF           -1.0000          .              .          
+t22        -INF           -1.0000          .              .          
+t23        -INF             .              .              .          
+t24        -INF             .              .              .          
+
+---- EQU r29  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t2         -1.0000        -1.0000        +INF             .          
+t3         -1.0000        -1.0000        +INF             .          
+t4         -1.0000        -1.0000        +INF             .          
+t5         -1.0000        -1.0000        +INF             .          
+t6         -1.0000        -1.0000        +INF             .          
+t7         -1.0000        -1.0000        +INF             .          
+t8         -1.0000        -1.0000        +INF             .          
+t9         -1.0000        -1.0000        +INF             .          
+t10        -1.0000        -1.0000        +INF             .          
+t11        -1.0000        -1.0000        +INF             .          
+t12        -1.0000        -1.0000        +INF             .          
+t13        -1.0000        -1.0000        +INF             .          
+t14        -1.0000        -1.0000        +INF             .          
+t15        -1.0000        -1.0000        +INF             .          
+t16        -1.0000        -1.0000        +INF             .          
+t17        -1.0000        -1.0000        +INF             .          
+t18        -1.0000        -1.0000        +INF             .          
+t19        -1.0000        -1.0000        +INF             .          
+t20        -1.0000          .            +INF             .          
+t21        -1.0000        -1.0000        +INF             .          
+t22        -1.0000        -1.0000        +INF             .          
+t23        -1.0000        -1.0000        +INF             .          
+t24        -1.0000        -1.0000        +INF             .          
+
+---- EQU r30  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t2         -INF             .              .              .          
+t3         -INF             .              .              .          
+t4         -INF             .              .              .          
+t5         -INF             .              .              .          
+t6         -INF             .              .              .          
+t7         -INF           -1.0000          .              .          
+t8         -INF           -1.0000          .              .          
+t9         -INF           -1.0000          .              .          
+t10        -INF           -1.0000          .              .          
+t11        -INF           -1.0000          .              .          
+t12        -INF           -1.0000          .              .          
+t13        -INF           -1.0000          .              .          
+t14        -INF           -1.0000          .              .          
+t15        -INF           -1.0000          .              .          
+t16        -INF           -1.0000          .              .          
+t17        -INF           -1.0000          .              .          
+t18        -INF           -1.0000          .              .          
+t19        -INF           -1.0000          .              .          
+t20        -INF             .              .              .          
+t21        -INF             .              .              .          
+t22        -INF             .              .              .          
+t23        -INF           -1.0000          .              .          
+t24        -INF           -1.0000          .              .          
+
+---- EQU r31  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t2         -INF             .              .              .          
+t3         -INF             .              .              .          
+t4         -INF             .              .              .          
+t5         -INF             .              .              .          
+t6         -INF             .              .              .          
+t7         -INF             .              .              .          
+t8         -INF             .              .              .          
+t9         -INF             .              .              .          
+t10        -INF             .              .              .          
+t11        -INF             .              .              .          
+t12        -INF             .              .              .          
+t13        -INF             .              .              .          
+t14        -INF             .              .              .          
+t15        -INF             .              .              .          
+t16        -INF             .              .              .          
+t17        -INF             .              .              .          
+t18        -INF             .              .              .          
+t19        -INF             .              .              .          
+t20        -INF             .              .              .          
+t21        -INF             .              .              .          
+t22        -INF             .              .              .          
+t23        -INF             .              .              .          
+t24        -INF             .              .              .          
+
+---- EQU r32  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t2         -1.0000          .            +INF             .          
+t3         -1.0000          .            +INF             .          
+t4         -1.0000          .            +INF             .          
+t5         -1.0000          .            +INF             .          
+t6         -1.0000          .            +INF             .          
+t7         -1.0000        -1.0000        +INF             .          
+t8         -1.0000        -1.0000        +INF             .          
+t9         -1.0000        -1.0000        +INF             .          
+t10        -1.0000        -1.0000        +INF             .          
+t11        -1.0000        -1.0000        +INF             .          
+t12        -1.0000        -1.0000        +INF             .          
+t13        -1.0000        -1.0000        +INF             .          
+t14        -1.0000        -1.0000        +INF             .          
+t15        -1.0000        -1.0000        +INF             .          
+t16        -1.0000        -1.0000        +INF             .          
+t17        -1.0000        -1.0000        +INF             .          
+t18        -1.0000        -1.0000        +INF             .          
+t19        -1.0000        -1.0000        +INF             .          
+t20        -1.0000          .            +INF             .          
+t21        -1.0000          .            +INF             .          
+t22        -1.0000          .            +INF             .          
+t23        -1.0000        -1.0000        +INF             .          
+t24        -1.0000        -1.0000        +INF             .          
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU r33               -INF            2.0000        11.0000          .          
+---- EQU r34                 .              .              .             EPS         
+---- EQU r35           866300.0000    866300.0000    866300.0000         EPS         
+---- EQU r36                 .              .              .             EPS         
+---- EQU r37          -114101.6490   -114101.6490   -114101.6490         EPS         
+
+---- EQU r38  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1       -564.3000       -31.7575        +INF             .          
+t2       -564.3000       -21.3490        +INF             .          
+t3       -564.3000       -18.1038        +INF             .          
+t4       -564.3000       -21.6707        +INF             .          
+t5       -564.3000       -17.6330        +INF             .          
+t6       -564.3000       -17.3550        +INF             .          
+t7       -564.3000          .            +INF             .          
+t8       -564.3000          .            +INF             .          
+t9       -338.0552          .            +INF             .          
+t10      -404.4700          .            +INF             .          
+t11      -442.9100       -57.1719        +INF             .          
+t12      -442.9100      -346.2927        +INF             .          
+t13      -442.9100      -161.4978        +INF             .          
+t14      -442.9100      -372.6616        +INF             .          
+t15      -338.0552      -338.0552        +INF           -4.0970      
+t16      -338.0552      -338.0552        +INF           -3.5814      
+t17      -338.0552      -338.0552        +INF           -0.5995      
+t18      -338.0552      -138.4208        +INF             .          
+t19      -504.4300          .            +INF             .          
+t20      -453.9669          .            +INF             .          
+t21      -453.9669          .            +INF             .          
+t22      -453.9669          .            +INF             .          
+t23      -338.0552          .            +INF             .          
+t24      -338.0552          .            +INF             .          
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU r39           959636.7100    959636.7100    959636.7100         EPS         
+---- EQU r40           959629.4841    959629.4841    959629.4841         EPS         
+---- EQU r41                 .              .              .             EPS         
+---- EQU r42                 .              .              .             EPS         
+---- EQU r43                 .              .              .             EPS         
+---- EQU r44                 .              .              .             EPS         
+---- EQU r45                 .              .              .             EPS         
+
+---- VAR SOC  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1        100.0000       100.0000      1900.0000          .          
+t2        100.0000       100.0000      1900.0000          .          
+t3        100.0000       100.0000      1900.0000          .          
+t4        100.0000       103.5579      1900.0000          .          
+t5        100.0000       103.5579      1900.0000          .          
+t6        100.0000       103.5579      1900.0000          .          
+t7        100.0000       100.0000      1900.0000        -1.5835      
+t8        100.0000       106.3961      1900.0000          .          
+t9        100.0000       100.0000      1900.0000          .          
+t10       100.0000       100.0000      1900.0000        -3.9679      
+t11       100.0000       181.6743      1900.0000          .          
+t12       100.0000       553.6743      1900.0000          .          
+t13       100.0000       925.6743      1900.0000          .          
+t14       100.0000      1297.6743      1900.0000          .          
+t15       100.0000      1570.4127      1900.0000          .          
+t16       100.0000      1773.2421      1900.0000          .          
+t17       100.0000      1900.0000      1900.0000         1.6093      
+t18       100.0000      1900.0000      1900.0000          .          
+t19       100.0000      1736.3790      1900.0000          .          
+t20       100.0000      1324.0079      1900.0000          .          
+t21       100.0000       911.6368      1900.0000          .          
+t22       100.0000       499.2656      1900.0000          .          
+t23       100.0000       146.8256      1900.0000          .          
+t24       100.0000       100.0000       100.0000       -28.7449      
+
+---- VAR Pc  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .              .            +INF           -3.0232      
+t2           .              .            +INF           -1.4304      
+t3           .              .            +INF           -0.6476      
+t4           .             3.8257        +INF             .          
+t5           .              .            +INF           -0.0699      
+t6           .              .            +INF           -1.7038      
+t7           .              .            +INF           -3.2990      
+t8           .             6.8775        +INF             .          
+t9           .              .            +INF           -3.1392      
+t10          .              .            +INF            EPS         
+t11          .            87.8218        +INF             .          
+t12          .           400.0000        +INF             .          
+t13          .           400.0000        +INF             .          
+t14          .           400.0000        +INF             .          
+t15          .           293.2672        +INF             .          
+t16          .           218.0961        +INF             .          
+t17          .           136.2988        +INF             .          
+t18          .              .            +INF           -2.6713      
+t19          .              .            +INF           -2.9012      
+t20          .              .            +INF           -6.2218      
+t21          .              .            +INF           -9.4108      
+t22          .              .            +INF           -6.2531      
+t23          .              .            +INF           -2.9012      
+t24          .              .            +INF           -2.9012      
+
+---- VAR Pd  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .              .            +INF           -0.2759      
+t2           .              .            +INF           -1.8687      
+t3           .              .            +INF           -2.6514      
+t4           .              .            +INF           -3.2990      
+t5           .              .            +INF           -3.2292      
+t6           .              .            +INF           -1.5952      
+t7           .             3.4512        +INF             .          
+t8           .              .            +INF           -3.1392      
+t9           .             6.2042        +INF             .          
+t10          .              .            +INF           -3.1392      
+t11          .              .            +INF           -2.7387      
+t12          .              .            +INF           -4.6012      
+t13          .              .            +INF           -5.4235      
+t14          .              .            +INF           -6.0472      
+t15          .              .            +INF           -2.7387      
+t16          .              .            +INF           -2.7387      
+t17          .              .            +INF           -2.7387      
+t18          .              .            +INF           -0.2298      
+t19          .           158.7123        +INF             .          
+t20          .           400.0000        +INF             .          
+t21          .           400.0000        +INF             .          
+t22          .           400.0000        +INF             .          
+t23          .           341.8669        +INF             .          
+t24          .            45.4208        +INF             .          
+
+---- VAR Pb  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .            31.7575        +INF             .          
+t2           .            21.3490        +INF             .          
+t3           .            18.1038        +INF             .          
+t4           .            21.6707        +INF             .          
+t5           .            17.6330        +INF             .          
+t6           .            17.3550        +INF             .          
+t7           .              .            +INF           -1.5781      
+t8           .              .            +INF           -7.1975      
+t9           .              .            +INF           -0.9514      
+t10          .              .            +INF           -3.4669      
+t11          .            57.1719        +INF             .          
+t12          .           346.2927        +INF             .          
+t13          .           161.4978        +INF             .          
+t14          .           372.6616        +INF             .          
+t15          .           338.0552        +INF             .          
+t16          .           338.0552        +INF             .          
+t17          .           338.0552        +INF             .          
+t18          .           138.4208        +INF             .          
+t19          .              .            +INF          -24.4553      
+t20          .              .            +INF          -18.6947      
+t21          .              .            +INF          -18.6947      
+t22          .              .            +INF          -18.6947      
+t23          .              .            +INF           -7.6921      
+t24          .              .            +INF           -5.3483      
+
+---- VAR Ps  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .              .            +INF           -8.3295      
+t2           .              .            +INF           -8.3295      
+t3           .              .            +INF           -8.3295      
+t4           .              .            +INF           -8.3295      
+t5           .              .            +INF           -8.3295      
+t6           .              .            +INF           -8.3295      
+t7           .              .            +INF           -6.7514      
+t8           .              .            +INF           -1.1319      
+t9           .              .            +INF           -6.7408      
+t10          .              .            +INF           -8.2088      
+t11          .              .            +INF           -8.0996      
+t12          .              .            +INF           -8.0996      
+t13          .              .            +INF           -8.0996      
+t14          .              .            +INF           -8.0996      
+t15          .              .            +INF          -11.7892      
+t16          .              .            +INF          -11.2735      
+t17          .              .            +INF           -8.2916      
+t18          .              .            +INF           -7.6921      
+t19          .              .            +INF           -1.8373      
+t20          .           247.0843        +INF             .          
+t21          .           265.0623        +INF             .          
+t22          .           358.1074        +INF             .          
+t23          .           294.8639        +INF             .          
+t24          .              .            +INF           -2.3439      
+
+---- VAR P_E  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .             0.4500        +INF             .          
+t2           .             0.4500        +INF             .          
+t3           .             0.4500        +INF             .          
+t4           .             0.4500        +INF             .          
+t5           .             0.4500        +INF             .          
+t6           .             0.4500        +INF             .          
+t7           .            13.5000        +INF             .          
+t8           .            87.1671        +INF             .          
+t9           .            13.5000        +INF             .          
+t10          .            60.1926        +INF             .          
+t11          .            90.0000        +INF             .          
+t12          .            90.0000        +INF             .          
+t13          .            90.0000        +INF             .          
+t14          .            90.0000        +INF             .          
+t15          .            90.0000        +INF             .          
+t16          .            90.0000        +INF             .          
+t17          .            90.0000        +INF             .          
+t18          .            13.5000        +INF             .          
+t19          .            13.5000        +INF             .          
+t20          .             0.4500        +INF             .          
+t21          .             0.4500        +INF             .          
+t22          .             0.4500        +INF             .          
+t23          .            13.5000        +INF             .          
+t24          .            13.5000        +INF             .          
+
+---- VAR P_E_prod  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .              .            +INF           -4.4958      
+t2           .              .            +INF           -2.9030      
+t3           .              .            +INF           -2.1203      
+t4           .              .            +INF           -1.4726      
+t5           .              .            +INF           -1.5425      
+t6           .              .            +INF           -3.1765      
+t7           .            13.5000        +INF             .          
+t8           .            87.1671        +INF             .          
+t9           .            13.5000        +INF             .          
+t10          .            60.1926        +INF             .          
+t11          .            90.0000        +INF             .          
+t12          .            90.0000        +INF             .          
+t13          .            90.0000        +INF             .          
+t14          .            90.0000        +INF             .          
+t15          .            90.0000        +INF             .          
+t16          .            90.0000        +INF             .          
+t17          .            90.0000        +INF             .          
+t18          .            13.5000        +INF             .          
+t19          .            13.5000        +INF             .          
+t20          .              .            +INF           -4.0283      
+t21          .              .            +INF           -7.2173      
+t22          .              .            +INF           -4.0596      
+t23          .            13.5000        +INF             .          
+t24          .            13.5000        +INF             .          
+
+---- VAR rh  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .              .            +INF            EPS         
+t2           .              .            +INF            EPS         
+t3           .              .            +INF            EPS         
+t4           .              .            +INF            EPS         
+t5           .              .            +INF            EPS         
+t6           .              .            +INF            EPS         
+t7           .             0.1500        +INF             .          
+t8           .             0.9685        +INF             .          
+t9           .             0.1500        +INF             .          
+t10          .             0.6688        +INF             .          
+t11          .             1.0000        +INF             .          
+t12          .             1.0000        +INF             .          
+t13          .             1.0000        +INF             .          
+t14          .             1.0000        +INF             .          
+t15          .             1.0000        +INF             .          
+t16          .             1.0000        +INF             .          
+t17          .             1.0000        +INF             .          
+t18          .             0.1500        +INF             .          
+t19          .             0.1500        +INF             .          
+t20          .              .            +INF            EPS         
+t21          .              .            +INF            EPS         
+t22          .              .            +INF            EPS         
+t23          .             0.1500        +INF             .          
+t24          .             0.1500        +INF             .          
+
+---- VAR H2_prod  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .              .            +INF             .          
+t2           .              .            +INF             .          
+t3           .              .            +INF             .          
+t4           .              .            +INF             .          
+t5           .              .            +INF             .          
+t6           .              .            +INF             .          
+t7           .             0.2700        +INF             .          
+t8           .             1.7433        +INF             .          
+t9           .             0.2700        +INF             .          
+t10          .             1.2039        +INF             .          
+t11          .             1.8000        +INF             .          
+t12          .             1.8000        +INF             .          
+t13          .             1.8000        +INF             .          
+t14          .             1.8000        +INF             .          
+t15          .             1.8000        +INF             .          
+t16          .             1.8000        +INF             .          
+t17          .             1.8000        +INF             .          
+t18          .             0.2700        +INF             .          
+t19          .             0.2700        +INF             .          
+t20          .              .            +INF             .          
+t21          .              .            +INF             .          
+t22          .              .            +INF             .          
+t23          .             0.2700        +INF             .          
+t24          .             0.2700        +INF             .          
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- VAR H2_total_~          .            17.1672        +INF             .          
+---- VAR H2_total_~          .          6266.0256        +INF             .          
+---- VAR H2O_total~          .             0.2575        +INF             .          
+---- VAR H2O_total~          .            93.9904        +INF             .          
+---- VAR Investment          .        866300.0000        +INF             .          
+
+---- VAR w1  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .             1.0000         1.0000         EPS         
+t2           .              .             1.0000         EPS         
+t3           .              .             1.0000         EPS         
+t4           .             1.0000         1.0000         EPS         
+t5           .              .             1.0000         EPS         
+t6           .              .             1.0000         EPS         
+t7           .              .             1.0000         EPS         
+t8           .             1.0000         1.0000         EPS         
+t9           .              .             1.0000         EPS         
+t10          .              .             1.0000         EPS         
+t11          .             1.0000         1.0000         EPS         
+t12          .             1.0000         1.0000       744.9840      
+t13          .             1.0000         1.0000      1073.9240      
+t14          .             1.0000         1.0000      1323.3800      
+t15          .             1.0000         1.0000         EPS         
+t16          .             1.0000         1.0000         EPS         
+t17          .             1.0000         1.0000         EPS         
+t18          .              .             1.0000         EPS         
+t19          .              .             1.0000         EPS         
+t20          .              .             1.0000     -1328.2560      
+t21          .              .             1.0000     -2603.8680      
+t22          .              .             1.0000     -1340.7640      
+t23          .              .             1.0000         EPS         
+t24          .              .             1.0000         EPS         
+
+---- VAR w3  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .             1.0000         1.0000         EPS         
+t2           .             1.0000         1.0000         EPS         
+t3           .             1.0000         1.0000         EPS         
+t4           .             1.0000         1.0000         EPS         
+t5           .             1.0000         1.0000         EPS         
+t6           .             1.0000         1.0000         EPS         
+t7           .              .             1.0000         EPS         
+t8           .              .             1.0000         EPS         
+t9           .              .             1.0000         EPS         
+t10          .              .             1.0000         EPS         
+t11          .             1.0000         1.0000         EPS         
+t12          .             1.0000         1.0000         EPS         
+t13          .             1.0000         1.0000         EPS         
+t14          .             1.0000         1.0000         EPS         
+t15          .             1.0000         1.0000         EPS         
+t16          .             1.0000         1.0000         EPS         
+t17          .             1.0000         1.0000         EPS         
+t18          .             1.0000         1.0000         EPS         
+t19          .              .             1.0000         EPS         
+t20          .              .             1.0000         EPS         
+t21          .              .             1.0000         EPS         
+t22          .              .             1.0000         EPS         
+t23          .              .             1.0000         EPS         
+t24          .              .             1.0000         EPS         
+
+---- VAR aE  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .             1.0000         1.0000       -15.0399      
+t2           .             1.0000         1.0000       -14.3232      
+t3           .             1.0000         1.0000       -13.9709      
+t4           .             1.0000         1.0000       -13.6795      
+t5           .             1.0000         1.0000       -13.7109      
+t6           .             1.0000         1.0000       -14.4462      
+t7           .              .             1.0000       -15.1641      
+t8           .              .             1.0000       -13.0168      
+t9           .              .             1.0000       -14.4295      
+t10          .              .             1.0000       -13.0168      
+t11          .              .             1.0000       -13.0168      
+t12          .              .             1.0000       -13.0168      
+t13          .              .             1.0000       -13.0168      
+t14          .              .             1.0000       -13.0168      
+t15          .              .             1.0000       -13.0168      
+t16          .              .             1.0000       -13.0168      
+t17          .              .             1.0000       -13.0168      
+t18          .              .             1.0000       -13.2318      
+t19          .              .             1.0000       -13.3353      
+t20          .             1.0000         1.0000       -14.8295      
+t21          .             1.0000         1.0000       -16.2646      
+t22          .             1.0000         1.0000       -14.8436      
+t23          .              .             1.0000       -13.3353      
+t24          .              .             1.0000       -13.3353      
+
+---- VAR bE  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .              .             1.0000         EPS         
+t2           .              .             1.0000         EPS         
+t3           .              .             1.0000         EPS         
+t4           .              .             1.0000         EPS         
+t5           .              .             1.0000         EPS         
+t6           .              .             1.0000         EPS         
+t7           .             1.0000         1.0000       -64.4176      
+t8           .             1.0000         1.0000         EPS         
+t9           .             1.0000         1.0000       -42.3793      
+t10          .             1.0000         1.0000         EPS         
+t11          .             1.0000         1.0000         EPS         
+t12          .             1.0000         1.0000         EPS         
+t13          .             1.0000         1.0000         EPS         
+t14          .             1.0000         1.0000         EPS         
+t15          .             1.0000         1.0000         EPS         
+t16          .             1.0000         1.0000         EPS         
+t17          .             1.0000         1.0000         EPS         
+t18          .             1.0000         1.0000        -6.4508      
+t19          .             1.0000         1.0000        -9.5534      
+t20          .              .             1.0000         EPS         
+t21          .              .             1.0000         EPS         
+t22          .              .             1.0000         EPS         
+t23          .             1.0000         1.0000        -9.5534      
+t24          .             1.0000         1.0000        -9.5534      
+
+---- VAR csE  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t1           .              .             1.0000      -150.3993      
+t2           .              .             1.0000      -143.2316      
+t3           .              .             1.0000      -139.7093      
+t4           .              .             1.0000      -136.7950      
+t5           .              .             1.0000      -137.1094      
+t6           .              .             1.0000      -144.4622      
+t7           .              .             1.0000      -151.6406      
+t8           .              .             1.0000      -130.1681      
+t9           .              .             1.0000      -144.2946      
+t10          .              .             1.0000      -130.1681      
+t11          .              .             1.0000      -130.1681      
+t12          .              .             1.0000      -130.1681      
+t13          .              .             1.0000      -130.1681      
+t14          .              .             1.0000      -130.1681      
+t15          .              .             1.0000      -130.1681      
+t16          .              .             1.0000      -130.1681      
+t17          .              .             1.0000      -130.1681      
+t18          .              .             1.0000      -132.3184      
+t19          .              .             1.0000      -133.3526      
+t20          .              .             1.0000      -148.2955      
+t21          .              .             1.0000      -162.6461      
+t22          .              .             1.0000      -148.4362      
+t23          .              .             1.0000      -133.3526      
+t24          .              .             1.0000      -133.3526      
+
+---- VAR dE  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t2           .              .             1.0000         EPS         
+t3           .              .             1.0000         EPS         
+t4           .              .             1.0000         EPS         
+t5           .              .             1.0000         EPS         
+t6           .              .             1.0000         EPS         
+t7           .             1.0000         1.0000         EPS         
+t8           .              .             1.0000         EPS         
+t9           .              .             1.0000         EPS         
+t10          .              .             1.0000         EPS         
+t11          .              .             1.0000         EPS         
+t12          .              .             1.0000         EPS         
+t13          .              .             1.0000         EPS         
+t14          .              .             1.0000         EPS         
+t15          .              .             1.0000         EPS         
+t16          .              .             1.0000         EPS         
+t17          .              .             1.0000         EPS         
+t18          .              .             1.0000         EPS         
+t19          .              .             1.0000         EPS         
+t20          .              .             1.0000         EPS         
+t21          .              .             1.0000         EPS         
+t22          .              .             1.0000         EPS         
+t23          .             1.0000         1.0000         EPS         
+t24          .              .             1.0000         EPS         
+
+---- VAR fE  
+
+           LOWER          LEVEL          UPPER         MARGINAL
+
+t2           .              .             1.0000         EPS         
+t3           .              .             1.0000         EPS         
+t4           .              .             1.0000         EPS         
+t5           .              .             1.0000         EPS         
+t6           .              .             1.0000         EPS         
+t7           .              .             1.0000         EPS         
+t8           .              .             1.0000         EPS         
+t9           .              .             1.0000         EPS         
+t10          .              .             1.0000         EPS         
+t11          .              .             1.0000         EPS         
+t12          .              .             1.0000         EPS         
+t13          .              .             1.0000         EPS         
+t14          .              .             1.0000         EPS         
+t15          .              .             1.0000         EPS         
+t16          .              .             1.0000         EPS         
+t17          .              .             1.0000         EPS         
+t18          .              .             1.0000         EPS         
+t19          .              .             1.0000         EPS         
+t20          .              .             1.0000         EPS         
+t21          .              .             1.0000         EPS         
+t22          .              .             1.0000         EPS         
+t23          .              .             1.0000         EPS         
+t24          .              .             1.0000         EPS         
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- VAR Benefit           -INF       -16651.9085        +INF             .          
+---- VAR Capacity          -INF       -27482.3358        +INF             .          
+---- VAR Arbitraje         -INF       -13998.6989        +INF             .          
+---- VAR Hidrogeno         -INF        24829.1263        +INF             .          
+---- VAR CashFlow          -INF        97449.7406        +INF             .          
+---- VAR npv               -INF       348139.1650        +INF             .          
+---- VAR Base              -INF      -114101.6490        +INF             .          
+---- VAR Wload             -INF       959636.7100        +INF             .          
+---- VAR Wpvtot            -INF       959629.4841        +INF             .          
+---- VAR Wimport           -INF       809598.8913        +INF             .          
+---- VAR Wexport           -INF       425268.0600        +INF             .          
+---- VAR WcargaBESS        -INF       710358.3013        +INF             .          
+---- VAR Wdescarga~        -INF       640814.2236        +INF             .          
+---- VAR Welectrol~        -INF       314779.5277        +INF             .          
+
+  Capacity  Cargos de Poyencia, Eur/kWh
+  Arbitraje  arbitraje con la red
+  Hidrogeno  balance de hidrogeno
+  CashFlow  Project CashFlow Eur/yr
+  npv  Net Present Value Eur
+  Base  Load payment with no PV and no BESS Eur
+  Wload  Energia total load kWh/año
+  Wpvtot  Producción Energia PV kWh/año
+  Wimport  Importación Energia kWh/año
+  Wexport  Exportación Energia kWh/año
+  WcargaBESS  Energia carga BESS kWh/año
+  WdescargaBESS  Energia carga BESS kWh/año
+  Welectrolizador  Energia consumida por el electrolizador kWh/año
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 47.5.0  d6b95593 Aug 29, 2024          DEX-DEG x86 64bit/macOS - 06/06/25 21:25:57 Page 7
+Despacho óptimo Industria + BESS + PV + Electrolizador (España)
+E x e c u t i o n
+
+
+EXECUTION TIME       =        0.836 SECONDS      4 MB  47.5.0 d6b95593 DEX-DEG
+
+
+USER: Academic User                                  G240823+0003Ac-GEN
+      pm.deoliveiradejes@uniandes.edu.co                      CLA100108
+      License for teaching and research at degree granting institutions
+
+
+**** FILE SUMMARY
+
+Input      /Users/pm.deoliveiradejes/Dropbox (Personal)/Maestria en Energia (MISE)/MISE_E4/MISE_E4-main/M1.5_Self-Generation_Dispatch Hydrogen/Ejemplo_1_H/gams/M1_5_E1e.gms
+Output     /Users/pm.deoliveiradejes/Dropbox (Personal)/Maestria en Energia (MISE)/MISE_E4/MISE_E4-main/M1.5_Self-Generation_Dispatch Hydrogen/Ejemplo_1_H/gams/M1_5_E1e.lst
