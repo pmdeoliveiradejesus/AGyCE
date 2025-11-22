@@ -1,0 +1,2737 @@
+--- Job MODEL.gms Start 06/01/25 00:58:59 48.6.1 67fbb04b LEX-LEG x86 64bit/Linux
+--- Applying:
+--- GAMS Parameters defined
+    Restart /var/lib/condor/execute/dir_4187613/gamsexec/restart.g00
+    Input /var/lib/condor/execute/dir_4187613/gamsexec/MODEL.gms
+    Output /var/lib/condor/execute/dir_4187613/gamsexec/solve.lst
+    PageWidth 79
+    PageSize 0
+    ScrDir /var/lib/condor/execute/dir_4187613/neos-4187615/
+    SysDir /opt/gams/48.6.1/
+    CurDir /var/lib/condor/execute/dir_4187613/gamsexec/
+    LogOption 4
+    LogFile /var/lib/condor/execute/dir_4187613/gamsexec/solve.log
+    AppendOut 1
+    AppendLog 0
+    Suppress 0
+    CErr 10
+    ErrMsg 1
+    ErrorLog 99
+    LimRow 0
+    LimCol 0
+    IDE 1
+    GDX /var/lib/condor/execute/dir_4187613/gamsexec/out.gdx
+    ExecMode 3
+    gdxCompress 1
+    Solver cbc
+    LstTitleLeftAligned 1
+Licensee: NEOS Server License prod-exec-7.neos-server.orgS241211/0001AB-GEN
+          mac@2c:ea:7f:71:ac:18                                     DCE1890
+          /opt/gams/48.6.1/gamslice.txt
+          Evaluation license: Not for commercial or production use
+          The expiration date of time-limited license is Dec 06, 2025
+Processor information: 2 socket(s), 32 core(s), and 64 thread(s) available
+GAMS 48.6.1   Copyright (C) 1987-2025 GAMS Development. All rights reserved
+--- Starting continued compilation
+--- Workfile was generated under GAMS version WEX480-480
+--- MODEL.gms(4) 8 Mb[FIL:"/var/lib/condor/execute/dir_4187613/gamsexec/MODEL.gms",4,0]
+--- Starting execution: elapsed 0:00:00.031[LST:10]
+--- Generating MINLP model modelAGSizingspain[LST:10]
+--- MODEL.gms(61448) 30 Mb[FIL:"/var/lib/condor/execute/dir_4187613/gamsexec/MODEL.gms",61448,0]
+---   78,852 rows  61,337 columns  231,702 non-zeroes
+---   105,120 nl-code  35,040 nl-non-zeroes
+---   17,520 discrete-columns
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 1.000E+00, 1.203E+05] - Zero values observed as well
+--- Bound     [min, max] : [ 1.000E+00, 1.000E+00] - Zero values observed as well
+--- Matrix    [min, max] : [ 1.000E-05, 7.000E+02] - Zero values observed as well
+--- MODEL.gms(61448) 28 Mb[FIL:"/var/lib/condor/execute/dir_4187613/gamsexec/MODEL.gms",61448,0]
+--- Executing DICOPT (Solvelink=2): elapsed 0:00:00.156[LST:24]
+-------------------------------------------------------------------------------
+Dicopt 2         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+-------------------------------------------------------------------------------
+--- DICOPT: Starting major iteration 1
+--- DICOPT: Setting up first (relaxed) NLP.
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.0799724184E+06 (Input point)
+ 
+    The pre-triangular part of the model has 2 constraints and 1 variables.
+    The post-triangular part of the model has 6 constraints and variables.
+    There are 8760 penalty and minimax constraints with 6 variables.
+ 
+    Reduced model without penalty components has 70084 constraints and
+    61324 variables with 197170 Jacobian elements, 35040 of which are nonlinear.
+ 
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      9.5963671248E+05 (Model without penalty constraints)
+                      1.3129441295E+04 (After scaling)
+                      1.2255994368E+04 (After adjusting individual variables)
+       1   0          1.2241851976E+04                 1.0E+00     7 T  T
+       2   0          1.1433983890E+04                 1.0E+00     9 T  T
+       3   0          1.1429082232E+04                 1.0E+00    13 T  T
+       4   0          1.1424538240E+04                 1.0E+00    19 T  T
+       5   0          1.1417870013E+04                 1.0E+00    28 T  T
+       6   0          1.1402461167E+04                 1.0E+00    42 T  T
+       7   0          1.1358543616E+04                 1.0E+00    61 T  T
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       8   0          1.1287383481E+04                 1.0E+00    91 T  T
+       9   0          1.1176699155E+04                 1.0E+00   134 T  T
+      10   0          1.1031083570E+04                 1.0E+00   195 T  T
+      11   0          1.0847363766E+04                 1.0E+00   283 T  T
+      12   0          1.0631330896E+04                 1.0E+00   407 T  T
+      13   0          1.0400257956E+04                 1.0E+00   584 T  T
+      14   0          1.0048281874E+04                 1.0E+00   816 T  T
+      15   0          9.7609321029E+03                 1.0E+00   240 T  T
+      16   0          9.7080875060E+03                 1.0E+00    39 T  T
+      17   0          9.7051430383E+03                 1.0E+00     2 T  T
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+      18   1    7313  9.6652045739E+03 7.5E+01      25 1.0E+00    25 T  T
+      19   1    7278  9.6043732369E+03 7.5E+01      35 1.0E+00    35 T  T
+      20   1    7229  9.5266706377E+03 7.5E+01      49 1.0E+00    49 T  T
+      21   1    7160  9.4132957406E+03 7.5E+01      69 1.0E+00    69 T  T
+      22   1    7063  9.2533877599E+03 7.5E+01      97 1.0E+00    97 T  T
+      23   1    6926  9.0214877752E+03 7.5E+01     137 1.0E+00   137 T  T
+      24   1    6733  8.6943196409E+03 7.5E+01     193 1.0E+00   193 T  T
+      25   1    6461  8.2439859778E+03 7.5E+01     272 1.0E+00   272 T  T
+      26   1    6077  7.6292988527E+03 7.5E+01     384 1.0E+00   384 T  T
+      27   1    5534  6.8391574078E+03 7.5E+01     543 1.0E+00   543 T  T
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+      28   1    4767  5.7204648916E+03 7.5E+01     767 1.0E+00   767 T  T
+      29   1    3767  4.4597150094E+03 7.5E+01    1000 1.0E+00  1000 T  T
+      30   1    3050  2.9889838240E+03 8.8E+02     870 1.0E+00   919 T  T
+      31   1    2084  1.9684821208E+03 8.7E+02    1020 1.0E+00  1000 T  T
+      32   1    1084  9.3105542980E+02 4.7E+00    1000 1.0E+00  1000 T  T
+      33   1     169  1.5221318347E+02 2.3E+00     915 1.0E+00   915 T  T
+      34   1      28  2.2615957854E+01 2.3E+00     141 1.0E+00   141 T  T
+      35   1       4  2.8910950177E+00 2.3E+00      24 1.0E+00    24 T  T
+ 
+    Previous model terminated and penalty components are added back in.
+    Full preprocessed model has 78844 constraints and 61330 variables
+    with 214690 Jacobian elements, 35040 of which are nonlinear.
+ 
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+                      5.7083148972E-12 (After adjusting penalty variables)
+ 
+ ** Feasible solution. Value of objective =    354095.857564
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+      36   3          3.5715263229E+05 2.0E+03      32 1.0E+00    21 T  T
+      37   3          3.6193794116E+05 4.8E+04      48 1.0E+00    30 T  T
+      38   3          3.6834915877E+05 7.6E+03      68 1.0E+00    42 T  T
+      39   3          3.7793678821E+05 1.0E+04      91 1.0E+00    59 T  T
+      40   3          3.9007365557E+05 1.6E+04     128 1.0E+00    82 T  T
+      41   3          4.0705735003E+05 4.3E+04     156 1.0E+00   107 T  T
+      42   3          4.3002051441E+05 1.7E+04     247 1.0E+00   163 T  T
+      43   3          4.6576606687E+05 3.8E+04     342 1.0E+00   230 T  T
+      44   3          5.2136061711E+05 9.3E+04     492 1.0E+00   321 T  T
+      45   3          5.3213027804E+05 1.2E+05      75 1.0E+00    52 T  T
+   Elapsed time       36.5 seconds.
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+      46   3          5.3492582488E+05 1.1E+04     645 9.1E-03   604 T  T
+      47   3          5.3902125217E+05 1.7E+05     121 1.0E+00    76 T  T
+      48   3          5.4004227950E+05 2.6E+03      87 1.0E+00    76 T  T
+      49   3          5.4078740586E+05 2.1E+04      95 1.0E+00    87 T  T
+      50   3          5.4084371214E+05 4.6E+03       4 1.0E+00     3 T  T
+      51   3          5.4334056417E+05 6.9E+04      75 1.0E+00    64 T  T
+      52   3          5.4750909654E+05 2.3E+05     518 1.0E+00   229 T  T
+      53   3          5.4880270185E+05 7.8E+03     414 3.0E-01   262 T  T
+      54   3          5.5041907249E+05 7.9E+03     304 1.0E+00   194 T  T
+      55   3          5.5188313477E+05 8.5E+03     349 1.0E+00   240 T  T
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+      56   3          5.5364095673E+05 9.2E+03     549 1.0E+00   355 T  T
+      57   3          5.5606462453E+05 1.9E+04     621 1.0E+00   537 T  T
+      58   3          5.5852492559E+05 2.0E+04     724 1.0E+00   610 T  T
+      59   3          5.6144111419E+05 2.1E+04     732 9.7E-01   713 T  T
+      60   3          5.6315608113E+05 2.1E+04     633 1.0E+00   354 T  T
+      61   3          5.6449817014E+05 2.3E+05     669 1.0E+00   359 T  T
+      62   3          5.6548447529E+05 2.1E+04     359 5.2E-01   501 T  T
+      63   3          5.6631442933E+05 2.2E+04     355 1.0E+00   278 T  T
+      64   3          5.6753594242E+05 2.2E+04     302 1.0E+00   372 T  T
+      65   3          5.6838293233E+05 2.2E+04     300 1.0E+00   185 T  T
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+      66   3          5.6971039603E+05 2.3E+05     137 1.0E+00   252 T  T
+      67   3          5.7163011541E+05 2.2E+04     285 1.0E+00   353 T  T
+      68   3          5.7362355765E+05 2.2E+04     365 1.0E+00   377 T  T
+      69   3          5.7583635758E+05 2.3E+05     501 1.0E+00   596 T  T
+      70   3          5.7805774319E+05 2.3E+04     589 9.5E-01   715 T  T
+      71   3          5.7959767213E+05 2.3E+04     490 1.0E+00   369 T  T
+      72   3          5.8166413013E+05 2.3E+04     524 1.0E+00   466 T  T
+      73   3          5.8384308479E+05 2.4E+04     505 9.8E-01   503 T  T
+      74   3          5.8519880060E+05 2.4E+04     348 1.0E+00   274 T  T
+      75   3          5.8682155837E+05 2.4E+04     335 1.0E+00   347 T  T
+   Elapsed time       86.4 seconds.
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+      76   3          5.8853154188E+05 2.3E+05     417 1.0E+00   540 T  T
+      77   3          5.9164588978E+05 4.8E+04     456 1.0E+00   804 T  T
+      78   3          5.9464655076E+05 4.8E+04     715 9.8E-01   914 T  T
+      79   3          5.9730404701E+05 4.7E+04     229 1.0E+00   474 T  T
+      80   3          6.0012621132E+05 4.8E+04     591 1.0E+00   665 T  T
+      81   3          6.0328981164E+05 4.8E+04     707 1.0E+00   909 T  T
+      82   3          6.0613179181E+05 4.8E+04     908 1.0E+00   941 T  T
+      83   3          6.0893070296E+05 2.3E+05     766 1.0E+00   923 T  T
+      84   3          6.1126642298E+05 2.5E+04      66 1.0E+00    72 T  T
+      85   3          6.1437894067E+05 2.3E+05     124 1.0E+00   420 T  T
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+      86   3          6.1669503987E+05 3.3E+04      64 1.0E+00    55 T  T
+      87   3          6.1981187039E+05 2.3E+05     136 1.0E+00   334 T  T
+      88   3          6.2210494319E+05 8.2E+04      69 1.0E+00    95 T  T
+      89   3          6.2522240563E+05 2.3E+05     143 1.0E+00   450 T  T
+      90   3          6.2760662806E+05 2.8E+04      75 1.0E+00   107 T  T
+      91   3          6.3069980132E+05 2.3E+05     136 1.0E+00   333 T  T
+      92   3          6.3300558799E+05 4.3E+04      62 1.0E+00    68 T  T
+      93   3          6.3607220750E+05 2.3E+05     150 1.0E+00   357 T  T
+      94   3          6.4069118414E+05 2.2E+05      84 1.0E+00   120 T  T
+      95   3          6.4549828770E+05 2.3E+05     366 7.9E-01   460 T  T
+   Elapsed time      121.8 seconds.
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+      96   3          6.4776075118E+05 2.3E+05     205 1.0E+00   177 T  T
+      97   3          6.5197473711E+05 2.3E+05     219 1.0E+00   449 T  T
+      98   3          6.5727204283E+05 9.3E+04     195 1.0E+00   311 T  T
+      99   3          6.6174424298E+05 1.3E+05     191 1.0E+00   329 T  T
+     100   3          6.6673317435E+05 9.2E+04     416 8.2E-01   364 T  T
+     101   3          6.6903792928E+05 9.2E+04     423 1.0E+00   266 T  T
+     102   3          6.7335072188E+05 2.3E+05      74 1.0E+00   131 T  T
+     103   3          6.7792510604E+05 6.9E+04     114 1.0E+00    78 T  T
+     104   3          6.8380345361E+05 2.3E+05     194 1.0E+00   380 T  T
+     105   3          6.8889544536E+05 9.1E+04      88 9.8E-01   157 T  T
+   Elapsed time      153.0 seconds.
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+     106   3          6.9143593805E+05 9.1E+04     125 1.0E+00   117 T  T
+     107   3          6.9588935568E+05 7.1E+04      74 1.0E+00    41 T  T
+     108   3          7.0167727392E+05 2.2E+05     128 1.0E+00   291 T  T
+     109   3          7.0634663555E+05 7.8E+04     133 1.0E+00   122 T  T
+     110   3          7.1196012889E+05 9.0E+04     290 1.0E+00   255 T  T
+     111   3          7.1712134200E+05 8.9E+04     115 9.8E-01   209 T  T
+     112   3          7.2210657723E+05 8.9E+04     159 1.0E+00   207 T  T
+     113   3          7.2717061835E+05 8.9E+04     100 1.0E+00   241 T  T
+     114   3          7.3584546037E+05 8.7E+04     135 1.0E+00   212 T  T
+     115   3          7.4150056877E+05 2.2E+05     327 5.0E-01   645 F  F
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+     116   3          7.4469332669E+05 2.2E+05     301 1.0E+00   229 T  T
+     117   3          7.4576557140E+05 2.8E+05     105 1.0E+00    22 T  T
+     118   3          7.4840901326E+05 2.2E+05     264 1.0E+00   299 T  T
+     119   3          7.5261538369E+05 2.1E+05     107 1.0E+00   204 T  T
+     120   3          7.6306821845E+05 2.2E+05     417 1.0E+00   924 T  T
+     121   3          7.7127024323E+05 1.3E+05     130 1.0E+00   286 T  T
+     122   3          7.8220703724E+05 2.2E+05     253 1.0E+00   873 T  T
+     123   3          7.9094668035E+05 1.5E+05     138 1.0E+00   318 T  T
+     124   3          8.0087023848E+05 1.6E+05     291 1.0E+00   829 T  T
+     125   3          8.0870041237E+05 1.4E+05     147 1.0E+00   212 T  T
+   Elapsed time      192.4 seconds.
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+     126   3          8.1866003850E+05 2.2E+05     568 9.9E-01   907 T  T
+     127   3          8.2637480898E+05 2.3E+05     376 9.9E-01   492 T  T
+     128   3          8.3311348248E+05 2.4E+05     186 1.0E+00   250 T  T
+     129   3          8.4031263449E+05 1.2E+05     252 1.0E+00   353 T  T
+     130   3          8.4767130438E+05 1.2E+05     393 1.0E+00   488 T  T
+     131   3          8.5530211266E+05 1.2E+05     511 1.0E+00   675 T  T
+     132   3          8.6262949593E+05 2.3E+05     586 9.6E-01   952 T  T
+     133   3          8.6609925122E+05 2.3E+05     555 1.0E+00   486 T  T
+     134   3          8.7284402871E+05 1.2E+05     352 1.0E+00   678 T  T
+     135   3          8.7975411237E+05 1.2E+05     543 1.0E+00   948 T  T
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+     136   3          8.8640053076E+05 1.1E+05     226 1.0E+00   698 T  T
+     137   3          8.9882557653E+05 2.2E+05     276 9.8E-01   964 T  T
+     138   3          9.1040804268E+05 2.0E+05     246 1.0E+00   497 T  T
+     139   3          9.2250641612E+05 2.0E+05     288 1.0E+00   706 T  T
+     140   3          9.3412086801E+05 2.2E+05     381 9.3E-01   973 T  T
+     141   3          9.3728176096E+05 2.2E+05     461 1.0E+00   479 T  T
+     142   3          9.4316672311E+05 2.0E+05     203 1.0E+00   679 T  T
+     143   3          9.5440161741E+05 2.0E+05     283 1.0E+00   966 T  T
+     144   3          9.6516751630E+05 1.8E+05     290 1.0E+00   498 T  T
+     145   3          9.7607229029E+05 1.9E+05     350 1.0E+00   697 T  T
+   Elapsed time      228.8 seconds.
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+     146   3          9.8695985521E+05 1.8E+05     421 1.0E+00   960 T  T
+     147   3          9.9741696023E+05 1.8E+05     379 1.0E+00   945 T  T
+     148   3          1.0061141507E+06 1.5E+05     274 1.0E+00   476 T  T
+     149   3          1.0164689801E+06 1.7E+05     326 9.1E-01   967 T  T
+     150   3          1.0211456688E+06 1.7E+05     472 1.0E+00   475 T  T
+     151   3          1.0250417375E+06 1.5E+05     192 1.0E+00   250 T  T
+     152   3          1.0324932031E+06 1.4E+05     174 1.0E+00   352 T  T
+     153   3          1.0391971114E+06 8.8E+04     260 1.0E+00   493 T  T
+     154   3          1.0449033009E+06 8.2E+04     321 1.0E+00   695 T  T
+     155   3          1.0522165118E+06 9.3E+04     454 1.0E+00   952 T  T
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+     156   3          1.0566849196E+06 7.5E+04     351 1.0E+00   487 T  T
+     157   3          1.0643695555E+06 1.2E+05     237 1.0E+00   691 T  T
+     158   3          1.0720084442E+06 1.2E+05     428 9.2E-01   980 T  T
+     159   3          1.0779345350E+06 1.1E+05     322 1.0E+00   494 T  T
+     160   3          1.0815271384E+06 3.6E+04     712 1.0E+00   694 T  T
+     161   3          1.0846427979E+06 3.9E+04     716 6.4E-01   964 F  F
+     162   3          1.0870347699E+06 4.0E+04     630 1.0E+00   483 T  T
+     163   3          1.0916428810E+06 3.8E+04     398 1.0E+00   680 T  T
+     164   3          1.0983716678E+06 2.8E+04     859 1.0E+00   941 T  T
+     165   3          1.0994982801E+06 1.9E+04     917 5.0E-01   943 F  F
+   Elapsed time      267.0 seconds.
+ 
+    Iter Phase   Ninf     Objective     RGmax      NSB   Step  InItr MX OK
+     166   3          1.1003405081E+06 2.1E+04     598 1.0E+00   215 T  T
+     167   3          1.1008834998E+06 1.7E+04     276 1.0E+00   221 T  T
+     168   3          1.1014541874E+06 6.9E+03     205 9.1E-01   256 T  T
+     169   3          1.1016272773E+06 4.6E+03     235 1.0E+00   112 T  T
+     170   3          1.1016974904E+06 3.7E+02     162 9.9E-01   168 T  T
+     171   3          1.1016980510E+06 3.7E+02     158 1.0E+00    42 T  T
+     172   3          1.1016980512E+06 1.2E-04       7 1.0E+00     2 T  T
+     173   3          1.1016980512E+06 1.2E-05       1 1.0E+00     1 T  T
+     174   4          1.1016980512E+06 6.7E-14       3
+ 
+ ** Optimal solution. Reduced gradient less than tolerance.
+ 
+--- DICOPT: Setting up first MIP
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092826.6 found by feasibility pump after 0 iterations and 0 nodes (61.16 seconds)
+1563 added rows had average density of 10.535509
+At root node, 1563 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 16.140 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1043 row cuts average 7.2 elements, 0 column cuts (0 active)  in 1.262 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.083 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.010 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.107 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.160 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1670 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.362 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092826.6 best solution, best possible 1099374.5 (91.50 seconds)
+After 100 nodes, 33 on tree, 1092826.6 best solution, best possible 1099374.5 (227.18 seconds)
+After 200 nodes, 37 on tree, 1092826.6 best solution, best possible 1099374.5 (291.48 seconds)
+After 300 nodes, 37 on tree, 1092826.6 best solution, best possible 1099374.5 (331.20 seconds)
+After 400 nodes, 37 on tree, 1092826.6 best solution, best possible 1099374.5 (369.71 seconds)
+After 500 nodes, 107 on tree, 1092826.6 best solution, best possible 1099374.5 (409.25 seconds)
+Integer solution of 1092828.7 found after 132154 iterations and 592 nodes (428.68 seconds)
+Integer solution of 1092828.7 found by rounding after 132163 iterations and 598 nodes (429.70 seconds)
+After 600 nodes, 187 on tree, 1092828.7 best solution, best possible 1099374.5 (431.15 seconds)
+Integer solution of 1092828.7 found after 132193 iterations and 611 nodes (432.87 seconds)
+After 700 nodes, 175 on tree, 1092828.7 best solution, best possible 1099374.5 (441.94 seconds)
+Integer solution of 1092830.8 found by RINS after 132734 iterations and 800 nodes (454.28 seconds)
+After 800 nodes, 143 on tree, 1092830.8 best solution, best possible 1099374.5 (454.28 seconds)
+After 900 nodes, 126 on tree, 1092830.8 best solution, best possible 1099374.5 (465.42 seconds)
+After 1000 nodes, 119 on tree, 1092830.8 best solution, best possible 1099374.5 (510.92 seconds)
+After 1100 nodes, 96 on tree, 1092830.8 best solution, best possible 1099374.5 (525.66 seconds)
+After 1200 nodes, 23 on tree, 1092830.8 best solution, best possible 1099374.5 (570.24 seconds)
+Integer solution of 1092945.6 found by RINS after 146560 iterations and 1201 nodes (572.81 seconds)
+After 1300 nodes, 32 on tree, 1092945.6 best solution, best possible 1099374.5 (682.95 seconds)
+After 1400 nodes, 32 on tree, 1092945.6 best solution, best possible 1099374.5 (803.60 seconds)
+After 1500 nodes, 38 on tree, 1092945.6 best solution, best possible 1099374.5 (947.10 seconds)
+After 1600 nodes, 36 on tree, 1092945.6 best solution, best possible 1099374.5 (1033.61 seconds)
+After 1700 nodes, 9 on tree, 1092945.6 best solution, best possible 1099374.5 (1126.52 seconds)
+After 1800 nodes, 43 on tree, 1092945.6 best solution, best possible 1099374.4 (1430.71 seconds)
+Integer solution of 1092945.6 found by rounding after 201770 iterations and 1805 nodes (1431.84 seconds)
+Integer solution of 1092945.6 found after 202704 iterations and 1895 nodes (1511.51 seconds)
+After 1900 nodes, 40 on tree, 1092945.6 best solution, best possible 1099374.4 (1517.70 seconds)
+After 2000 nodes, 38 on tree, 1092945.6 best solution, best possible 1099374.4 (1610.07 seconds)
+Search completed - best objective 1092945.586448255, took 213960 iterations and 2074 nodes (1666.40 seconds)
+Strong branching done 16374 times (150300 iterations), fathomed 184 nodes and fixed 4751 variables
+Maximum depth 187, 14562 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (2074 nodes, 1698.08 CPU seconds, 1705.19 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -2.328306e-09   (absolute tolerance optca: 0)
+Relative gap:   -2.130304e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9458279e-05 ( 0.18003196%) - largest zero change 1.9453852e-05
+0  Obj 1092907.8 Primal inf 19300.03 (70) Dual inf 319.87851 (40)
+0  Obj 1092907.7 Primal inf 19300.03 (70) Dual inf 1.8379459e+13 (306)
+728  Obj 1080013.1 Dual inf 13431.971 (404)
+1068  Obj 1092443.2 Dual inf 957.73812 (309)
+1320  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 2
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1197000499E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33518 constraints and 35044 variables.
+    The post-triangular part of the model has 3270 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092826.6 found by feasibility pump after 0 iterations and 0 nodes (72.16 seconds)
+1563 added rows had average density of 10.535509
+At root node, 1563 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 17.025 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1043 row cuts average 7.2 elements, 0 column cuts (0 active)  in 1.351 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.094 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.012 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.124 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.175 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1670 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.527 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092826.6 best solution, best possible 1099374.5 (105.31 seconds)
+After 100 nodes, 33 on tree, 1092826.6 best solution, best possible 1099374.5 (257.48 seconds)
+After 200 nodes, 37 on tree, 1092826.6 best solution, best possible 1099374.5 (322.27 seconds)
+After 300 nodes, 37 on tree, 1092826.6 best solution, best possible 1099374.5 (359.11 seconds)
+After 400 nodes, 37 on tree, 1092826.6 best solution, best possible 1099374.5 (396.28 seconds)
+After 500 nodes, 107 on tree, 1092826.6 best solution, best possible 1099374.5 (434.09 seconds)
+Integer solution of 1092828.7 found after 132154 iterations and 592 nodes (452.47 seconds)
+Integer solution of 1092828.7 found by rounding after 132163 iterations and 598 nodes (453.46 seconds)
+After 600 nodes, 187 on tree, 1092828.7 best solution, best possible 1099374.5 (454.86 seconds)
+Integer solution of 1092828.7 found after 132193 iterations and 611 nodes (456.51 seconds)
+After 700 nodes, 175 on tree, 1092828.7 best solution, best possible 1099374.5 (465.18 seconds)
+Integer solution of 1092830.8 found by RINS after 132734 iterations and 800 nodes (476.86 seconds)
+After 800 nodes, 143 on tree, 1092830.8 best solution, best possible 1099374.5 (476.86 seconds)
+After 900 nodes, 126 on tree, 1092830.8 best solution, best possible 1099374.5 (487.55 seconds)
+After 1000 nodes, 119 on tree, 1092830.8 best solution, best possible 1099374.5 (531.04 seconds)
+After 1100 nodes, 96 on tree, 1092830.8 best solution, best possible 1099374.5 (545.16 seconds)
+After 1200 nodes, 23 on tree, 1092830.8 best solution, best possible 1099374.5 (587.20 seconds)
+Integer solution of 1092945.6 found by RINS after 146560 iterations and 1201 nodes (589.58 seconds)
+After 1300 nodes, 32 on tree, 1092945.6 best solution, best possible 1099374.5 (683.93 seconds)
+After 1400 nodes, 32 on tree, 1092945.6 best solution, best possible 1099374.5 (787.13 seconds)
+After 1500 nodes, 38 on tree, 1092945.6 best solution, best possible 1099374.5 (907.53 seconds)
+After 1600 nodes, 36 on tree, 1092945.6 best solution, best possible 1099374.5 (980.04 seconds)
+After 1700 nodes, 9 on tree, 1092945.6 best solution, best possible 1099374.5 (1057.22 seconds)
+After 1800 nodes, 43 on tree, 1092945.6 best solution, best possible 1099374.4 (1304.94 seconds)
+Integer solution of 1092945.6 found by rounding after 201770 iterations and 1805 nodes (1305.87 seconds)
+Integer solution of 1092945.6 found after 202704 iterations and 1895 nodes (1371.61 seconds)
+After 1900 nodes, 40 on tree, 1092945.6 best solution, best possible 1099374.4 (1376.72 seconds)
+After 2000 nodes, 38 on tree, 1092945.6 best solution, best possible 1099374.4 (1453.37 seconds)
+Search completed - best objective 1092945.586448255, took 213960 iterations and 2074 nodes (1500.32 seconds)
+Strong branching done 16374 times (150300 iterations), fathomed 184 nodes and fixed 4751 variables
+Maximum depth 187, 14562 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (2074 nodes, 1537.71 CPU seconds, 1542.94 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -2.793968e-09   (absolute tolerance optca: 0)
+Relative gap:   -2.556365e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9374058e-05 ( 0.16862535%) - largest zero change 1.9373956e-05
+0  Obj 1092907.8 Primal inf 19547.609 (65) Dual inf 633.37008 (37)
+0  Obj 1092907.7 Primal inf 19547.609 (65) Dual inf 1.7948969e+13 (277)
+696  Obj 1032870 Dual inf 37470.943 (478)
+1040  Obj 1092214.8 Dual inf 1606.4072 (288)
+1262  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 3
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.2075069747E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the critical variable is at a bound.
+ 
+ 
+    The pre-triangular part of the model has 24758 constraints and 26282 variables.
+    The post-triangular part of the model has 6 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092918.3 found by feasibility pump after 0 iterations and 0 nodes (73.59 seconds)
+1555 added rows had average density of 10.55627
+At root node, 1555 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 16.254 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.7 elements, 0 column cuts (0 active)  in 1.306 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.078 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.010 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.112 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.159 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.374 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092918.3 best solution, best possible 1099374.5 (104.88 seconds)
+After 100 nodes, 32 on tree, 1092918.3 best solution, best possible 1099374.5 (291.75 seconds)
+After 200 nodes, 36 on tree, 1092918.3 best solution, best possible 1099374.5 (346.72 seconds)
+After 300 nodes, 36 on tree, 1092918.3 best solution, best possible 1099374.5 (401.16 seconds)
+After 400 nodes, 48 on tree, 1092918.3 best solution, best possible 1099374.5 (456.09 seconds)
+Integer solution of 1092945.4 found by RINS after 126007 iterations and 500 nodes (478.58 seconds)
+After 500 nodes, 148 on tree, 1092945.4 best solution, best possible 1099374.5 (478.58 seconds)
+Integer solution of 1092945.6 found by rounding after 126487 iterations and 542 nodes (503.43 seconds)
+Integer solution of 1092945.6 found by rounding after 126563 iterations and 586 nodes (507.38 seconds)
+After 600 nodes, 147 on tree, 1092945.6 best solution, best possible 1099374.5 (508.71 seconds)
+After 700 nodes, 136 on tree, 1092945.6 best solution, best possible 1099374.5 (544.83 seconds)
+After 800 nodes, 39 on tree, 1092945.6 best solution, best possible 1099374.5 (563.85 seconds)
+After 900 nodes, 7 on tree, 1092945.6 best solution, best possible 1099374.5 (661.29 seconds)
+After 1000 nodes, 21 on tree, 1092945.6 best solution, best possible 1099374.4 (982.13 seconds)
+Integer solution of 1092945.6 found by rounding after 194446 iterations and 1035 nodes (1006.30 seconds)
+After 1100 nodes, 49 on tree, 1092945.6 best solution, best possible 1099374.4 (1023.19 seconds)
+Integer solution of 1092945.6 found after 194884 iterations and 1141 nodes (1034.48 seconds)
+After 1200 nodes, 49 on tree, 1092945.6 best solution, best possible 1099374.4 (1061.61 seconds)
+After 1300 nodes, 40 on tree, 1092945.6 best solution, best possible 1099374.4 (1100.57 seconds)
+Search completed - best objective 1092945.586448255, took 204863 iterations and 1353 nodes (1117.96 seconds)
+Strong branching done 8262 times (110492 iterations), fathomed 118 nodes and fixed 1362 variables
+Maximum depth 149, 14432 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1353 nodes, 1144.31 CPU seconds, 1148.36 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -1.629815e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.491213e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9442234e-05 ( 0.13155206%) - largest zero change 1.9441803e-05
+0  Obj 1092907.8 Primal inf 18729.547 (66) Dual inf 246.75432 (40)
+0  Obj 1092907.7 Primal inf 18729.547 (66) Dual inf 1.7463251e+13 (291)
+731  Obj 1083263.5 Dual inf 64084.668 (363)
+1174  Obj 1092884 Dual inf 3.5992652 (134)
+1251  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 4
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1474611787E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33518 constraints and 35044 variables.
+    The post-triangular part of the model has 3270 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092826.1 found by feasibility pump after 0 iterations and 0 nodes (68.54 seconds)
+1546 added rows had average density of 10.535576
+At root node, 1546 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 15.933 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.8 elements, 0 column cuts (0 active)  in 1.336 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.079 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.011 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.119 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.160 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.397 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092826.1 best solution, best possible 1099374.5 (99.51 seconds)
+After 100 nodes, 32 on tree, 1092826.1 best solution, best possible 1099374.5 (265.96 seconds)
+After 200 nodes, 37 on tree, 1092826.1 best solution, best possible 1099374.5 (309.98 seconds)
+After 300 nodes, 37 on tree, 1092826.1 best solution, best possible 1099374.5 (353.40 seconds)
+After 400 nodes, 58 on tree, 1092826.1 best solution, best possible 1099374.5 (391.99 seconds)
+Integer solution of 1092942.3 found by RINS after 121831 iterations and 500 nodes (426.30 seconds)
+After 500 nodes, 158 on tree, 1092942.3 best solution, best possible 1099374.5 (426.30 seconds)
+Integer solution of 1092943.5 found by rounding after 122105 iterations and 583 nodes (452.97 seconds)
+Integer solution of 1092943.5 found by rounding after 122111 iterations and 586 nodes (453.84 seconds)
+Integer solution of 1092943.5 found after 122140 iterations and 598 nodes (455.63 seconds)
+After 600 nodes, 230 on tree, 1092943.5 best solution, best possible 1099374.5 (456.94 seconds)
+Integer solution of 1092943.5 found by rounding after 122149 iterations and 604 nodes (457.74 seconds)
+After 700 nodes, 190 on tree, 1092943.5 best solution, best possible 1099374.5 (467.40 seconds)
+Integer solution of 1092944.3 found after 122667 iterations and 780 nodes (480.08 seconds)
+Integer solution of 1092944.3 found after 122694 iterations and 793 nodes (481.84 seconds)
+After 800 nodes, 235 on tree, 1092944.3 best solution, best possible 1099374.5 (483.62 seconds)
+Integer solution of 1092944.3 found by rounding after 122718 iterations and 804 nodes (484.47 seconds)
+Integer solution of 1092944.3 found after 122739 iterations and 815 nodes (486.03 seconds)
+Integer solution of 1092944.3 found after 122916 iterations and 865 nodes (493.03 seconds)
+Integer solution of 1092944.3 found after 123041 iterations and 892 nodes (499.73 seconds)
+After 900 nodes, 207 on tree, 1092944.3 best solution, best possible 1099374.5 (502.86 seconds)
+Integer solution of 1092945.6 found after 123233 iterations and 976 nodes (512.24 seconds)
+Integer solution of 1092945.6 found by rounding after 123235 iterations and 978 nodes (512.90 seconds)
+After 1000 nodes, 239 on tree, 1092945.6 best solution, best possible 1099374.5 (514.51 seconds)
+Integer solution of 1092945.6 found by rounding after 123350 iterations and 1027 nodes (517.71 seconds)
+Integer solution of 1092945.6 found by rounding after 123363 iterations and 1036 nodes (518.81 seconds)
+After 1100 nodes, 212 on tree, 1092945.6 best solution, best possible 1099374.5 (524.98 seconds)
+After 1200 nodes, 116 on tree, 1092945.6 best solution, best possible 1099374.5 (540.20 seconds)
+After 1300 nodes, 27 on tree, 1092945.6 best solution, best possible 1099374.5 (558.77 seconds)
+After 1400 nodes, 5 on tree, 1092945.6 best solution, best possible 1099374.5 (748.24 seconds)
+Integer solution of 1092945.6 found by rounding after 196640 iterations and 1470 nodes (909.61 seconds)
+Integer solution of 1092945.6 found by rounding after 196651 iterations and 1477 nodes (910.52 seconds)
+After 1500 nodes, 48 on tree, 1092945.6 best solution, best possible 1099374.4 (912.49 seconds)
+Integer solution of 1092945.6 found by rounding after 196848 iterations and 1543 nodes (919.80 seconds)
+Integer solution of 1092945.6 found by rounding after 196869 iterations and 1556 nodes (921.50 seconds)
+After 1600 nodes, 34 on tree, 1092945.6 best solution, best possible 1099374.4 (935.90 seconds)
+After 1700 nodes, 13 on tree, 1092945.6 best solution, best possible 1099374.4 (972.47 seconds)
+Search completed - best objective 1092945.586448254, took 209678 iterations and 1716 nodes (979.88 seconds)
+Strong branching done 8318 times (117862 iterations), fathomed 106 nodes and fixed 910 variables
+Maximum depth 234, 10222 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1716 nodes, 1009.00 CPU seconds, 1012.57 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -2.328306e-09   (absolute tolerance optca: 0)
+Relative gap:   -2.130304e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9445554e-05 ( 0.15149223%) - largest zero change 1.9442898e-05
+0  Obj 1092907.8 Primal inf 23750.497 (69) Dual inf 640.98767 (35)
+0  Obj 1092907.7 Primal inf 23750.497 (69) Dual inf 2.5098436e+13 (275)
+703  Obj 1072556.9 Dual inf 4456.089 (442)
+1007  Obj 1090750.9 Dual inf 1084.4989 (318)
+1326  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 5
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1314740148E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33517 constraints and 35044 variables.
+    The post-triangular part of the model has 3269 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092826.6 found by feasibility pump after 0 iterations and 0 nodes (73.99 seconds)
+1553 added rows had average density of 10.508049
+At root node, 1553 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 15.974 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.8 elements, 0 column cuts (0 active)  in 1.370 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.080 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.010 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.126 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.162 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.413 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092826.6 best solution, best possible 1099374.5 (105.15 seconds)
+After 100 nodes, 32 on tree, 1092826.6 best solution, best possible 1099374.5 (268.61 seconds)
+After 200 nodes, 37 on tree, 1092826.6 best solution, best possible 1099374.5 (325.36 seconds)
+After 300 nodes, 37 on tree, 1092826.6 best solution, best possible 1099374.5 (369.32 seconds)
+After 400 nodes, 37 on tree, 1092826.6 best solution, best possible 1099374.5 (415.46 seconds)
+After 500 nodes, 101 on tree, 1092826.6 best solution, best possible 1099374.5 (454.80 seconds)
+Integer solution of 1092942.2 found by RINS after 139312 iterations and 600 nodes (482.87 seconds)
+After 600 nodes, 35 on tree, 1092942.2 best solution, best possible 1099374.5 (482.89 seconds)
+Integer solution of 1092945.4 found by RINS after 144407 iterations and 700 nodes (511.12 seconds)
+After 700 nodes, 115 on tree, 1092945.4 best solution, best possible 1099374.5 (511.12 seconds)
+Integer solution of 1092945.4 found by RINS after 144538 iterations and 800 nodes (531.40 seconds)
+After 800 nodes, 213 on tree, 1092945.4 best solution, best possible 1099374.5 (531.40 seconds)
+Integer solution of 1092945.6 found after 144623 iterations and 850 nodes (535.66 seconds)
+After 900 nodes, 250 on tree, 1092945.6 best solution, best possible 1099374.5 (538.85 seconds)
+Integer solution of 1092945.6 found by rounding after 144786 iterations and 920 nodes (540.69 seconds)
+After 1000 nodes, 228 on tree, 1092945.6 best solution, best possible 1099374.5 (547.39 seconds)
+After 1100 nodes, 138 on tree, 1092945.6 best solution, best possible 1099374.5 (567.15 seconds)
+After 1200 nodes, 39 on tree, 1092945.6 best solution, best possible 1099374.5 (577.00 seconds)
+After 1300 nodes, 5 on tree, 1092945.6 best solution, best possible 1099374.5 (716.11 seconds)
+Integer solution of 1092945.6 found by rounding after 195387 iterations and 1387 nodes (950.90 seconds)
+After 1400 nodes, 49 on tree, 1092945.6 best solution, best possible 1099374.4 (953.08 seconds)
+After 1500 nodes, 50 on tree, 1092945.6 best solution, best possible 1099374.4 (976.56 seconds)
+Integer solution of 1092945.6 found after 196702 iterations and 1573 nodes (1002.19 seconds)
+After 1600 nodes, 55 on tree, 1092945.6 best solution, best possible 1099374.4 (1004.41 seconds)
+After 1700 nodes, 42 on tree, 1092945.6 best solution, best possible 1099374.4 (1021.75 seconds)
+Search completed - best objective 1092945.586448255, took 210745 iterations and 1767 nodes (1044.98 seconds)
+Strong branching done 9094 times (118791 iterations), fathomed 77 nodes and fixed 991 variables
+Maximum depth 251, 7674 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1767 nodes, 1080.50 CPU seconds, 1083.77 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -1.629815e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.491213e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.945705e-05 ( 0.17046535%) - largest zero change 1.9454566e-05
+0  Obj 854800.27 Primal inf 24492178 (13753) Dual inf 2615.6335 (70)
+0  Obj 854800.17 Primal inf 24492178 (13753) Dual inf 4.3786189e+15 (4538)
+700  Obj 1090139 Dual inf 68317.853 (381)
+959  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 6
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1631297834E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33517 constraints and 35044 variables.
+    The post-triangular part of the model has 3269 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092920.5 found by feasibility pump after 0 iterations and 0 nodes (74.56 seconds)
+1555 added rows had average density of 10.56463
+At root node, 1555 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 16.117 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.8 elements, 0 column cuts (0 active)  in 1.406 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.081 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.010 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.134 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.163 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.407 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092920.5 best solution, best possible 1099374.5 (106.03 seconds)
+After 100 nodes, 32 on tree, 1092920.5 best solution, best possible 1099374.5 (293.37 seconds)
+After 200 nodes, 37 on tree, 1092920.5 best solution, best possible 1099374.5 (344.75 seconds)
+After 300 nodes, 37 on tree, 1092920.5 best solution, best possible 1099374.5 (391.70 seconds)
+After 400 nodes, 35 on tree, 1092920.5 best solution, best possible 1099374.5 (441.11 seconds)
+After 500 nodes, 135 on tree, 1092920.5 best solution, best possible 1099374.5 (466.79 seconds)
+Integer solution of 1092945.4 found by RINS after 132378 iterations and 600 nodes (490.24 seconds)
+After 600 nodes, 150 on tree, 1092945.4 best solution, best possible 1099374.5 (490.25 seconds)
+After 700 nodes, 127 on tree, 1092945.4 best solution, best possible 1099374.5 (503.26 seconds)
+Integer solution of 1092945.6 found by rounding after 132920 iterations and 737 nodes (519.11 seconds)
+Integer solution of 1092945.6 found after 133091 iterations and 800 nodes (526.72 seconds)
+After 800 nodes, 139 on tree, 1092945.6 best solution, best possible 1099374.5 (526.72 seconds)
+After 900 nodes, 129 on tree, 1092945.6 best solution, best possible 1099374.5 (561.84 seconds)
+After 1000 nodes, 75 on tree, 1092945.6 best solution, best possible 1099374.5 (643.67 seconds)
+After 1100 nodes, 14 on tree, 1092945.6 best solution, best possible 1099374.5 (709.65 seconds)
+After 1200 nodes, 32 on tree, 1092945.6 best solution, best possible 1099374.4 (1042.12 seconds)
+Integer solution of 1092945.6 found after 196174 iterations and 1214 nodes (1048.26 seconds)
+After 1300 nodes, 40 on tree, 1092945.6 best solution, best possible 1099374.4 (1059.73 seconds)
+After 1400 nodes, 37 on tree, 1092945.6 best solution, best possible 1099374.4 (1082.31 seconds)
+After 1500 nodes, 34 on tree, 1092945.6 best solution, best possible 1099374.4 (1091.13 seconds)
+Integer solution of 1092945.6 found by rounding after 197733 iterations and 1546 nodes (1104.65 seconds)
+After 1600 nodes, 33 on tree, 1092945.6 best solution, best possible 1099374.4 (1128.51 seconds)
+After 1700 nodes, 12 on tree, 1092945.6 best solution, best possible 1099374.4 (1199.06 seconds)
+After 1800 nodes, 24 on tree, 1092945.6 best solution, best possible 1099374.4 (1237.13 seconds)
+Search completed - best objective 1092945.586448255, took 212745 iterations and 1839 nodes (1247.64 seconds)
+Strong branching done 10276 times (105468 iterations), fathomed 160 nodes and fixed 2083 variables
+Maximum depth 220, 9886 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1839 nodes, 1277.09 CPU seconds, 1281.21 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -1.862645e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.704243e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9458279e-05 ( 0.1846367%) - largest zero change 1.9451876e-05
+0  Obj 1092907.8 Primal inf 18329.062 (65) Dual inf 246.75433 (40)
+0  Obj 1092907.7 Primal inf 18329.062 (65) Dual inf 1.6481209e+13 (290)
+731  Obj 1086907.1 Dual inf 6298.3125 (359)
+1060  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 7
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1478280072E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33516 constraints and 35044 variables.
+    The post-triangular part of the model has 3269 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092825.9 found by feasibility pump after 0 iterations and 0 nodes (75.79 seconds)
+1553 added rows had average density of 10.551191
+At root node, 1553 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 17.136 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.7 elements, 0 column cuts (0 active)  in 1.528 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.091 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.011 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.158 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.181 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.768 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092825.9 best solution, best possible 1099374.5 (111.86 seconds)
+After 100 nodes, 32 on tree, 1092825.9 best solution, best possible 1099374.5 (315.10 seconds)
+After 200 nodes, 36 on tree, 1092825.9 best solution, best possible 1099374.5 (371.43 seconds)
+After 300 nodes, 36 on tree, 1092825.9 best solution, best possible 1099374.5 (429.93 seconds)
+After 400 nodes, 44 on tree, 1092825.9 best solution, best possible 1099374.5 (483.79 seconds)
+Integer solution of 1092942 found by RINS after 127048 iterations and 500 nodes (518.48 seconds)
+After 500 nodes, 30 on tree, 1092942 best solution, best possible 1099374.5 (518.50 seconds)
+Integer solution of 1092945.4 found by RINS after 154092 iterations and 600 nodes (572.51 seconds)
+After 600 nodes, 65 on tree, 1092945.4 best solution, best possible 1099374.5 (572.51 seconds)
+Integer solution of 1092945.4 found by RINS after 154275 iterations and 700 nodes (597.56 seconds)
+After 700 nodes, 161 on tree, 1092945.4 best solution, best possible 1099374.5 (597.57 seconds)
+Integer solution of 1092945.6 found after 154344 iterations and 729 nodes (601.16 seconds)
+Integer solution of 1092945.6 found by rounding after 154374 iterations and 744 nodes (603.41 seconds)
+After 800 nodes, 177 on tree, 1092945.6 best solution, best possible 1099374.5 (611.41 seconds)
+After 900 nodes, 130 on tree, 1092945.6 best solution, best possible 1099374.5 (624.04 seconds)
+After 1000 nodes, 30 on tree, 1092945.6 best solution, best possible 1099374.5 (633.07 seconds)
+After 1100 nodes, 33 on tree, 1092945.6 best solution, best possible 1099374.5 (704.77 seconds)
+After 1200 nodes, 13 on tree, 1092945.6 best solution, best possible 1099374.5 (867.77 seconds)
+Integer solution of 1092945.6 found after 197880 iterations and 1282 nodes (1146.41 seconds)
+After 1300 nodes, 36 on tree, 1092945.6 best solution, best possible 1099374.4 (1150.37 seconds)
+After 1400 nodes, 31 on tree, 1092945.6 best solution, best possible 1099374.4 (1243.34 seconds)
+Integer solution of 1092945.6 found after 200104 iterations and 1436 nodes (1301.23 seconds)
+After 1500 nodes, 31 on tree, 1092945.6 best solution, best possible 1099374.4 (1361.24 seconds)
+Search completed - best objective 1092945.586448255, took 209920 iterations and 1567 nodes (1395.53 seconds)
+Strong branching done 10526 times (131796 iterations), fathomed 142 nodes and fixed 2159 variables
+Maximum depth 198, 12050 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1567 nodes, 1431.85 CPU seconds, 1436.42 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -1.396984e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.278182e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9461125e-05 ( 0.12989625%) - largest zero change 1.9460605e-05
+0  Obj 1092907.8 Primal inf 23160.536 (68) Dual inf 241.91896 (39)
+0  Obj 1092907.7 Primal inf 23160.536 (68) Dual inf 2.1095891e+13 (272)
+685  Obj 1087029.1 Dual inf 27516.961 (440)
+1124  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 8
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1454060697E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33516 constraints and 35044 variables.
+    The post-triangular part of the model has 3269 constraints and variables.
+    There are 2 penalty and minimax constraints with 2 variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092826.6 found by feasibility pump after 0 iterations and 0 nodes (82.22 seconds)
+1552 added rows had average density of 10.525129
+At root node, 1552 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 17.327 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1043 row cuts average 6.8 elements, 0 column cuts (0 active)  in 1.590 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.097 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.012 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.169 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.187 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.760 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092826.6 best solution, best possible 1099374.5 (117.83 seconds)
+After 100 nodes, 32 on tree, 1092826.6 best solution, best possible 1099374.5 (320.68 seconds)
+After 200 nodes, 37 on tree, 1092826.6 best solution, best possible 1099374.5 (395.17 seconds)
+After 300 nodes, 37 on tree, 1092826.6 best solution, best possible 1099374.5 (449.96 seconds)
+After 400 nodes, 35 on tree, 1092826.6 best solution, best possible 1099374.5 (498.23 seconds)
+Integer solution of 1092942.1 found by RINS after 131711 iterations and 500 nodes (529.17 seconds)
+After 500 nodes, 31 on tree, 1092942.1 best solution, best possible 1099374.5 (529.19 seconds)
+Integer solution of 1092945.4 found by RINS after 161518 iterations and 600 nodes (584.06 seconds)
+After 600 nodes, 60 on tree, 1092945.4 best solution, best possible 1099374.5 (584.06 seconds)
+After 700 nodes, 149 on tree, 1092945.4 best solution, best possible 1099374.5 (604.25 seconds)
+After 800 nodes, 49 on tree, 1092945.4 best solution, best possible 1099374.5 (613.27 seconds)
+Integer solution of 1092945.4 found by RINS after 165308 iterations and 833 nodes (621.14 seconds)
+Integer solution of 1092945.6 found by rounding after 165589 iterations and 878 nodes (647.93 seconds)
+Integer solution of 1092945.6 found by rounding after 165610 iterations and 889 nodes (649.75 seconds)
+After 900 nodes, 54 on tree, 1092945.6 best solution, best possible 1099374.5 (651.12 seconds)
+After 1000 nodes, 39 on tree, 1092945.6 best solution, best possible 1099374.5 (690.69 seconds)
+After 1100 nodes, 12 on tree, 1092945.6 best solution, best possible 1099374.5 (777.34 seconds)
+After 1200 nodes, 45 on tree, 1092945.6 best solution, best possible 1099374.4 (1136.90 seconds)
+Integer solution of 1092945.6 found by rounding after 196655 iterations and 1209 nodes (1138.61 seconds)
+After 1300 nodes, 42 on tree, 1092945.6 best solution, best possible 1099374.4 (1198.59 seconds)
+Integer solution of 1092945.6 found after 198476 iterations and 1327 nodes (1236.58 seconds)
+After 1400 nodes, 37 on tree, 1092945.6 best solution, best possible 1099374.4 (1276.03 seconds)
+After 1500 nodes, 41 on tree, 1092945.6 best solution, best possible 1099374.4 (1350.57 seconds)
+After 1600 nodes, 20 on tree, 1092945.6 best solution, best possible 1099374.4 (1393.94 seconds)
+Search completed - best objective 1092945.586448254, took 213054 iterations and 1660 nodes (1413.63 seconds)
+Strong branching done 11352 times (123593 iterations), fathomed 159 nodes and fixed 2424 variables
+Maximum depth 165, 10657 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1660 nodes, 1456.81 CPU seconds, 1462.46 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -1.629815e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.491213e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9424862e-05 ( 0.18796976%) - largest zero change 1.9423032e-05
+0  Obj 1092907.8 Primal inf 23160.536 (68) Dual inf 241.91896 (39)
+0  Obj 1092907.7 Primal inf 23160.536 (68) Dual inf 2.1085694e+13 (272)
+684  Obj 1086738.9 Dual inf 25322.793 (475)
+1086  Obj 1092902.5 Dual inf 1.8761644 (124)
+1150  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 9
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1450498549E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33517 constraints and 35044 variables.
+    The post-triangular part of the model has 3270 constraints and variables.
+    There are 1 penalty and minimax constraints with 1 variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+  MIP    8   1092945.58645   1462.46   213054      0      cbc
+  NLP    9        *Infeas*      2.40        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092920.5 found by feasibility pump after 0 iterations and 0 nodes (93.32 seconds)
+1555 added rows had average density of 10.664952
+At root node, 1555 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 16.774 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 7.1 elements, 0 column cuts (0 active)  in 1.563 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.091 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.011 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.168 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.183 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.4 elements, 0 column cuts (0 active)  in 2.673 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092920.5 best solution, best possible 1099374.5 (128.36 seconds)
+After 100 nodes, 32 on tree, 1092920.5 best solution, best possible 1099374.5 (315.95 seconds)
+After 200 nodes, 36 on tree, 1092920.5 best solution, best possible 1099374.5 (379.48 seconds)
+After 300 nodes, 36 on tree, 1092920.5 best solution, best possible 1099374.5 (418.90 seconds)
+After 400 nodes, 45 on tree, 1092920.5 best solution, best possible 1099374.5 (479.18 seconds)
+Integer solution of 1092945.4 found by RINS after 123498 iterations and 500 nodes (502.30 seconds)
+After 500 nodes, 145 on tree, 1092945.4 best solution, best possible 1099374.5 (502.30 seconds)
+Integer solution of 1092945.6 found after 123928 iterations and 546 nodes (525.81 seconds)
+After 600 nodes, 147 on tree, 1092945.6 best solution, best possible 1099374.5 (531.97 seconds)
+Integer solution of 1092945.6 found by rounding after 124062 iterations and 602 nodes (532.63 seconds)
+After 700 nodes, 92 on tree, 1092945.6 best solution, best possible 1099374.5 (547.94 seconds)
+After 800 nodes, 10 on tree, 1092945.6 best solution, best possible 1099374.5 (577.16 seconds)
+After 900 nodes, 13 on tree, 1092945.6 best solution, best possible 1099374.4 (948.55 seconds)
+Integer solution of 1092945.6 found by rounding after 186871 iterations and 963 nodes (978.42 seconds)
+Integer solution of 1092945.6 found by rounding after 186903 iterations and 976 nodes (980.69 seconds)
+Integer solution of 1092945.6 found by rounding after 187218 iterations and 984 nodes (982.30 seconds)
+After 1000 nodes, 69 on tree, 1092945.6 best solution, best possible 1099374.4 (986.96 seconds)
+After 1100 nodes, 53 on tree, 1092945.6 best solution, best possible 1099374.4 (1019.41 seconds)
+After 1200 nodes, 48 on tree, 1092945.6 best solution, best possible 1099374.4 (1056.34 seconds)
+After 1300 nodes, 42 on tree, 1092945.6 best solution, best possible 1099374.4 (1094.32 seconds)
+After 1400 nodes, 38 on tree, 1092945.6 best solution, best possible 1099374.4 (1125.95 seconds)
+After 1500 nodes, 26 on tree, 1092945.6 best solution, best possible 1099374.4 (1164.39 seconds)
+After 1600 nodes, 35 on tree, 1092945.6 best solution, best possible 1099374.4 (1260.88 seconds)
+After 1700 nodes, 35 on tree, 1092945.6 best solution, best possible 1099374.4 (1385.12 seconds)
+Search completed - best objective 1092945.586448255, took 235423 iterations and 1755 nodes (1406.18 seconds)
+Strong branching done 11622 times (164353 iterations), fathomed 123 nodes and fixed 2579 variables
+Maximum depth 143, 12087 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1755 nodes, 1455.13 CPU seconds, 1459.55 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -1.862645e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.704243e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9462393e-05 ( 0.19873084%) - largest zero change 1.9462129e-05
+0  Obj 1092907.8 Primal inf 24271.423 (72) Dual inf 239.17485 (40)
+0  Obj 1092907.7 Primal inf 24271.423 (72) Dual inf 2.2328774e+13 (285)
+731  Obj 1082910.5 Dual inf 18197.355 (443)
+1136  Obj 1092900.4 Dual inf 1.2337677 (118)
+1200  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 10
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.0921171212E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the critical variable is at a bound.
+ 
+ 
+    The pre-triangular part of the model has 24833 constraints and 26358 variables.
+    The post-triangular part of the model has 6 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+  MIP    8   1092945.58645   1462.46   213054      0      cbc
+  NLP    9        *Infeas*      2.40        0      0      conopt
+  MIP    9   1092945.58646   1459.55   235423      0      cbc
+  NLP   10        *Infeas*      2.20        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092826.3 found by feasibility pump after 0 iterations and 0 nodes (68.68 seconds)
+1555 added rows had average density of 10.655949
+At root node, 1555 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 15.914 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 7.1 elements, 0 column cuts (0 active)  in 1.533 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.081 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.010 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.158 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.168 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.4 elements, 0 column cuts (0 active)  in 2.526 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092826.3 best solution, best possible 1099374.5 (100.36 seconds)
+After 100 nodes, 32 on tree, 1092826.3 best solution, best possible 1099374.5 (280.02 seconds)
+After 200 nodes, 37 on tree, 1092826.3 best solution, best possible 1099374.5 (324.38 seconds)
+After 300 nodes, 37 on tree, 1092826.3 best solution, best possible 1099374.5 (362.62 seconds)
+After 400 nodes, 63 on tree, 1092826.3 best solution, best possible 1099374.5 (407.68 seconds)
+Integer solution of 1092942.2 found by RINS after 112272 iterations and 500 nodes (429.11 seconds)
+After 500 nodes, 37 on tree, 1092942.2 best solution, best possible 1099374.5 (429.13 seconds)
+Integer solution of 1092945.4 found by RINS after 116903 iterations and 600 nodes (469.91 seconds)
+After 600 nodes, 127 on tree, 1092945.4 best solution, best possible 1099374.5 (469.91 seconds)
+After 700 nodes, 170 on tree, 1092945.4 best solution, best possible 1099374.5 (480.93 seconds)
+Integer solution of 1092945.6 found by rounding after 117488 iterations and 786 nodes (497.43 seconds)
+After 800 nodes, 129 on tree, 1092945.6 best solution, best possible 1099374.5 (499.75 seconds)
+Integer solution of 1092945.6 found by rounding after 117516 iterations and 802 nodes (500.37 seconds)
+Integer solution of 1092945.6 found by rounding after 117551 iterations and 822 nodes (502.29 seconds)
+After 900 nodes, 110 on tree, 1092945.6 best solution, best possible 1099374.5 (515.62 seconds)
+After 1000 nodes, 32 on tree, 1092945.6 best solution, best possible 1099374.5 (549.54 seconds)
+After 1100 nodes, 12 on tree, 1092945.6 best solution, best possible 1099374.5 (701.78 seconds)
+After 1200 nodes, 34 on tree, 1092945.6 best solution, best possible 1099374.4 (941.77 seconds)
+Integer solution of 1092945.6 found after 185746 iterations and 1206 nodes (942.73 seconds)
+Integer solution of 1092945.6 found after 186586 iterations and 1222 nodes (945.82 seconds)
+After 1300 nodes, 29 on tree, 1092945.6 best solution, best possible 1099374.4 (965.30 seconds)
+After 1400 nodes, 25 on tree, 1092945.6 best solution, best possible 1099374.4 (1021.80 seconds)
+After 1500 nodes, 13 on tree, 1092945.6 best solution, best possible 1099374.4 (1100.35 seconds)
+After 1600 nodes, 12 on tree, 1092945.6 best solution, best possible 1099374.4 (1165.03 seconds)
+After 1700 nodes, 11 on tree, 1092945.6 best solution, best possible 1099374.4 (1239.75 seconds)
+Search completed - best objective 1092945.586448255, took 206149 iterations and 1779 nodes (1340.73 seconds)
+Strong branching done 12478 times (138000 iterations), fathomed 140 nodes and fixed 2979 variables
+Maximum depth 182, 13306 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1779 nodes, 1375.28 CPU seconds, 1379.44 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -1.164153e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.065152e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9455931e-05 ( 0.1644548%) - largest zero change 1.94556e-05
+0  Obj 1092907.8 Primal inf 23750.497 (69) Dual inf 246.7543 (40)
+0  Obj 1092907.7 Primal inf 23750.497 (69) Dual inf 2.1902053e+13 (274)
+731  Obj 1086921.3 Dual inf 42170.769 (403)
+1128  Obj 1092945.1 Dual inf 0.012426133 (50)
+1158  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 11
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1317660957E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33517 constraints and 35044 variables.
+    The post-triangular part of the model has 3270 constraints and variables.
+    There are 1 penalty and minimax constraints with 1 variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+  MIP    8   1092945.58645   1462.46   213054      0      cbc
+  NLP    9        *Infeas*      2.40        0      0      conopt
+  MIP    9   1092945.58646   1459.55   235423      0      cbc
+  NLP   10        *Infeas*      2.20        0      0      conopt
+  MIP   10   1092945.58645   1379.44   206149      0      cbc
+  NLP   11        *Infeas*      2.47        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092827 found by feasibility pump after 0 iterations and 0 nodes (71.42 seconds)
+1551 added rows had average density of 10.523533
+At root node, 1551 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 16.482 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.8 elements, 0 column cuts (0 active)  in 1.637 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.090 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.011 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.177 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.183 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.660 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092827 best solution, best possible 1099374.5 (105.06 seconds)
+After 100 nodes, 32 on tree, 1092827 best solution, best possible 1099374.5 (328.42 seconds)
+After 200 nodes, 37 on tree, 1092827 best solution, best possible 1099374.5 (370.22 seconds)
+After 300 nodes, 37 on tree, 1092827 best solution, best possible 1099374.5 (414.21 seconds)
+After 400 nodes, 45 on tree, 1092827 best solution, best possible 1099374.5 (476.38 seconds)
+Integer solution of 1092941.4 found by RINS after 125800 iterations and 500 nodes (517.79 seconds)
+After 500 nodes, 31 on tree, 1092941.4 best solution, best possible 1099374.5 (517.81 seconds)
+Integer solution of 1092945.4 found by RINS after 157779 iterations and 600 nodes (574.76 seconds)
+After 600 nodes, 56 on tree, 1092945.4 best solution, best possible 1099374.5 (574.76 seconds)
+Integer solution of 1092945.4 found by RINS after 157986 iterations and 700 nodes (600.55 seconds)
+After 700 nodes, 154 on tree, 1092945.4 best solution, best possible 1099374.5 (600.56 seconds)
+Integer solution of 1092945.6 found by rounding after 158059 iterations and 726 nodes (603.84 seconds)
+Integer solution of 1092945.6 found by rounding after 158068 iterations and 731 nodes (605.11 seconds)
+Integer solution of 1092945.6 found after 158080 iterations and 741 nodes (606.52 seconds)
+After 800 nodes, 170 on tree, 1092945.6 best solution, best possible 1099374.5 (614.68 seconds)
+After 900 nodes, 100 on tree, 1092945.6 best solution, best possible 1099374.5 (624.87 seconds)
+After 1000 nodes, 7 on tree, 1092945.6 best solution, best possible 1099374.5 (650.48 seconds)
+After 1100 nodes, 43 on tree, 1092945.6 best solution, best possible 1099374.4 (1001.02 seconds)
+Integer solution of 1092945.6 found by rounding after 193871 iterations and 1103 nodes (1001.82 seconds)
+Integer solution of 1092945.6 found after 194265 iterations and 1196 nodes (1020.50 seconds)
+After 1200 nodes, 44 on tree, 1092945.6 best solution, best possible 1099374.4 (1021.89 seconds)
+After 1300 nodes, 8 on tree, 1092945.6 best solution, best possible 1099374.4 (1050.08 seconds)
+Search completed - best objective 1092945.586448255, took 206076 iterations and 1312 nodes (1065.86 seconds)
+Strong branching done 6958 times (117721 iterations), fathomed 64 nodes and fixed 707 variables
+Maximum depth 191, 8713 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1312 nodes, 1110.91 CPU seconds, 1114.62 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -2.793968e-09   (absolute tolerance optca: 0)
+Relative gap:   -2.556365e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9447872e-05 ( 0.15690367%) - largest zero change 1.9439117e-05
+0  Obj 1092907.8 Primal inf 23989.385 (67) Dual inf 638.48472 (41)
+0  Obj 1092907.7 Primal inf 23989.385 (67) Dual inf 2.2880449e+13 (274)
+732  Obj 1092509.4 Dual inf 682.47891 (334)
+872  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 12
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.2131279276E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the critical variable is at a bound.
+ 
+ 
+    The pre-triangular part of the model has 24757 constraints and 26282 variables.
+    The post-triangular part of the model has 6 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+  MIP    8   1092945.58645   1462.46   213054      0      cbc
+  NLP    9        *Infeas*      2.40        0      0      conopt
+  MIP    9   1092945.58646   1459.55   235423      0      cbc
+  NLP   10        *Infeas*      2.20        0      0      conopt
+  MIP   10   1092945.58645   1379.44   206149      0      cbc
+  NLP   11        *Infeas*      2.47        0      0      conopt
+  MIP   11   1092945.58645   1114.62   206076      0      cbc
+  NLP   12        *Infeas*      2.33        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092826.9 found by feasibility pump after 0 iterations and 0 nodes (76.25 seconds)
+1550 added rows had average density of 10.547097
+At root node, 1550 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 16.833 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.8 elements, 0 column cuts (0 active)  in 1.693 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.092 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.011 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.187 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.186 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.719 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092826.9 best solution, best possible 1099374.5 (110.71 seconds)
+After 100 nodes, 32 on tree, 1092826.9 best solution, best possible 1099374.5 (347.20 seconds)
+After 200 nodes, 36 on tree, 1092826.9 best solution, best possible 1099374.5 (389.69 seconds)
+After 300 nodes, 36 on tree, 1092826.9 best solution, best possible 1099374.5 (436.73 seconds)
+After 400 nodes, 36 on tree, 1092826.9 best solution, best possible 1099374.5 (502.26 seconds)
+After 500 nodes, 136 on tree, 1092826.9 best solution, best possible 1099374.5 (543.39 seconds)
+Integer solution of 1092941.4 found by RINS after 135636 iterations and 600 nodes (573.94 seconds)
+After 600 nodes, 236 on tree, 1092941.4 best solution, best possible 1099374.5 (573.94 seconds)
+Integer solution of 1092942 found by rounding after 135808 iterations and 674 nodes (596.55 seconds)
+Integer solution of 1092942 found by rounding after 135815 iterations and 677 nodes (597.52 seconds)
+Integer solution of 1092942 found by rounding after 135848 iterations and 690 nodes (599.94 seconds)
+After 700 nodes, 301 on tree, 1092942 best solution, best possible 1099374.5 (601.94 seconds)
+Integer solution of 1092942 found after 135868 iterations and 701 nodes (602.64 seconds)
+Integer solution of 1092942.1 found by rounding after 135956 iterations and 730 nodes (607.79 seconds)
+Integer solution of 1092942.1 found by rounding after 135983 iterations and 738 nodes (609.65 seconds)
+Integer solution of 1092942.1 found by rounding after 136026 iterations and 752 nodes (611.98 seconds)
+Integer solution of 1092943.3 found by RINS after 136152 iterations and 800 nodes (619.64 seconds)
+After 800 nodes, 263 on tree, 1092943.3 best solution, best possible 1099374.5 (619.64 seconds)
+After 900 nodes, 266 on tree, 1092943.3 best solution, best possible 1099374.5 (644.17 seconds)
+Integer solution of 1092944.1 found after 136812 iterations and 995 nodes (662.57 seconds)
+After 1000 nodes, 303 on tree, 1092944.1 best solution, best possible 1099374.5 (663.01 seconds)
+Integer solution of 1092944.1 found by rounding after 136952 iterations and 1040 nodes (669.93 seconds)
+Integer solution of 1092944.1 found after 136961 iterations and 1046 nodes (671.16 seconds)
+Integer solution of 1092944.1 found after 137082 iterations and 1091 nodes (677.83 seconds)
+After 1100 nodes, 295 on tree, 1092944.1 best solution, best possible 1099374.5 (678.61 seconds)
+Integer solution of 1092944.1 found by rounding after 137162 iterations and 1118 nodes (681.00 seconds)
+Integer solution of 1092944.1 found by rounding after 137163 iterations and 1119 nodes (681.70 seconds)
+Integer solution of 1092945.4 found by RINS after 137375 iterations and 1200 nodes (694.88 seconds)
+After 1200 nodes, 281 on tree, 1092945.4 best solution, best possible 1099374.5 (694.88 seconds)
+After 1300 nodes, 283 on tree, 1092945.4 best solution, best possible 1099374.5 (710.21 seconds)
+Integer solution of 1092945.6 found by rounding after 138125 iterations and 1400 nodes (730.80 seconds)
+After 1400 nodes, 230 on tree, 1092945.6 best solution, best possible 1099374.5 (730.80 seconds)
+After 1500 nodes, 213 on tree, 1092945.6 best solution, best possible 1099374.5 (785.33 seconds)
+Integer solution of 1092945.6 found by rounding after 139155 iterations and 1540 nodes (813.79 seconds)
+After 1600 nodes, 218 on tree, 1092945.6 best solution, best possible 1099374.5 (846.54 seconds)
+After 1700 nodes, 189 on tree, 1092945.6 best solution, best possible 1099374.5 (864.82 seconds)
+After 1800 nodes, 93 on tree, 1092945.6 best solution, best possible 1099374.5 (894.20 seconds)
+After 1900 nodes, 15 on tree, 1092945.6 best solution, best possible 1099374.5 (920.81 seconds)
+After 2000 nodes, 13 on tree, 1092945.6 best solution, best possible 1099374.4 (1272.64 seconds)
+Integer solution of 1092945.6 found after 200741 iterations and 2043 nodes (1308.81 seconds)
+After 2100 nodes, 51 on tree, 1092945.6 best solution, best possible 1099374.4 (1313.40 seconds)
+After 2200 nodes, 47 on tree, 1092945.6 best solution, best possible 1099374.4 (1332.33 seconds)
+After 2300 nodes, 44 on tree, 1092945.6 best solution, best possible 1099374.4 (1340.52 seconds)
+Integer solution of 1092945.6 found after 201945 iterations and 2327 nodes (1355.45 seconds)
+After 2400 nodes, 40 on tree, 1092945.6 best solution, best possible 1099374.4 (1373.97 seconds)
+After 2500 nodes, 47 on tree, 1092945.6 best solution, best possible 1099374.4 (1431.07 seconds)
+After 2600 nodes, 9 on tree, 1092945.6 best solution, best possible 1099374.4 (1472.73 seconds)
+Search completed - best objective 1092945.586448254, took 213133 iterations and 2611 nodes (1479.72 seconds)
+Strong branching done 13524 times (123566 iterations), fathomed 226 nodes and fixed 2624 variables
+Maximum depth 292, 11554 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (2611 nodes, 1511.28 CPU seconds, 1516.31 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -1.629815e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.491213e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9461125e-05 ( 0.1527265%) - largest zero change 1.9460605e-05
+0  Obj 1092907.8 Primal inf 23160.536 (68) Dual inf 241.91897 (39)
+0  Obj 1092907.7 Primal inf 23160.536 (68) Dual inf 2.1212286e+13 (272)
+684  Obj 1087215.2 Dual inf 16181.628 (369)
+1119  Obj 1092945.6
+1120  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 13
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1454279674E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33517 constraints and 35044 variables.
+    The post-triangular part of the model has 3269 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+  MIP    8   1092945.58645   1462.46   213054      0      cbc
+  NLP    9        *Infeas*      2.40        0      0      conopt
+  MIP    9   1092945.58646   1459.55   235423      0      cbc
+  NLP   10        *Infeas*      2.20        0      0      conopt
+  MIP   10   1092945.58645   1379.44   206149      0      cbc
+  NLP   11        *Infeas*      2.47        0      0      conopt
+  MIP   11   1092945.58645   1114.62   206076      0      cbc
+  NLP   12        *Infeas*      2.33        0      0      conopt
+  MIP   12   1092945.58645   1516.31   213133      0      cbc
+  NLP   13        *Infeas*      2.42        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092826.6 found by feasibility pump after 0 iterations and 0 nodes (70.17 seconds)
+1557 added rows had average density of 10.48298
+At root node, 1557 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 16.827 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.7 elements, 0 column cuts (0 active)  in 1.732 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.093 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.012 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.195 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.189 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.764 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092826.6 best solution, best possible 1099374.5 (105.30 seconds)
+After 100 nodes, 32 on tree, 1092826.6 best solution, best possible 1099374.5 (342.93 seconds)
+After 200 nodes, 36 on tree, 1092826.6 best solution, best possible 1099374.5 (394.64 seconds)
+After 300 nodes, 36 on tree, 1092826.6 best solution, best possible 1099374.5 (448.79 seconds)
+After 400 nodes, 68 on tree, 1092826.6 best solution, best possible 1099374.5 (505.31 seconds)
+Integer solution of 1092943.7 found by RINS after 117555 iterations and 500 nodes (530.79 seconds)
+After 500 nodes, 34 on tree, 1092943.7 best solution, best possible 1099374.5 (530.80 seconds)
+Integer solution of 1092945.4 found by RINS after 154313 iterations and 600 nodes (599.05 seconds)
+After 600 nodes, 50 on tree, 1092945.4 best solution, best possible 1099374.5 (599.05 seconds)
+Integer solution of 1092945.4 found by RINS after 154435 iterations and 700 nodes (612.74 seconds)
+After 700 nodes, 148 on tree, 1092945.4 best solution, best possible 1099374.5 (612.74 seconds)
+Integer solution of 1092945.6 found by rounding after 154494 iterations and 717 nodes (615.78 seconds)
+Integer solution of 1092945.6 found by rounding after 154509 iterations and 725 nodes (617.62 seconds)
+Integer solution of 1092945.6 found by rounding after 154617 iterations and 760 nodes (623.14 seconds)
+After 800 nodes, 157 on tree, 1092945.6 best solution, best possible 1099374.5 (628.13 seconds)
+After 900 nodes, 104 on tree, 1092945.6 best solution, best possible 1099374.5 (637.97 seconds)
+After 1000 nodes, 10 on tree, 1092945.6 best solution, best possible 1099374.5 (658.94 seconds)
+After 1100 nodes, 25 on tree, 1092945.6 best solution, best possible 1099374.4 (1036.02 seconds)
+Integer solution of 1092945.6 found by rounding after 183632 iterations and 1120 nodes (1048.42 seconds)
+After 1200 nodes, 14 on tree, 1092945.6 best solution, best possible 1099374.4 (1058.24 seconds)
+Integer solution of 1092945.6 found by rounding after 186274 iterations and 1218 nodes (1080.37 seconds)
+After 1300 nodes, 30 on tree, 1092945.6 best solution, best possible 1099374.4 (1133.87 seconds)
+After 1400 nodes, 17 on tree, 1092945.6 best solution, best possible 1099374.4 (1224.62 seconds)
+After 1500 nodes, 19 on tree, 1092945.6 best solution, best possible 1099374.4 (1386.59 seconds)
+After 1600 nodes, 21 on tree, 1092945.6 best solution, best possible 1099374.4 (1532.92 seconds)
+Search completed - best objective 1092945.586448255, took 203835 iterations and 1644 nodes (1570.74 seconds)
+Strong branching done 11624 times (139015 iterations), fathomed 130 nodes and fixed 2687 variables
+Maximum depth 180, 11973 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1644 nodes, 1599.61 CPU seconds, 1605.26 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -1.862645e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.704243e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9441024e-05 ( 0.1460868%) - largest zero change 1.9434916e-05
+0  Obj 848714.19 Primal inf 24534354 (13755) Dual inf 2536.3362 (63)
+0  Obj 848714.09 Primal inf 24534354 (13755) Dual inf 4.3803285e+15 (4522)
+708  Obj 1074172.4 Dual inf 84070.755 (537)
+993  Obj 1091156.3 Dual inf 673.86228 (381)
+1302  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 14
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1486585380E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33517 constraints and 35044 variables.
+    The post-triangular part of the model has 3270 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+  MIP    8   1092945.58645   1462.46   213054      0      cbc
+  NLP    9        *Infeas*      2.40        0      0      conopt
+  MIP    9   1092945.58646   1459.55   235423      0      cbc
+  NLP   10        *Infeas*      2.20        0      0      conopt
+  MIP   10   1092945.58645   1379.44   206149      0      cbc
+  NLP   11        *Infeas*      2.47        0      0      conopt
+  MIP   11   1092945.58645   1114.62   206076      0      cbc
+  NLP   12        *Infeas*      2.33        0      0      conopt
+  MIP   12   1092945.58645   1516.31   213133      0      cbc
+  NLP   13        *Infeas*      2.42        0      0      conopt
+  MIP   13   1092945.58645   1605.26   203835      0      cbc
+  NLP   14        *Infeas*      2.45        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092830.6 found by feasibility pump after 0 iterations and 0 nodes (76.75 seconds)
+1555 added rows had average density of 10.657878
+At root node, 1555 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 16.863 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 7.1 elements, 0 column cuts (0 active)  in 1.780 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.092 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.012 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.204 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.191 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.4 elements, 0 column cuts (0 active)  in 2.768 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092830.6 best solution, best possible 1099374.5 (111.60 seconds)
+After 100 nodes, 32 on tree, 1092830.6 best solution, best possible 1099374.5 (317.07 seconds)
+After 200 nodes, 37 on tree, 1092830.6 best solution, best possible 1099374.5 (368.07 seconds)
+After 300 nodes, 37 on tree, 1092830.6 best solution, best possible 1099374.5 (418.43 seconds)
+After 400 nodes, 58 on tree, 1092830.6 best solution, best possible 1099374.5 (474.89 seconds)
+Integer solution of 1092941.4 found by RINS after 117714 iterations and 500 nodes (499.48 seconds)
+After 500 nodes, 36 on tree, 1092941.4 best solution, best possible 1099374.5 (499.50 seconds)
+Integer solution of 1092945.4 found by RINS after 123484 iterations and 600 nodes (539.66 seconds)
+After 600 nodes, 121 on tree, 1092945.4 best solution, best possible 1099374.5 (539.66 seconds)
+After 700 nodes, 184 on tree, 1092945.4 best solution, best possible 1099374.5 (552.11 seconds)
+Integer solution of 1092945.4 found by RINS after 124097 iterations and 800 nodes (572.38 seconds)
+After 800 nodes, 133 on tree, 1092945.4 best solution, best possible 1099374.5 (572.38 seconds)
+Integer solution of 1092945.6 found by rounding after 124102 iterations and 803 nodes (573.18 seconds)
+Integer solution of 1092945.6 found by rounding after 124173 iterations and 833 nodes (577.20 seconds)
+After 900 nodes, 112 on tree, 1092945.6 best solution, best possible 1099374.5 (584.81 seconds)
+After 1000 nodes, 31 on tree, 1092945.6 best solution, best possible 1099374.5 (612.34 seconds)
+After 1100 nodes, 3 on tree, 1092945.6 best solution, best possible 1099374.5 (796.00 seconds)
+Integer solution of 1092945.6 found by rounding after 187460 iterations and 1168 nodes (1082.73 seconds)
+Integer solution of 1092945.6 found by rounding after 187483 iterations and 1174 nodes (1084.27 seconds)
+After 1200 nodes, 37 on tree, 1092945.6 best solution, best possible 1099374.4 (1093.17 seconds)
+After 1300 nodes, 40 on tree, 1092945.6 best solution, best possible 1099374.4 (1142.91 seconds)
+After 1400 nodes, 39 on tree, 1092945.6 best solution, best possible 1099374.4 (1208.98 seconds)
+After 1500 nodes, 9 on tree, 1092945.6 best solution, best possible 1099374.4 (1291.85 seconds)
+Integer solution of 1092945.6 found by rounding after 197862 iterations and 1532 nodes (1318.85 seconds)
+After 1600 nodes, 37 on tree, 1092945.6 best solution, best possible 1099374.4 (1324.40 seconds)
+After 1700 nodes, 35 on tree, 1092945.6 best solution, best possible 1099374.4 (1337.41 seconds)
+After 1800 nodes, 35 on tree, 1092945.6 best solution, best possible 1099374.4 (1352.28 seconds)
+After 1900 nodes, 32 on tree, 1092945.6 best solution, best possible 1099374.4 (1394.66 seconds)
+Search completed - best objective 1092945.586448254, took 222665 iterations and 1946 nodes (1426.44 seconds)
+Strong branching done 10898 times (128554 iterations), fathomed 135 nodes and fixed 2236 variables
+Maximum depth 189, 11391 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1946 nodes, 1461.65 CPU seconds, 1466.12 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -2.793968e-09   (absolute tolerance optca: 0)
+Relative gap:   -2.556365e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9423099e-05 ( 0.15385089%) - largest zero change 1.9420733e-05
+0  Obj 1092907.8 Primal inf 23350.012 (68) Dual inf 624.93172 (37)
+0  Obj 1092907.7 Primal inf 23350.012 (68) Dual inf 2.4082995e+13 (274)
+731  Obj 1081536.5 Dual inf 18878.806 (417)
+1141  Obj 1092945.1 Dual inf 0.016817536 (78)
+1168  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 15
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1301906239E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33516 constraints and 35044 variables.
+    The post-triangular part of the model has 3269 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+  MIP    8   1092945.58645   1462.46   213054      0      cbc
+  NLP    9        *Infeas*      2.40        0      0      conopt
+  MIP    9   1092945.58646   1459.55   235423      0      cbc
+  NLP   10        *Infeas*      2.20        0      0      conopt
+  MIP   10   1092945.58645   1379.44   206149      0      cbc
+  NLP   11        *Infeas*      2.47        0      0      conopt
+  MIP   11   1092945.58645   1114.62   206076      0      cbc
+  NLP   12        *Infeas*      2.33        0      0      conopt
+  MIP   12   1092945.58645   1516.31   213133      0      cbc
+  NLP   13        *Infeas*      2.42        0      0      conopt
+  MIP   13   1092945.58645   1605.26   203835      0      cbc
+  NLP   14        *Infeas*      2.45        0      0      conopt
+  MIP   14   1092945.58645   1466.12   222665      0      cbc
+  NLP   15        *Infeas*      2.43        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092813.2 found by feasibility pump after 0 iterations and 0 nodes (74.45 seconds)
+1553 added rows had average density of 10.518995
+At root node, 1553 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 17.234 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.8 elements, 0 column cuts (0 active)  in 1.853 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.094 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.012 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.212 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.196 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.874 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092813.2 best solution, best possible 1099374.5 (110.29 seconds)
+After 100 nodes, 32 on tree, 1092813.2 best solution, best possible 1099374.5 (326.29 seconds)
+After 200 nodes, 36 on tree, 1092813.2 best solution, best possible 1099374.5 (378.46 seconds)
+After 300 nodes, 36 on tree, 1092813.2 best solution, best possible 1099374.5 (426.34 seconds)
+After 400 nodes, 36 on tree, 1092813.2 best solution, best possible 1099374.5 (468.82 seconds)
+After 500 nodes, 130 on tree, 1092813.2 best solution, best possible 1099374.5 (505.25 seconds)
+Integer solution of 1092944.1 found by RINS after 130323 iterations and 600 nodes (530.07 seconds)
+After 600 nodes, 36 on tree, 1092944.1 best solution, best possible 1099374.5 (530.09 seconds)
+Integer solution of 1092945.4 found by RINS after 140606 iterations and 700 nodes (570.10 seconds)
+After 700 nodes, 100 on tree, 1092945.4 best solution, best possible 1099374.5 (570.10 seconds)
+Integer solution of 1092945.4 found by RINS after 140725 iterations and 800 nodes (584.86 seconds)
+After 800 nodes, 194 on tree, 1092945.4 best solution, best possible 1099374.5 (584.86 seconds)
+Integer solution of 1092945.6 found by rounding after 140827 iterations and 850 nodes (590.42 seconds)
+Integer solution of 1092945.6 found by rounding after 140959 iterations and 894 nodes (596.36 seconds)
+After 900 nodes, 236 on tree, 1092945.6 best solution, best possible 1099374.5 (598.11 seconds)
+After 1000 nodes, 212 on tree, 1092945.6 best solution, best possible 1099374.5 (607.47 seconds)
+After 1100 nodes, 112 on tree, 1092945.6 best solution, best possible 1099374.5 (614.71 seconds)
+After 1200 nodes, 31 on tree, 1092945.6 best solution, best possible 1099374.5 (651.77 seconds)
+After 1300 nodes, 7 on tree, 1092945.6 best solution, best possible 1099374.5 (865.66 seconds)
+Integer solution of 1092945.6 found by rounding after 187655 iterations and 1353 nodes (1044.22 seconds)
+After 1400 nodes, 24 on tree, 1092945.6 best solution, best possible 1099374.4 (1081.85 seconds)
+Integer solution of 1092945.6 found by rounding after 188926 iterations and 1443 nodes (1133.23 seconds)
+After 1500 nodes, 22 on tree, 1092945.6 best solution, best possible 1099374.4 (1147.97 seconds)
+After 1600 nodes, 38 on tree, 1092945.6 best solution, best possible 1099374.4 (1223.70 seconds)
+After 1700 nodes, 34 on tree, 1092945.6 best solution, best possible 1099374.4 (1318.97 seconds)
+Search completed - best objective 1092945.586448255, took 199724 iterations and 1796 nodes (1439.75 seconds)
+Strong branching done 12554 times (104624 iterations), fathomed 115 nodes and fixed 2778 variables
+Maximum depth 238, 8474 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1796 nodes, 1472.36 CPU seconds, 1477.40 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -1.862645e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.704243e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9434814e-05 ( 0.15751452%) - largest zero change 1.9432185e-05
+0  Obj 1092907.8 Primal inf 23350.012 (68) Dual inf 246.75433 (40)
+0  Obj 1092907.7 Primal inf 23350.012 (68) Dual inf 2.1205635e+13 (274)
+731  Obj 1086360.2 Dual inf 103254.45 (437)
+1139  Obj 1092945.6
+1140  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 16
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1313568826E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33517 constraints and 35044 variables.
+    The post-triangular part of the model has 3270 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+  MIP    8   1092945.58645   1462.46   213054      0      cbc
+  NLP    9        *Infeas*      2.40        0      0      conopt
+  MIP    9   1092945.58646   1459.55   235423      0      cbc
+  NLP   10        *Infeas*      2.20        0      0      conopt
+  MIP   10   1092945.58645   1379.44   206149      0      cbc
+  NLP   11        *Infeas*      2.47        0      0      conopt
+  MIP   11   1092945.58645   1114.62   206076      0      cbc
+  NLP   12        *Infeas*      2.33        0      0      conopt
+  MIP   12   1092945.58645   1516.31   213133      0      cbc
+  NLP   13        *Infeas*      2.42        0      0      conopt
+  MIP   13   1092945.58645   1605.26   203835      0      cbc
+  NLP   14        *Infeas*      2.45        0      0      conopt
+  MIP   14   1092945.58645   1466.12   222665      0      cbc
+  NLP   15        *Infeas*      2.43        0      0      conopt
+  MIP   15   1092945.58645   1477.40   199724      0      cbc
+  NLP   16        *Infeas*      2.47        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092826.6 found by feasibility pump after 0 iterations and 0 nodes (79.26 seconds)
+1549 added rows had average density of 10.573273
+At root node, 1549 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 17.245 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.8 elements, 0 column cuts (0 active)  in 1.895 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.096 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.012 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.223 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.198 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.899 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092826.6 best solution, best possible 1099374.5 (115.39 seconds)
+After 100 nodes, 32 on tree, 1092826.6 best solution, best possible 1099374.5 (337.24 seconds)
+After 200 nodes, 36 on tree, 1092826.6 best solution, best possible 1099374.5 (389.06 seconds)
+After 300 nodes, 36 on tree, 1092826.6 best solution, best possible 1099374.5 (436.83 seconds)
+After 400 nodes, 76 on tree, 1092826.6 best solution, best possible 1099374.5 (496.67 seconds)
+Integer solution of 1092945 found by RINS after 113822 iterations and 500 nodes (522.73 seconds)
+After 500 nodes, 36 on tree, 1092945 best solution, best possible 1099374.5 (522.75 seconds)
+Integer solution of 1092945.4 found by RINS after 153266 iterations and 600 nodes (594.60 seconds)
+After 600 nodes, 42 on tree, 1092945.4 best solution, best possible 1099374.5 (594.60 seconds)
+After 700 nodes, 138 on tree, 1092945.4 best solution, best possible 1099374.5 (607.08 seconds)
+Integer solution of 1092945.6 found after 153449 iterations and 722 nodes (610.36 seconds)
+Integer solution of 1092945.6 found after 153592 iterations and 775 nodes (618.52 seconds)
+Integer solution of 1092945.6 found by rounding after 153600 iterations and 781 nodes (619.52 seconds)
+After 800 nodes, 148 on tree, 1092945.6 best solution, best possible 1099374.5 (621.74 seconds)
+After 900 nodes, 82 on tree, 1092945.6 best solution, best possible 1099374.5 (630.91 seconds)
+After 1000 nodes, 8 on tree, 1092945.6 best solution, best possible 1099374.5 (706.45 seconds)
+Integer solution of 1092945.6 found after 181614 iterations and 1093 nodes (1086.01 seconds)
+After 1100 nodes, 30 on tree, 1092945.6 best solution, best possible 1099374.4 (1086.46 seconds)
+After 1200 nodes, 19 on tree, 1092945.6 best solution, best possible 1099374.4 (1114.16 seconds)
+Integer solution of 1092945.6 found after 182132 iterations and 1212 nodes (1121.92 seconds)
+After 1300 nodes, 25 on tree, 1092945.6 best solution, best possible 1099374.4 (1140.44 seconds)
+Integer solution of 1092945.6 found by rounding after 184461 iterations and 1395 nodes (1259.66 seconds)
+After 1400 nodes, 19 on tree, 1092945.6 best solution, best possible 1099374.4 (1263.78 seconds)
+After 1500 nodes, 18 on tree, 1092945.6 best solution, best possible 1099374.4 (1379.69 seconds)
+Search completed - best objective 1092945.586448254, took 190759 iterations and 1556 nodes (1420.62 seconds)
+Strong branching done 10356 times (102252 iterations), fathomed 157 nodes and fixed 2326 variables
+Maximum depth 171, 11104 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1556 nodes, 1460.04 CPU seconds, 1464.98 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -2.095476e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.917274e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9462476e-05 ( 0.14125161%) - largest zero change 1.9460092e-05
+0  Obj 1095171.6 Primal inf 338099.94 (1515) Dual inf 16.518595 (45)
+86  Obj 1092945.7
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 17
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1450088660E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33517 constraints and 35044 variables.
+    The post-triangular part of the model has 3270 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+  MIP    8   1092945.58645   1462.46   213054      0      cbc
+  NLP    9        *Infeas*      2.40        0      0      conopt
+  MIP    9   1092945.58646   1459.55   235423      0      cbc
+  NLP   10        *Infeas*      2.20        0      0      conopt
+  MIP   10   1092945.58645   1379.44   206149      0      cbc
+  NLP   11        *Infeas*      2.47        0      0      conopt
+  MIP   11   1092945.58645   1114.62   206076      0      cbc
+  NLP   12        *Infeas*      2.33        0      0      conopt
+  MIP   12   1092945.58645   1516.31   213133      0      cbc
+  NLP   13        *Infeas*      2.42        0      0      conopt
+  MIP   13   1092945.58645   1605.26   203835      0      cbc
+  NLP   14        *Infeas*      2.45        0      0      conopt
+  MIP   14   1092945.58645   1466.12   222665      0      cbc
+  NLP   15        *Infeas*      2.43        0      0      conopt
+  MIP   15   1092945.58645   1477.40   199724      0      cbc
+  NLP   16        *Infeas*      2.47        0      0      conopt
+  MIP   16   1092945.58645   1464.98   190759      0      cbc
+  NLP   17        *Infeas*      2.47        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092919.1 found by feasibility pump after 0 iterations and 0 nodes (70.42 seconds)
+1552 added rows had average density of 10.534149
+At root node, 1552 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 17.373 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.8 elements, 0 column cuts (0 active)  in 1.952 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.096 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.012 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.229 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.200 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.954 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092919.1 best solution, best possible 1099374.5 (106.88 seconds)
+After 100 nodes, 32 on tree, 1092919.1 best solution, best possible 1099374.5 (309.19 seconds)
+After 200 nodes, 37 on tree, 1092919.1 best solution, best possible 1099374.5 (364.90 seconds)
+After 300 nodes, 37 on tree, 1092919.1 best solution, best possible 1099374.5 (413.06 seconds)
+After 400 nodes, 27 on tree, 1092919.1 best solution, best possible 1099374.5 (460.22 seconds)
+After 500 nodes, 67 on tree, 1092919.1 best solution, best possible 1099374.5 (517.46 seconds)
+Integer solution of 1092945.4 found by RINS after 157400 iterations and 600 nodes (547.26 seconds)
+After 600 nodes, 142 on tree, 1092945.4 best solution, best possible 1099374.5 (547.27 seconds)
+Integer solution of 1092945.6 found by rounding after 157911 iterations and 681 nodes (578.78 seconds)
+After 700 nodes, 131 on tree, 1092945.6 best solution, best possible 1099374.5 (583.62 seconds)
+Integer solution of 1092945.6 found after 158227 iterations and 739 nodes (600.67 seconds)
+After 800 nodes, 117 on tree, 1092945.6 best solution, best possible 1099374.5 (612.48 seconds)
+After 900 nodes, 91 on tree, 1092945.6 best solution, best possible 1099374.5 (645.02 seconds)
+After 1000 nodes, 6 on tree, 1092945.6 best solution, best possible 1099374.5 (714.03 seconds)
+After 1100 nodes, 32 on tree, 1092945.6 best solution, best possible 1099374.4 (1103.27 seconds)
+Integer solution of 1092945.6 found by rounding after 189433 iterations and 1120 nodes (1125.31 seconds)
+Integer solution of 1092945.6 found by rounding after 189503 iterations and 1139 nodes (1130.51 seconds)
+Integer solution of 1092945.6 found after 190294 iterations and 1142 nodes (1131.99 seconds)
+After 1200 nodes, 45 on tree, 1092945.6 best solution, best possible 1099374.4 (1139.23 seconds)
+After 1300 nodes, 45 on tree, 1092945.6 best solution, best possible 1099374.4 (1162.32 seconds)
+After 1400 nodes, 19 on tree, 1092945.6 best solution, best possible 1099374.4 (1216.62 seconds)
+After 1500 nodes, 38 on tree, 1092945.6 best solution, best possible 1099374.4 (1268.70 seconds)
+After 1600 nodes, 35 on tree, 1092945.6 best solution, best possible 1099374.4 (1374.56 seconds)
+Search completed - best objective 1092945.586448254, took 206616 iterations and 1680 nodes (1466.02 seconds)
+Strong branching done 11728 times (110558 iterations), fathomed 197 nodes and fixed 2752 variables
+Maximum depth 177, 11830 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1680 nodes, 1523.25 CPU seconds, 1527.87 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -2.095476e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.917274e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.942644e-05 ( 0.16446357%) - largest zero change 1.9425885e-05
+0  Obj 1092907.8 Primal inf 23870.938 (71) Dual inf 251.80639 (41)
+0  Obj 1092907.7 Primal inf 23870.938 (71) Dual inf 2.1642509e+13 (286)
+731  Obj 1083544.5 Dual inf 17032.477 (464)
+1140  Obj 1092902.7 Dual inf 1.6432071 (126)
+1202  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 18
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.0937689423E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33517 constraints and 35044 variables.
+    The post-triangular part of the model has 3269 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+  MIP    8   1092945.58645   1462.46   213054      0      cbc
+  NLP    9        *Infeas*      2.40        0      0      conopt
+  MIP    9   1092945.58646   1459.55   235423      0      cbc
+  NLP   10        *Infeas*      2.20        0      0      conopt
+  MIP   10   1092945.58645   1379.44   206149      0      cbc
+  NLP   11        *Infeas*      2.47        0      0      conopt
+  MIP   11   1092945.58645   1114.62   206076      0      cbc
+  NLP   12        *Infeas*      2.33        0      0      conopt
+  MIP   12   1092945.58645   1516.31   213133      0      cbc
+  NLP   13        *Infeas*      2.42        0      0      conopt
+  MIP   13   1092945.58645   1605.26   203835      0      cbc
+  NLP   14        *Infeas*      2.45        0      0      conopt
+  MIP   14   1092945.58645   1466.12   222665      0      cbc
+  NLP   15        *Infeas*      2.43        0      0      conopt
+  MIP   15   1092945.58645   1477.40   199724      0      cbc
+  NLP   16        *Infeas*      2.47        0      0      conopt
+  MIP   16   1092945.58645   1464.98   190759      0      cbc
+  NLP   17        *Infeas*      2.47        0      0      conopt
+  MIP   17   1092945.58645   1527.87   206616      0      cbc
+  NLP   18        *Infeas*      2.51        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092826.6 found by feasibility pump after 0 iterations and 0 nodes (77.56 seconds)
+1554 added rows had average density of 10.506435
+At root node, 1554 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 17.307 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.8 elements, 0 column cuts (0 active)  in 1.978 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.095 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.012 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.235 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.201 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.971 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092826.6 best solution, best possible 1099374.5 (114.28 seconds)
+After 100 nodes, 32 on tree, 1092826.6 best solution, best possible 1099374.5 (336.75 seconds)
+After 200 nodes, 36 on tree, 1092826.6 best solution, best possible 1099374.5 (394.62 seconds)
+After 300 nodes, 36 on tree, 1092826.6 best solution, best possible 1099374.5 (464.11 seconds)
+After 400 nodes, 42 on tree, 1092826.6 best solution, best possible 1099374.5 (511.30 seconds)
+Integer solution of 1092941.4 found by RINS after 125890 iterations and 500 nodes (554.62 seconds)
+After 500 nodes, 142 on tree, 1092941.4 best solution, best possible 1099374.5 (554.62 seconds)
+Integer solution of 1092945.4 found by RINS after 126092 iterations and 600 nodes (591.31 seconds)
+After 600 nodes, 187 on tree, 1092945.4 best solution, best possible 1099374.5 (591.31 seconds)
+After 700 nodes, 150 on tree, 1092945.4 best solution, best possible 1099374.5 (604.71 seconds)
+Integer solution of 1092945.6 found by rounding after 126710 iterations and 728 nodes (619.57 seconds)
+Integer solution of 1092945.6 found by rounding after 126856 iterations and 792 nodes (625.48 seconds)
+After 800 nodes, 167 on tree, 1092945.6 best solution, best possible 1099374.5 (626.20 seconds)
+Integer solution of 1092945.6 found by rounding after 126910 iterations and 819 nodes (629.95 seconds)
+After 900 nodes, 151 on tree, 1092945.6 best solution, best possible 1099374.5 (693.36 seconds)
+After 1000 nodes, 74 on tree, 1092945.6 best solution, best possible 1099374.5 (736.25 seconds)
+After 1100 nodes, 14 on tree, 1092945.6 best solution, best possible 1099374.5 (817.82 seconds)
+After 1200 nodes, 36 on tree, 1092945.6 best solution, best possible 1099374.4 (1153.31 seconds)
+Integer solution of 1092945.6 found after 190870 iterations and 1210 nodes (1158.35 seconds)
+Integer solution of 1092945.6 found by rounding after 190891 iterations and 1216 nodes (1160.87 seconds)
+After 1300 nodes, 38 on tree, 1092945.6 best solution, best possible 1099374.4 (1190.53 seconds)
+After 1400 nodes, 36 on tree, 1092945.6 best solution, best possible 1099374.4 (1241.64 seconds)
+After 1500 nodes, 34 on tree, 1092945.6 best solution, best possible 1099374.4 (1285.99 seconds)
+After 1600 nodes, 37 on tree, 1092945.6 best solution, best possible 1099374.4 (1326.96 seconds)
+After 1700 nodes, 16 on tree, 1092945.6 best solution, best possible 1099374.4 (1395.61 seconds)
+Search completed - best objective 1092945.586448255, took 211269 iterations and 1791 nodes (1443.50 seconds)
+Strong branching done 10882 times (129075 iterations), fathomed 131 nodes and fixed 2282 variables
+Maximum depth 229, 8692 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (1791 nodes, 1471.24 CPU seconds, 1476.19 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -1.629815e-09   (absolute tolerance optca: 0)
+Relative gap:   -1.491213e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9450701e-05 ( 0.20454291%) - largest zero change 1.9449839e-05
+0  Obj 1092907.8 Primal inf 23750.497 (69) Dual inf 237.74423 (39)
+0  Obj 1092907.7 Primal inf 23750.497 (69) Dual inf 2.1902096e+13 (272)
+731  Obj 1084429.3 Dual inf 19938.309 (413)
+1131  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 19
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.1313674964E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the infeasibility is positive after all
+    variables in the constraint have been moved to best bound.
+    Some bounds may have been derived from other constraints.
+ 
+ 
+    The pre-triangular part of the model has 33516 constraints and 35044 variables.
+    The post-triangular part of the model has 3268 constraints and variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Setting up next MIP
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+  MIP    8   1092945.58645   1462.46   213054      0      cbc
+  NLP    9        *Infeas*      2.40        0      0      conopt
+  MIP    9   1092945.58646   1459.55   235423      0      cbc
+  NLP   10        *Infeas*      2.20        0      0      conopt
+  MIP   10   1092945.58645   1379.44   206149      0      cbc
+  NLP   11        *Infeas*      2.47        0      0      conopt
+  MIP   11   1092945.58645   1114.62   206076      0      cbc
+  NLP   12        *Infeas*      2.33        0      0      conopt
+  MIP   12   1092945.58645   1516.31   213133      0      cbc
+  NLP   13        *Infeas*      2.42        0      0      conopt
+  MIP   13   1092945.58645   1605.26   203835      0      cbc
+  NLP   14        *Infeas*      2.45        0      0      conopt
+  MIP   14   1092945.58645   1466.12   222665      0      cbc
+  NLP   15        *Infeas*      2.43        0      0      conopt
+  MIP   15   1092945.58645   1477.40   199724      0      cbc
+  NLP   16        *Infeas*      2.47        0      0      conopt
+  MIP   16   1092945.58645   1464.98   190759      0      cbc
+  NLP   17        *Infeas*      2.47        0      0      conopt
+  MIP   17   1092945.58645   1527.87   206616      0      cbc
+  NLP   18        *Infeas*      2.51        0      0      conopt
+  MIP   18   1092945.58646   1476.19   211269      0      cbc
+  NLP   19        *Infeas*      2.49        0      0      conopt
+
+COIN-OR CBC      48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+
+Parallel mode: none, using 64 threads in linear algebra
+
+Calling CBC main solution routine...
+Integer solution of 1092920.5 found by feasibility pump after 0 iterations and 0 nodes (218.92 seconds)
+1554 added rows had average density of 10.566924
+At root node, 1554 cuts changed objective from 1101698.1 to 1099374.5 in 8 passes
+Cut generator 0 (Probing) - 1 row cuts average 2.0 elements, 0 column cuts (0 active)  in 17.128 seconds - new frequency is -100
+Cut generator 1 (Gomory) - 1042 row cuts average 6.7 elements, 0 column cuts (0 active)  in 1.999 seconds - new frequency is 1
+Cut generator 2 (Knapsack) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.095 seconds - new frequency is -100
+Cut generator 3 (Clique) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.012 seconds - new frequency is -100
+Cut generator 4 (MixedIntegerRounding2) - 1329 row cuts average 4.0 elements, 0 column cuts (0 active)  in 0.242 seconds - new frequency is 1
+Cut generator 5 (FlowCover) - 0 row cuts average 0.0 elements, 0 column cuts (0 active)  in 0.201 seconds - new frequency is -100
+Cut generator 6 (TwoMirCuts) - 1669 row cuts average 21.3 elements, 0 column cuts (0 active)  in 2.984 seconds - new frequency is -100
+After 0 nodes, 1 on tree, 1092920.5 best solution, best possible 1099374.5 (255.40 seconds)
+After 100 nodes, 32 on tree, 1092920.5 best solution, best possible 1099374.5 (482.69 seconds)
+After 200 nodes, 36 on tree, 1092920.5 best solution, best possible 1099374.5 (543.62 seconds)
+After 300 nodes, 36 on tree, 1092920.5 best solution, best possible 1099374.5 (598.31 seconds)
+After 400 nodes, 20 on tree, 1092920.5 best solution, best possible 1099374.5 (664.73 seconds)
+After 500 nodes, 79 on tree, 1092920.5 best solution, best possible 1099374.5 (714.70 seconds)
+Integer solution of 1092945.4 found by RINS after 154228 iterations and 600 nodes (739.77 seconds)
+After 600 nodes, 138 on tree, 1092945.4 best solution, best possible 1099374.5 (739.78 seconds)
+Integer solution of 1092945.4 found by RINS after 154780 iterations and 700 nodes (776.54 seconds)
+After 700 nodes, 134 on tree, 1092945.4 best solution, best possible 1099374.5 (776.54 seconds)
+Integer solution of 1092945.6 found by rounding after 154783 iterations and 701 nodes (777.21 seconds)
+Integer solution of 1092945.6 found by rounding after 154940 iterations and 783 nodes (787.33 seconds)
+After 800 nodes, 122 on tree, 1092945.6 best solution, best possible 1099374.5 (790.59 seconds)
+Integer solution of 1092945.6 found by rounding after 155652 iterations and 856 nodes (816.30 seconds)
+After 900 nodes, 109 on tree, 1092945.6 best solution, best possible 1099374.5 (828.91 seconds)
+After 1000 nodes, 69 on tree, 1092945.6 best solution, best possible 1099374.5 (914.76 seconds)
+After 1100 nodes, 5 on tree, 1092945.6 best solution, best possible 1099374.5 (1004.55 seconds)
+Integer solution of 1092945.6 found after 188416 iterations and 1192 nodes (1344.80 seconds)
+After 1200 nodes, 50 on tree, 1092945.6 best solution, best possible 1099374.4 (1345.75 seconds)
+Integer solution of 1092945.6 found after 188965 iterations and 1227 nodes (1352.16 seconds)
+After 1300 nodes, 46 on tree, 1092945.6 best solution, best possible 1099374.4 (1376.47 seconds)
+After 1400 nodes, 45 on tree, 1092945.6 best solution, best possible 1099374.4 (1413.32 seconds)
+After 1500 nodes, 41 on tree, 1092945.6 best solution, best possible 1099374.4 (1477.53 seconds)
+After 1600 nodes, 48 on tree, 1092945.6 best solution, best possible 1099374.4 (1553.85 seconds)
+After 1700 nodes, 52 on tree, 1092945.6 best solution, best possible 1099374.4 (1620.27 seconds)
+After 1800 nodes, 43 on tree, 1092945.6 best solution, best possible 1099374.4 (1651.89 seconds)
+After 1900 nodes, 24 on tree, 1092945.6 best solution, best possible 1099374.4 (1692.10 seconds)
+After 2000 nodes, 34 on tree, 1092945.6 best solution, best possible 1099374.4 (1728.82 seconds)
+Search completed - best objective 1092945.586448255, took 249280 iterations and 2043 nodes (1744.08 seconds)
+Strong branching done 12654 times (146586 iterations), fathomed 239 nodes and fixed 2631 variables
+Maximum depth 189, 13173 variables fixed on reduced cost
+
+Solved to optimality.
+MIP solution:    1.092946e+06   (2043 nodes, 1790.73 CPU seconds, 1796.81 wall clock seconds)
+
+Best possible:   1.092946e+06
+Absolute gap:   -2.793968e-09   (absolute tolerance optca: 0)
+Relative gap:   -2.556365e-15   (relative tolerance optcr: 0)
+
+Resolve with fixed discrete variables.
+Perturbing problem by 0.001% of 9.4632863 - largest nonzero change 1.9451719e-05 ( 0.16370138%) - largest zero change 1.9446664e-05
+0  Obj 1092907.8 Primal inf 23358.553 (67) Dual inf 248.43056 (37)
+0  Obj 1092907.7 Primal inf 23358.553 (67) Dual inf 2.2813901e+13 (270)
+710  Obj 1074879.4 Dual inf 24693.924 (425)
+1084  Obj 1092945.2 Dual inf 0.011630023 (24)
+1106  Obj 1092945.6
+Optimal - objective value 1092945.6
+--- DICOPT: Starting major iteration 20
+--- DICOPT: Setting up next NLP
+
+CONOPT 4         48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+ 
+ 
+    C O N O P T   version 4.35
+    Copyright (C) GAMS Software GmbH
+                  GAMS Development Corporation
+ 
+ 
+    The user model has 78852 constraints and 61337 variables
+    with 231702 Jacobian elements, 35040 of which are nonlinear.
+    The Hessian of the Lagrangian has 0 elements on the diagonal,
+    8760 elements below the diagonal, and 8761 nonlinear variables.
+ 
+    Iter Phase   Ninf   Infeasibility   RGmax      NSB   Step  InItr MX OK
+       0   0          1.2261249028E+06 (Input point)
+ 
+ ** An equation in the pre-triangular part of the model cannot
+    be solved because the critical variable is at a bound.
+ 
+ 
+    The pre-triangular part of the model has 24756 constraints and 26282 variables.
+    The post-triangular part of the model has 6 constraints and variables.
+    There are 1 penalty and minimax constraints with 1 variables.
+ 
+ ** Infeasible solution. The Preprocessor has determined that the model
+    is infeasible.
+ 
+--- DICOPT: Checking convergence
+
+--- NOTICE : Too many infeasible NLP subproblems consider the use of infeasder option
+
+--- DICOPT: Maximum number of major iterations (20) exceeded
+
+--- DICOPT: Log File:
+ Major Major     Objective    CPU time  Itera- Evaluation Solver
+ Step  Iter       Function     (Sec)    tions   Errors
+  NLP    1   1101698.05120    269.79      174      0      conopt
+  MIP    1   1092945.58645   1705.19   213960      0      cbc
+  NLP    2        *Infeas*      2.49        0      0      conopt
+  MIP    2   1092945.58645   1542.94   213960      0      cbc
+  NLP    3        *Infeas*      2.21        0      0      conopt
+  MIP    3   1092945.58645   1148.36   204863      0      cbc
+  NLP    4        *Infeas*      2.23        0      0      conopt
+  MIP    4   1092945.58645   1012.57   209678      0      cbc
+  NLP    5        *Infeas*      2.22        0      0      conopt
+  MIP    5   1092945.58645   1083.77   210745      0      cbc
+  NLP    6        *Infeas*      2.23        0      0      conopt
+  MIP    6   1092945.58646   1281.21   212745      0      cbc
+  NLP    7        *Infeas*      2.35        0      0      conopt
+  MIP    7   1092945.58645   1436.42   209920      0      cbc
+  NLP    8        *Infeas*      2.43        0      0      conopt
+  MIP    8   1092945.58645   1462.46   213054      0      cbc
+  NLP    9        *Infeas*      2.40        0      0      conopt
+  MIP    9   1092945.58646   1459.55   235423      0      cbc
+  NLP   10        *Infeas*      2.20        0      0      conopt
+  MIP   10   1092945.58645   1379.44   206149      0      cbc
+  NLP   11        *Infeas*      2.47        0      0      conopt
+  MIP   11   1092945.58645   1114.62   206076      0      cbc
+  NLP   12        *Infeas*      2.33        0      0      conopt
+  MIP   12   1092945.58645   1516.31   213133      0      cbc
+  NLP   13        *Infeas*      2.42        0      0      conopt
+  MIP   13   1092945.58645   1605.26   203835      0      cbc
+  NLP   14        *Infeas*      2.45        0      0      conopt
+  MIP   14   1092945.58645   1466.12   222665      0      cbc
+  NLP   15        *Infeas*      2.43        0      0      conopt
+  MIP   15   1092945.58645   1477.40   199724      0      cbc
+  NLP   16        *Infeas*      2.47        0      0      conopt
+  MIP   16   1092945.58645   1464.98   190759      0      cbc
+  NLP   17        *Infeas*      2.47        0      0      conopt
+  MIP   17   1092945.58645   1527.87   206616      0      cbc
+  NLP   18        *Infeas*      2.51        0      0      conopt
+  MIP   18   1092945.58646   1476.19   211269      0      cbc
+  NLP   19        *Infeas*      2.49        0      0      conopt
+  MIP   19   1092945.58645   1796.81   249280      0      cbc
+  NLP   20        *Infeas*      2.45        0      0      conopt
+--- DICOPT: Terminating...
+--- DICOPT: Stopped on MAXCYCLES
+
+      The search was stopped because the major iteration limit
+      was reached. This limit can be reset with the DICOPT
+      option MAXCYCLES.
+
+--- DICOPT: No integer solution
+
+      No integer solution was found. The relaxed NLP solution
+      will be reported.
+
+--- Reading solution for model modelAGSizingspain[LST:36]
+--- Executing after solve: elapsed 7:34:55.837[LST:143392]
+--- GDX File (execute_unload) /var/lib/condor/execute/dir_4187613/gamsexec/Results M1_6_E1eL.gdx[FIL:"/var/lib/condor/execute/dir_4187613/gamsexec/Results M1_6_E1eL.gdx",0,0]
+--- GDX File /var/lib/condor/execute/dir_4187613/gamsexec/out.gdx[FIL:"/var/lib/condor/execute/dir_4187613/gamsexec/out.gdx",0,0]
+*** Status: Normal completion[LST:143409]
+--- Job MODEL.gms Stop 06/01/25 08:33:55 elapsed 7:34:56.024
