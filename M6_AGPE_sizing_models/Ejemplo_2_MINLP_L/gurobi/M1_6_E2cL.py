@@ -166,6 +166,8 @@ for t in T:
 # 3.3  FUNCIÓN OBJETIVO
 # ---------------------------------------------------------------------------
 m.setObjective(npv, GRB.MAXIMIZE)
+# Explored 52018 nodes (1507406 simplex iterations) in 8816.71 seconds (5327.37 work units)
+# Thread count was 8 (of 8 available processors)
 # Net importer (w2=1) ---------------------
 # Beneficio óptimo: -40,722.88 €/año
 # NPV: 1,422,658.35 €/año

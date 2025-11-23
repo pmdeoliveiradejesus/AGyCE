@@ -1,31 +1,27 @@
-
-Kill Job #16514897 Request sent to prod-sub-1.neos-server.org:
-0
-
-
---- Job M1_6_E1eL.gms Start 07/14/25 12:18:05 47.5.0 d6b95593 DEX-DEG x86 64bit/macOS
+--- Job M1_6_E1eL.gms Start 11/22/25 15:03:57 51.2.1 5fb43f63 DEX-DEG x86 64bit/macOS
 --- Applying:
-    /Library/Frameworks/GAMS.framework/Versions/47/Resources/gmsprmun.txt
+    /Library/Frameworks/GAMS.framework/Versions/51/Resources/gmsprmun.txt
 --- GAMS Parameters defined
-    Input "/Users/pm.deoliveiradejes/Dropbox (Personal)/Uniandes/Maestria en Energia (MISE)/MISE_E4/MISE_E4-main/M1.6_SelfGeneration_Design/Ejemplo_1_MINLP_L/gams/M1_6_E1eL.gms"
-    XSave "/Users/pm.deoliveiradejes/Dropbox (Personal)/Uniandes/Maestria en Energia (MISE)/MISE_E4/MISE_E4-main/M1.6_SelfGeneration_Design/Ejemplo_1_MINLP_L/gams/M1_6_E1eL.g0?"
+    Input /Users/pm.deoliveiradejes/Desktop/M6_AGPE_sizing_models/Ejemplo_1_MINLP_L/gams/M1_6_E1eL.gms
+    XSave /Users/pm.deoliveiradejes/Desktop/M6_AGPE_sizing_models/Ejemplo_1_MINLP_L/gams/M1_6_E1eL.g0?
     PageSize 0
     Action C
-    ScrDir "/Users/pm.deoliveiradejes/Dropbox (Personal)/Uniandes/Maestria en Energia (MISE)/MISE_E4/MISE_E4-main/M1.6_SelfGeneration_Design/Ejemplo_1_MINLP_L/gams/225b/"
-    SysDir /Library/Frameworks/GAMS.framework/Versions/47/Resources/
+    ScrDir /Users/pm.deoliveiradejes/Desktop/M6_AGPE_sizing_models/Ejemplo_1_MINLP_L/gams/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/51/Resources/
     LogOption 3
+    AppendLog 1
     ErrMsg 1
     ErrorLog 99
     IDE 1
     LstTitleLeftAligned 1
     PreviousWork 1
-Licensee: Academic User                                  G240823+0003Ac-GEN
-          pm.deoliveiradejes@uniandes.edu.co                      CLA100108
-          225b/gamslice.dat
-          node:65452501 mem:16 cores:4 ipport:53246 v:2                    
-          Community license for demonstration and instructional purposes only
-Processor information: 1 socket(s), 4 core(s), and 8 thread(s) available
-GAMS 47.5.0   Copyright (C) 1987-2024 GAMS Development. All rights reserved
+Licensee: GAMS Demo, for EULA and demo limitations see   G250826+0003Cc-GEN
+          https://www.gams.com/latest/docs/UG%5FLicense.html         DC0000
+          /Users/pm.deoliveiradejes/Library/Application Support/GAMS/gamslice.txt
+          v:2                                                              
+          Demo license for demonstration and instructional purposes only
+System information: 4 physical cores and 16 Gb physical memory detected
+GAMS 51.2.1   Copyright (C) 1987-2025 GAMS Development. All rights reserved
 --- Starting compilation
 --- M1_6_E1eL.gms(4) 3 Mb
 --- . lambda.inc(8763) 4 Mb
@@ -37,9 +33,9 @@ GAMS 47.5.0   Copyright (C) 1987-2024 GAMS Development. All rights reserved
 --- . Plu.inc(8763) 6 Mb
 --- M1_6_E1eL.gms(17633) 8 Mb
 *** Status: Normal completion
---- Job M1_6_E1eL.gms Stop 07/14/25 12:18:06 elapsed 0:00:00.336
+--- Job M1_6_E1eL.gms Stop 11/22/25 15:03:57 elapsed 0:00:00.254
 
 --- switch to NEOS ./M1_6_E1eL/solve.lst
-Job 16515026 dispatched
-password: SjOJyeRB
-Network error: Temporary network failure.
+Job 18056744 dispatched
+password: xHEleCiI
+Network error: Host neos-server.org not found
