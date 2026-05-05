@@ -1,0 +1,173 @@
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 05/05/26 09:21:21 Page 1
+(LP model)
+C o m p i l a t i o n
+
+
+   2  * Paulo M. De Oliveira-De Jesus pdeoliv@gmail.com
+   3  Variable x1, x2, x3, z;
+   4  Positive Variables x1, x2, x3;
+   5  Equation eq1, eq2, eq3;
+   6  eq1.. 1 * x1 + 2 * x2 + 1 * x3 =l= 10;
+   7  eq2.. 2 * x1 + 1 * x2 + 3 * x3 =l= 15;
+   8  eq3.. 3 * x1 + 5 * x2 + 2 * x3 =e= z;
+   9  Model LP / all /;
+  10  solve LP using lp maximizing z;
+  11  display x1.l, x2.l, x3.l, z.l;
+  12  execute_unload 'Results M1_1_LP_E1.gdx';
+
+
+COMPILATION TIME     =        0.015 SECONDS      2 MB  51.4.0 91cb996b WEX-WEI
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 05/05/26 09:21:21 Page 2
+(LP model)
+Equation Listing    SOLVE LP Using LP From line 10
+
+
+---- eq1  =L=  
+
+eq1..  x1 + 2*x2 + x3 =L= 10 ; (LHS = 0)
+     
+
+---- eq2  =L=  
+
+eq2..  2*x1 + x2 + 3*x3 =L= 15 ; (LHS = 0)
+     
+
+---- eq3  =E=  
+
+eq3..  3*x1 + 5*x2 + 2*x3 - z =E= 0 ; (LHS = 0)
+     
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 05/05/26 09:21:21 Page 3
+(LP model)
+Column Listing      SOLVE LP Using LP From line 10
+
+
+---- x1  
+
+x1
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       eq1
+        2       eq2
+        3       eq3
+
+
+---- x2  
+
+x2
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        2       eq1
+        1       eq2
+        5       eq3
+
+
+---- x3  
+
+x3
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       eq1
+        3       eq2
+        2       eq3
+
+
+---- z  
+
+z
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       eq3
+
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 05/05/26 09:21:21 Page 4
+(LP model)
+Range Statistics    SOLVE LP Using LP From line 10
+
+
+RANGE STATISTICS (ABSOLUTE NON-ZERO FINITE VALUES)
+
+RHS       [min, max] : [ 1.000E+01, 1.500E+01] - Zero values observed as well
+Bound     [min, max] : [        NA,        NA] - Zero values observed as well
+Matrix    [min, max] : [ 1.000E+00, 5.000E+00]
+
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 05/05/26 09:21:21 Page 5
+(LP model)
+Model Statistics    SOLVE LP Using LP From line 10
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS           3     SINGLE EQUATIONS            3
+BLOCKS OF VARIABLES           4     SINGLE VARIABLES            4
+NON ZERO ELEMENTS            10
+
+
+GENERATION TIME      =        0.313 SECONDS      3 MB  51.4.0 91cb996b WEX-WEI
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 05/05/26 09:21:21 Page 6
+(LP model)
+Solution Report     SOLVE LP Using LP From line 10
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   LP                  OBJECTIVE  z
+     TYPE    LP                  DIRECTION  MAXIMIZE
+     SOLVER  CPLEX               FROM LINE  10
+
+**** SOLVER STATUS     1 Normal Completion
+**** MODEL STATUS      1 Optimal
+**** OBJECTIVE VALUE               28.3333
+
+ RESOURCE USAGE, LIMIT          0.047 10000000000.000
+ ITERATION COUNT, LIMIT         2    2147483647
+*** This solver runs with a community license. No commercial use.
+--- GMO setup time: 0.00s
+--- GMO memory 0.50 Mb (peak 0.50 Mb)
+--- Dictionary memory 0.00 Mb
+--- Cplex 22.1.2.0 link memory 0.00 Mb (peak 0.00 Mb)
+--- Starting Cplex
+
+
+--- LP status (1): optimal.
+--- Cplex Time: 0.03sec (det. 0.01 ticks)
+
+
+Optimal solution found
+Objective:           28.333333
+
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- EQU eq1               -INF           10.0000        10.0000         2.3333      
+---- EQU eq2               -INF           15.0000        15.0000         0.3333      
+---- EQU eq3                 .              .              .            -1.0000      
+
+                           LOWER          LEVEL          UPPER         MARGINAL
+
+---- VAR x1                  .             6.6667        +INF             .          
+---- VAR x2                  .             1.6667        +INF             .          
+---- VAR x3                  .              .            +INF           -1.3333      
+---- VAR z                 -INF           28.3333        +INF             .          
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 05/05/26 09:21:21 Page 7
+(LP model)
+E x e c u t i o n
+
+
+----     11 VARIABLE x1.L                  =        6.667  
+            VARIABLE x2.L                  =        1.667  
+            VARIABLE x3.L                  =        0.000  
+            VARIABLE z.L                   =       28.333  
+
+
+EXECUTION TIME       =        0.922 SECONDS      3 MB  51.4.0 91cb996b WEX-WEI
+
+
+USER: Academic User                                  G260505+0003Ac-GEN
+      pm.deoliveiradejes@uniandes.edu.co                      CLA118952
+      License for teaching and research at degree granting institutions
+
+
+**** FILE SUMMARY
+
+Input      G:\Mi unidad\EDCO_2026_10\AGyCE\M1_Optimization\Ejemplo_1_LP\gams\M1_1_E1.gms
+Output     G:\Mi unidad\EDCO_2026_10\AGyCE\M1_Optimization\Ejemplo_1_LP\gams\M1_1_E1.lst

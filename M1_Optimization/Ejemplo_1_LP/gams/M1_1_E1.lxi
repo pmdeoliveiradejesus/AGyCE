@@ -1,0 +1,25 @@
+B 3 C o m p i l a t i o n
+B 22 Equation Listing    SOLVE LP Using LP From line 10
+D 25 eq1
+D 30 eq2
+D 35 eq3
+B 41 Column Listing      SOLVE LP Using LP From line 10
+E 44 x1
+E 53 x2
+E 62 x3
+E 71 z
+B 79 Range Statistics    SOLVE LP Using LP From line 10
+B 90 Model Statistics    SOLVE LP Using LP From line 10
+B 103 Solution Report     SOLVE LP Using LP From line 10
+F 136 eq1
+F 137 eq2
+F 138 eq3
+G 142 x1
+G 143 x2
+G 144 x3
+G 145 z
+B 153 E x e c u t i o n
+I 155 x1
+I 156 x2
+I 157 x3
+I 158 z
