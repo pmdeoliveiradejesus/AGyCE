@@ -1,5 +1,4 @@
 {
-    "dynamicMainFile": false,
     "file": "M1_4_E5e.gms",
     "name": "M1_4_E5e",
     "nodes": [
@@ -28,7 +27,6 @@
     "options": [
         ""
     ],
-    "ownBaseDir": false,
     "path": ".",
     "pf": "",
     "projectType": 1,
