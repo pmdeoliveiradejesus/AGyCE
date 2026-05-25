@@ -102,6 +102,10 @@ Pb  = {t: m.addVar(lb=0, name=f'Pb[{t}]')  for t in T}
 Ps  = {t: m.addVar(lb=0, name=f'Ps[{t}]')  for t in T}
 w1 = {t: m.addVar(vtype=GRB.BINARY, name=f'w1[{t}]') for t in T}
 w3 = {t: m.addVar(vtype=GRB.BINARY, name=f'w3[{t}]') for t in T}
+Wl = m.addVar(name='Wl', lb=0)
+Es = m.addVar(name='Es', lb=0)
+Eb = m.addVar(name='Eb', lb=0)
+OPEX = m.addVar(name='OPEX', lb=0)
 # 3.2 RESTRICCIONES ----------------------------------------------------------
 # --- Financiero -------------------------------------------------------------
 m.addConstr(
@@ -155,7 +159,10 @@ for t in T:
             -quicksum( CU * Plmax * data[t]['Plu']*365
                     for t in T )+PenReactiva 
           ), name='r10')
-
+m.addConstr(Wl == 365*sum(Plmax * data[t]['Plu'] for t in T))
+m.addConstr(Es == 365*(quicksum(CU * Ps[t] for t in T)))
+m.addConstr(Eb == 365*(quicksum(CU * Pb[t] for t in T)))
+m.addConstr(OPEX == Eb )
 
 # ---------------------------------------------------------------------------
 # 3.3  FUNCIÓN OBJETIVO
@@ -194,6 +201,9 @@ else:
     NPER = np.log((PMT - rate * FV) / (PMT + rate * PV)) / np.log(1 + rate)    
 # ─────────────────────────────────────────────────────────────────────────────
 if m.Status == GRB.OPTIMAL:
+    OPEXgross = 0
+    LCOEgross = 1000*(Io + OPEXgross/crf)/(Wl.X/crf) if Wl.X > 0 else 0
+    LCOEnet = 1000*(Io + (OPEX.X + Base.X - Es.X)/crf)/((Wl.X)/crf) if Wl.X > 0 else 0   
     print(f"Resultados:")
     print(f"---------------------")
     print(f"Beneficio óptimo: {Benefit.X:,.2f} USD/año")
@@ -205,3 +215,5 @@ if m.Status == GRB.OPTIMAL:
     print(f"TIR:      {TIR:,.2f} %")
     print(f"NPER:     {NPER:,.2f} años")
     print(f"B/C Ratio {BCratio:,.2f}")
+    print(f"Gross LCOE: (only CAPEX and OPEX)    {LCOEgross:,.2f} USD/MWh")
+    print(f"Net LCOE (include earnings and savings):     {LCOEnet:,.2f} USD/MWh")

@@ -96,7 +96,10 @@ Pb  = {t: m.addVar(lb=0, name=f'Pb[{t}]')  for t in T}
 Ps  = {t: m.addVar(lb=0, name=f'Ps[{t}]')  for t in T}
 w1  = {t: m.addVar(vtype=GRB.BINARY, name=f'w1[{t}]') for t in T}
 w3  = {t: m.addVar(vtype=GRB.BINARY, name=f'w3[{t}]') for t in T}
-
+Wl = m.addVar(name='Wl', lb=0)
+Es = m.addVar(name='Es', lb=0)
+Eb = m.addVar(name='Eb', lb=0)
+OPEX = m.addVar(name='OPEX', lb=0)
 # 4.2 FUNCIÓN DE BENEFICIO ───────────────────────────────────────────────────
 m.addConstr(
     Benefit ==
@@ -144,6 +147,10 @@ for t in range(23, 24): m.addConstr(Pb[t] <= PbmaxP5, name=f'r28_29_PbmaxP5[{t}]
 m.addConstr(CashFlow == Benefit-Base, name='r7')
 m.addConstr(Investment ==    CAPEXpv*Ppvmax+CAPEX_BESS*C+CAPEX_BESS_inverter*C*R_c, name='r8')
 m.addConstr(npv == CashFlow/crf-Investment, name='r9')
+m.addConstr(Wl == 365*sum(Plmax * data[t]['Plu'] for t in T))
+m.addConstr(Es == 365*(quicksum(data[t]['lambda'] * Ps[t] for t in T)))
+m.addConstr(Eb == 365*(quicksum((data[t]['lambda'] + data[t]['psi']) * Pb[t] for t in T)))
+m.addConstr(OPEX == capac_cost + Eb )
 for t in T:
     m.addConstr(Base ==(
             -quicksum((data[t]['lambda'] + data[t]['psi']) * Plmax * data[t]['Plu']*365
@@ -185,6 +192,11 @@ else:
     NPER = np.log((PMT - rate * FV) / (PMT + rate * PV)) / np.log(1 + rate)    
 # ─────────────────────────────────────────────────────────────────────────────
 if m.Status == GRB.OPTIMAL:
+    OPEXgross = 0
+    LCOEgross = 1000*(Io + OPEXgross/crf)/(Wl.X/crf) if Wl.X > 0 else 0
+    LCOEnet = 1000*(Io + (OPEX.X + Base.X - Es.X)/crf)/((Wl.X)/crf) if Wl.X > 0 else 0
+     
+    
     print(f"Resultados:")
     print(f"---------------------")
     print(f"Beneficio óptimo: {Benefit.X:,.2f} €/año")
@@ -196,7 +208,8 @@ if m.Status == GRB.OPTIMAL:
     print(f"TIR:      {TIR:,.2f} %")
     print(f"NPER:     {NPER:,.2f} años")
     print(f"B/C Ratio {BCratio:,.2f}")
-    
+    print(f"Gross LCOE: (only CAPEX and OPEX)    {LCOEgross:,.2f} €/MWh")
+    print(f"Net LCOE (include earnings and savings):     {LCOEnet:,.2f} €/MWh")    
 if m.status == gp.GRB.OPTIMAL:
     with open('solution_M1_4_E5eL.csv', 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
@@ -215,3 +228,7 @@ if m.status == gp.GRB.OPTIMAL:
                 npv.X
             ])
     print("Solution written to solution_M1_4_E5e.csv")    
+    
+    
+    
+    
