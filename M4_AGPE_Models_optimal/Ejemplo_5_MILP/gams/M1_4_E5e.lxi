@@ -1,0 +1,87 @@
+B 3 C o m p i l a t i o n
+B 120 Equation Listing    SOLVE modelAGspain Using MIP From line 110
+D 123 Bcalc
+D 128 Bcalc1
+D 133 Bcalc2
+D 138 balance
+D 149 r1
+D 160 r2
+D 171 r3
+D 182 r4
+D 193 r5
+D 204 r6
+D 215 r7
+D 220 r8
+D 225 r9
+D 230 r10
+D 235 r11
+D 240 r12
+D 245 r13
+D 250 r14
+D 255 r15
+D 260 r16
+B 266 Column Listing      SOLVE modelAGspain Using MIP From line 110
+E 269 Benefit
+E 277 Capacity
+E 285 Energy
+E 293 CashFlow
+E 301 npv
+E 308 Base
+E 316 SOC
+E 338 Pd
+E 363 Pc
+E 388 Pb
+E 416 Ps
+E 441 Investment
+E 449 Wload
+E 456 Wpvtot
+E 463 Wimport
+E 470 Wexport
+E 477 WcargaBESS
+E 484 WdescargaBESS
+E 491 w1
+E 510 w3
+B 530 Range Statistics    SOLVE modelAGspain Using MIP From line 110
+B 541 Model Statistics    SOLVE modelAGspain Using MIP From line 110
+B 554 Solution Report     SOLVE modelAGspain Using MIP From line 110
+F 599 Bcalc
+F 600 Bcalc1
+F 601 Bcalc2
+F 603 balance
+F 632 r1
+F 661 r2
+F 690 r3
+F 719 r4
+F 748 r5
+F 777 r6
+F 808 r7
+F 809 r8
+F 810 r9
+F 811 r10
+F 812 r11
+F 813 r12
+F 814 r13
+F 815 r14
+F 816 r15
+F 817 r16
+G 821 Benefit
+G 822 Capacity
+G 823 Energy
+G 824 CashFlow
+G 825 npv
+G 826 Base
+G 835 SOC
+G 864 Pd
+G 893 Pc
+G 922 Pb
+G 951 Ps
+G 982 Investment
+G 983 Wload
+G 984 Wpvtot
+G 985 Wimport
+G 986 Wexport
+G 987 WcargaBESS
+G 988 WdescargaBESS
+G 998 w1
+G 1027 w3
+B 1062 E x e c u t i o n
