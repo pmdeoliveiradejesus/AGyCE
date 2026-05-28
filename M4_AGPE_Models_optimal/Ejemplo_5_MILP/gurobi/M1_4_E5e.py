@@ -7,6 +7,8 @@ Created on Sat May 10 21:15:32 2025
 """
 Despacho óptimo Industria + BESS + PV ─ Caso España 24h
 """
+!pip install numpy-financial
+!pip install gurobipy
 import numpy as np
 import numpy_financial as npf
 import gurobipy as gp

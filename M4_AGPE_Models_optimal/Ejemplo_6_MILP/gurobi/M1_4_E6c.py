@@ -10,6 +10,9 @@ Created on Sat May 10 22:35:37 2025
 """
 Despacho óptimo Industria + BESS + PV  (Caso Colombia 24h)
 """
+
+!pip install numpy-financial
+!pip install gurobipy
 import numpy as np
 import numpy_financial as npf
 import gurobipy as gp
