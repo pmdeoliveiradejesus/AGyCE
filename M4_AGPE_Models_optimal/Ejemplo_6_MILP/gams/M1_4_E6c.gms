@@ -30,7 +30,7 @@ t22     0.179217943416770   0.000000000000000   0.1483866982563560
 t23     0.144883067091137   0.000000000000000   0.1400058133248490
 t24     0.138041019820362   0.000000000000000   0.1345652879823840;  
 * -----------------------------------------------------
-
+* En este script NO de utiliza lambda, solo se aplica MCm seguin CREG 101 072/2025
 Variable
    Benefit     'Benefit USD/yr'
    VE          'Energy sold to the system USD/day'
@@ -85,7 +85,7 @@ Scalar
    CAPEX_BESS_inverter /88/
    ReactivePayment /-24942.4/
    crf       /0.08024258719069/
-   w2        /1/   ;
+   w2        /0/   ;
 SOC.up(t)     = ((1-DoD)/2+DoD)*C;
 SOC.lo(t)     = ((1-DoD)/2)*C;
 SOC.fx('t24') = SOC0;

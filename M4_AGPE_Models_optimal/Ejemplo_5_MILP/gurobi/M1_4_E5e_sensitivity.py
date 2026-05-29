@@ -11,6 +11,8 @@ Created on Thu May 28 11:15:26 2026
 """
 Análisis de sensibilidad del CAPEX PV sobre KPIs (TIR, PBT, NPV, LCOEgross)
 """
+!pip install numpy-financial
+!pip install gurobipy
 import numpy as np
 import numpy_financial as npf
 import gurobipy as gp
