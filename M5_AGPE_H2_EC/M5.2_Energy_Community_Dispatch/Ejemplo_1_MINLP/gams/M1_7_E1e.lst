@@ -1,0 +1,2820 @@
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:52:21 Page 1
+M_1_7_E1e Energy Community 1 and 2 with a CDS - Dispatch MINLP (spain 24h)
+C o m p i l a t i o n
+
+
+   2  *M1.7.E1e - Caso España:  CE+CDS with PV+BESS (OnGrid) (Despacho Optimo, 24h)
+   3  Set
+   4     t 'hours'         / t1*t24 /;
+   5  Table data(t,*)
+   6  *    Eur/kWh            per unit            Eur/kWh         per unit
+   7      lambda              psi                 Ppvu                Plu2                  pbmax2         Plu1               pbmax1
+   8  t1  0.068746794520548   0.0228205053080510  0.000000000000000   0.530061285794532   553.88960000000 0.135388629090637   564.3000000
+   9  t2  0.064382931506849   0.0228205053080510  0.000000000000000   0.531661233031055   553.88960000000 0.090377249176867   564.3000000
+  10  t3  0.062238410958904   0.0228205053080510  0.000000000000000   0.534176029026283   553.88960000000 0.076343641406536   564.3000000
+  11  t4  0.060464136986301   0.0228205053080510  0.000000000000000   0.553334784117771   553.88960000000 0.075224251241957   564.3000000
+  12  t5  0.060655534246575   0.0228205053080510  0.000000000000000   0.618973516973413   553.88960000000 0.074307578750070   564.3000000
+  13  t6  0.065132136986301   0.0228205053080510  0.000000000000000   0.732698140959379   553.88960000000 0.073105608680250   564.3000000
+  14  t7  0.073826082191781   0.0228205053080510  0.047492750000000   0.905410448254070   553.88960000000 0.073406190057000   564.3000000
+  15  t8  0.076148794520548   0.0228205053080510  0.200034333333333   0.989775313849690   553.88960000000 0.085516408757498   564.3000000
+  16  t9  0.069382712328767   0.0210743713052406  0.371942916666667   1.000000000000000   379.49780000000 0.883664344082149   338.0551530
+  17  t10 0.056760082191781   0.0319883482993510  0.512186250000000   0.980132084762807   494.17200000000 1.000000000000000   404.4700000
+  18  t11 0.046949369863014   0.0221906474349675  0.605126833333333   0.957725277555312   561.32090000000 0.967245871300936   442.9100000
+  19  t12 0.041846739726027   0.0221906474349675  0.645309833333333   0.942323657709171   561.32090000000 0.966410238486499   442.9100000
+  20  t13 0.039593726027397   0.0221906474349675  0.627257666666667   0.913475812983633   561.32090000000 0.122847383567665   442.9100000
+  21  t14 0.037885123287671   0.0221906474349675  0.568799916666667   0.889945957227714   561.32090000000 0.892179315688642   442.9100000
+  22  t15 0.036840931506849   0.0210743713052406  0.473205250000000   0.886750273145298   379.49780000000 0.968865480059381   338.0551530
+  23  t16 0.038253698630137   0.0210743713052406  0.337161416666667   0.905656297371664   379.49780000000 0.959187873431187   338.0551530
+  24  t17 0.046423205479452   0.0210743713052406  0.188570083333333   0.861890166282270   379.49780000000 0.947290206165413   338.0551530
+  25  t18 0.059484767123288   0.0210743713052406  0.043513583333333   0.701714201302491   379.49780000000 0.647289021374806   338.0551530
+  26  t19 0.076155178082192   0.0720344854462120  0.000000000000000   0.351262364643030   408.15430000000 0.627968640962237   504.4300000
+  27  t20 0.090286438356164   0.0512182441617940  0.000000000000000   0.338840454837792   437.71230000000 0.659335616819762   453.9668670
+  28  t21 0.099023506849315   0.0512182441617940  0.000000000000000   0.317456333765505   437.71230000000 0.581590012689108   453.9668670
+  29  t22 0.090372109589041   0.0512182441617940  0.000000000000000   0.293644351056787   437.71230000000 0.179217943416770   453.9668670
+  30  t23 0.081188794520548   0.0210743713052406  0.000000000000000   0.274768244366155   379.49780000000 0.144883067091137   338.0551530
+  31  t24 0.074767232876712   0.0210743713052406  0.000000000000000   0.331848323823927   379.49780000000 0.138041019820362   338.0551530;
+  32  * -----------------------------------------------------
+  33  PARAMETER
+  34  pbmax1(t)
+  35  Plu1(t)
+  36  pbmax2(t)
+  37  Plu2(t);
+  38  pbmax1(t) = data(t,'pbmax1');
+  39  Plu1(t) =   data(t,'Plu1');
+  40  pbmax2(t) = data(t,'pbmax2');
+  41  Plu2(t) =   data(t,'Plu2');;
+  42  Variable
+  43     npv         'Net Present Value Eur Industry 1+2'
+  44     Benefit1     'Benefit Eur/year'
+  45     Capacity1    'Capacity Payment Eur/year'
+  46     Energy1      'Energy Trading Result Eur/year'
+  47     CashFlow1    'Project CashFlow Eur/yr'
+  48     npv1         'Net Present Value Eur Industry 1'
+  49     Base1        'Load payment with no PV and no BESS'
+  50     Benefit2     'Benefit Eur/year'
+  51     Capacity2    'Capacity Payment Eur/year'
+  52     Energy2      'Energy Trading Result Eur/year'
+  53     CashFlow2    'Project CashFlow Eur/yr'
+  54     npv2         'Net Present Value Eur Industry 1'
+  55     Base2        'Load payment with no PV and no BESS'
+  56     IndustryProfit   'Total Industry 1 + 2 Profit, Euro/year'
+  57     CW               'Total Community Welfare, Euro/year'
+  58     EP1              'Energy and Power/Capacity Balance Industry 1 Euro/year'
+  59     EP2              'Energy and Power/Capacity Balance Industry 2 Euro/year'
+  60     E1               'Exchange Industry 1 with the Aggregaror, Euro/year'
+  61     E2               'Exchange Industry 2 with the Aggregaror, Euro/year'
+  62     APA              'CDS Aggregator Profit, Euro,/year'
+  63     I1_Profit        'Industry 1 Profit with respect to no CDS, Euro,/year'
+  64     I2_Profit        'Industry 2 Profit with respect to no CDS, Euro,/year'
+  65     AP1              'Industry 1 Profit, Euro,/year'
+  66     AP2              'Industry 2 Profit, Euro,/year'
+  67  Positive variable
+  68     SOC1(t)      'State of Charge  kWh'
+  69     Pd1(t)       'Power battery discharge  kW'
+  70     Pc1(t)       'Power battery charge  kW'
+  71     Pb1(t)       'Power bought from the public grid kW'
+  72     Ps1(t)       'Power sold to the public grid kW'
+  73     Investment1  'Project initial investment Eur'
+  74     Wload1       'Energia total load kWh/año'
+  75     Wpvtot1      'Producción Energia PV kWh/año'
+  76     Wimport1      'Importación Energia kWh/año'
+  77     Wexport1      'Exportación Energia kWh/año'
+  78     WcargaBESS1  'Energia carga BESS kWh/año'
+  79     WdescargaBESS1  'Energia carga BESS kWh/año'
+  80     SOC2(t)      'State of Charge  kWh'
+  81     Pd2(t)       'Power battery discharge  kW'
+  82     Pc2(t)       'Power battery charge  kW'
+  83     Pb2(t)       'Power bought from the public grid kW'
+  84     Ps2(t)       'Power sold to the public grid kW'
+  85     Investment2  'Project initial investment Eur'
+  86     Wload2       'Energia total load kWh/año'
+  87     Wpvtot2      'Producción Energia PV kWh/año'
+  88     Wimport2      'Importación Energia kWh/año'
+  89     Wexport2      'Exportación Energia kWh/año'
+  90     WcargaBESS2  'Energia carga BESS kWh/año'
+  91     WdescargaBESS2  'Energia carga BESS kWh/año'
+  92     P12CDS(t)       'Power sent from 1 to 2 through a CDS kW'
+  93     P21CDS(t)       'Power sent from 2 to 1 through a CDS kW'
+  94     epsilon(t)      'Internal Local Market Price $/kWh'
+  95     delta        'Internal Capacity Price $/kW';
+  96  Binary Variable
+  97     w11
+  98     w31
+  99     w12
+ 100     w32
+ 101     v12;
+ 102  Scalar
+ 103     Ppvmax1    / 569/
+ 104     Plmax1     / 231.241369863014 /
+ 105     SOC01      / 100  /
+ 106     C1         / 2000  /
+ 107     eff_c1     / 0.93 /
+ 108     eff_d1     / 0.97 /
+ 109     R_c1       / 0.2/
+ 110     R_d1       / 0.2/
+ 111     DoD1       / 0.9/
+ 112     Pmax1      / 600/
+ 113     Capacity01    /-31713.9/
+ 114     Ppvmax2    / 800/
+ 115     Plmax2     / 312.78235978049 /
+ 116     SOC02      / 140  /
+ 117     C2         / 2800  /
+ 118     eff_c2     / 0.92 /
+ 119     eff_d2     / 0.95 /
+ 120     R_c2       / 0.3/
+ 121     R_d2       / 0.3/
+ 122     DoD2       / 0.9/
+ 123     Pmax2      / 650/
+ 124     Capacity02    /-33786.68/
+ 125     kappaP1   / 28.79187 /
+ 126     kappaP2   / 15.07764 /
+ 127     kappaP3   / 6.55917 /
+ 128     kappaP4   / 5.17209 /
+ 129     kappaP5   / 1.93281 /
+ 130     kappaP6   / 0.91609 /
+ 131     CAPEXpv   /700/
+ 132     CAPEX_BESS /200/
+ 133     CAPEX_BESS_inverter /80/
+ 134     crf       /0.08024258719069/
+ 135     varphib      /0.00375/
+ 136     varphis      /0.00125/
+ 137     PmaxCDS     / 400/
+ 138     CAPEX_I1   /830300/
+ 139     CAPEX_I2   /1187200/
+ 140  ;
+ 141  *Limits
+ 142  SOC1.up(t)     = ((1-DoD1)/2+DoD1)*C1;
+ 143  SOC1.lo(t)     = ((1-DoD1)/2)*C1;
+ 144  SOC1.fx('t24') = SOC01;
+ 145  SOC2.up(t)     = ((1-DoD2)/2+DoD2)*C2;
+ 146  SOC2.lo(t)     = ((1-DoD2)/2)*C2;
+ 147  SOC2.fx('t24') = SOC02;
+ 148  Equation BcalcA, Bcalc1A, Bcalc2A, balanceA,  r1A, r2A, r3A, r4A,r5A, r6A, r7A, r8A, r9A, r10A, r11A,r12A,r13A,r14A,r15A,r16A,
+ 149           BcalcB, Bcalc1B, Bcalc2B, balanceB,  r1B, r2B, r3B, r4B,r5B, r6B, r7B, r8B, r9B, r10B, r11B,r12B,r13B,r14B,r15B,r16B,
+ 150  CE0 ,
+ 151  CE1 ,
+ 152  CE2 ,
+ 153  CE3 ,
+ 154  CE4 ,
+ 155  CE5 ,
+ 156  CE6 ,
+ 157  CE7 ,
+ 158  CE8 ,
+ 159  CE9 ,
+ 160  CE10    ,
+ 161  CE10b    ,
+ 162  CE11    ,
+ 163  CE12    ,
+ 164  CE13    ,
+ 165  CE14    ,
+ 166  CE15    ,
+ 167  CE16    ,
+ 168  CE17    ,
+ 169  CE18    ,
+ 170  CE19    ,
+ 171  CE20    ,
+ 172  CE21    ,
+ 173  CE24;
+ 174  BcalcA..         Benefit1  =e= Capacity1+Energy1;
+ 175  Bcalc1A..        Capacity1 =e= -kappaP1*pbmax1('t19')-kappaP2*pbmax1('t20')-kappaP3*pbmax1('t10')-kappaP4*pbmax1('t11')-kappaP5*pbmax1('t24')-kappaP6*pbmax1('t1');
+ 176  Bcalc2A..        Energy1 =e=365*sum((t), (data(t,'lambda')*ps1(t)-(data(t,'lambda')+data(t,'psi'))*pb1(t)));
+ 177  balanceA(t)..    Pd1(t) + Pb1(t) + Ppvmax1*data(t,'Ppvu') - Pc1(t) - Ps1(t) - Plmax1*Plu1(t) + P21CDS(t) - P12CDS(t)=e= 0;
+ 178  r1A(t)..         SOC1(t) =e= SOC01$(ord(t)=1) + SOC1(t-1)$(ord(t)>1) + Pc1(t)*eff_c1  - Pd1(t)/eff_d1;
+ 179  r2A(t)..  Pc1(t) =l= R_c1*C1*w11(t);
+ 180  r3A(t)..  Pd1(t) =l= R_d1*C1*(1-w11(t));
+ 181  r4A(t)..  Pb1(t) =l= Pmax1*w31(t);
+ 182  r5A(t)..  Ps1(t) =l= Pmax1*(1-w31(t));
+ 183  r6A(t)..  pbmax1(t) =g= Pb1(t);
+ 184  r7A..     CashFlow1 =e= Benefit1-Base1;
+ 185  r8A..     Investment1 =e=    CAPEXpv*Ppvmax1+CAPEX_BESS*C1+CAPEX_BESS_inverter*C1*R_c1;
+ 186  r9A..     npv1=e=CashFlow1/crf-Investment1;
+ 187  r10A..    Base1 =e=365*sum((t), -(data(t,'lambda')+data(t,'psi'))* Plmax1*Plu1(t))+Capacity01;
+ 188  r11A..    Wload1=e=365*sum((t),Plu1(t))*Plmax1;
+ 189  r12A..    Wpvtot1=e=365*sum((t),data(t,'Ppvu'))*Ppvmax1;
+ 190  r13A..    Wimport1=e= 365*sum((t),Pb1(t));
+ 191  r14A..    Wexport1=e= 365*sum((t),Ps1(t));
+ 192  r15A..    WcargaBESS1 =e= 365*sum((t),Pc1(t));
+ 193  r16A..    WdescargaBESS1 =e= 365*sum((t),Pd1(t));
+ 194  BcalcB..         Benefit2  =e= Capacity2+Energy2;
+ 195  Bcalc1B..        Capacity2 =e= -kappaP1*pbmax2('t19')-kappaP2*pbmax2('t20')-kappaP3*pbmax2('t10')-kappaP4*pbmax2('t11')-kappaP5*pbmax2('t24')-kappaP6*pbmax2('t1');
+ 196  Bcalc2B..        Energy2 =e=365*sum((t), (data(t,'lambda')*ps2(t)-(data(t,'lambda')+data(t,'psi'))*pb2(t)));
+ 197  balanceB(t)..    Pd2(t) + Pb2(t) + Ppvmax2*data(t,'Ppvu') - Pc2(t) - Ps2(t) - Plmax2*Plu2(t) - P21CDS(t) + P12CDS(t) =e= 0;
+ 198  r1B(t)..         SOC2(t) =e= SOC02$(ord(t)=1) + SOC2(t-1)$(ord(t)>1) + Pc2(t)*eff_c2  - Pd2(t)/eff_d2;
+ 199  r2B(t)..  Pc2(t) =l= R_c2*C2*w12(t);
+ 200  r3B(t)..  Pd2(t) =l= R_d2*C2*(1-w12(t));
+ 201  r4B(t)..  Pb2(t) =l= Pmax2*w32(t);
+ 202  r5B(t)..  Ps2(t) =l= Pmax2*(1-w32(t));
+ 203  r6B(t)..  pbmax2(t) =g= Pb2(t);
+ 204  r7B..     CashFlow2 =e= Benefit2-Base2;
+ 205  r8B..     Investment2 =e=    CAPEXpv*Ppvmax2+CAPEX_BESS*C2+CAPEX_BESS_inverter*C2*R_c2;
+ 206  r9B..     npv2=e=CashFlow2/crf-Investment2;
+ 207  r10B..    Base2 =e=365*sum((t), -(data(t,'lambda')+data(t,'psi'))* Plmax2*Plu2(t))+Capacity02;
+ 208  r11B..    Wload2=e=365*sum((t),Plu2(t))*Plmax2;
+ 209  r12B..    Wpvtot2=e=365*sum((t),data(t,'Ppvu'))*Ppvmax2;
+ 210  r13B..    Wimport2=e= 365*sum((t),Pb2(t));
+ 211  r14B..    Wexport2=e= 365*sum((t),Ps2(t));
+ 212  r15B..    WcargaBESS2 =e= 365*sum((t),Pc2(t));
+ 213  r16B..    WdescargaBESS2 =e= 365*sum((t),Pd2(t));
+ 214  CE0..         IndustryProfit =e=  I1_Profit+ I2_Profit;
+ 215  CE1..         CW =e=  EP1+E1+EP2+E2+APA;
+ 216  CE2..         EP1 =e= Benefit1;
+ 217  CE3..         EP2 =e= Benefit2;
+ 218  CE4.. E1 =e=  365*(sum((t), (epsilon(t)-varphis)*P12CDS(t))-sum((t), (epsilon(t)+varphib)*P21CDS(t)));
+ 219  CE5.. E2 =e=  365*(sum((t), (epsilon(t)-varphis)*P21CDS(t))-sum((t), (epsilon(t)+varphib)*P12CDS(t)));
+ 220  CE6..         APA  =e=(2*delta)*PmaxCDS+(365)*(sum((t), (varphis+varphib)*(P12CDS(t)+P21CDS(t))));
+ 221  CE7..         I1_Profit =e= EP1+E1;
+ 222  CE8..         I2_Profit =e= EP2+E2;
+ 223  CE9..         AP1=e= EP1+E1;
+ 224  CE10..        AP2=e= EP2+E2;
+ 225  CE10b..       Investment2*I1_Profit=e=Investment1*I2_Profit;
+ 226  CE11(t)..      P12CDS(t) =l= PmaxCDS*v12(t);
+ 227  CE12(t)..      P21CDS(t) =l= PmaxCDS*(1-v12(t));
+ 228  CE13(t)..      epsilon(t) =l= (data(t,'lambda')+data(t,'psi'));
+ 229  CE14(t)..      epsilon(t) =g= data(t,'lambda');
+ 230  CE15..      delta =l= kappaP1;
+ 231  CE16..      delta =l= kappaP2;
+ 232  CE17..      delta =l= kappaP3;
+ 233  CE18..      delta =l= kappaP4;
+ 234  CE19..      delta =l= kappaP5;
+ 235  CE20..      delta =l= kappaP6;
+ 236  CE21..      delta =g= 0;
+ 237  CE24..      npv=e=(IndustryProfit-Base1-Base2)/crf-Investment1-Investment2;
+ 238  *option minlp=lindo, miqcp=lindo;
+ 239  *option minlp=alphaecp, miqcp=alphaecp;
+ 240  *option minlp=knitro, miqcp=knitro;
+ 241  *option minlp=lindoglobal, miqcp=lindoglobal;
+ 242  *option minlp=sbb, miqcp=sbb;
+ 243  *option minlp=scip, miqcp=scip;
+ 244  *option minlp=shot, miqcp=shot;
+ 245  *option minlp=xpress, miqcp=xpress;
+ 246  option minlp=gurobi, miqcp=gurobi;
+ 247  Model modelCDS / all /;
+ 248  solve modelCDS using MINLP maximizing IndustryProfit
+ 249  execute_unload 'M1_7_E1e.gdx';
+
+
+COMPILATION TIME     =        0.000 SECONDS      3 MB  51.4.0 91cb996b WEX-WEI
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:52:21 Page 2
+M_1_7_E1e Energy Community 1 and 2 with a CDS - Dispatch MINLP (spain 24h)
+Equation Listing    SOLVE modelCDS Using MINLP From line 249
+
+
+---- BcalcA  =E=  
+
+BcalcA..  Benefit1 - Capacity1 - Energy1 =E= 0 ; (LHS = 0)
+     
+
+---- Bcalc1A  =E=  
+
+Bcalc1A..  Capacity1 =E= -27482.3358157238 ; (LHS = 0, INFES = 27482.3358157238 ****)
+     
+
+---- Bcalc2A  =E=  
+
+Bcalc2A..  Energy1 + 33.4220644374386*Pb1(t1) + 31.8292544374385*Pb1(t2) + 31.0465044374386*Pb1(t3) + 30.3988944374385*Pb1(t4) + 30.4687544374385*Pb1(t5) + 32.1027144374385*Pb1(t6) + 35.2760044374387*Pb1(t7) + 36.1237944374386*Pb1(t8) + 33.0168355264128*Pb1(t9) + 32.3931771292632*Pb1(t10) + 25.2361063137632*Pb1(t11) + 23.373646313763*Pb1(t12) + 22.551296313763*Pb1(t13) + 21.9276563137631*Pb1(t14) + 21.1390855264127*Pb1(t15) + 21.6547455264128*Pb1(t16) + 24.6366155264128*Pb1(t17) + 29.4040855264129*Pb1(t18) + 54.0892271878675*Pb1(t19) + 51.6492091190547*Pb1(t20) + 54.8382391190548*Pb1(t21) + 51.6804791190548*Pb1(t22) + 37.3260555264128*Pb1(t23) + 34.9821855264127*Pb1(t24) - 25.09258*Ps1(t1) - 23.4997699999999*Ps1(t2) - 22.71702*Ps1(t3) - 22.0694099999999*Ps1(t4) - 22.1392699999999*Ps1(t5) - 23.7732299999999*Ps1(t6) - 26.9465200000001*Ps1(t7) - 27.79431*Ps1(t8) - 25.32469*Ps1(t9) - 20.7174300000001*Ps1(t10) - 17.1365200000001*Ps1(t11) - 15.2740599999999*Ps1(t12) - 14.4517099999999*Ps1(t13) - 13.8280699999999*Ps1(t14) - 13.4469399999999*Ps1(t15) - 13.9626*Ps1(t16) - 16.94447*Ps1(t17) - 21.7119400000001*Ps1(t18) - 27.7966400000001*Ps1(t19) - 32.9545499999999*Ps1(t20) - 36.14358*Ps1(t21) - 32.98582*Ps1(t22) - 29.63391*Ps1(t23) - 27.2900399999999*Ps1(t24) =E= 0 ; (LHS = 0)
+     
+
+---- balanceA  =E=  
+
+balanceA(t1)..  Pd1(t1) - Pc1(t1) + Pb1(t1) - Ps1(t1) - P12CDS(t1) + P21CDS(t1) =E= 31.3074520547944 ; (LHS = 0, INFES = 31.3074520547944 ****)
+     
+balanceA(t2)..  Pd1(t2) - Pc1(t2) + Pb1(t2) - Ps1(t2) - P12CDS(t2) + P21CDS(t2) =E= 20.8989589041097 ; (LHS = 0, INFES = 20.8989589041097 ****)
+     
+balanceA(t3)..  Pd1(t3) - Pc1(t3) + Pb1(t3) - Ps1(t3) - P12CDS(t3) + P21CDS(t3) =E= 17.6538082191781 ; (LHS = 0, INFES = 17.6538082191781 ****)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r1A  =E=  
+
+r1A(t1)..  SOC1(t1) + 1.03092783505155*Pd1(t1) - 0.93*Pc1(t1) =E= 100 ; (LHS = 100)
+     
+r1A(t2)..  - SOC1(t1) + SOC1(t2) + 1.03092783505155*Pd1(t2) - 0.93*Pc1(t2) =E= 0 ; (LHS = 0)
+     
+r1A(t3)..  - SOC1(t2) + SOC1(t3) + 1.03092783505155*Pd1(t3) - 0.93*Pc1(t3) =E= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r2A  =L=  
+
+r2A(t1)..  Pc1(t1) - 400*w11(t1) =L= 0 ; (LHS = 0)
+     
+r2A(t2)..  Pc1(t2) - 400*w11(t2) =L= 0 ; (LHS = 0)
+     
+r2A(t3)..  Pc1(t3) - 400*w11(t3) =L= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r3A  =L=  
+
+r3A(t1)..  Pd1(t1) + 400*w11(t1) =L= 400 ; (LHS = 0)
+     
+r3A(t2)..  Pd1(t2) + 400*w11(t2) =L= 400 ; (LHS = 0)
+     
+r3A(t3)..  Pd1(t3) + 400*w11(t3) =L= 400 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r4A  =L=  
+
+r4A(t1)..  Pb1(t1) - 600*w31(t1) =L= 0 ; (LHS = 0)
+     
+r4A(t2)..  Pb1(t2) - 600*w31(t2) =L= 0 ; (LHS = 0)
+     
+r4A(t3)..  Pb1(t3) - 600*w31(t3) =L= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r5A  =L=  
+
+r5A(t1)..  Ps1(t1) + 600*w31(t1) =L= 600 ; (LHS = 0)
+     
+r5A(t2)..  Ps1(t2) + 600*w31(t2) =L= 600 ; (LHS = 0)
+     
+r5A(t3)..  Ps1(t3) + 600*w31(t3) =L= 600 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r6A  =G=  
+
+r6A(t1)..  - Pb1(t1) =G= -564.3 ; (LHS = 0)
+     
+r6A(t2)..  - Pb1(t2) =G= -564.3 ; (LHS = 0)
+     
+r6A(t3)..  - Pb1(t3) =G= -564.3 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r7A  =E=  
+
+r7A..  - Benefit1 + CashFlow1 + Base1 =E= 0 ; (LHS = 0)
+     
+
+---- r8A  =E=  
+
+r8A..  Investment1 =E= 830300 ; (LHS = 0, INFES = 830300 ****)
+     
+
+---- r9A  =E=  
+
+r9A..  - 12.4622103425402*CashFlow1 + npv1 + Investment1 =E= 0 ; (LHS = 0)
+     
+
+---- r10A  =E=  
+
+r10A..  Base1 =E= -114101.649035551 ; (LHS = 0, INFES = 114101.649035551 ****)
+     
+
+---- r11A  =E=  
+
+r11A..  Wload1 =E= 959636.71 ; (LHS = 0, INFES = 959636.71 ****)
+     
+
+---- r12A  =E=  
+
+r12A..  Wpvtot1 =E= 959629.484070833 ; (LHS = 0, INFES = 959629.484070833 ****)
+     
+
+---- r13A  =E=  
+
+r13A..  - 365*Pb1(t1) - 365*Pb1(t2) - 365*Pb1(t3) - 365*Pb1(t4) - 365*Pb1(t5) - 365*Pb1(t6) - 365*Pb1(t7) - 365*Pb1(t8) - 365*Pb1(t9) - 365*Pb1(t10) - 365*Pb1(t11) - 365*Pb1(t12) - 365*Pb1(t13) - 365*Pb1(t14) - 365*Pb1(t15) - 365*Pb1(t16) - 365*Pb1(t17) - 365*Pb1(t18) - 365*Pb1(t19) - 365*Pb1(t20) - 365*Pb1(t21) - 365*Pb1(t22) - 365*Pb1(t23) - 365*Pb1(t24) + Wimport1 =E= 0 ; (LHS = 0)
+     
+
+---- r14A  =E=  
+
+r14A..  - 365*Ps1(t1) - 365*Ps1(t2) - 365*Ps1(t3) - 365*Ps1(t4) - 365*Ps1(t5) - 365*Ps1(t6) - 365*Ps1(t7) - 365*Ps1(t8) - 365*Ps1(t9) - 365*Ps1(t10) - 365*Ps1(t11) - 365*Ps1(t12) - 365*Ps1(t13) - 365*Ps1(t14) - 365*Ps1(t15) - 365*Ps1(t16) - 365*Ps1(t17) - 365*Ps1(t18) - 365*Ps1(t19) - 365*Ps1(t20) - 365*Ps1(t21) - 365*Ps1(t22) - 365*Ps1(t23) - 365*Ps1(t24) + Wexport1 =E= 0 ; (LHS = 0)
+     
+
+---- r15A  =E=  
+
+r15A..  - 365*Pc1(t1) - 365*Pc1(t2) - 365*Pc1(t3) - 365*Pc1(t4) - 365*Pc1(t5) - 365*Pc1(t6) - 365*Pc1(t7) - 365*Pc1(t8) - 365*Pc1(t9) - 365*Pc1(t10) - 365*Pc1(t11) - 365*Pc1(t12) - 365*Pc1(t13) - 365*Pc1(t14) - 365*Pc1(t15) - 365*Pc1(t16) - 365*Pc1(t17) - 365*Pc1(t18) - 365*Pc1(t19) - 365*Pc1(t20) - 365*Pc1(t21) - 365*Pc1(t22) - 365*Pc1(t23) - 365*Pc1(t24) + WcargaBESS1 =E= 0 ; (LHS = 0)
+     
+
+---- r16A  =E=  
+
+r16A..  - 365*Pd1(t1) - 365*Pd1(t2) - 365*Pd1(t3) - 365*Pd1(t4) - 365*Pd1(t5) - 365*Pd1(t6) - 365*Pd1(t7) - 365*Pd1(t8) - 365*Pd1(t9) - 365*Pd1(t10) - 365*Pd1(t11) - 365*Pd1(t12) - 365*Pd1(t13) - 365*Pd1(t14) - 365*Pd1(t15) - 365*Pd1(t16) - 365*Pd1(t17) - 365*Pd1(t18) - 365*Pd1(t19) - 365*Pd1(t20) - 365*Pd1(t21) - 365*Pd1(t22) - 365*Pd1(t23) - 365*Pd1(t24) + WdescargaBESS1 =E= 0 ; (LHS = 0)
+     
+
+---- BcalcB  =E=  
+
+BcalcB..  Benefit2 - Capacity2 - Energy2 =E= 0 ; (LHS = 0)
+     
+
+---- Bcalc1B  =E=  
+
+Bcalc1B..  Capacity2 =E= -25736.664265916 ; (LHS = 0, INFES = 25736.664265916 ****)
+     
+
+---- Bcalc2B  =E=  
+
+Bcalc2B..  Energy2 + 33.4220644374386*Pb2(t1) + 31.8292544374385*Pb2(t2) + 31.0465044374386*Pb2(t3) + 30.3988944374385*Pb2(t4) + 30.4687544374385*Pb2(t5) + 32.1027144374385*Pb2(t6) + 35.2760044374387*Pb2(t7) + 36.1237944374386*Pb2(t8) + 33.0168355264128*Pb2(t9) + 32.3931771292632*Pb2(t10) + 25.2361063137632*Pb2(t11) + 23.373646313763*Pb2(t12) + 22.551296313763*Pb2(t13) + 21.9276563137631*Pb2(t14) + 21.1390855264127*Pb2(t15) + 21.6547455264128*Pb2(t16) + 24.6366155264128*Pb2(t17) + 29.4040855264129*Pb2(t18) + 54.0892271878675*Pb2(t19) + 51.6492091190547*Pb2(t20) + 54.8382391190548*Pb2(t21) + 51.6804791190548*Pb2(t22) + 37.3260555264128*Pb2(t23) + 34.9821855264127*Pb2(t24) - 25.09258*Ps2(t1) - 23.4997699999999*Ps2(t2) - 22.71702*Ps2(t3) - 22.0694099999999*Ps2(t4) - 22.1392699999999*Ps2(t5) - 23.7732299999999*Ps2(t6) - 26.9465200000001*Ps2(t7) - 27.79431*Ps2(t8) - 25.32469*Ps2(t9) - 20.7174300000001*Ps2(t10) - 17.1365200000001*Ps2(t11) - 15.2740599999999*Ps2(t12) - 14.4517099999999*Ps2(t13) - 13.8280699999999*Ps2(t14) - 13.4469399999999*Ps2(t15) - 13.9626*Ps2(t16) - 16.94447*Ps2(t17) - 21.7119400000001*Ps2(t18) - 27.7966400000001*Ps2(t19) - 32.9545499999999*Ps2(t20) - 36.14358*Ps2(t21) - 32.98582*Ps2(t22) - 29.63391*Ps2(t23) - 27.2900399999999*Ps2(t24) =E= 0 ; (LHS = 0)
+     
+
+---- balanceB  =E=  
+
+balanceB(t1)..  Pd2(t1) - Pc2(t1) + Pb2(t1) - Ps2(t1) + P12CDS(t1) - P21CDS(t1) =E= 165.793819799094 ; (LHS = 0, INFES = 165.793819799094 ****)
+     
+balanceB(t2)..  Pd2(t2) - Pc2(t2) + Pb2(t2) - Ps2(t2) + P12CDS(t2) - P21CDS(t2) =E= 166.294255071258 ; (LHS = 0, INFES = 166.294255071258 ****)
+     
+balanceB(t3)..  Pd2(t3) - Pc2(t3) + Pb2(t3) - Ps2(t3) + P12CDS(t3) - P21CDS(t3) =E= 167.080838897012 ; (LHS = 0, INFES = 167.080838897012 ****)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r1B  =E=  
+
+r1B(t1)..  SOC2(t1) + 1.05263157894737*Pd2(t1) - 0.92*Pc2(t1) =E= 140 ; (LHS = 140)
+     
+r1B(t2)..  - SOC2(t1) + SOC2(t2) + 1.05263157894737*Pd2(t2) - 0.92*Pc2(t2) =E= 0 ; (LHS = 0)
+     
+r1B(t3)..  - SOC2(t2) + SOC2(t3) + 1.05263157894737*Pd2(t3) - 0.92*Pc2(t3) =E= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r2B  =L=  
+
+r2B(t1)..  Pc2(t1) - 840*w12(t1) =L= 0 ; (LHS = 0)
+     
+r2B(t2)..  Pc2(t2) - 840*w12(t2) =L= 0 ; (LHS = 0)
+     
+r2B(t3)..  Pc2(t3) - 840*w12(t3) =L= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r3B  =L=  
+
+r3B(t1)..  Pd2(t1) + 840*w12(t1) =L= 840 ; (LHS = 0)
+     
+r3B(t2)..  Pd2(t2) + 840*w12(t2) =L= 840 ; (LHS = 0)
+     
+r3B(t3)..  Pd2(t3) + 840*w12(t3) =L= 840 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r4B  =L=  
+
+r4B(t1)..  Pb2(t1) - 650*w32(t1) =L= 0 ; (LHS = 0)
+     
+r4B(t2)..  Pb2(t2) - 650*w32(t2) =L= 0 ; (LHS = 0)
+     
+r4B(t3)..  Pb2(t3) - 650*w32(t3) =L= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r5B  =L=  
+
+r5B(t1)..  Ps2(t1) + 650*w32(t1) =L= 650 ; (LHS = 0)
+     
+r5B(t2)..  Ps2(t2) + 650*w32(t2) =L= 650 ; (LHS = 0)
+     
+r5B(t3)..  Ps2(t3) + 650*w32(t3) =L= 650 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r6B  =G=  
+
+r6B(t1)..  - Pb2(t1) =G= -553.8896 ; (LHS = 0)
+     
+r6B(t2)..  - Pb2(t2) =G= -553.8896 ; (LHS = 0)
+     
+r6B(t3)..  - Pb2(t3) =G= -553.8896 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- r7B  =E=  
+
+r7B..  - Benefit2 + CashFlow2 + Base2 =E= 0 ; (LHS = 0)
+     
+
+---- r8B  =E=  
+
+r8B..  Investment2 =E= 1187200 ; (LHS = 0, INFES = 1187200 ****)
+     
+
+---- r9B  =E=  
+
+r9B..  - 12.4622103425402*CashFlow2 + npv2 + Investment2 =E= 0 ; (LHS = 0)
+     
+
+---- r10B  =E=  
+
+r10B..  Base2 =E= -190292.744626452 ; (LHS = 0, INFES = 190292.744626452 ****)
+     
+
+---- r11B  =E=  
+
+r11B..  Wload2 =E= 1865867.65452017 ; (LHS = 0, INFES = 1865867.65452017 ****)
+     
+
+---- r12B  =E=  
+
+r12B..  Wpvtot2 =E= 1349215.44333333 ; (LHS = 0, INFES = 1349215.44333333 ****)
+     
+
+---- r13B  =E=  
+
+r13B..  - 365*Pb2(t1) - 365*Pb2(t2) - 365*Pb2(t3) - 365*Pb2(t4) - 365*Pb2(t5) - 365*Pb2(t6) - 365*Pb2(t7) - 365*Pb2(t8) - 365*Pb2(t9) - 365*Pb2(t10) - 365*Pb2(t11) - 365*Pb2(t12) - 365*Pb2(t13) - 365*Pb2(t14) - 365*Pb2(t15) - 365*Pb2(t16) - 365*Pb2(t17) - 365*Pb2(t18) - 365*Pb2(t19) - 365*Pb2(t20) - 365*Pb2(t21) - 365*Pb2(t22) - 365*Pb2(t23) - 365*Pb2(t24) + Wimport2 =E= 0 ; (LHS = 0)
+     
+
+---- r14B  =E=  
+
+r14B..  - 365*Ps2(t1) - 365*Ps2(t2) - 365*Ps2(t3) - 365*Ps2(t4) - 365*Ps2(t5) - 365*Ps2(t6) - 365*Ps2(t7) - 365*Ps2(t8) - 365*Ps2(t9) - 365*Ps2(t10) - 365*Ps2(t11) - 365*Ps2(t12) - 365*Ps2(t13) - 365*Ps2(t14) - 365*Ps2(t15) - 365*Ps2(t16) - 365*Ps2(t17) - 365*Ps2(t18) - 365*Ps2(t19) - 365*Ps2(t20) - 365*Ps2(t21) - 365*Ps2(t22) - 365*Ps2(t23) - 365*Ps2(t24) + Wexport2 =E= 0 ; (LHS = 0)
+     
+
+---- r15B  =E=  
+
+r15B..  - 365*Pc2(t1) - 365*Pc2(t2) - 365*Pc2(t3) - 365*Pc2(t4) - 365*Pc2(t5) - 365*Pc2(t6) - 365*Pc2(t7) - 365*Pc2(t8) - 365*Pc2(t9) - 365*Pc2(t10) - 365*Pc2(t11) - 365*Pc2(t12) - 365*Pc2(t13) - 365*Pc2(t14) - 365*Pc2(t15) - 365*Pc2(t16) - 365*Pc2(t17) - 365*Pc2(t18) - 365*Pc2(t19) - 365*Pc2(t20) - 365*Pc2(t21) - 365*Pc2(t22) - 365*Pc2(t23) - 365*Pc2(t24) + WcargaBESS2 =E= 0 ; (LHS = 0)
+     
+
+---- r16B  =E=  
+
+r16B..  - 365*Pd2(t1) - 365*Pd2(t2) - 365*Pd2(t3) - 365*Pd2(t4) - 365*Pd2(t5) - 365*Pd2(t6) - 365*Pd2(t7) - 365*Pd2(t8) - 365*Pd2(t9) - 365*Pd2(t10) - 365*Pd2(t11) - 365*Pd2(t12) - 365*Pd2(t13) - 365*Pd2(t14) - 365*Pd2(t15) - 365*Pd2(t16) - 365*Pd2(t17) - 365*Pd2(t18) - 365*Pd2(t19) - 365*Pd2(t20) - 365*Pd2(t21) - 365*Pd2(t22) - 365*Pd2(t23) - 365*Pd2(t24) + WdescargaBESS2 =E= 0 ; (LHS = 0)
+     
+
+---- CE0  =E=  
+
+CE0..  IndustryProfit - I1_Profit - I2_Profit =E= 0 ; (LHS = 0)
+     
+
+---- CE1  =E=  
+
+CE1..  CW - EP1 - EP2 - E1 - E2 - APA =E= 0 ; (LHS = 0)
+     
+
+---- CE2  =E=  
+
+CE2..  - Benefit1 + EP1 =E= 0 ; (LHS = 0)
+     
+
+---- CE3  =E=  
+
+CE3..  - Benefit2 + EP2 =E= 0 ; (LHS = 0)
+     
+
+---- CE4  =E=  
+
+CE4..  E1 + (0.45625)*P12CDS(t1) + (0.45625)*P12CDS(t2) + (0.45625)*P12CDS(t3) + (0.45625)*P12CDS(t4) + (0.45625)*P12CDS(t5) + (0.45625)*P12CDS(t6) + (0.45625)*P12CDS(t7) + (0.45625)*P12CDS(t8) + (0.45625)*P12CDS(t9) + (0.45625)*P12CDS(t10) + (0.45625)*P12CDS(t11) + (0.45625)*P12CDS(t12) + (0.45625)*P12CDS(t13) + (0.45625)*P12CDS(t14) + (0.45625)*P12CDS(t15) + (0.45625)*P12CDS(t16) + (0.45625)*P12CDS(t17) + (0.45625)*P12CDS(t18) + (0.45625)*P12CDS(t19) + (0.45625)*P12CDS(t20) + (0.45625)*P12CDS(t21) + (0.45625)*P12CDS(t22) + (0.45625)*P12CDS(t23) + (0.45625)*P12CDS(t24) + (1.36875)*P21CDS(t1) + (1.36875)*P21CDS(t2) + (1.36875)*P21CDS(t3) + (1.36875)*P21CDS(t4) + (1.36875)*P21CDS(t5) + (1.36875)*P21CDS(t6) + (1.36875)*P21CDS(t7) + (1.36875)*P21CDS(t8) + (1.36875)*P21CDS(t9) + (1.36875)*P21CDS(t10) + (1.36875)*P21CDS(t11) + (1.36875)*P21CDS(t12) + (1.36875)*P21CDS(t13) + (1.36875)*P21CDS(t14) + (1.36875)*P21CDS(t15) + (1.36875)*P21CDS(t16) + (1.36875)*P21CDS(t17) + (1.36875)*P21CDS(t18) + (1.36875)*P21CDS(t19) + (1.36875)*P21CDS(t20) + (1.36875)*P21CDS(t21) + (1.36875)*P21CDS(t22) + (1.36875)*P21CDS(t23) + (1.36875)*P21CDS(t24) + (0)*epsilon(t1) + (0)*epsilon(t2) + (0)*epsilon(t3) + (0)*epsilon(t4) + (0)*epsilon(t5) + (0)*epsilon(t6) + (0)*epsilon(t7) + (0)*epsilon(t8) + (0)*epsilon(t9) + (0)*epsilon(t10) + (0)*epsilon(t11) + (0)*epsilon(t12) + (0)*epsilon(t13) + (0)*epsilon(t14) + (0)*epsilon(t15) + (0)*epsilon(t16) + (0)*epsilon(t17) + (0)*epsilon(t18) + (0)*epsilon(t19) + (0)*epsilon(t20) + (0)*epsilon(t21) + (0)*epsilon(t22) + (0)*epsilon(t23) + (0)*epsilon(t24) =E= 0 ; (LHS = 0)
+     
+
+---- CE5  =E=  
+
+CE5..  E2 + (1.36875)*P12CDS(t1) + (1.36875)*P12CDS(t2) + (1.36875)*P12CDS(t3) + (1.36875)*P12CDS(t4) + (1.36875)*P12CDS(t5) + (1.36875)*P12CDS(t6) + (1.36875)*P12CDS(t7) + (1.36875)*P12CDS(t8) + (1.36875)*P12CDS(t9) + (1.36875)*P12CDS(t10) + (1.36875)*P12CDS(t11) + (1.36875)*P12CDS(t12) + (1.36875)*P12CDS(t13) + (1.36875)*P12CDS(t14) + (1.36875)*P12CDS(t15) + (1.36875)*P12CDS(t16) + (1.36875)*P12CDS(t17) + (1.36875)*P12CDS(t18) + (1.36875)*P12CDS(t19) + (1.36875)*P12CDS(t20) + (1.36875)*P12CDS(t21) + (1.36875)*P12CDS(t22) + (1.36875)*P12CDS(t23) + (1.36875)*P12CDS(t24) + (0.45625)*P21CDS(t1) + (0.45625)*P21CDS(t2) + (0.45625)*P21CDS(t3) + (0.45625)*P21CDS(t4) + (0.45625)*P21CDS(t5) + (0.45625)*P21CDS(t6) + (0.45625)*P21CDS(t7) + (0.45625)*P21CDS(t8) + (0.45625)*P21CDS(t9) + (0.45625)*P21CDS(t10) + (0.45625)*P21CDS(t11) + (0.45625)*P21CDS(t12) + (0.45625)*P21CDS(t13) + (0.45625)*P21CDS(t14) + (0.45625)*P21CDS(t15) + (0.45625)*P21CDS(t16) + (0.45625)*P21CDS(t17) + (0.45625)*P21CDS(t18) + (0.45625)*P21CDS(t19) + (0.45625)*P21CDS(t20) + (0.45625)*P21CDS(t21) + (0.45625)*P21CDS(t22) + (0.45625)*P21CDS(t23) + (0.45625)*P21CDS(t24) + (0)*epsilon(t1) + (0)*epsilon(t2) + (0)*epsilon(t3) + (0)*epsilon(t4) + (0)*epsilon(t5) + (0)*epsilon(t6) + (0)*epsilon(t7) + (0)*epsilon(t8) + (0)*epsilon(t9) + (0)*epsilon(t10) + (0)*epsilon(t11) + (0)*epsilon(t12) + (0)*epsilon(t13) + (0)*epsilon(t14) + (0)*epsilon(t15) + (0)*epsilon(t16) + (0)*epsilon(t17) + (0)*epsilon(t18) + (0)*epsilon(t19) + (0)*epsilon(t20) + (0)*epsilon(t21) + (0)*epsilon(t22) + (0)*epsilon(t23) + (0)*epsilon(t24) =E= 0 ; (LHS = 0)
+     
+
+---- CE6  =E=  
+
+CE6..  APA - 1.825*P12CDS(t1) - 1.825*P12CDS(t2) - 1.825*P12CDS(t3) - 1.825*P12CDS(t4) - 1.825*P12CDS(t5) - 1.825*P12CDS(t6) - 1.825*P12CDS(t7) - 1.825*P12CDS(t8) - 1.825*P12CDS(t9) - 1.825*P12CDS(t10) - 1.825*P12CDS(t11) - 1.825*P12CDS(t12) - 1.825*P12CDS(t13) - 1.825*P12CDS(t14) - 1.825*P12CDS(t15) - 1.825*P12CDS(t16) - 1.825*P12CDS(t17) - 1.825*P12CDS(t18) - 1.825*P12CDS(t19) - 1.825*P12CDS(t20) - 1.825*P12CDS(t21) - 1.825*P12CDS(t22) - 1.825*P12CDS(t23) - 1.825*P12CDS(t24) - 1.825*P21CDS(t1) - 1.825*P21CDS(t2) - 1.825*P21CDS(t3) - 1.825*P21CDS(t4) - 1.825*P21CDS(t5) - 1.825*P21CDS(t6) - 1.825*P21CDS(t7) - 1.825*P21CDS(t8) - 1.825*P21CDS(t9) - 1.825*P21CDS(t10) - 1.825*P21CDS(t11) - 1.825*P21CDS(t12) - 1.825*P21CDS(t13) - 1.825*P21CDS(t14) - 1.825*P21CDS(t15) - 1.825*P21CDS(t16) - 1.825*P21CDS(t17) - 1.825*P21CDS(t18) - 1.825*P21CDS(t19) - 1.825*P21CDS(t20) - 1.825*P21CDS(t21) - 1.825*P21CDS(t22) - 1.825*P21CDS(t23) - 1.825*P21CDS(t24) - 800*delta =E= 0 ; (LHS = 0)
+     
+
+---- CE7  =E=  
+
+CE7..  - EP1 - E1 + I1_Profit =E= 0 ; (LHS = 0)
+     
+
+---- CE8  =E=  
+
+CE8..  - EP2 - E2 + I2_Profit =E= 0 ; (LHS = 0)
+     
+
+---- CE9  =E=  
+
+CE9..  - EP1 - E1 + AP1 =E= 0 ; (LHS = 0)
+     
+
+---- CE10  =E=  
+
+CE10..  - EP2 - E2 + AP2 =E= 0 ; (LHS = 0)
+     
+
+---- CE10b  =E=  
+
+CE10b..  (0)*I1_Profit + (0)*I2_Profit + (0)*Investment1 + (0)*Investment2 =E= 0 ; (LHS = 0)
+     
+
+---- CE11  =L=  
+
+CE11(t1)..  P12CDS(t1) - 400*v12(t1) =L= 0 ; (LHS = 0)
+     
+CE11(t2)..  P12CDS(t2) - 400*v12(t2) =L= 0 ; (LHS = 0)
+     
+CE11(t3)..  P12CDS(t3) - 400*v12(t3) =L= 0 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- CE12  =L=  
+
+CE12(t1)..  P21CDS(t1) + 400*v12(t1) =L= 400 ; (LHS = 0)
+     
+CE12(t2)..  P21CDS(t2) + 400*v12(t2) =L= 400 ; (LHS = 0)
+     
+CE12(t3)..  P21CDS(t3) + 400*v12(t3) =L= 400 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- CE13  =L=  
+
+CE13(t1)..  epsilon(t1) =L= 0.091567299828599 ; (LHS = 0)
+     
+CE13(t2)..  epsilon(t2) =L= 0.0872034368149 ; (LHS = 0)
+     
+CE13(t3)..  epsilon(t3) =L= 0.085058916266955 ; (LHS = 0)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- CE14  =G=  
+
+CE14(t1)..  epsilon(t1) =G= 0.068746794520548 ; (LHS = 0, INFES = 0.068746794520548 ****)
+     
+CE14(t2)..  epsilon(t2) =G= 0.064382931506849 ; (LHS = 0, INFES = 0.064382931506849 ****)
+     
+CE14(t3)..  epsilon(t3) =G= 0.062238410958904 ; (LHS = 0, INFES = 0.062238410958904 ****)
+     
+REMAINING 21 ENTRIES SKIPPED
+
+
+---- CE15  =L=  
+
+CE15..  delta =L= 28.79187 ; (LHS = 0)
+     
+
+---- CE16  =L=  
+
+CE16..  delta =L= 15.07764 ; (LHS = 0)
+     
+
+---- CE17  =L=  
+
+CE17..  delta =L= 6.55917 ; (LHS = 0)
+     
+
+---- CE18  =L=  
+
+CE18..  delta =L= 5.17209 ; (LHS = 0)
+     
+
+---- CE19  =L=  
+
+CE19..  delta =L= 1.93281 ; (LHS = 0)
+     
+
+---- CE20  =L=  
+
+CE20..  delta =L= 0.91609 ; (LHS = 0)
+     
+
+---- CE21  =G=  
+
+CE21..  delta =G= 0 ; (LHS = 0)
+     
+
+---- CE24  =E=  
+
+CE24..  npv + 12.4622103425402*Base1 + 12.4622103425402*Base2 - 12.4622103425402*IndustryProfit + Investment1 + Investment2 =E= 0 ; (LHS = 0)
+     
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:52:21 Page 3
+M_1_7_E1e Energy Community 1 and 2 with a CDS - Dispatch MINLP (spain 24h)
+Column Listing      SOLVE modelCDS Using MINLP From line 249
+
+
+---- npv  Net Present Value Eur Industry 1+2
+
+npv
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       CE24
+
+
+---- Benefit1  Benefit Eur/year
+
+Benefit1
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       BcalcA
+       -1       r7A
+       -1       CE2
+
+
+---- Capacity1  Capacity Payment Eur/year
+
+Capacity1
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       BcalcA
+        1       Bcalc1A
+
+
+---- Energy1  Energy Trading Result Eur/year
+
+Energy1
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       BcalcA
+        1       Bcalc2A
+
+
+---- CashFlow1  Project CashFlow Eur/yr
+
+CashFlow1
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r7A
+      -12.4622  r9A
+
+
+---- npv1  Net Present Value Eur Industry 1
+
+npv1
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r9A
+
+
+---- Base1  Load payment with no PV and no BESS
+
+Base1
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r7A
+        1       r10A
+       12.4622  CE24
+
+
+---- Benefit2  Benefit Eur/year
+
+Benefit2
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       BcalcB
+       -1       r7B
+       -1       CE3
+
+
+---- Capacity2  Capacity Payment Eur/year
+
+Capacity2
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       BcalcB
+        1       Bcalc1B
+
+
+---- Energy2  Energy Trading Result Eur/year
+
+Energy2
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       BcalcB
+        1       Bcalc2B
+
+
+---- CashFlow2  Project CashFlow Eur/yr
+
+CashFlow2
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r7B
+      -12.4622  r9B
+
+
+---- npv2  Net Present Value Eur Industry 1
+
+npv2
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r9B
+
+
+---- Base2  Load payment with no PV and no BESS
+
+Base2
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       r7B
+        1       r10B
+       12.4622  CE24
+
+
+---- IndustryProfit  Total Industry 1 + 2 Profit, Euro/year
+
+IndustryProfit
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       CE0
+      -12.4622  CE24
+
+
+---- CW  Total Community Welfare, Euro/year
+
+CW
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       CE1
+
+
+---- EP1  Energy and Power/Capacity Balance Industry 1 Euro/year
+
+EP1
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       CE1
+        1       CE2
+       -1       CE7
+       -1       CE9
+
+
+---- EP2  Energy and Power/Capacity Balance Industry 2 Euro/year
+
+EP2
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       CE1
+        1       CE3
+       -1       CE8
+       -1       CE10
+
+
+---- E1  Exchange Industry 1 with the Aggregaror, Euro/year
+
+E1
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       CE1
+        1       CE4
+       -1       CE7
+       -1       CE9
+
+
+---- E2  Exchange Industry 2 with the Aggregaror, Euro/year
+
+E2
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       CE1
+        1       CE5
+       -1       CE8
+       -1       CE10
+
+
+---- APA  CDS Aggregator Profit, Euro,/year
+
+APA
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       CE1
+        1       CE6
+
+
+---- I1_Profit  Industry 1 Profit with respect to no CDS, Euro,/year
+
+I1_Profit
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       CE0
+        1       CE7
+       (0)      CE10b
+
+
+---- I2_Profit  Industry 2 Profit with respect to no CDS, Euro,/year
+
+I2_Profit
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+       -1       CE0
+        1       CE8
+       (0)      CE10b
+
+
+---- AP1  Industry 1 Profit, Euro,/year
+
+AP1
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       CE9
+
+
+---- AP2  Industry 2 Profit, Euro,/year
+
+AP2
+                (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
+        1       CE10
+
+
+---- SOC1  State of Charge  kWh
+
+SOC1(t1)
+                (.LO, .L, .UP, .M = 100, 100, 1900, 0)
+        1       r1A(t1)
+       -1       r1A(t2)
+        0       (OLD LEVEL ****)
+
+SOC1(t2)
+                (.LO, .L, .UP, .M = 100, 100, 1900, 0)
+        1       r1A(t2)
+       -1       r1A(t3)
+        0       (OLD LEVEL ****)
+
+SOC1(t3)
+                (.LO, .L, .UP, .M = 100, 100, 1900, 0)
+        1       r1A(t3)
+       -1       r1A(t4)
+        0       (OLD LEVEL ****)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Pd1  Power battery discharge  kW
+
+Pd1(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       balanceA(t1)
+        1.0309  r1A(t1)
+        1       r3A(t1)
+     -365       r16A
+
+Pd1(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       balanceA(t2)
+        1.0309  r1A(t2)
+        1       r3A(t2)
+     -365       r16A
+
+Pd1(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       balanceA(t3)
+        1.0309  r1A(t3)
+        1       r3A(t3)
+     -365       r16A
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Pc1  Power battery charge  kW
+
+Pc1(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       balanceA(t1)
+       -0.93    r1A(t1)
+        1       r2A(t1)
+     -365       r15A
+
+Pc1(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       balanceA(t2)
+       -0.93    r1A(t2)
+        1       r2A(t2)
+     -365       r15A
+
+Pc1(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       balanceA(t3)
+       -0.93    r1A(t3)
+        1       r2A(t3)
+     -365       r15A
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Pb1  Power bought from the public grid kW
+
+Pb1(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       33.4221  Bcalc2A
+        1       balanceA(t1)
+        1       r4A(t1)
+       -1       r6A(t1)
+     -365       r13A
+
+Pb1(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       31.8293  Bcalc2A
+        1       balanceA(t2)
+        1       r4A(t2)
+       -1       r6A(t2)
+     -365       r13A
+
+Pb1(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       31.0465  Bcalc2A
+        1       balanceA(t3)
+        1       r4A(t3)
+       -1       r6A(t3)
+     -365       r13A
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Ps1  Power sold to the public grid kW
+
+Ps1(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -25.0926  Bcalc2A
+       -1       balanceA(t1)
+        1       r5A(t1)
+     -365       r14A
+
+Ps1(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -23.4998  Bcalc2A
+       -1       balanceA(t2)
+        1       r5A(t2)
+     -365       r14A
+
+Ps1(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -22.717   Bcalc2A
+       -1       balanceA(t3)
+        1       r5A(t3)
+     -365       r14A
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Investment1  Project initial investment Eur
+
+Investment1
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r8A
+        1       r9A
+       (0)      CE10b
+        1       CE24
+
+
+---- Wload1  Energia total load kWh/año
+
+Wload1
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r11A
+
+
+---- Wpvtot1  Producción Energia PV kWh/año
+
+Wpvtot1
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r12A
+
+
+---- Wimport1  Importación Energia kWh/año
+
+Wimport1
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r13A
+
+
+---- Wexport1  Exportación Energia kWh/año
+
+Wexport1
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r14A
+
+
+---- WcargaBESS1  Energia carga BESS kWh/año
+
+WcargaBESS1
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r15A
+
+
+---- WdescargaBESS1  Energia carga BESS kWh/año
+
+WdescargaBESS1
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r16A
+
+
+---- SOC2  State of Charge  kWh
+
+SOC2(t1)
+                (.LO, .L, .UP, .M = 140, 140, 2660, 0)
+        1       r1B(t1)
+       -1       r1B(t2)
+        0       (OLD LEVEL ****)
+
+SOC2(t2)
+                (.LO, .L, .UP, .M = 140, 140, 2660, 0)
+        1       r1B(t2)
+       -1       r1B(t3)
+        0       (OLD LEVEL ****)
+
+SOC2(t3)
+                (.LO, .L, .UP, .M = 140, 140, 2660, 0)
+        1       r1B(t3)
+       -1       r1B(t4)
+        0       (OLD LEVEL ****)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Pd2  Power battery discharge  kW
+
+Pd2(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       balanceB(t1)
+        1.0526  r1B(t1)
+        1       r3B(t1)
+     -365       r16B
+
+Pd2(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       balanceB(t2)
+        1.0526  r1B(t2)
+        1       r3B(t2)
+     -365       r16B
+
+Pd2(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       balanceB(t3)
+        1.0526  r1B(t3)
+        1       r3B(t3)
+     -365       r16B
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Pc2  Power battery charge  kW
+
+Pc2(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       balanceB(t1)
+       -0.92    r1B(t1)
+        1       r2B(t1)
+     -365       r15B
+
+Pc2(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       balanceB(t2)
+       -0.92    r1B(t2)
+        1       r2B(t2)
+     -365       r15B
+
+Pc2(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       balanceB(t3)
+       -0.92    r1B(t3)
+        1       r2B(t3)
+     -365       r15B
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Pb2  Power bought from the public grid kW
+
+Pb2(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       33.4221  Bcalc2B
+        1       balanceB(t1)
+        1       r4B(t1)
+       -1       r6B(t1)
+     -365       r13B
+
+Pb2(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       31.8293  Bcalc2B
+        1       balanceB(t2)
+        1       r4B(t2)
+       -1       r6B(t2)
+     -365       r13B
+
+Pb2(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       31.0465  Bcalc2B
+        1       balanceB(t3)
+        1       r4B(t3)
+       -1       r6B(t3)
+     -365       r13B
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Ps2  Power sold to the public grid kW
+
+Ps2(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -25.0926  Bcalc2B
+       -1       balanceB(t1)
+        1       r5B(t1)
+     -365       r14B
+
+Ps2(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -23.4998  Bcalc2B
+       -1       balanceB(t2)
+        1       r5B(t2)
+     -365       r14B
+
+Ps2(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+      -22.717   Bcalc2B
+       -1       balanceB(t3)
+        1       r5B(t3)
+     -365       r14B
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- Investment2  Project initial investment Eur
+
+Investment2
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r8B
+        1       r9B
+       (0)      CE10b
+        1       CE24
+
+
+---- Wload2  Energia total load kWh/año
+
+Wload2
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r11B
+
+
+---- Wpvtot2  Producción Energia PV kWh/año
+
+Wpvtot2
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r12B
+
+
+---- Wimport2  Importación Energia kWh/año
+
+Wimport2
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r13B
+
+
+---- Wexport2  Exportación Energia kWh/año
+
+Wexport2
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r14B
+
+
+---- WcargaBESS2  Energia carga BESS kWh/año
+
+WcargaBESS2
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r15B
+
+
+---- WdescargaBESS2  Energia carga BESS kWh/año
+
+WdescargaBESS2
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       r16B
+
+
+---- P12CDS  Power sent from 1 to 2 through a CDS kW
+
+P12CDS(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       balanceA(t1)
+        1       balanceB(t1)
+       (0.4562) CE4
+       (1.3687) CE5
+       -1.825   CE6
+        1       CE11(t1)
+
+P12CDS(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       balanceA(t2)
+        1       balanceB(t2)
+       (0.4562) CE4
+       (1.3687) CE5
+       -1.825   CE6
+        1       CE11(t2)
+
+P12CDS(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       -1       balanceA(t3)
+        1       balanceB(t3)
+       (0.4562) CE4
+       (1.3687) CE5
+       -1.825   CE6
+        1       CE11(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- P21CDS  Power sent from 2 to 1 through a CDS kW
+
+P21CDS(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       balanceA(t1)
+       -1       balanceB(t1)
+       (1.3687) CE4
+       (0.4562) CE5
+       -1.825   CE6
+        1       CE12(t1)
+
+P21CDS(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       balanceA(t2)
+       -1       balanceB(t2)
+       (1.3687) CE4
+       (0.4562) CE5
+       -1.825   CE6
+        1       CE12(t2)
+
+P21CDS(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+        1       balanceA(t3)
+       -1       balanceB(t3)
+       (1.3687) CE4
+       (0.4562) CE5
+       -1.825   CE6
+        1       CE12(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- epsilon  Internal Local Market Price $/kWh
+
+epsilon(t1)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       (0)      CE4
+       (0)      CE5
+        1       CE13(t1)
+        1       CE14(t1)
+
+epsilon(t2)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       (0)      CE4
+       (0)      CE5
+        1       CE13(t2)
+        1       CE14(t2)
+
+epsilon(t3)
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+       (0)      CE4
+       (0)      CE5
+        1       CE13(t3)
+        1       CE14(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- delta  Internal Capacity Price $/kW
+
+delta
+                (.LO, .L, .UP, .M = 0, 0, +INF, 0)
+     -800       CE6
+        1       CE15
+        1       CE16
+        1       CE17
+        1       CE18
+        1       CE19
+        1       CE20
+        1       CE21
+
+
+---- w11  
+
+w11(t1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -400       r2A(t1)
+      400       r3A(t1)
+
+w11(t2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -400       r2A(t2)
+      400       r3A(t2)
+
+w11(t3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -400       r2A(t3)
+      400       r3A(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- w31  
+
+w31(t1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -600       r4A(t1)
+      600       r5A(t1)
+
+w31(t2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -600       r4A(t2)
+      600       r5A(t2)
+
+w31(t3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -600       r4A(t3)
+      600       r5A(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- w12  
+
+w12(t1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -840       r2B(t1)
+      840       r3B(t1)
+
+w12(t2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -840       r2B(t2)
+      840       r3B(t2)
+
+w12(t3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -840       r2B(t3)
+      840       r3B(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- w32  
+
+w32(t1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -650       r4B(t1)
+      650       r5B(t1)
+
+w32(t2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -650       r4B(t2)
+      650       r5B(t2)
+
+w32(t3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -650       r4B(t3)
+      650       r5B(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+
+---- v12  
+
+v12(t1)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -400       CE11(t1)
+      400       CE12(t1)
+
+v12(t2)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -400       CE11(t2)
+      400       CE12(t2)
+
+v12(t3)
+                (.LO, .L, .UP, .M = 0, 0, 1, 0)
+     -400       CE11(t3)
+      400       CE12(t3)
+
+REMAINING 21 ENTRIES SKIPPED
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:52:21 Page 4
+M_1_7_E1e Energy Community 1 and 2 with a CDS - Dispatch MINLP (spain 24h)
+Range Statistics    SOLVE modelCDS Using MINLP From line 249
+
+
+RANGE STATISTICS (ABSOLUTE NON-ZERO FINITE VALUES)
+
+RHS       [min, max] : [ 3.684E-02, 1.866E+06] - Zero values observed as well
+Bound     [min, max] : [ 1.000E+00, 2.660E+03] - Zero values observed as well
+Matrix    [min, max] : [ 4.563E-01, 8.400E+02] - Zero values observed as well
+
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:52:21 Page 5
+M_1_7_E1e Energy Community 1 and 2 with a CDS - Dispatch MINLP (spain 24h)
+Model Statistics    SOLVE modelCDS Using MINLP From line 249
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS          64     SINGLE EQUATIONS          478
+BLOCKS OF VARIABLES          57     SINGLE VARIABLES          471  46 projected
+NON ZERO ELEMENTS         1,618     NON LINEAR N-Z            148
+CODE LENGTH                 397     CONSTANT POOL              19     DISCRETE VARIABLES        120
+
+
+GENERATION TIME      =        0.031 SECONDS      4 MB  51.4.0 91cb996b WEX-WEI
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:52:21 Page 6
+M_1_7_E1e Energy Community 1 and 2 with a CDS - Dispatch MINLP (spain 24h)
+Solution Report     SOLVE modelCDS Using MINLP From line 249
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   modelCDS            OBJECTIVE  IndustryProfit
+     TYPE    MINLP               DIRECTION  MAXIMIZE
+     SOLVER  GUROBI              FROM LINE  249
+
+**** SOLVER STATUS     1 Normal Completion
+**** MODEL STATUS      1 Optimal
+**** OBJECTIVE VALUE           -79773.5791
+
+ RESOURCE USAGE, LIMIT          0.076 10000000000.000
+ ITERATION COUNT, LIMIT       204    2147483647
+ EVALUATION ERRORS             NA             0
+
+    Gurobi           51.4.0 91cb996b Nov 10, 2025          WEI x86 64bit/MS Window
+
+... GAMS/Gurobi demo/community requires a Gurobi license from Gurobi Optimization.
+... GMO Q Extraction (ThreePass): 0.01s
+
+    Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
+    
+    CPU model: Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz, instruction set [SSE2|AVX]
+    Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+    
+    Non-default parameters:
+    MIPGapAbs  0
+    LogToConsole  0
+    
+    Optimize a model with 475 rows, 471 columns and 1468 nonzeros
+    Model fingerprint: 0x9a0e3f6b
+    Model has 3 quadratic constraints
+    Variable types: 351 continuous, 120 integer (0 binary)
+    Coefficient statistics:
+      Matrix range     [9e-01, 8e+02]
+      QMatrix range    [1e+00, 4e+02]
+      QLMatrix range   [5e-01, 1e+00]
+      Objective range  [1e+00, 1e+00]
+      Bounds range     [1e+00, 3e+03]
+      RHS range        [4e-02, 2e+06]
+    Presolve removed 150 rows and 52 columns
+    Presolve time: 0.00s
+    Presolved: 518 rows, 468 columns, 1598 nonzeros
+    Presolved model has 48 bilinear constraint(s)
+    
+    Solving non-convex MIQCP
+    
+    Variable types: 352 continuous, 116 integer (116 binary)
+    
+    Root relaxation: objective -7.977358e+04, 204 iterations, 0.00 seconds (0.00 work units)
+    
+        Nodes    |    Current Node    |     Objective Bounds      |     Work
+     Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+    
+         0     0 -79773.579    0    3          - -79773.579      -     -    0s
+    H    0     0                    -79773.57906 -79773.579  0.00%     -    0s
+         0     0 -79773.579    0    3 -79773.579 -79773.579  0.00%     -    0s
+    
+    Explored 1 nodes (204 simplex iterations) in 0.03 seconds (0.01 work units)
+    Thread count was 8 (of 8 available processors)
+    
+    Solution count 1: -79773.6 
+    No other solutions better than -79773.6
+    
+    Optimal solution found (tolerance 1.00e-04)
+    Warning: max constraint violation (7.6294e-06) exceeds tolerance
+    Best objective -7.977357905572e+04, best bound -7.977357905572e+04, gap 0.0000%
+    
+    User-callback calls 477, time in user-callback 0.00 sec
+
+... Solving fixed model...
+
+    Gurobi Optimizer version 12.0.3 build v12.0.3rc0 (win64 - Windows 11.0 (26100.2))
+    
+    CPU model: Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz, instruction set [SSE2|AVX]
+    Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+    
+    Non-default parameters:
+    MIPGapAbs  0
+    LogToConsole  0
+    
+    Optimize a model with 475 rows, 471 columns and 1468 nonzeros
+    Model fingerprint: 0x225df5c5
+    Model has 3 quadratic constraints
+    Coefficient statistics:
+      Matrix range     [9e-01, 8e+02]
+      QMatrix range    [1e+00, 4e+02]
+      QLMatrix range   [5e-01, 1e+00]
+      Objective range  [1e+00, 1e+00]
+      Bounds range     [1e+00, 1e+06]
+      RHS range        [4e-02, 2e+06]
+    Presolve removed 434 rows and 373 columns
+    Presolve time: 0.00s
+    Presolved: 44 rows, 98 columns, 196 nonzeros
+    Ordering time: 0.00s
+    
+    Barrier statistics:
+     Free vars  : 2
+     AA' NZ     : 8.000e+01
+     Factor NZ  : 5.300e+02
+     Factor Ops : 8.210e+03 (less than 1 second per iteration)
+     Threads    : 1
+    
+                      Objective                Residual
+    Iter       Primal          Dual         Primal    Dual     Compl     Time
+       0  -9.71718872e-10  3.82475527e+01  1.17e+04 1.25e-01  1.64e+02     0s
+       1   3.11538335e+02  1.10635317e+01  4.06e+03 1.00e-01  5.41e+01     0s
+       2  -1.25892863e+05 -2.66650206e+01  4.06e+03 1.00e-01  1.16e+02     0s
+       3  -1.71133216e+05 -5.47828266e+01  4.06e+03 1.00e-01  2.47e+02     0s
+       4  -1.74358692e+05  5.12866575e+02  4.06e+03 9.89e-02  3.75e+03     0s
+       5  -1.12213565e+05  2.33781402e+03  3.04e+03 9.19e-02  1.20e+04     0s
+       6  -9.31691683e+04  1.39158455e+04  1.34e+03 2.08e-02  5.42e+04     0s
+       7  -8.84771585e+04 -4.12736505e+04  8.79e+02 3.78e-03  2.85e+04     0s
+       8  -8.19424383e+04 -6.81171169e+04  2.65e+02 6.01e-05  8.01e+03     0s
+       9  -8.00296314e+04 -7.47474175e+04  7.42e+01 5.78e-06  2.47e+03     0s
+      10  -7.92613542e+04 -7.73864781e+04  3.91e+01 6.06e-07  1.13e+03     0s
+      11  -8.02326028e+04 -7.88926122e+04  1.58e+00 9.39e-08  2.60e+02     0s
+      12  -7.99858998e+04 -7.95592431e+04  3.63e-01 6.43e-08  8.03e+01     0s
+      13  -7.98002208e+04 -7.97586816e+04  3.98e-02 4.49e-08  7.92e+00     0s
+      14  -7.97738807e+04 -7.97733941e+04  4.68e-04 5.98e-09  9.21e-02     0s
+      15  -7.97735791e+04 -7.97735790e+04  1.72e-08 6.36e-11  2.59e-06     0s
+      16  -7.97735791e+04 -7.97735791e+04  1.92e-10 9.25e-13  3.19e-12     0s
+    
+    Barrier solved model in 16 iterations and 0.03 seconds (0.00 work units)
+    Optimal objective -7.97735791e+04
+    
+    
+    User-callback calls 111, time in user-callback 0.00 sec
+    Warning: to get QCP duals, please set parameter QCPDual to 1
+
+
+                           LOWER          LEVEL          UPPER
+
+---- EQU BcalcA              .              .              .          
+---- EQU Bcalc1A       -27482.3358    -27482.3358    -27482.3358      
+---- EQU Bcalc2A             .       -3.65198E-12          .          
+
+---- EQU balanceA  
+
+           LOWER          LEVEL          UPPER
+
+t1         31.3075        31.3075        31.3075      
+t2         20.8990        20.8990        20.8990      
+t3         17.6538        17.6538        17.6538      
+t4         17.3950        17.3950        17.3950      
+t5         17.1830        17.1830        17.1830      
+t6         16.9050        16.9050        16.9050      
+t7        -10.0488       -10.0488       -10.0488      
+t8        -94.0446       -94.0446       -94.0446      
+t9         -7.2958        -7.2958        -7.2958      
+t10       -60.1926       -60.1926       -60.1926      
+t11      -120.6499      -120.6499      -120.6499      
+t12      -143.7073      -143.7073      -143.7073      
+t13      -328.5022      -328.5022      -328.5022      
+t14      -117.3384      -117.3384      -117.3384      
+t15       -45.2120       -45.2120       -45.2120      
+t16        29.9591        29.9591        29.9591      
+t17       111.7563       111.7563       111.7563      
+t18       124.9208       124.9208       124.9208      
+t19       145.2123       145.2123       145.2123      
+t20       152.4657       152.4657       152.4657      
+t21       134.4877       134.4877       134.4877      
+t22        41.4426        41.4426        41.4426      
+t23        33.5030        33.5030        33.5030      
+t24        31.9208        31.9208        31.9208      
+
+---- EQU r1A  
+
+           LOWER          LEVEL          UPPER
+
+t1        100.0000       100.0000       100.0000      
+t2           .       -5.41828E-15          .          
+t3           .       1.133950E-13          .          
+t4           .       -6.83162E-15          .          
+t5           .       8.706329E-16          .          
+t6           .       6.826713E-15          .          
+t7           .       6.668363E-15          .          
+t8           .       5.696875E-15          .          
+t9           .       4.114208E-15          .          
+t10          .       -1.42109E-14          .          
+t11          .       9.819701E-12          .          
+t12          .       -2.84217E-14          .          
+t13          .              .              .          
+t14          .              .              .          
+t15          .              .              .          
+t16          .       5.684342E-14          .          
+t17          .       2.420750E-14          .          
+t18          .       -1.65045E-10          .          
+t19          .       5.684342E-14          .          
+t20          .       -5.68434E-14          .          
+t21          .       5.684342E-14          .          
+t22          .              .              .          
+t23          .              .              .          
+t24          .              .              .          
+
+---- EQU r2A  
+
+           LOWER          LEVEL          UPPER
+
+t1         -INF         -400.0000          .          
+t2         -INF             .              .          
+t3         -INF             .              .          
+t4         -INF             .              .          
+t5         -INF             .              .          
+t6         -INF             .              .          
+t7         -INF             .              .          
+t8         -INF             .              .          
+t9         -INF             .              .          
+t10        -INF         -339.8074          .          
+t11        -INF         -279.3501          .          
+t12        -INF         -136.7219          .          
+t13        -INF             .              .          
+t14        -INF             .              .          
+t15        -INF          -16.7328          .          
+t16        -INF          -91.9039          .          
+t17        -INF             .              .          
+t18        -INF             .              .          
+t19        -INF             .              .          
+t20        -INF             .              .          
+t21        -INF             .              .          
+t22        -INF             .              .          
+t23        -INF             .              .          
+t24        -INF             .              .          
+
+---- EQU r3A  
+
+           LOWER          LEVEL          UPPER
+
+t1         -INF          400.0000       400.0000      
+t2         -INF      9.123598E-14       400.0000      
+t3         -INF      4.107055E-14       400.0000      
+t4         -INF      7.157859E-15       400.0000      
+t5         -INF      1.462904E-14       400.0000      
+t6         -INF      1.306827E-13       400.0000      
+t7         -INF      2.025284E-14       400.0000      
+t8         -INF      5.525969E-15       400.0000      
+t9         -INF      1.777531E-14       400.0000      
+t10        -INF          400.0000       400.0000      
+t11        -INF          400.0000       400.0000      
+t12        -INF          400.0000       400.0000      
+t13        -INF          400.0000       400.0000      
+t14        -INF          400.0000       400.0000      
+t15        -INF          400.0000       400.0000      
+t16        -INF          400.0000       400.0000      
+t17        -INF      2.348128E-14       400.0000      
+t18        -INF      1.130401E-12       400.0000      
+t19        -INF          255.0810       400.0000      
+t20        -INF          400.0000       400.0000      
+t21        -INF          400.0000       400.0000      
+t22        -INF          400.0000       400.0000      
+t23        -INF          155.2019       400.0000      
+t24        -INF          135.7171       400.0000      
+
+---- EQU r4A  
+
+           LOWER          LEVEL          UPPER
+
+t1         -INF         -568.6925          .          
+t2         -INF         -579.1010          .          
+t3         -INF         -582.3462          .          
+t4         -INF         -582.6050          .          
+t5         -INF         -582.8170          .          
+t6         -INF         -583.0950          .          
+t7         -INF             .              .          
+t8         -INF             .              .          
+t9         -INF             .              .          
+t10        -INF             .              .          
+t11        -INF             .              .          
+t12        -INF         -480.4292          .          
+t13        -INF         -528.5022          .          
+t14        -INF         -317.3384          .          
+t15        -INF         -261.9448          .          
+t16        -INF         -261.9448          .          
+t17        -INF         -488.2437          .          
+t18        -INF         -475.0792          .          
+t19        -INF             .              .          
+t20        -INF             .              .          
+t21        -INF             .              .          
+t22        -INF             .              .          
+t23        -INF             .              .          
+t24        -INF             .              .          
+
+---- EQU r5A  
+
+           LOWER          LEVEL          UPPER
+
+t1         -INF          600.0000       600.0000      
+t2         -INF          600.0000       600.0000      
+t3         -INF          600.0000       600.0000      
+t4         -INF          600.0000       600.0000      
+t5         -INF          600.0000       600.0000      
+t6         -INF          600.0000       600.0000      
+t7         -INF      2.025284E-14       600.0000      
+t8         -INF      5.525969E-15       600.0000      
+t9         -INF      1.777531E-14       600.0000      
+t10        -INF      2.624641E-14       600.0000      
+t11        -INF      2.420432E-14       600.0000      
+t12        -INF          600.0000       600.0000      
+t13        -INF          600.0000       600.0000      
+t14        -INF          600.0000       600.0000      
+t15        -INF          600.0000       600.0000      
+t16        -INF          600.0000       600.0000      
+t17        -INF          600.0000       600.0000      
+t18        -INF          600.0000       600.0000      
+t19        -INF      4.115520E-14       600.0000      
+t20        -INF          600.0000       600.0000      
+t21        -INF          410.5786       600.0000      
+t22        -INF          456.7106       600.0000      
+t23        -INF           35.7563       600.0000      
+t24        -INF      3.384011E-14       600.0000      
+
+---- EQU r6A  
+
+           LOWER          LEVEL          UPPER
+
+t1       -564.3000       -31.3075        +INF         
+t2       -564.3000       -20.8990        +INF         
+t3       -564.3000       -17.6538        +INF         
+t4       -564.3000       -17.3950        +INF         
+t5       -564.3000       -17.1830        +INF         
+t6       -564.3000       -16.9050        +INF         
+t7       -564.3000          .            +INF         
+t8       -564.3000          .            +INF         
+t9       -338.0552          .            +INF         
+t10      -404.4700          .            +INF         
+t11      -442.9100          .            +INF         
+t12      -442.9100      -119.5708        +INF         
+t13      -442.9100       -71.4978        +INF         
+t14      -442.9100      -282.6616        +INF         
+t15      -338.0552      -338.0552        +INF         
+t16      -338.0552      -338.0552        +INF         
+t17      -338.0552      -111.7563        +INF         
+t18      -338.0552      -124.9208        +INF         
+t19      -504.4300          .            +INF         
+t20      -453.9669          .            +INF         
+t21      -453.9669          .            +INF         
+t22      -453.9669          .            +INF         
+t23      -338.0552          .            +INF         
+t24      -338.0552          .            +INF         
+
+                           LOWER          LEVEL          UPPER
+
+---- EQU r7A                 .              .              .          
+---- EQU r8A           830300.0000    830300.0000    830300.0000      
+---- EQU r9A                 .              .              .          
+---- EQU r10A         -114101.6490   -114101.6490   -114101.6490      
+---- EQU r11A          959636.7100    959636.7100    959636.7100      
+---- EQU r12A          959629.4841    959629.4841    959629.4841      
+---- EQU r13A                .              .              .          
+---- EQU r14A                .              .              .          
+---- EQU r15A                .              .              .          
+---- EQU r16A                .              .              .          
+---- EQU BcalcB              .              .              .          
+---- EQU Bcalc1B       -25736.6643    -25736.6643    -25736.6643      
+---- EQU Bcalc2B             .       -2.23853E-11          .          
+
+---- EQU balanceB  
+
+           LOWER          LEVEL          UPPER
+
+t1        165.7938       165.7938       165.7938      
+t2        166.2943       166.2943       166.2943      
+t3        167.0808       167.0808       167.0808      
+t4        173.0734       173.0734       173.0734      
+t5        193.6040       193.6040       193.6040      
+t6        229.1751       229.1751       229.1751      
+t7        245.2022       245.2022       245.2022      
+t8        149.5568       149.5568       149.5568      
+t9         15.2280        15.2280        15.2280      
+t10      -103.1810      -103.1810      -103.1810      
+t11      -184.5419      -184.5419      -184.5419      
+t12      -221.5056      -221.5056      -221.5056      
+t13      -216.0870      -216.0870      -216.0870      
+t14      -176.6805      -176.6805      -176.6805      
+t15      -101.2044      -101.2044      -101.2044      
+t16        13.5442        13.5442        13.5442      
+t17       118.7280       118.7280       118.7280      
+t18       184.6730       184.6730       184.6730      
+t19       109.8687       109.8687       109.8687      
+t20       105.9833       105.9833       105.9833      
+t21        99.2947        99.2947        99.2947      
+t22        91.8468        91.8468        91.8468      
+t23        85.9427        85.9427        85.9427      
+t24       103.7963       103.7963       103.7963      
+
+---- EQU r1B  
+
+           LOWER          LEVEL          UPPER
+
+t1        140.0000       140.0000       140.0000      
+t2           .       6.665820E-15          .          
+t3           .       2.414408E-13          .          
+t4           .       -2.18847E-10          .          
+t5           .       -2.44096E-14          .          
+t6           .       6.629618E-12          .          
+t7           .       2.842171E-14          .          
+t8           .              .              .          
+t9           .       -3.33010E-15          .          
+t10          .              .              .          
+t11          .       7.398171E-11          .          
+t12          .       -2.84217E-14          .          
+t13          .              .              .          
+t14          .              .              .          
+t15          .       5.684342E-14          .          
+t16          .              .              .          
+t17          .       1.173035E-14          .          
+t18          .       5.071284E-13          .          
+t19          .       1.164163E-14          .          
+t20          .       -1.13687E-13          .          
+t21          .       -1.13687E-13          .          
+t22          .              .              .          
+t23          .       1.302131E-14          .          
+t24          .       -7.59718E-15          .          
+
+---- EQU r2B  
+
+           LOWER          LEVEL          UPPER
+
+t1         -INF         -840.0000          .          
+t2         -INF             .              .          
+t3         -INF             .              .          
+t4         -INF         -507.4307          .          
+t5         -INF             .              .          
+t6         -INF             .              .          
+t7         -INF             .              .          
+t8         -INF             .              .          
+t9         -INF             .              .          
+t10        -INF         -736.8190          .          
+t11        -INF         -655.4581          .          
+t12        -INF         -618.4944          .          
+t13        -INF         -194.7553          .          
+t14        -INF         -101.9986          .          
+t15        -INF         -359.2978          .          
+t16        -INF         -474.0464          .          
+t17        -INF             .              .          
+t18        -INF             .              .          
+t19        -INF             .              .          
+t20        -INF             .              .          
+t21        -INF             .              .          
+t22        -INF             .              .          
+t23        -INF             .              .          
+t24        -INF             .              .          
+
+---- EQU r3B  
+
+           LOWER          LEVEL          UPPER
+
+t1         -INF          840.0000       840.0000      
+t2         -INF      8.733440E-14       840.0000      
+t3         -INF      6.736505E-14       840.0000      
+t4         -INF          840.0000       840.0000      
+t5         -INF      3.081211E-14       840.0000      
+t6         -INF      8.799346E-14       840.0000      
+t7         -INF          235.1534       840.0000      
+t8         -INF           55.5122       840.0000      
+t9         -INF      2.128414E-13       840.0000      
+t10        -INF          840.0000       840.0000      
+t11        -INF          840.0000       840.0000      
+t12        -INF          840.0000       840.0000      
+t13        -INF          840.0000       840.0000      
+t14        -INF          840.0000       840.0000      
+t15        -INF          840.0000       840.0000      
+t16        -INF          840.0000       840.0000      
+t17        -INF      1.114383E-14       840.0000      
+t18        -INF      4.976200E-14       840.0000      
+t19        -INF      1.105955E-14       840.0000      
+t20        -INF          714.0000       840.0000      
+t21        -INF          840.0000       840.0000      
+t22        -INF          840.0000       840.0000      
+t23        -INF      1.237024E-14       840.0000      
+t24        -INF      -7.21732E-15       840.0000      
+
+---- EQU r4B  
+
+           LOWER          LEVEL          UPPER
+
+t1         -INF         -484.2062          .          
+t2         -INF         -483.7057          .          
+t3         -INF         -482.9192          .          
+t4         -INF         -144.3573          .          
+t5         -INF         -456.3960          .          
+t6         -INF         -420.8249          .          
+t7         -INF             .              .          
+t8         -INF             .              .          
+t9         -INF         -642.0677          .          
+t10        -INF             .              .          
+t11        -INF             .              .          
+t12        -INF             .              .          
+t13        -INF         -220.8423          .          
+t14        -INF          -88.6791          .          
+t15        -INF         -270.5022          .          
+t16        -INF         -270.5022          .          
+t17        -INF         -531.2720          .          
+t18        -INF         -465.3270          .          
+t19        -INF             .              .          
+t20        -INF             .              .          
+t21        -INF             .              .          
+t22        -INF             .              .          
+t23        -INF             .              .          
+t24        -INF             .              .          
+
+---- EQU r5B  
+
+           LOWER          LEVEL          UPPER
+
+t1         -INF          650.0000       650.0000      
+t2         -INF          650.0000       650.0000      
+t3         -INF          650.0000       650.0000      
+t4         -INF          650.0000       650.0000      
+t5         -INF          650.0000       650.0000      
+t6         -INF          650.0000       650.0000      
+t7         -INF      3.838600E-14       650.0000      
+t8         -INF      5.234650E-14       650.0000      
+t9         -INF          650.0000       650.0000      
+t10        -INF      2.149116E-13       650.0000      
+t11        -INF      3.838118E-14       650.0000      
+t12        -INF      5.334393E-14       650.0000      
+t13        -INF          650.0000       650.0000      
+t14        -INF          650.0000       650.0000      
+t15        -INF          650.0000       650.0000      
+t16        -INF          650.0000       650.0000      
+t17        -INF          650.0000       650.0000      
+t18        -INF          650.0000       650.0000      
+t19        -INF      1.105955E-14       650.0000      
+t20        -INF          255.5510       650.0000      
+t21        -INF          595.6389       650.0000      
+t22        -INF          650.0000       650.0000      
+t23        -INF      1.237024E-14       650.0000      
+t24        -INF      6.993532E-15       650.0000      
+
+---- EQU r6B  
+
+           LOWER          LEVEL          UPPER
+
+t1       -553.8896      -165.7938        +INF         
+t2       -553.8896      -166.2943        +INF         
+t3       -553.8896      -167.0808        +INF         
+t4       -553.8896      -505.6427        +INF         
+t5       -553.8896      -193.6040        +INF         
+t6       -553.8896      -229.1751        +INF         
+t7       -553.8896          .            +INF         
+t8       -553.8896          .            +INF         
+t9       -379.4978        -7.9323        +INF         
+t10      -494.1720          .            +INF         
+t11      -561.3209          .            +INF         
+t12      -561.3209          .            +INF         
+t13      -561.3209      -429.1577        +INF         
+t14      -561.3209      -561.3209        +INF         
+t15      -379.4978      -379.4978        +INF         
+t16      -379.4978      -379.4978        +INF         
+t17      -379.4978      -118.7280        +INF         
+t18      -379.4978      -184.6730        +INF         
+t19      -408.1543          .            +INF         
+t20      -437.7123          .            +INF         
+t21      -437.7123          .            +INF         
+t22      -437.7123          .            +INF         
+t23      -379.4978          .            +INF         
+t24      -379.4978          .            +INF         
+
+                           LOWER          LEVEL          UPPER
+
+---- EQU r7B                 .              .              .          
+---- EQU r8B          1187200.0000   1187200.0000   1187200.0000      
+---- EQU r9B                 .              .              .          
+---- EQU r10B         -190292.7446   -190292.7446   -190292.7446      
+---- EQU r11B         1865867.6545   1865867.6545   1865867.6545      
+---- EQU r12B         1349215.4433   1349215.4433   1349215.4433      
+---- EQU r13B                .              .              .          
+---- EQU r14B                .              .              .          
+---- EQU r15B                .              .              .          
+---- EQU r16B                .       1.164153E-10          .          
+---- EQU CE0                 .       7.275958E-12          .          
+---- EQU CE1                 .       -1.36424E-12          .          
+---- EQU CE2                 .              .              .          
+---- EQU CE3                 .              .              .          
+---- EQU CE4                 .       -2.968591E-9          .          
+---- EQU CE5                 .       3.0304363E-9          .          
+---- EQU CE6                 .       -1.42109E-13          .          
+---- EQU CE7                 .       1.2267265E-8          .          
+---- EQU CE8                 .       1.2012606E-8          .          
+---- EQU CE9                 .              .              .          
+---- EQU CE10                .              .              .          
+---- EQU CE10b               .              .              .          
+
+---- EQU CE11  
+
+           LOWER          LEVEL          UPPER
+
+t1         -INF             .              .          
+t2         -INF             .              .          
+t3         -INF             .              .          
+t4         -INF             .              .          
+t5         -INF             .              .          
+t6         -INF             .              .          
+t7         -INF         -389.9512          .          
+t8         -INF         -305.9554          .          
+t9         -INF         -392.7042          .          
+t10        -INF             .              .          
+t11        -INF             .              .          
+t12        -INF             .              .          
+t13        -INF             .              .          
+t14        -INF             .              .          
+t15        -INF             .              .          
+t16        -INF             .              .          
+t17        -INF             .              .          
+t18        -INF             .              .          
+t19        -INF         -290.1313          .          
+t20        -INF             .              .          
+t21        -INF             .              .          
+t22        -INF             .              .          
+t23        -INF         -314.0573          .          
+t24        -INF         -296.2037          .          
+
+---- EQU CE12  
+
+           LOWER          LEVEL          UPPER
+
+t1         -INF             .           400.0000      
+t2         -INF             .           400.0000      
+t3         -INF             .           400.0000      
+t4         -INF             .           400.0000      
+t5         -INF             .           400.0000      
+t6         -INF             .           400.0000      
+t7         -INF          400.0000       400.0000      
+t8         -INF          400.0000       400.0000      
+t9         -INF          400.0000       400.0000      
+t10        -INF             .           400.0000      
+t11        -INF             .           400.0000      
+t12        -INF             .           400.0000      
+t13        -INF             .           400.0000      
+t14        -INF             .           400.0000      
+t15        -INF             .           400.0000      
+t16        -INF             .           400.0000      
+t17        -INF             .           400.0000      
+t18        -INF             .           400.0000      
+t19        -INF          400.0000       400.0000      
+t20        -INF          352.4657       400.0000      
+t21        -INF          145.0663       400.0000      
+t22        -INF           98.1532       400.0000      
+t23        -INF          400.0000       400.0000      
+t24        -INF          400.0000       400.0000      
+
+---- EQU CE13  
+
+           LOWER          LEVEL          UPPER
+
+t1         -INF            0.0687         0.0916      
+t2         -INF            0.0644         0.0872      
+t3         -INF            0.0622         0.0851      
+t4         -INF            0.0605         0.0833      
+t5         -INF            0.0607         0.0835      
+t6         -INF            0.0651         0.0880      
+t7         -INF            0.0738         0.0966      
+t8         -INF            0.0761         0.0990      
+t9         -INF            0.0694         0.0905      
+t10        -INF            0.0568         0.0887      
+t11        -INF            0.0469         0.0691      
+t12        -INF            0.0418         0.0640      
+t13        -INF            0.0396         0.0618      
+t14        -INF            0.0379         0.0601      
+t15        -INF            0.0368         0.0579      
+t16        -INF            0.0383         0.0593      
+t17        -INF            0.0464         0.0675      
+t18        -INF            0.0595         0.0806      
+t19        -INF            0.0762         0.1482      
+t20        -INF            0.1415         0.1415      
+t21        -INF            0.1502         0.1502      
+t22        -INF            0.1416         0.1416      
+t23        -INF            0.0812         0.1023      
+t24        -INF            0.0748         0.0958      
+
+---- EQU CE14  
+
+           LOWER          LEVEL          UPPER
+
+t1          0.0687         0.0687        +INF         
+t2          0.0644         0.0644        +INF         
+t3          0.0622         0.0622        +INF         
+t4          0.0605         0.0605        +INF         
+t5          0.0607         0.0607        +INF         
+t6          0.0651         0.0651        +INF         
+t7          0.0738         0.0738        +INF         
+t8          0.0761         0.0761        +INF         
+t9          0.0694         0.0694        +INF         
+t10         0.0568         0.0568        +INF         
+t11         0.0469         0.0469        +INF         
+t12         0.0418         0.0418        +INF         
+t13         0.0396         0.0396        +INF         
+t14         0.0379         0.0379        +INF         
+t15         0.0368         0.0368        +INF         
+t16         0.0383         0.0383        +INF         
+t17         0.0464         0.0464        +INF         
+t18         0.0595         0.0595        +INF         
+t19         0.0762         0.0762        +INF         
+t20         0.0903         0.1415        +INF         
+t21         0.0990         0.1502        +INF         
+t22         0.0904         0.1416        +INF         
+t23         0.0812         0.0812        +INF         
+t24         0.0748         0.0748        +INF         
+
+                           LOWER          LEVEL          UPPER
+
+---- EQU CE15              -INF             .            28.7919      
+---- EQU CE16              -INF             .            15.0776      
+---- EQU CE17              -INF             .             6.5592      
+---- EQU CE18              -INF             .             5.1721      
+---- EQU CE19              -INF             .             1.9328      
+---- EQU CE20              -INF             .             0.9161      
+---- EQU CE21                .              .            +INF         
+---- EQU CE24                .              .              .          
+
+                           LOWER          LEVEL          UPPER
+
+---- VAR npv               -INF       781771.8389        +INF         
+---- VAR Benefit1          -INF       -12098.3616        +INF         
+---- VAR Capacity1         -INF       -27482.3358        +INF         
+---- VAR Energy1           -INF        15383.9742        +INF         
+---- VAR CashFlow1         -INF       102003.2874        +INF         
+---- VAR npv1              -INF       440886.4234        +INF         
+---- VAR Base1             -INF      -114101.6490        +INF         
+---- VAR Benefit2          -INF       -65838.0227        +INF         
+---- VAR Capacity2         -INF       -25736.6643        +INF         
+---- VAR Energy2           -INF       -40101.3584        +INF         
+---- VAR CashFlow2         -INF       124454.7219        +INF         
+---- VAR npv2              -INF       363780.9227        +INF         
+---- VAR Base2             -INF      -190292.7446        +INF         
+---- VAR IndustryP~        -INF       -79773.5791        +INF         
+---- VAR CW                -INF       -77936.3843        +INF         
+---- VAR EP1               -INF       -12098.3616        +INF         
+---- VAR EP2               -INF       -65838.0227        +INF         
+---- VAR E1                -INF       -20732.3708        +INF         
+---- VAR E2                -INF        18895.1761        +INF         
+---- VAR APA               -INF         1837.1947        +INF         
+---- VAR I1_Profit         -INF       -32830.7324        +INF         
+---- VAR I2_Profit         -INF       -46942.8466        +INF         
+---- VAR AP1               -INF       -32830.7324        +INF         
+---- VAR AP2               -INF       -46942.8466        +INF         
+
+  npv  Net Present Value Eur Industry 1+2
+  Benefit1  Benefit Eur/year
+  Capacity1  Capacity Payment Eur/year
+  Energy1  Energy Trading Result Eur/year
+  CashFlow1  Project CashFlow Eur/yr
+  npv1  Net Present Value Eur Industry 1
+  Base1  Load payment with no PV and no BESS
+  Benefit2  Benefit Eur/year
+  Capacity2  Capacity Payment Eur/year
+  Energy2  Energy Trading Result Eur/year
+  CashFlow2  Project CashFlow Eur/yr
+  npv2  Net Present Value Eur Industry 1
+  Base2  Load payment with no PV and no BESS
+  IndustryProfit  Total Industry 1 + 2 Profit, Euro/year
+  CW  Total Community Welfare, Euro/year
+  EP1  Energy and Power/Capacity Balance Industry 1 Euro/year
+  EP2  Energy and Power/Capacity Balance Industry 2 Euro/year
+  E1  Exchange Industry 1 with the Aggregaror, Euro/year
+  E2  Exchange Industry 2 with the Aggregaror, Euro/year
+  APA  CDS Aggregator Profit, Euro,/year
+  I1_Profit  Industry 1 Profit with respect to no CDS, Euro,/year
+  I2_Profit  Industry 2 Profit with respect to no CDS, Euro,/year
+  AP1  Industry 1 Profit, Euro,/year
+  AP2  Industry 2 Profit, Euro,/year
+
+---- VAR SOC1  State of Charge  kWh
+
+           LOWER          LEVEL          UPPER
+
+t1        100.0000       100.0000      1900.0000      
+t2        100.0000       100.0000      1900.0000      
+t3        100.0000       100.0000      1900.0000      
+t4        100.0000       100.0000      1900.0000      
+t5        100.0000       100.0000      1900.0000      
+t6        100.0000       100.0000      1900.0000      
+t7        100.0000       100.0000      1900.0000      
+t8        100.0000       100.0000      1900.0000      
+t9        100.0000       100.0000      1900.0000      
+t10       100.0000       155.9791      1900.0000      
+t11       100.0000       268.1835      1900.0000      
+t12       100.0000       513.0322      1900.0000      
+t13       100.0000       885.0322      1900.0000      
+t14       100.0000      1257.0322      1900.0000      
+t15       100.0000      1613.4706      1900.0000      
+t16       100.0000      1900.0000      1900.0000      
+t17       100.0000      1900.0000      1900.0000      
+t18       100.0000      1900.0000      1900.0000      
+t19       100.0000      1637.0299      1900.0000      
+t20       100.0000      1224.6588      1900.0000      
+t21       100.0000       812.2876      1900.0000      
+t22       100.0000       399.9165      1900.0000      
+t23       100.0000       239.9145      1900.0000      
+t24       100.0000       100.0000       100.0000      
+
+---- VAR Pd1  Power battery discharge  kW
+
+           LOWER          LEVEL          UPPER
+
+t1           .              .            +INF         
+t2           .       9.123598E-14        +INF         
+t3           .       4.107055E-14        +INF         
+t4           .       7.157859E-15        +INF         
+t5           .       1.462904E-14        +INF         
+t6           .       1.306827E-13        +INF         
+t7           .       2.025284E-14        +INF         
+t8           .       5.525969E-15        +INF         
+t9           .       1.777531E-14        +INF         
+t10          .              .            +INF         
+t11          .              .            +INF         
+t12          .              .            +INF         
+t13          .              .            +INF         
+t14          .              .            +INF         
+t15          .              .            +INF         
+t16          .              .            +INF         
+t17          .       2.348128E-14        +INF         
+t18          .       1.130401E-12        +INF         
+t19          .           255.0810        +INF         
+t20          .           400.0000        +INF         
+t21          .           400.0000        +INF         
+t22          .           400.0000        +INF         
+t23          .           155.2019        +INF         
+t24          .           135.7171        +INF         
+
+---- VAR Pc1  Power battery charge  kW
+
+           LOWER          LEVEL          UPPER
+
+t1           .       2.037707E-13        +INF         
+t2           .              .            +INF         
+t3           .              .            +INF         
+t4           .              .            +INF         
+t5           .              .            +INF         
+t6           .              .            +INF         
+t7           .              .            +INF         
+t8           .              .            +INF         
+t9           .              .            +INF         
+t10          .            60.1926        +INF         
+t11          .           120.6499        +INF         
+t12          .           263.2781        +INF         
+t13          .           400.0000        +INF         
+t14          .           400.0000        +INF         
+t15          .           383.2672        +INF         
+t16          .           308.0961        +INF         
+t17          .              .            +INF         
+t18          .              .            +INF         
+t19          .              .            +INF         
+t20          .              .            +INF         
+t21          .              .            +INF         
+t22          .              .            +INF         
+t23          .              .            +INF         
+t24          .              .            +INF         
+
+---- VAR Pb1  Power bought from the public grid kW
+
+           LOWER          LEVEL          UPPER
+
+t1           .            31.3075        +INF         
+t2           .            20.8990        +INF         
+t3           .            17.6538        +INF         
+t4           .            17.3950        +INF         
+t5           .            17.1830        +INF         
+t6           .            16.9050        +INF         
+t7           .              .            +INF         
+t8           .              .            +INF         
+t9           .              .            +INF         
+t10          .              .            +INF         
+t11          .              .            +INF         
+t12          .           119.5708        +INF         
+t13          .            71.4978        +INF         
+t14          .           282.6616        +INF         
+t15          .           338.0552        +INF         
+t16          .           338.0552        +INF         
+t17          .           111.7563        +INF         
+t18          .           124.9208        +INF         
+t19          .              .            +INF         
+t20          .              .            +INF         
+t21          .              .            +INF         
+t22          .              .            +INF         
+t23          .              .            +INF         
+t24          .              .            +INF         
+
+---- VAR Ps1  Power sold to the public grid kW
+
+           LOWER          LEVEL          UPPER
+
+t1           .              .            +INF         
+t2           .              .            +INF         
+t3           .              .            +INF         
+t4           .              .            +INF         
+t5           .              .            +INF         
+t6           .              .            +INF         
+t7           .       2.025284E-14        +INF         
+t8           .       5.525969E-15        +INF         
+t9           .       1.777531E-14        +INF         
+t10          .       2.624641E-14        +INF         
+t11          .       2.420432E-14        +INF         
+t12          .              .            +INF         
+t13          .              .            +INF         
+t14          .              .            +INF         
+t15          .              .            +INF         
+t16          .              .            +INF         
+t17          .              .            +INF         
+t18          .              .            +INF         
+t19          .       4.115520E-14        +INF         
+t20          .           600.0000        +INF         
+t21          .           410.5786        +INF         
+t22          .           456.7106        +INF         
+t23          .            35.7563        +INF         
+t24          .       3.384011E-14        +INF         
+
+                           LOWER          LEVEL          UPPER
+
+---- VAR Investmen~          .        830300.0000        +INF         
+---- VAR Wload1              .        959636.7100        +INF         
+---- VAR Wpvtot1             .        959629.4841        +INF         
+---- VAR Wimport1            .        550369.2058        +INF         
+---- VAR Wexport1            .        548611.6277        +INF         
+---- VAR WcargaBES~          .        706451.6129        +INF         
+---- VAR Wdescarga~          .        637290.0000        +INF         
+
+  Investment1  Project initial investment Eur
+  Wload1  Energia total load kWh/año
+  Wpvtot1  Producción Energia PV kWh/año
+  Wimport1  Importación Energia kWh/año
+  Wexport1  Exportación Energia kWh/año
+  WcargaBESS1  Energia carga BESS kWh/año
+  WdescargaBESS1  Energia carga BESS kWh/año
+
+---- VAR SOC2  State of Charge  kWh
+
+           LOWER          LEVEL          UPPER
+
+t1        140.0000       140.0000      2660.0000      
+t2        140.0000       140.0000      2660.0000      
+t3        140.0000       140.0000      2660.0000      
+t4        140.0000       445.9638      2660.0000      
+t5        140.0000       445.9638      2660.0000      
+t6        140.0000       445.9638      2660.0000      
+t7        140.0000       198.4339      2660.0000      
+t8        140.0000       140.0000      2660.0000      
+t9        140.0000       140.0000      2660.0000      
+t10       140.0000       234.9265      2660.0000      
+t11       140.0000       404.7050      2660.0000      
+t12       140.0000       608.4902      2660.0000      
+t13       140.0000      1202.1154      2660.0000      
+t14       140.0000      1881.0767      2660.0000      
+t15       140.0000      2323.3227      2660.0000      
+t16       140.0000      2660.0000      2660.0000      
+t17       140.0000      2660.0000      2660.0000      
+t18       140.0000      2660.0000      2660.0000      
+t19       140.0000      2660.0000      2660.0000      
+t20       140.0000      1908.4211      2660.0000      
+t21       140.0000      1024.2105      2660.0000      
+t22       140.0000       140.0000      2660.0000      
+t23       140.0000       140.0000      2660.0000      
+t24       140.0000       140.0000       140.0000      
+
+---- VAR Pd2  Power battery discharge  kW
+
+           LOWER          LEVEL          UPPER
+
+t1           .              .            +INF         
+t2           .       8.733440E-14        +INF         
+t3           .       6.736505E-14        +INF         
+t4           .              .            +INF         
+t5           .       3.081211E-14        +INF         
+t6           .       8.799346E-14        +INF         
+t7           .           235.1534        +INF         
+t8           .            55.5122        +INF         
+t9           .       2.128414E-13        +INF         
+t10          .              .            +INF         
+t11          .              .            +INF         
+t12          .              .            +INF         
+t13          .              .            +INF         
+t14          .              .            +INF         
+t15          .              .            +INF         
+t16          .              .            +INF         
+t17          .       1.114383E-14        +INF         
+t18          .       4.976200E-14        +INF         
+t19          .       1.105955E-14        +INF         
+t20          .           714.0000        +INF         
+t21          .           840.0000        +INF         
+t22          .           840.0000        +INF         
+t23          .       1.237024E-14        +INF         
+t24          .       -7.21732E-15        +INF         
+
+---- VAR Pc2  Power battery charge  kW
+
+           LOWER          LEVEL          UPPER
+
+t1           .       1.676881E-12        +INF         
+t2           .              .            +INF         
+t3           .              .            +INF         
+t4           .           332.5693        +INF         
+t5           .              .            +INF         
+t6           .              .            +INF         
+t7           .              .            +INF         
+t8           .              .            +INF         
+t9           .              .            +INF         
+t10          .           103.1810        +INF         
+t11          .           184.5419        +INF         
+t12          .           221.5056        +INF         
+t13          .           645.2447        +INF         
+t14          .           738.0014        +INF         
+t15          .           480.7022        +INF         
+t16          .           365.9536        +INF         
+t17          .              .            +INF         
+t18          .              .            +INF         
+t19          .              .            +INF         
+t20          .              .            +INF         
+t21          .              .            +INF         
+t22          .              .            +INF         
+t23          .              .            +INF         
+t24          .              .            +INF         
+
+---- VAR Pb2  Power bought from the public grid kW
+
+           LOWER          LEVEL          UPPER
+
+t1           .           165.7938        +INF         
+t2           .           166.2943        +INF         
+t3           .           167.0808        +INF         
+t4           .           505.6427        +INF         
+t5           .           193.6040        +INF         
+t6           .           229.1751        +INF         
+t7           .              .            +INF         
+t8           .              .            +INF         
+t9           .             7.9323        +INF         
+t10          .              .            +INF         
+t11          .              .            +INF         
+t12          .              .            +INF         
+t13          .           429.1577        +INF         
+t14          .           561.3209        +INF         
+t15          .           379.4978        +INF         
+t16          .           379.4978        +INF         
+t17          .           118.7280        +INF         
+t18          .           184.6730        +INF         
+t19          .              .            +INF         
+t20          .              .            +INF         
+t21          .              .            +INF         
+t22          .              .            +INF         
+t23          .              .            +INF         
+t24          .              .            +INF         
+
+---- VAR Ps2  Power sold to the public grid kW
+
+           LOWER          LEVEL          UPPER
+
+t1           .              .            +INF         
+t2           .              .            +INF         
+t3           .              .            +INF         
+t4           .              .            +INF         
+t5           .              .            +INF         
+t6           .              .            +INF         
+t7           .       3.838600E-14        +INF         
+t8           .       5.234650E-14        +INF         
+t9           .              .            +INF         
+t10          .       2.149116E-13        +INF         
+t11          .       3.838118E-14        +INF         
+t12          .       5.334393E-14        +INF         
+t13          .              .            +INF         
+t14          .              .            +INF         
+t15          .              .            +INF         
+t16          .              .            +INF         
+t17          .              .            +INF         
+t18          .              .            +INF         
+t19          .       1.105955E-14        +INF         
+t20          .           255.5510        +INF         
+t21          .           595.6389        +INF         
+t22          .           650.0000        +INF         
+t23          .       1.237024E-14        +INF         
+t24          .       6.993532E-15        +INF         
+
+                           LOWER          LEVEL          UPPER
+
+---- VAR Investmen~          .       1187200.0000        +INF         
+---- VAR Wload2              .       1865867.6545        +INF         
+---- VAR Wpvtot2             .       1349215.4433        +INF         
+---- VAR Wimport2            .       1273265.2760        +INF         
+---- VAR Wexport2            .        547934.3328        +INF         
+---- VAR WcargaBES~          .       1121170.4070        +INF         
+---- VAR Wdescarga~          .        979902.9357        +INF         
+
+  Investment2  Project initial investment Eur
+  Wload2  Energia total load kWh/año
+  Wpvtot2  Producción Energia PV kWh/año
+  Wimport2  Importación Energia kWh/año
+  Wexport2  Exportación Energia kWh/año
+  WcargaBESS2  Energia carga BESS kWh/año
+  WdescargaBESS2  Energia carga BESS kWh/año
+
+---- VAR P12CDS  Power sent from 1 to 2 through a CDS kW
+
+           LOWER          LEVEL          UPPER
+
+t1           .              .            +INF         
+t2           .              .            +INF         
+t3           .              .            +INF         
+t4           .              .            +INF         
+t5           .              .            +INF         
+t6           .              .            +INF         
+t7           .            10.0488        +INF         
+t8           .            94.0446        +INF         
+t9           .             7.2958        +INF         
+t10          .              .            +INF         
+t11          .              .            +INF         
+t12          .              .            +INF         
+t13          .              .            +INF         
+t14          .              .            +INF         
+t15          .              .            +INF         
+t16          .              .            +INF         
+t17          .              .            +INF         
+t18          .              .            +INF         
+t19          .           109.8687        +INF         
+t20          .              .            +INF         
+t21          .              .            +INF         
+t22          .              .            +INF         
+t23          .            85.9427        +INF         
+t24          .           103.7963        +INF         
+
+---- VAR P21CDS  Power sent from 2 to 1 through a CDS kW
+
+           LOWER          LEVEL          UPPER
+
+t1           .              .            +INF         
+t2           .              .            +INF         
+t3           .              .            +INF         
+t4           .              .            +INF         
+t5           .              .            +INF         
+t6           .              .            +INF         
+t7           .              .            +INF         
+t8           .              .            +INF         
+t9           .              .            +INF         
+t10          .              .            +INF         
+t11          .              .            +INF         
+t12          .              .            +INF         
+t13          .              .            +INF         
+t14          .              .            +INF         
+t15          .              .            +INF         
+t16          .              .            +INF         
+t17          .              .            +INF         
+t18          .              .            +INF         
+t19          .              .            +INF         
+t20          .           352.4657        +INF         
+t21          .           145.0663        +INF         
+t22          .            98.1532        +INF         
+t23          .              .            +INF         
+t24          .              .            +INF         
+
+---- VAR epsilon  Internal Local Market Price $/kWh
+
+           LOWER          LEVEL          UPPER
+
+t1           .             0.0687        +INF         
+t2           .             0.0644        +INF         
+t3           .             0.0622        +INF         
+t4           .             0.0605        +INF         
+t5           .             0.0607        +INF         
+t6           .             0.0651        +INF         
+t7           .             0.0738        +INF         
+t8           .             0.0761        +INF         
+t9           .             0.0694        +INF         
+t10          .             0.0568        +INF         
+t11          .             0.0469        +INF         
+t12          .             0.0418        +INF         
+t13          .             0.0396        +INF         
+t14          .             0.0379        +INF         
+t15          .             0.0368        +INF         
+t16          .             0.0383        +INF         
+t17          .             0.0464        +INF         
+t18          .             0.0595        +INF         
+t19          .             0.0762        +INF         
+t20          .             0.1415        +INF         
+t21          .             0.1502        +INF         
+t22          .             0.1416        +INF         
+t23          .             0.0812        +INF         
+t24          .             0.0748        +INF         
+
+                           LOWER          LEVEL          UPPER
+
+---- VAR delta               .              .            +INF         
+
+  delta  Internal Capacity Price $/kW
+
+---- VAR w11  
+
+           LOWER          LEVEL          UPPER
+
+t1           .             1.0000         1.0000      
+t2           .              .             1.0000      
+t3           .              .             1.0000      
+t4           .              .             1.0000      
+t5           .              .             1.0000      
+t6           .              .             1.0000      
+t7           .              .             1.0000      
+t8           .              .             1.0000      
+t9           .              .             1.0000      
+t10          .             1.0000         1.0000      
+t11          .             1.0000         1.0000      
+t12          .             1.0000         1.0000      
+t13          .             1.0000         1.0000      
+t14          .             1.0000         1.0000      
+t15          .             1.0000         1.0000      
+t16          .             1.0000         1.0000      
+t17          .              .             1.0000      
+t18          .              .             1.0000      
+t19          .              .             1.0000      
+t20          .              .             1.0000      
+t21          .              .             1.0000      
+t22          .              .             1.0000      
+t23          .              .             1.0000      
+t24          .              .             1.0000      
+
+---- VAR w31  
+
+           LOWER          LEVEL          UPPER
+
+t1           .             1.0000         1.0000      
+t2           .             1.0000         1.0000      
+t3           .             1.0000         1.0000      
+t4           .             1.0000         1.0000      
+t5           .             1.0000         1.0000      
+t6           .             1.0000         1.0000      
+t7           .              .             1.0000      
+t8           .              .             1.0000      
+t9           .              .             1.0000      
+t10          .              .             1.0000      
+t11          .              .             1.0000      
+t12          .             1.0000         1.0000      
+t13          .             1.0000         1.0000      
+t14          .             1.0000         1.0000      
+t15          .             1.0000         1.0000      
+t16          .             1.0000         1.0000      
+t17          .             1.0000         1.0000      
+t18          .             1.0000         1.0000      
+t19          .              .             1.0000      
+t20          .              .             1.0000      
+t21          .              .             1.0000      
+t22          .              .             1.0000      
+t23          .              .             1.0000      
+t24          .              .             1.0000      
+
+---- VAR w12  
+
+           LOWER          LEVEL          UPPER
+
+t1           .             1.0000         1.0000      
+t2           .              .             1.0000      
+t3           .              .             1.0000      
+t4           .             1.0000         1.0000      
+t5           .              .             1.0000      
+t6           .              .             1.0000      
+t7           .              .             1.0000      
+t8           .              .             1.0000      
+t9           .              .             1.0000      
+t10          .             1.0000         1.0000      
+t11          .             1.0000         1.0000      
+t12          .             1.0000         1.0000      
+t13          .             1.0000         1.0000      
+t14          .             1.0000         1.0000      
+t15          .             1.0000         1.0000      
+t16          .             1.0000         1.0000      
+t17          .              .             1.0000      
+t18          .              .             1.0000      
+t19          .              .             1.0000      
+t20          .              .             1.0000      
+t21          .              .             1.0000      
+t22          .              .             1.0000      
+t23          .              .             1.0000      
+t24          .              .             1.0000      
+
+---- VAR w32  
+
+           LOWER          LEVEL          UPPER
+
+t1           .             1.0000         1.0000      
+t2           .             1.0000         1.0000      
+t3           .             1.0000         1.0000      
+t4           .             1.0000         1.0000      
+t5           .             1.0000         1.0000      
+t6           .             1.0000         1.0000      
+t7           .              .             1.0000      
+t8           .              .             1.0000      
+t9           .             1.0000         1.0000      
+t10          .              .             1.0000      
+t11          .              .             1.0000      
+t12          .              .             1.0000      
+t13          .             1.0000         1.0000      
+t14          .             1.0000         1.0000      
+t15          .             1.0000         1.0000      
+t16          .             1.0000         1.0000      
+t17          .             1.0000         1.0000      
+t18          .             1.0000         1.0000      
+t19          .              .             1.0000      
+t20          .              .             1.0000      
+t21          .              .             1.0000      
+t22          .              .             1.0000      
+t23          .              .             1.0000      
+t24          .              .             1.0000      
+
+---- VAR v12  
+
+           LOWER          LEVEL          UPPER
+
+t1           .              .             1.0000      
+t2           .              .             1.0000      
+t3           .              .             1.0000      
+t4           .              .             1.0000      
+t5           .              .             1.0000      
+t6           .              .             1.0000      
+t7           .             1.0000         1.0000      
+t8           .             1.0000         1.0000      
+t9           .             1.0000         1.0000      
+t10          .              .             1.0000      
+t11          .              .             1.0000      
+t12          .              .             1.0000      
+t13          .              .             1.0000      
+t14          .              .             1.0000      
+t15          .              .             1.0000      
+t16          .              .             1.0000      
+t17          .              .             1.0000      
+t18          .              .             1.0000      
+t19          .             1.0000         1.0000      
+t20          .              .             1.0000      
+t21          .              .             1.0000      
+t22          .              .             1.0000      
+t23          .             1.0000         1.0000      
+t24          .             1.0000         1.0000      
+
+
+**** REPORT SUMMARY :        0     NONOPT
+                             0 INFEASIBLE
+                             0  UNBOUNDED
+                             0     ERRORS
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:52:21 Page 7
+M_1_7_E1e Energy Community 1 and 2 with a CDS - Dispatch MINLP (spain 24h)
+E x e c u t i o n
+
+
+EXECUTION TIME       =        0.266 SECONDS      4 MB  51.4.0 91cb996b WEX-WEI
+
+
+USER: Academic User                                  G260505+0003Ac-GEN
+      pm.deoliveiradejes@uniandes.edu.co                      CLA118952
+      License for teaching and research at degree granting institutions
+
+
+**** FILE SUMMARY
+
+Input      C:\Users\pm.deoliveiradejes\Dropbox\AG_EC_GreenH2\AGyCE\M5_AGPE_H2_EC\M5.2_Energy_Community_Dispatch\Ejemplo_1_MINLP\gams\M1_7_E1e.gms
+Output     C:\Users\pm.deoliveiradejes\Dropbox\AG_EC_GreenH2\AGyCE\M5_AGPE_H2_EC\M5.2_Energy_Community_Dispatch\Ejemplo_1_MINLP\gams\M1_7_E1e.lst

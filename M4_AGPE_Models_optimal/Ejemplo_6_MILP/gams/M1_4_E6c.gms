@@ -85,7 +85,7 @@ Scalar
    CAPEX_BESS_inverter /88/
    ReactivePayment /-24942.4/
    crf       /0.08024258719069/
-   w2        /0/   ;
+   w2        /1/   ;
 SOC.up(t)     = ((1-DoD)/2+DoD)*C;
 SOC.lo(t)     = ((1-DoD)/2)*C;
 SOC.fx('t24') = SOC0;

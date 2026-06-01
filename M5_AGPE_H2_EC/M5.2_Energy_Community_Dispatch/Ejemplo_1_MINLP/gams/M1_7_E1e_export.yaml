@@ -1,0 +1,1185 @@
+- GDXReader:
+    file: /Users/pm.deoliveiradejes/Dropbox (Personal)/Maestria en Energia (MISE)/MISE_E4/MISE_E4-main/M1.7_Energy_Communitty_Dispatch/Ejemplo_1_MINLP/energy_community_CDS/24h/Gams/M1_7_E1e.gdx
+    symbols: 
+      - name: t
+      - name: data
+      - name: pbmax1
+      - name: Plu1
+      - name: pbmax2
+      - name: Plu2
+      - name: npv
+      - name: Benefit1
+      - name: Capacity1
+      - name: Energy1
+      - name: CashFlow1
+      - name: npv1
+      - name: Base1
+      - name: Benefit2
+      - name: Capacity2
+      - name: Energy2
+      - name: CashFlow2
+      - name: npv2
+      - name: Base2
+      - name: IndustryProfit
+      - name: CW
+      - name: EP1
+      - name: EP2
+      - name: E1
+      - name: E2
+      - name: APA
+      - name: I1_Profit
+      - name: I2_Profit
+      - name: AP1
+      - name: AP2
+      - name: IndustryProfitnoCDS_BESS_PV1
+      - name: IndustryProfitnoCDS_BESS_PV2
+      - name: SOC1
+      - name: Pd1
+      - name: Pc1
+      - name: Pb1
+      - name: Ps1
+      - name: Investment1
+      - name: Wload1
+      - name: Wpvtot1
+      - name: Wimport1
+      - name: Wexport1
+      - name: WcargaBESS1
+      - name: WdescargaBESS1
+      - name: SOC2
+      - name: Pd2
+      - name: Pc2
+      - name: Pb2
+      - name: Ps2
+      - name: Investment2
+      - name: Wload2
+      - name: Wpvtot2
+      - name: Wimport2
+      - name: Wexport2
+      - name: WcargaBESS2
+      - name: WdescargaBESS2
+      - name: P12CDS
+      - name: P21CDS
+      - name: epsilon
+      - name: delta
+      - name: w11
+      - name: w31
+      - name: w12
+      - name: w32
+      - name: v12
+      - name: Ppvmax1
+      - name: Plmax1
+      - name: SOC01
+      - name: C1
+      - name: eff_c1
+      - name: eff_d1
+      - name: R_c1
+      - name: R_d1
+      - name: DoD1
+      - name: Pmax1
+      - name: Capacity01
+      - name: Ppvmax2
+      - name: Plmax2
+      - name: SOC02
+      - name: C2
+      - name: eff_c2
+      - name: eff_d2
+      - name: R_c2
+      - name: R_d2
+      - name: DoD2
+      - name: Pmax2
+      - name: Capacity02
+      - name: kappaP1
+      - name: kappaP2
+      - name: kappaP3
+      - name: kappaP4
+      - name: kappaP5
+      - name: kappaP6
+      - name: CAPEXpv
+      - name: CAPEX_BESS
+      - name: CAPEX_BESS_inverter
+      - name: crf
+      - name: varphib
+      - name: varphis
+      - name: PmaxCDS
+      - name: CAPEX_I1
+      - name: CAPEX_I2
+      - name: BcalcA
+      - name: Bcalc1A
+      - name: Bcalc2A
+      - name: balanceA
+      - name: r1A
+      - name: r2A
+      - name: r3A
+      - name: r4A
+      - name: r5A
+      - name: r6A
+      - name: r7A
+      - name: r8A
+      - name: r9A
+      - name: r10A
+      - name: r11A
+      - name: r12A
+      - name: r13A
+      - name: r14A
+      - name: r15A
+      - name: r16A
+      - name: BcalcB
+      - name: Bcalc1B
+      - name: Bcalc2B
+      - name: balanceB
+      - name: r1B
+      - name: r2B
+      - name: r3B
+      - name: r4B
+      - name: r5B
+      - name: r6B
+      - name: r7B
+      - name: r8B
+      - name: r9B
+      - name: r10B
+      - name: r11B
+      - name: r12B
+      - name: r13B
+      - name: r14B
+      - name: r15B
+      - name: r16B
+      - name: CE0
+      - name: CE1
+      - name: CE2
+      - name: CE3
+      - name: CE4
+      - name: CE5
+      - name: CE6
+      - name: CE7
+      - name: CE8
+      - name: CE9
+      - name: CE10
+      - name: CE10b
+      - name: CE11
+      - name: CE12
+      - name: CE13
+      - name: CE14
+      - name: CE15
+      - name: CE16
+      - name: CE17
+      - name: CE18
+      - name: CE19
+      - name: CE20
+      - name: CE21
+      - name: CE22
+      - name: CE23
+      - name: CE24
+- Projection:
+    name: npv
+    newName: npv_proj_
+    asParameter: true
+- Projection:
+    name: Benefit1
+    newName: Benefit1_proj_
+    asParameter: true
+- Projection:
+    name: Capacity1
+    newName: Capacity1_proj_
+    asParameter: true
+- Projection:
+    name: Energy1
+    newName: Energy1_proj_
+    asParameter: true
+- Projection:
+    name: CashFlow1
+    newName: CashFlow1_proj_
+    asParameter: true
+- Projection:
+    name: npv1
+    newName: npv1_proj_
+    asParameter: true
+- Projection:
+    name: Base1
+    newName: Base1_proj_
+    asParameter: true
+- Projection:
+    name: Benefit2
+    newName: Benefit2_proj_
+    asParameter: true
+- Projection:
+    name: Capacity2
+    newName: Capacity2_proj_
+    asParameter: true
+- Projection:
+    name: Energy2
+    newName: Energy2_proj_
+    asParameter: true
+- Projection:
+    name: CashFlow2
+    newName: CashFlow2_proj_
+    asParameter: true
+- Projection:
+    name: npv2
+    newName: npv2_proj_
+    asParameter: true
+- Projection:
+    name: Base2
+    newName: Base2_proj_
+    asParameter: true
+- Projection:
+    name: IndustryProfit
+    newName: IndustryProfit_proj_
+    asParameter: true
+- Projection:
+    name: CW
+    newName: CW_proj_
+    asParameter: true
+- Projection:
+    name: EP1
+    newName: EP1_proj_
+    asParameter: true
+- Projection:
+    name: EP2
+    newName: EP2_proj_
+    asParameter: true
+- Projection:
+    name: E1
+    newName: E1_proj_
+    asParameter: true
+- Projection:
+    name: E2
+    newName: E2_proj_
+    asParameter: true
+- Projection:
+    name: APA
+    newName: APA_proj_
+    asParameter: true
+- Projection:
+    name: I1_Profit
+    newName: I1_Profit_proj_
+    asParameter: true
+- Projection:
+    name: I2_Profit
+    newName: I2_Profit_proj_
+    asParameter: true
+- Projection:
+    name: AP1
+    newName: AP1_proj_
+    asParameter: true
+- Projection:
+    name: AP2
+    newName: AP2_proj_
+    asParameter: true
+- Projection:
+    name: IndustryProfitnoCDS_BESS_PV1
+    newName: IndustryProfitnoCDS_BESS_PV1_proj_
+    asParameter: true
+- Projection:
+    name: IndustryProfitnoCDS_BESS_PV2
+    newName: IndustryProfitnoCDS_BESS_PV2_proj_
+    asParameter: true
+- Projection:
+    name: SOC1(0)
+    newName: SOC1_proj_(0)
+    asParameter: true
+- Projection:
+    name: Pd1(0)
+    newName: Pd1_proj_(0)
+    asParameter: true
+- Projection:
+    name: Pc1(0)
+    newName: Pc1_proj_(0)
+    asParameter: true
+- Projection:
+    name: Pb1(0)
+    newName: Pb1_proj_(0)
+    asParameter: true
+- Projection:
+    name: Ps1(0)
+    newName: Ps1_proj_(0)
+    asParameter: true
+- Projection:
+    name: Investment1
+    newName: Investment1_proj_
+    asParameter: true
+- Projection:
+    name: Wload1
+    newName: Wload1_proj_
+    asParameter: true
+- Projection:
+    name: Wpvtot1
+    newName: Wpvtot1_proj_
+    asParameter: true
+- Projection:
+    name: Wimport1
+    newName: Wimport1_proj_
+    asParameter: true
+- Projection:
+    name: Wexport1
+    newName: Wexport1_proj_
+    asParameter: true
+- Projection:
+    name: WcargaBESS1
+    newName: WcargaBESS1_proj_
+    asParameter: true
+- Projection:
+    name: WdescargaBESS1
+    newName: WdescargaBESS1_proj_
+    asParameter: true
+- Projection:
+    name: SOC2(0)
+    newName: SOC2_proj_(0)
+    asParameter: true
+- Projection:
+    name: Pd2(0)
+    newName: Pd2_proj_(0)
+    asParameter: true
+- Projection:
+    name: Pc2(0)
+    newName: Pc2_proj_(0)
+    asParameter: true
+- Projection:
+    name: Pb2(0)
+    newName: Pb2_proj_(0)
+    asParameter: true
+- Projection:
+    name: Ps2(0)
+    newName: Ps2_proj_(0)
+    asParameter: true
+- Projection:
+    name: Investment2
+    newName: Investment2_proj_
+    asParameter: true
+- Projection:
+    name: Wload2
+    newName: Wload2_proj_
+    asParameter: true
+- Projection:
+    name: Wpvtot2
+    newName: Wpvtot2_proj_
+    asParameter: true
+- Projection:
+    name: Wimport2
+    newName: Wimport2_proj_
+    asParameter: true
+- Projection:
+    name: Wexport2
+    newName: Wexport2_proj_
+    asParameter: true
+- Projection:
+    name: WcargaBESS2
+    newName: WcargaBESS2_proj_
+    asParameter: true
+- Projection:
+    name: WdescargaBESS2
+    newName: WdescargaBESS2_proj_
+    asParameter: true
+- Projection:
+    name: P12CDS(0)
+    newName: P12CDS_proj_(0)
+    asParameter: true
+- Projection:
+    name: P21CDS(0)
+    newName: P21CDS_proj_(0)
+    asParameter: true
+- Projection:
+    name: epsilon(0)
+    newName: epsilon_proj_(0)
+    asParameter: true
+- Projection:
+    name: delta
+    newName: delta_proj_
+    asParameter: true
+- Projection:
+    name: w11(0)
+    newName: w11_proj_(0)
+    asParameter: true
+- Projection:
+    name: w31(0)
+    newName: w31_proj_(0)
+    asParameter: true
+- Projection:
+    name: w12(0)
+    newName: w12_proj_(0)
+    asParameter: true
+- Projection:
+    name: w32(0)
+    newName: w32_proj_(0)
+    asParameter: true
+- Projection:
+    name: v12(0)
+    newName: v12_proj_(0)
+    asParameter: true
+- Projection:
+    name: BcalcA
+    newName: BcalcA_proj_
+    asParameter: true
+- Projection:
+    name: Bcalc1A
+    newName: Bcalc1A_proj_
+    asParameter: true
+- Projection:
+    name: Bcalc2A
+    newName: Bcalc2A_proj_
+    asParameter: true
+- Projection:
+    name: balanceA(0)
+    newName: balanceA_proj_(0)
+    asParameter: true
+- Projection:
+    name: r1A(0)
+    newName: r1A_proj_(0)
+    asParameter: true
+- Projection:
+    name: r2A(0)
+    newName: r2A_proj_(0)
+    asParameter: true
+- Projection:
+    name: r3A(0)
+    newName: r3A_proj_(0)
+    asParameter: true
+- Projection:
+    name: r4A(0)
+    newName: r4A_proj_(0)
+    asParameter: true
+- Projection:
+    name: r5A(0)
+    newName: r5A_proj_(0)
+    asParameter: true
+- Projection:
+    name: r6A(0)
+    newName: r6A_proj_(0)
+    asParameter: true
+- Projection:
+    name: r7A
+    newName: r7A_proj_
+    asParameter: true
+- Projection:
+    name: r8A
+    newName: r8A_proj_
+    asParameter: true
+- Projection:
+    name: r9A
+    newName: r9A_proj_
+    asParameter: true
+- Projection:
+    name: r10A
+    newName: r10A_proj_
+    asParameter: true
+- Projection:
+    name: r11A
+    newName: r11A_proj_
+    asParameter: true
+- Projection:
+    name: r12A
+    newName: r12A_proj_
+    asParameter: true
+- Projection:
+    name: r13A
+    newName: r13A_proj_
+    asParameter: true
+- Projection:
+    name: r14A
+    newName: r14A_proj_
+    asParameter: true
+- Projection:
+    name: r15A
+    newName: r15A_proj_
+    asParameter: true
+- Projection:
+    name: r16A
+    newName: r16A_proj_
+    asParameter: true
+- Projection:
+    name: BcalcB
+    newName: BcalcB_proj_
+    asParameter: true
+- Projection:
+    name: Bcalc1B
+    newName: Bcalc1B_proj_
+    asParameter: true
+- Projection:
+    name: Bcalc2B
+    newName: Bcalc2B_proj_
+    asParameter: true
+- Projection:
+    name: balanceB(0)
+    newName: balanceB_proj_(0)
+    asParameter: true
+- Projection:
+    name: r1B(0)
+    newName: r1B_proj_(0)
+    asParameter: true
+- Projection:
+    name: r2B(0)
+    newName: r2B_proj_(0)
+    asParameter: true
+- Projection:
+    name: r3B(0)
+    newName: r3B_proj_(0)
+    asParameter: true
+- Projection:
+    name: r4B(0)
+    newName: r4B_proj_(0)
+    asParameter: true
+- Projection:
+    name: r5B(0)
+    newName: r5B_proj_(0)
+    asParameter: true
+- Projection:
+    name: r6B(0)
+    newName: r6B_proj_(0)
+    asParameter: true
+- Projection:
+    name: r7B
+    newName: r7B_proj_
+    asParameter: true
+- Projection:
+    name: r8B
+    newName: r8B_proj_
+    asParameter: true
+- Projection:
+    name: r9B
+    newName: r9B_proj_
+    asParameter: true
+- Projection:
+    name: r10B
+    newName: r10B_proj_
+    asParameter: true
+- Projection:
+    name: r11B
+    newName: r11B_proj_
+    asParameter: true
+- Projection:
+    name: r12B
+    newName: r12B_proj_
+    asParameter: true
+- Projection:
+    name: r13B
+    newName: r13B_proj_
+    asParameter: true
+- Projection:
+    name: r14B
+    newName: r14B_proj_
+    asParameter: true
+- Projection:
+    name: r15B
+    newName: r15B_proj_
+    asParameter: true
+- Projection:
+    name: r16B
+    newName: r16B_proj_
+    asParameter: true
+- Projection:
+    name: CE0
+    newName: CE0_proj_
+    asParameter: true
+- Projection:
+    name: CE1
+    newName: CE1_proj_
+    asParameter: true
+- Projection:
+    name: CE2
+    newName: CE2_proj_
+    asParameter: true
+- Projection:
+    name: CE3
+    newName: CE3_proj_
+    asParameter: true
+- Projection:
+    name: CE4
+    newName: CE4_proj_
+    asParameter: true
+- Projection:
+    name: CE5
+    newName: CE5_proj_
+    asParameter: true
+- Projection:
+    name: CE6
+    newName: CE6_proj_
+    asParameter: true
+- Projection:
+    name: CE7
+    newName: CE7_proj_
+    asParameter: true
+- Projection:
+    name: CE8
+    newName: CE8_proj_
+    asParameter: true
+- Projection:
+    name: CE9
+    newName: CE9_proj_
+    asParameter: true
+- Projection:
+    name: CE10
+    newName: CE10_proj_
+    asParameter: true
+- Projection:
+    name: CE10b
+    newName: CE10b_proj_
+    asParameter: true
+- Projection:
+    name: CE11(0)
+    newName: CE11_proj_(0)
+    asParameter: true
+- Projection:
+    name: CE12(0)
+    newName: CE12_proj_(0)
+    asParameter: true
+- Projection:
+    name: CE13(0)
+    newName: CE13_proj_(0)
+    asParameter: true
+- Projection:
+    name: CE14(0)
+    newName: CE14_proj_(0)
+    asParameter: true
+- Projection:
+    name: CE15
+    newName: CE15_proj_
+    asParameter: true
+- Projection:
+    name: CE16
+    newName: CE16_proj_
+    asParameter: true
+- Projection:
+    name: CE17
+    newName: CE17_proj_
+    asParameter: true
+- Projection:
+    name: CE18
+    newName: CE18_proj_
+    asParameter: true
+- Projection:
+    name: CE19
+    newName: CE19_proj_
+    asParameter: true
+- Projection:
+    name: CE20
+    newName: CE20_proj_
+    asParameter: true
+- Projection:
+    name: CE21
+    newName: CE21_proj_
+    asParameter: true
+- Projection:
+    name: CE22
+    newName: CE22_proj_
+    asParameter: true
+- Projection:
+    name: CE23
+    newName: CE23_proj_
+    asParameter: true
+- Projection:
+    name: CE24
+    newName: CE24_proj_
+    asParameter: true
+- ExcelWriter:
+    file: /Users/pm.deoliveiradejes/Dropbox (Personal)/Maestria en Energia (MISE)/MISE_E4/MISE_E4-main/M1.7_Energy_Communitty_Dispatch/Ejemplo_1_MINLP/energy_community_CDS/24h/Gams/M1_7_E1e_export.xlsx
+    valueSubstitutions: {
+      EPS: EPS,
+      INF: INF,
+      -INF: -INF,
+      UNDEF: UNDEF,
+      NA: NA
+    }
+    symbols:
+      - name: t
+        range: t!A1
+        columnDimension: 0
+      - name: data
+        range: data!A1
+        columnDimension: 0
+      - name: pbmax1
+        range: pbmax1!A1
+        columnDimension: 0
+      - name: Plu1
+        range: Plu1!A1
+        columnDimension: 0
+      - name: pbmax2
+        range: pbmax2!A1
+        columnDimension: 0
+      - name: Plu2
+        range: Plu2!A1
+        columnDimension: 0
+      - name: npv_proj_
+        range: npv!A1
+        columnDimension: 1
+      - name: Benefit1_proj_
+        range: Benefit1!A1
+        columnDimension: 1
+      - name: Capacity1_proj_
+        range: Capacity1!A1
+        columnDimension: 1
+      - name: Energy1_proj_
+        range: Energy1!A1
+        columnDimension: 1
+      - name: CashFlow1_proj_
+        range: CashFlow1!A1
+        columnDimension: 1
+      - name: npv1_proj_
+        range: npv1!A1
+        columnDimension: 1
+      - name: Base1_proj_
+        range: Base1!A1
+        columnDimension: 1
+      - name: Benefit2_proj_
+        range: Benefit2!A1
+        columnDimension: 1
+      - name: Capacity2_proj_
+        range: Capacity2!A1
+        columnDimension: 1
+      - name: Energy2_proj_
+        range: Energy2!A1
+        columnDimension: 1
+      - name: CashFlow2_proj_
+        range: CashFlow2!A1
+        columnDimension: 1
+      - name: npv2_proj_
+        range: npv2!A1
+        columnDimension: 1
+      - name: Base2_proj_
+        range: Base2!A1
+        columnDimension: 1
+      - name: IndustryProfit_proj_
+        range: IndustryProfit!A1
+        columnDimension: 1
+      - name: CW_proj_
+        range: CW!A1
+        columnDimension: 1
+      - name: EP1_proj_
+        range: EP1!A1
+        columnDimension: 1
+      - name: EP2_proj_
+        range: EP2!A1
+        columnDimension: 1
+      - name: E1_proj_
+        range: E1!A1
+        columnDimension: 1
+      - name: E2_proj_
+        range: E2!A1
+        columnDimension: 1
+      - name: APA_proj_
+        range: APA!A1
+        columnDimension: 1
+      - name: I1_Profit_proj_
+        range: I1_Profit!A1
+        columnDimension: 1
+      - name: I2_Profit_proj_
+        range: I2_Profit!A1
+        columnDimension: 1
+      - name: AP1_proj_
+        range: AP1!A1
+        columnDimension: 1
+      - name: AP2_proj_
+        range: AP2!A1
+        columnDimension: 1
+      - name: IndustryProfitnoCDS_BESS_PV1_proj_
+        range: IndustryProfitnoCDS_BESS_PV1!A1
+        columnDimension: 1
+      - name: IndustryProfitnoCDS_BESS_PV2_proj_
+        range: IndustryProfitnoCDS_BESS_PV2!A1
+        columnDimension: 1
+      - name: SOC1_proj_
+        range: SOC1!A1
+        columnDimension: 1
+      - name: Pd1_proj_
+        range: Pd1!A1
+        columnDimension: 1
+      - name: Pc1_proj_
+        range: Pc1!A1
+        columnDimension: 1
+      - name: Pb1_proj_
+        range: Pb1!A1
+        columnDimension: 1
+      - name: Ps1_proj_
+        range: Ps1!A1
+        columnDimension: 1
+      - name: Investment1_proj_
+        range: Investment1!A1
+        columnDimension: 1
+      - name: Wload1_proj_
+        range: Wload1!A1
+        columnDimension: 1
+      - name: Wpvtot1_proj_
+        range: Wpvtot1!A1
+        columnDimension: 1
+      - name: Wimport1_proj_
+        range: Wimport1!A1
+        columnDimension: 1
+      - name: Wexport1_proj_
+        range: Wexport1!A1
+        columnDimension: 1
+      - name: WcargaBESS1_proj_
+        range: WcargaBESS1!A1
+        columnDimension: 1
+      - name: WdescargaBESS1_proj_
+        range: WdescargaBESS1!A1
+        columnDimension: 1
+      - name: SOC2_proj_
+        range: SOC2!A1
+        columnDimension: 1
+      - name: Pd2_proj_
+        range: Pd2!A1
+        columnDimension: 1
+      - name: Pc2_proj_
+        range: Pc2!A1
+        columnDimension: 1
+      - name: Pb2_proj_
+        range: Pb2!A1
+        columnDimension: 1
+      - name: Ps2_proj_
+        range: Ps2!A1
+        columnDimension: 1
+      - name: Investment2_proj_
+        range: Investment2!A1
+        columnDimension: 1
+      - name: Wload2_proj_
+        range: Wload2!A1
+        columnDimension: 1
+      - name: Wpvtot2_proj_
+        range: Wpvtot2!A1
+        columnDimension: 1
+      - name: Wimport2_proj_
+        range: Wimport2!A1
+        columnDimension: 1
+      - name: Wexport2_proj_
+        range: Wexport2!A1
+        columnDimension: 1
+      - name: WcargaBESS2_proj_
+        range: WcargaBESS2!A1
+        columnDimension: 1
+      - name: WdescargaBESS2_proj_
+        range: WdescargaBESS2!A1
+        columnDimension: 1
+      - name: P12CDS_proj_
+        range: P12CDS!A1
+        columnDimension: 1
+      - name: P21CDS_proj_
+        range: P21CDS!A1
+        columnDimension: 1
+      - name: epsilon_proj_
+        range: epsilon!A1
+        columnDimension: 1
+      - name: delta_proj_
+        range: delta!A1
+        columnDimension: 1
+      - name: w11_proj_
+        range: w11!A1
+        columnDimension: 1
+      - name: w31_proj_
+        range: w31!A1
+        columnDimension: 1
+      - name: w12_proj_
+        range: w12!A1
+        columnDimension: 1
+      - name: w32_proj_
+        range: w32!A1
+        columnDimension: 1
+      - name: v12_proj_
+        range: v12!A1
+        columnDimension: 1
+      - name: Ppvmax1
+        range: Ppvmax1!A1
+        columnDimension: 0
+      - name: Plmax1
+        range: Plmax1!A1
+        columnDimension: 0
+      - name: SOC01
+        range: SOC01!A1
+        columnDimension: 0
+      - name: C1
+        range: C1!A1
+        columnDimension: 0
+      - name: eff_c1
+        range: eff_c1!A1
+        columnDimension: 0
+      - name: eff_d1
+        range: eff_d1!A1
+        columnDimension: 0
+      - name: R_c1
+        range: R_c1!A1
+        columnDimension: 0
+      - name: R_d1
+        range: R_d1!A1
+        columnDimension: 0
+      - name: DoD1
+        range: DoD1!A1
+        columnDimension: 0
+      - name: Pmax1
+        range: Pmax1!A1
+        columnDimension: 0
+      - name: Capacity01
+        range: Capacity01!A1
+        columnDimension: 0
+      - name: Ppvmax2
+        range: Ppvmax2!A1
+        columnDimension: 0
+      - name: Plmax2
+        range: Plmax2!A1
+        columnDimension: 0
+      - name: SOC02
+        range: SOC02!A1
+        columnDimension: 0
+      - name: C2
+        range: C2!A1
+        columnDimension: 0
+      - name: eff_c2
+        range: eff_c2!A1
+        columnDimension: 0
+      - name: eff_d2
+        range: eff_d2!A1
+        columnDimension: 0
+      - name: R_c2
+        range: R_c2!A1
+        columnDimension: 0
+      - name: R_d2
+        range: R_d2!A1
+        columnDimension: 0
+      - name: DoD2
+        range: DoD2!A1
+        columnDimension: 0
+      - name: Pmax2
+        range: Pmax2!A1
+        columnDimension: 0
+      - name: Capacity02
+        range: Capacity02!A1
+        columnDimension: 0
+      - name: kappaP1
+        range: kappaP1!A1
+        columnDimension: 0
+      - name: kappaP2
+        range: kappaP2!A1
+        columnDimension: 0
+      - name: kappaP3
+        range: kappaP3!A1
+        columnDimension: 0
+      - name: kappaP4
+        range: kappaP4!A1
+        columnDimension: 0
+      - name: kappaP5
+        range: kappaP5!A1
+        columnDimension: 0
+      - name: kappaP6
+        range: kappaP6!A1
+        columnDimension: 0
+      - name: CAPEXpv
+        range: CAPEXpv!A1
+        columnDimension: 0
+      - name: CAPEX_BESS
+        range: CAPEX_BESS!A1
+        columnDimension: 0
+      - name: CAPEX_BESS_inverter
+        range: CAPEX_BESS_inverter!A1
+        columnDimension: 0
+      - name: crf
+        range: crf!A1
+        columnDimension: 0
+      - name: varphib
+        range: varphib!A1
+        columnDimension: 0
+      - name: varphis
+        range: varphis!A1
+        columnDimension: 0
+      - name: PmaxCDS
+        range: PmaxCDS!A1
+        columnDimension: 0
+      - name: CAPEX_I1
+        range: CAPEX_I1!A1
+        columnDimension: 0
+      - name: CAPEX_I2
+        range: CAPEX_I2!A1
+        columnDimension: 0
+      - name: BcalcA_proj_
+        range: BcalcA!A1
+        columnDimension: 1
+      - name: Bcalc1A_proj_
+        range: Bcalc1A!A1
+        columnDimension: 1
+      - name: Bcalc2A_proj_
+        range: Bcalc2A!A1
+        columnDimension: 1
+      - name: balanceA_proj_
+        range: balanceA!A1
+        columnDimension: 1
+      - name: r1A_proj_
+        range: r1A!A1
+        columnDimension: 1
+      - name: r2A_proj_
+        range: r2A!A1
+        columnDimension: 1
+      - name: r3A_proj_
+        range: r3A!A1
+        columnDimension: 1
+      - name: r4A_proj_
+        range: r4A!A1
+        columnDimension: 1
+      - name: r5A_proj_
+        range: r5A!A1
+        columnDimension: 1
+      - name: r6A_proj_
+        range: r6A!A1
+        columnDimension: 1
+      - name: r7A_proj_
+        range: r7A!A1
+        columnDimension: 1
+      - name: r8A_proj_
+        range: r8A!A1
+        columnDimension: 1
+      - name: r9A_proj_
+        range: r9A!A1
+        columnDimension: 1
+      - name: r10A_proj_
+        range: r10A!A1
+        columnDimension: 1
+      - name: r11A_proj_
+        range: r11A!A1
+        columnDimension: 1
+      - name: r12A_proj_
+        range: r12A!A1
+        columnDimension: 1
+      - name: r13A_proj_
+        range: r13A!A1
+        columnDimension: 1
+      - name: r14A_proj_
+        range: r14A!A1
+        columnDimension: 1
+      - name: r15A_proj_
+        range: r15A!A1
+        columnDimension: 1
+      - name: r16A_proj_
+        range: r16A!A1
+        columnDimension: 1
+      - name: BcalcB_proj_
+        range: BcalcB!A1
+        columnDimension: 1
+      - name: Bcalc1B_proj_
+        range: Bcalc1B!A1
+        columnDimension: 1
+      - name: Bcalc2B_proj_
+        range: Bcalc2B!A1
+        columnDimension: 1
+      - name: balanceB_proj_
+        range: balanceB!A1
+        columnDimension: 1
+      - name: r1B_proj_
+        range: r1B!A1
+        columnDimension: 1
+      - name: r2B_proj_
+        range: r2B!A1
+        columnDimension: 1
+      - name: r3B_proj_
+        range: r3B!A1
+        columnDimension: 1
+      - name: r4B_proj_
+        range: r4B!A1
+        columnDimension: 1
+      - name: r5B_proj_
+        range: r5B!A1
+        columnDimension: 1
+      - name: r6B_proj_
+        range: r6B!A1
+        columnDimension: 1
+      - name: r7B_proj_
+        range: r7B!A1
+        columnDimension: 1
+      - name: r8B_proj_
+        range: r8B!A1
+        columnDimension: 1
+      - name: r9B_proj_
+        range: r9B!A1
+        columnDimension: 1
+      - name: r10B_proj_
+        range: r10B!A1
+        columnDimension: 1
+      - name: r11B_proj_
+        range: r11B!A1
+        columnDimension: 1
+      - name: r12B_proj_
+        range: r12B!A1
+        columnDimension: 1
+      - name: r13B_proj_
+        range: r13B!A1
+        columnDimension: 1
+      - name: r14B_proj_
+        range: r14B!A1
+        columnDimension: 1
+      - name: r15B_proj_
+        range: r15B!A1
+        columnDimension: 1
+      - name: r16B_proj_
+        range: r16B!A1
+        columnDimension: 1
+      - name: CE0_proj_
+        range: CE0!A1
+        columnDimension: 1
+      - name: CE1_proj_
+        range: CE1!A1
+        columnDimension: 1
+      - name: CE2_proj_
+        range: CE2!A1
+        columnDimension: 1
+      - name: CE3_proj_
+        range: CE3!A1
+        columnDimension: 1
+      - name: CE4_proj_
+        range: CE4!A1
+        columnDimension: 1
+      - name: CE5_proj_
+        range: CE5!A1
+        columnDimension: 1
+      - name: CE6_proj_
+        range: CE6!A1
+        columnDimension: 1
+      - name: CE7_proj_
+        range: CE7!A1
+        columnDimension: 1
+      - name: CE8_proj_
+        range: CE8!A1
+        columnDimension: 1
+      - name: CE9_proj_
+        range: CE9!A1
+        columnDimension: 1
+      - name: CE10_proj_
+        range: CE10!A1
+        columnDimension: 1
+      - name: CE10b_proj_
+        range: CE10b!A1
+        columnDimension: 1
+      - name: CE11_proj_
+        range: CE11!A1
+        columnDimension: 1
+      - name: CE12_proj_
+        range: CE12!A1
+        columnDimension: 1
+      - name: CE13_proj_
+        range: CE13!A1
+        columnDimension: 1
+      - name: CE14_proj_
+        range: CE14!A1
+        columnDimension: 1
+      - name: CE15_proj_
+        range: CE15!A1
+        columnDimension: 1
+      - name: CE16_proj_
+        range: CE16!A1
+        columnDimension: 1
+      - name: CE17_proj_
+        range: CE17!A1
+        columnDimension: 1
+      - name: CE18_proj_
+        range: CE18!A1
+        columnDimension: 1
+      - name: CE19_proj_
+        range: CE19!A1
+        columnDimension: 1
+      - name: CE20_proj_
+        range: CE20!A1
+        columnDimension: 1
+      - name: CE21_proj_
+        range: CE21!A1
+        columnDimension: 1
+      - name: CE22_proj_
+        range: CE22!A1
+        columnDimension: 1
+      - name: CE23_proj_
+        range: CE23!A1
+        columnDimension: 1
+      - name: CE24_proj_
+        range: CE24!A1
+        columnDimension: 1

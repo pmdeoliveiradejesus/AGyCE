@@ -1,0 +1,69 @@
+
+
+COMPILATION TIME     =        0.000 SECONDS      3 MB  48.6.1 67fbb04b LEX-LEG
+GAMS 48.6.1  67fbb04b Jan 23, 2025          LEX-LEG x86 64bit/Linux - 05/25/25 22:22:49 Page 1
+M_1_7_E1e Energy Community 1 and 2 with a CDS - Dispatch MINLP (spain 24h)
+Range Statistics    SOLVE modelCW Using MINLP From line 254
+
+
+RANGE STATISTICS (ABSOLUTE NON-ZERO FINITE VALUES)
+
+RHS       [min, max] : [ 3.684E-02, 1.866E+06] - Zero values observed as well
+Bound     [min, max] : [ 1.000E+00, 2.660E+03] - Zero values observed as well
+Matrix    [min, max] : [ 4.563E-01, 1.187E+06] - Zero values observed as well
+
+GAMS 48.6.1  67fbb04b Jan 23, 2025          LEX-LEG x86 64bit/Linux - 05/25/25 22:22:49 Page 2
+M_1_7_E1e Energy Community 1 and 2 with a CDS - Dispatch MINLP (spain 24h)
+Model Statistics    SOLVE modelCW Using MINLP From line 254
+
+
+MODEL STATISTICS
+
+BLOCKS OF EQUATIONS          66     SINGLE EQUATIONS          480
+BLOCKS OF VARIABLES          59     SINGLE VARIABLES          473  46 projected
+NON ZERO ELEMENTS         1,618     NON LINEAR N-Z            144
+CODE LENGTH                 390     CONSTANT POOL              19     
+DISCRETE VARIABLES        120
+
+
+GENERATION TIME      =        0.005 SECONDS      4 MB  48.6.1 67fbb04b LEX-LEG
+GAMS 48.6.1  67fbb04b Jan 23, 2025          LEX-LEG x86 64bit/Linux - 05/25/25 22:22:49 Page 3
+M_1_7_E1e Energy Community 1 and 2 with a CDS - Dispatch MINLP (spain 24h)
+Solution Report     SOLVE modelCW Using MINLP From line 254
+
+
+               S O L V E      S U M M A R Y
+
+     MODEL   modelCW             OBJECTIVE  IndustryProfit
+     TYPE    MINLP               DIRECTION  MAXIMIZE
+     SOLVER  MOSEK               FROM LINE  254
+
+**** SOLVER STATUS     6 Capability Problems
+**** MODEL STATUS      14 No Solution Returned
+**** OBJECTIVE VALUE               NA
+
+ RESOURCE USAGE, LIMIT          0.015 10000000000.000
+ ITERATION COUNT, LIMIT        NA    2147483647
+ EVALUATION ERRORS             NA             0
+Extraction of quadratics (ThreePass algorithm): 0.00s
+
+
+No solution returned
+GAMS 48.6.1  67fbb04b Jan 23, 2025          LEX-LEG x86 64bit/Linux - 05/25/25 22:22:49 Page 4
+M_1_7_E1e Energy Community 1 and 2 with a CDS - Dispatch MINLP (spain 24h)
+E x e c u t i o n
+
+
+EXECUTION TIME       =        0.053 SECONDS      4 MB  48.6.1 67fbb04b LEX-LEG
+
+
+USER: NEOS Server License prod-exec-1.neos-server.orgS241211/0001AB-GEN
+      mac@44:a8:42:25:df:6c                                     DCE1890
+      License for teaching and research at degree granting institutions
+
+
+**** FILE SUMMARY
+
+Restart    /var/lib/condor/execute/dir_3004940/gamsexec/restart.g00
+Input      /var/lib/condor/execute/dir_3004940/gamsexec/MODEL.gms
+Output     /var/lib/condor/execute/dir_3004940/gamsexec/solve.lst

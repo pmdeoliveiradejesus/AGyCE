@@ -1,0 +1,133 @@
+
+--- Job M1_5_E2c.gms Start 05/22/25 14:57:41 49.5.0 b32bf9f5 WEX-WEI x86 64bit/MS Windows
+--- Applying:
+    C:\GAMS\49\gmsprmNT.txt
+--- GAMS Parameters defined
+    Input "C:\Users\pm.deoliveiradejes\Dropbox\Maestria en Energia (MISE)\MISE_E4\MISE_E4-main\M1.5_Self-Generation_Dispatch Hydrogen\Ejemplo_2_H\gams\M1_5_E2c.gms"
+    PageSize 0
+    ScrDir "C:\Users\pm.deoliveiradejes\Dropbox\Maestria en Energia (MISE)\MISE_E4\MISE_E4-main\M1.5_Self-Generation_Dispatch Hydrogen\Ejemplo_2_H\gams\225a\"
+    SysDir C:\GAMS\49\
+    LogOption 3
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+Licensee: Academic User                                  G240823+0003Ac-GEN
+          pm.deoliveiradejes@uniandes.edu.co                      CLA100108
+          225a\gamslice.dat
+          node:36839801 mem:8 cores:4 ipport:56634 v:2                     
+          Community license for demonstration and instructional purposes only
+System information: 4 physical cores and 8 Gb memory detected
+GAMS 49.5.0   Copyright (C) 1987-2025 GAMS Development. All rights reserved
+--- Starting compilation
+--- M1_5_E2c.gms(215) 3 Mb
+--- Starting execution: elapsed 0:00:00.038
+--- M1_5_E2c.gms(206) 4 Mb
+--- Generating MIP model AGPE_H2
+--- M1_5_E2c.gms(211) 4 Mb
+---   527 rows  405 columns  1,446 non-zeroes
+---   166 discrete-columns
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 1.000E+00, 1.285E+06] - Zero values observed as well
+--- Bound     [min, max] : [ 1.000E+00, 1.900E+03] - Zero values observed as well
+--- Matrix    [min, max] : [ 1.500E-02, 3.431E+03]
+--- Executing GUROBI (Solvelink=2): elapsed 0:00:00.053
+
+Gurobi           49.5.0 b32bf9f5 Apr 29, 2025          WEI x86 64bit/MS Window
+
+*** This solver runs with a community license. No commercial use.
+Gurobi library version 12.0.1
+GAMS/Gurobi demo/community requires a Gurobi license from Gurobi Optimization.
+Set parameter OutputFlag to value 1
+Set parameter MIPGap to value 0.0001
+Set parameter MIPGapAbs to value 0
+Space for names approximately 0.01 Mb
+Use option 'names no' to turn use of names off
+Set parameter OutputFlag to value 1
+Starting Gurobi...
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 10.0 (19045.2))
+
+CPU model: Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz, instruction set [SSE2|AVX]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Non-default parameters:
+MIPGapAbs  0
+
+Academic license 2663428 - for non-commercial use only - registered to pm___@uniandes.edu.co
+Optimize a model with 526 rows, 404 columns and 1442 nonzeros
+Model fingerprint: 0x0f87d840
+Variable types: 238 continuous, 166 integer (166 binary)
+Coefficient statistics:
+  Matrix range     [1e-02, 3e+03]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 2e+03]
+  RHS range        [1e+00, 1e+06]
+Presolve removed 258 rows and 137 columns
+Presolve time: 0.02s
+Presolved: 268 rows, 267 columns, 801 nonzeros
+Variable types: 134 continuous, 133 integer (133 binary)
+
+Root relaxation: objective 8.835364e+04, 66 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0    88353.638754 88353.6388  0.00%     -    0s
+
+Explored 1 nodes (66 simplex iterations) in 0.02 seconds (0.00 work units)
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 88353.6 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.835363875444e+04, best bound 8.835363875444e+04, gap 0.0000%
+
+User-callback calls 574, time in user-callback 0.00 sec
+MIP status(2): Model was solved to optimality (subject to tolerances).
+
+Solving fixed MIP.
+Gurobi Optimizer version 12.0.1 build v12.0.1rc0 (win64 - Windows 10.0 (19045.2))
+
+CPU model: Intel(R) Core(TM) i7-2600 CPU @ 3.40GHz, instruction set [SSE2|AVX]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Non-default parameters:
+MIPGapAbs  0
+
+Academic license 2663428 - for non-commercial use only - registered to pm___@uniandes.edu.co
+Optimize a model with 526 rows, 404 columns and 1442 nonzeros
+Model fingerprint: 0xc8998e02
+Coefficient statistics:
+  Matrix range     [1e-02, 3e+03]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 2e+03]
+  RHS range        [1e+00, 1e+06]
+Presolve removed 499 rows and 333 columns
+Presolve time: 0.00s
+Presolved: 27 rows, 71 columns, 120 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.1380589e+05   2.592635e+02   0.000000e+00      0s
+      18    8.8353639e+04   0.000000e+00   0.000000e+00      0s
+
+Solved in 18 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  8.835363875e+04
+
+User-callback calls 101, time in user-callback 0.00 sec
+Fixed MIP status(2): Model was solved to optimality (subject to tolerances).
+
+MIP   Solution:      88353.638754    (66 iterations, 1 nodes)
+Final Solve:         88353.638754    (18 iterations)
+
+Best possible:       88353.638754
+Absolute gap:           -0.000000
+Relative gap:            0.000000
+
+--- Reading solution for model AGPE_H2
+--- Executing after solve: elapsed 0:00:00.269
+--- M1_5_E2c.gms(215) 4 Mb
+--- GDX File (execute_unload) C:\Users\pm.deoliveiradejes\Dropbox\Maestria en Energia (MISE)\MISE_E4\MISE_E4-main\M1.5_Self-Generation_Dispatch Hydrogen\Ejemplo_2_H\gams\Results_M1_5_E2c.gdx
+*** Status: Normal completion
+--- Job M1_5_E2c.gms Stop 05/22/25 14:57:41 elapsed 0:00:00.285
+Cannot delete file: 225a\gmsprmNT.dat
+Cannot delete directory: 225a

@@ -1,0 +1,94 @@
+--- Job MODEL.gms Start 05/25/25 22:22:49 48.6.1 67fbb04b LEX-LEG x86 64bit/Linux
+--- Applying:
+--- GAMS Parameters defined
+    Restart /var/lib/condor/execute/dir_3004940/gamsexec/restart.g00
+    Input /var/lib/condor/execute/dir_3004940/gamsexec/MODEL.gms
+    Output /var/lib/condor/execute/dir_3004940/gamsexec/solve.lst
+    PageWidth 79
+    PageSize 0
+    ScrDir /var/lib/condor/execute/dir_3004940/neos-3004942/
+    SysDir /opt/gams/48.6.1/
+    CurDir /var/lib/condor/execute/dir_3004940/gamsexec/
+    LogOption 4
+    LogFile /var/lib/condor/execute/dir_3004940/gamsexec/solve.log
+    AppendOut 1
+    AppendLog 0
+    Suppress 0
+    CErr 10
+    ErrMsg 1
+    ErrorLog 99
+    LimRow 0
+    LimCol 0
+    IDE 1
+    GDX /var/lib/condor/execute/dir_3004940/gamsexec/out.gdx
+    ExecMode 3
+    gdxCompress 1
+    Solver cbc
+    LstTitleLeftAligned 1
+Licensee: NEOS Server License prod-exec-1.neos-server.orgS241211/0001AB-GEN
+          mac@44:a8:42:25:df:6c                                     DCE1890
+          /opt/gams/48.6.1/gamslice.txt
+          Evaluation license: Not for commercial or production use
+          The expiration date of time-limited license is Dec 06, 2025
+Processor information: 2 socket(s), 32 core(s), and 64 thread(s) available
+GAMS 48.6.1   Copyright (C) 1987-2025 GAMS Development. All rights reserved
+--- Starting continued compilation
+--- Workfile was generated under GAMS version DEX430-430
+--- MODEL.gms(4) 3 Mb[FIL:"/var/lib/condor/execute/dir_3004940/gamsexec/MODEL.gms",4,0]
+--- Starting execution: elapsed 0:00:00.015[LST:5]
+--- MODEL.gms(251) 4 Mb[FIL:"/var/lib/condor/execute/dir_3004940/gamsexec/MODEL.gms",251,0]
+--- Generating MINLP model modelCW[LST:5]
+--- MODEL.gms(254) 6 Mb[FIL:"/var/lib/condor/execute/dir_3004940/gamsexec/MODEL.gms",254,0]
+---   480 rows  473 columns  1,618 non-zeroes
+---   390 nl-code  144 nl-non-zeroes
+---   120 discrete-columns
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 3.684E-02, 1.866E+06] - Zero values observed as well
+--- Bound     [min, max] : [ 1.000E+00, 2.660E+03] - Zero values observed as well
+--- Matrix    [min, max] : [ 4.563E-01, 1.187E+06] - Zero values observed as well
+--- MODEL.gms(254) 4 Mb[FIL:"/var/lib/condor/execute/dir_3004940/gamsexec/MODEL.gms",254,0]
+--- Executing MOSEK (Solvelink=2): elapsed 0:00:00.020[LST:19]
+
+MOSEK            48.6.1 67fbb04b Jan 23, 2025          LEG x86 64bit/Linux    
+
+	M O S E K       version 10.2.11 (Build date: 2024-12-3 12:27:52)
+	Copyright (C)   MOSEK ApS, Fruebjergvej 3, Box 16
+	                DK-2100 Copenhagen, Denmark
+	                https://www.mosek.com
+
+
+Extraction of quadratics (ThreePass algorithm): 0.00s
+Setting up initial integer solution.
+Problem
+  Name                   :                 
+  Objective sense        : maximize        
+  Type                   : QCQO (quadratically constrained optimization problem)
+  Constraints            : 480             
+  Affine conic cons.     : 0               
+  Disjunctive cons.      : 0               
+  Cones                  : 0               
+  Scalar variables       : 473             
+  Matrix variables       : 0               
+  Integer variables      : 120             
+
+Optimizer started.
+Quadratic to conic reformulation started.
+Nonconvex model detected. Constraint 'CE4'(366) is a nonlinear equality.
+ (*1290*)
+Quadratic to conic reformulation terminated. Time: 0.00    
+Optimizer terminated. Time: 0.02    
+
+
+Integer solution solution summary
+  Problem status  : UNKNOWN
+  Solution status : UNKNOWN
+  Primal.  obj: 0.0000000000e+00    nrm: 1e+02    Viol.  con: 2e+06    var: 0e+00    itg: 0e+00  
+
+Return code - 1290 [MSK_RES_ERR_NONLINEAR_EQUALITY]: The model contains a nonlinear equality.
+
+--- Reading solution for model modelCW[LST:31]
+--- Executing after solve: elapsed 0:00:00.067[LST:53]
+--- GDX File (execute_unload) /var/lib/condor/execute/dir_3004940/gamsexec/M1_7_E1e.gdx[FIL:"/var/lib/condor/execute/dir_3004940/gamsexec/M1_7_E1e.gdx",0,0]
+--- GDX File /var/lib/condor/execute/dir_3004940/gamsexec/out.gdx[FIL:"/var/lib/condor/execute/dir_3004940/gamsexec/out.gdx",0,0]
+*** Status: Normal completion[LST:70]
+--- Job MODEL.gms Stop 05/25/25 22:22:49 elapsed 0:00:00.069

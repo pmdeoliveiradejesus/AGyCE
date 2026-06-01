@@ -41,16 +41,65 @@ E 477 Investment
 E 485 Exc1
 E 494 Exc2
 E 502 Imp
-E 513 expo
-E 521 Wload
-E 528 Wpvtot
-E 535 Wimport
-E 542 Wexport
-E 549 WcargaBESS
-E 556 WdescargaBESS
-E 563 w1
-E 582 w3
-B 602 Range Statistics    SOLVE modelAGPEcolombia Using MIP From line 121
-B 613 Model Statistics    SOLVE modelAGPEcolombia Using MIP From line 121
-B 626 Solution Report     SOLVE modelAGPEcolombia Using MIP From line 121
-B 692 E x e c u t i o n
+E 511 expo
+E 519 Wload
+E 526 Wpvtot
+E 533 Wimport
+E 540 Wexport
+E 547 WcargaBESS
+E 554 WdescargaBESS
+E 561 w1
+E 580 w3
+B 600 Range Statistics    SOLVE modelAGPEcolombia Using MIP From line 121
+B 611 Model Statistics    SOLVE modelAGPEcolombia Using MIP From line 121
+B 624 Solution Report     SOLVE modelAGPEcolombia Using MIP From line 121
+F 720 AGPE
+F 722 balance
+F 753 r1
+F 754 r2
+F 755 r3
+F 756 r4a
+F 757 r4b
+F 758 r5
+F 760 r6
+F 789 r7
+F 818 r8
+F 847 r9
+F 876 r10
+F 907 r11
+F 909 r12
+F 940 r13
+F 941 r14
+F 942 r15
+F 943 r16
+F 944 r17
+F 945 r18
+F 946 r19
+F 947 r20
+F 948 r21
+F 949 r22
+G 953 Benefit
+G 954 VE
+G 955 CashFlow
+G 956 npv
+G 957 Base
+G 958 Backup
+G 967 SOC
+G 996 Pd
+G 1025 Pc
+G 1054 Pb
+G 1083 Ps
+G 1114 Investment
+G 1115 Exc1
+G 1116 Exc2
+G 1117 Imp
+G 1118 expo
+G 1119 Wload
+G 1120 Wpvtot
+G 1121 Wimport
+G 1122 Wexport
+G 1123 WcargaBESS
+G 1124 WdescargaBESS
+G 1138 w1
+G 1167 w3
+B 1202 E x e c u t i o n
