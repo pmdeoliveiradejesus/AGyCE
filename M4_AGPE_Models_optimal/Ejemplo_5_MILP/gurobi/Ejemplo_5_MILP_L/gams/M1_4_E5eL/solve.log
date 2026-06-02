@@ -1,0 +1,92 @@
+--- Job MODEL.gms Start 05/19/26 14:51:09 52.5.0 9bc771bf LEX-LEG x86 64bit/Linux
+--- Applying:
+--- GAMS Parameters defined
+    Restart /var/lib/condor/execute/dir_1070896/gamsexec/restart.g00
+    Input /var/lib/condor/execute/dir_1070896/gamsexec/MODEL.gms
+    Output /var/lib/condor/execute/dir_1070896/gamsexec/solve.lst
+    PageWidth 79
+    PageSize 0
+    ScrDir /var/lib/condor/execute/dir_1070896/neos-1070899/
+    SysDir /opt/gams/52.5.0/
+    CurDir /var/lib/condor/execute/dir_1070896/gamsexec/
+    LogOption 4
+    LogFile /var/lib/condor/execute/dir_1070896/gamsexec/solve.log
+    AppendOut 1
+    AppendLog 1
+    Suppress 0
+    CErr 10
+    OptFile 1
+    ErrMsg 1
+    ErrorLog 99
+    LimRow 0
+    LimCol 0
+    IDE 1
+    GDX /var/lib/condor/execute/dir_1070896/gamsexec/out.gdx
+    ExecMode 3
+    gdxCompress 1
+    Solver cbc
+    LstTitleLeftAligned 1
+Licensee: NEOS Server License - Production               G250831+0003Ac-GEN
+          University of Wisconsin-Madison                           DCE4604
+          /opt/gams/52.5.0/gamslice.txt
+          e4521daf-6d87-4ac7
+          node:68007503 v:2                                                
+          Evaluation license: Not for commercial or production use
+          The time-limited license stops working on : Jan 23, 2027
+System information: 12 physical cores and 63 Gb physical memory detected
+GAMS 52.5.0   Copyright (C) 1987-2026 GAMS Development. All rights reserved
+--- Starting continued compilation
+--- Workfile was generated under GAMS version WEX490-490
+--- MODEL.gms(4) 6 Mb[FIL:"/var/lib/condor/execute/dir_1070896/gamsexec/MODEL.gms",4,0]
+--- Starting execution: elapsed 0:00:00.023[LST:10]
+--- MODEL.gms(52655) 8 Mb[FIL:"/var/lib/condor/execute/dir_1070896/gamsexec/MODEL.gms",52655,0]
+--- Generating MIP model modelAGspain[LST:10]
+--- MODEL.gms(52680) 25 Mb[FIL:"/var/lib/condor/execute/dir_1070896/gamsexec/MODEL.gms",52680,0]
+---   61,333 rows  61,333 columns  200,966 non-zeroes
+---   17,520 discrete-columns
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 2.970E-02, 9.596E+05] - Zero values observed as well
+--- Bound     [min, max] : [ 1.000E+00, 1.900E+03] - Zero values observed as well
+--- Matrix    [min, max] : [ 1.000E-05, 6.000E+02]
+--- Executing CBC (Solvelink=2): elapsed 0:00:00.209[LST:23]
+
+COIN-OR CBC      52.5.0 9bc771bf Jan 28, 2026          LEG x86 64bit/Linux    
+
+COIN-OR Branch and Cut (CBC Library 2.10.11)
+written by J. Forrest
+Space for names approximately 2 MB.
+Use statement '<modelname>.dictfile=0;' to turn dictionary off.
+Reading parameter(s) from "/var/lib/condor/execute/dir_1070896/gamsexec/cbc.opt"
+>> 
+>>  threads=4
+Finished reading from "/var/lib/condor/execute/dir_1070896/gamsexec/cbc.opt"
+
+Parallel mode: deterministic, using 4 threads
+
+Calling CBC main solution routine...
+Integer solution of -18779.01 found by feasibility pump after 0 iterations and 0 nodes (11.29 seconds)
+Thread 0 used 0 times,  waiting to start 0.33853507, 0 cpu time, 0 locks, 0 locked, 0 waiting for locks
+Thread 1 used 0 times,  waiting to start 0.25862432, 0 cpu time, 0 locks, 0 locked, 0 waiting for locks
+Thread 2 used 0 times,  waiting to start 0.17186046, 0 cpu time, 0 locks, 0 locked, 0 waiting for locks
+Thread 3 used 0 times,  waiting to start 0.085567951, 0 cpu time, 0 locks, 0 locked, 0 waiting for locks
+Main thread 0 waiting for threads,  0 locks, 0 locked, 0 waiting for locks
+Search completed - best objective -18779.01013295965, took 0 iterations and 0 nodes (11.71 seconds)
+Maximum depth 0, 0 variables fixed on reduced cost
+
+Solved to optimality (within gap tolerances optca and optcr).
+MIP solution:   -1.877901e+04   (0 nodes, 34.83 CPU seconds, 35.49 wall clock seconds)
+
+Best possible:  -1.877901e+04
+Absolute gap:    1.600711e-10   (absolute tolerance optca: 0)
+Relative gap:    8.523935e-15   (relative tolerance optcr: 0.0001)
+
+Resolve with fixed discrete variables.
+0  Obj -19486.248 Primal inf 86282.531 (99) Dual inf 10.426395 (192)
+11  Obj -18779.01
+Optimal - objective value -18779.01
+--- Reading solution for model modelAGspain[LST:35]
+--- Executing after solve: elapsed 0:00:36.424[LST:122852]
+--- GDX File (execute_unload) /var/lib/condor/execute/dir_1070896/gamsexec/Results M1_4_E5eL.gdx[FIL:"/var/lib/condor/execute/dir_1070896/gamsexec/Results M1_4_E5eL.gdx",0,0]
+--- GDX File /var/lib/condor/execute/dir_1070896/gamsexec/out.gdx[FIL:"/var/lib/condor/execute/dir_1070896/gamsexec/out.gdx",0,0]
+*** Status: Normal completion[LST:122869]
+--- Job MODEL.gms Stop 05/19/26 14:51:46 elapsed 0:00:36.691

@@ -1,0 +1,23 @@
+--- Job M1_4_E5eL.gms Start 05/19/26 15:22:13 51.2.1 5fb43f63 DEX-DEG x86 64bit/macOS
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/51/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input "/Users/pm.deoliveiradejes/Library/CloudStorage/GoogleDrive-pdeoliv@gmail.com/My Drive/EDCO_2026_10/Módulo 3 - AG + BESS + H2/M1.4_Self-Generation_Dispatch/Ejemplo_5_MILP_L/gams/M1_4_E5eL.gms"
+    XSave "/Users/pm.deoliveiradejes/Library/CloudStorage/GoogleDrive-pdeoliv@gmail.com/My Drive/EDCO_2026_10/Módulo 3 - AG + BESS + H2/M1.4_Self-Generation_Dispatch/Ejemplo_5_MILP_L/gams/M1_4_E5eL.g0?"
+    PageSize 0
+    Action C
+    ScrDir "/Users/pm.deoliveiradejes/Library/CloudStorage/GoogleDrive-pdeoliv@gmail.com/My Drive/EDCO_2026_10/Módulo 3 - AG + BESS + H2/M1.4_Self-Generation_Dispatch/Ejemplo_5_MILP_L/gams/225a/"
+    SysDir /Library/Frameworks/GAMS.framework/Versions/51/Resources/
+    LogOption 3
+    AppendLog 1
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+    PreviousWork 1
+*** Time-limited license expired 116 days ago
+*** More than 30 days since expiration, sorry...
+*** Status: Terminated due to a licensing error
+***         License file: /Users/pm.deoliveiradejes/Library/Application Support/GAMS/gamslice.txt
+***         Inspect listing file for more information.
+--- Job M1_4_E5eL.gms Stop 05/19/26 15:22:14 elapsed 0:00:01.179

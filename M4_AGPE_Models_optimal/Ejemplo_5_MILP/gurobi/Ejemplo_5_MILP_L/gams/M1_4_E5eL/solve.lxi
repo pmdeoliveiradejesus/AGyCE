@@ -1,0 +1,45 @@
+B 3 C o m p i l a t i o n
+B 11 Range Statistics    SOLVE modelAGspain Using MIP From line 52680
+B 22 Model Statistics    SOLVE modelAGspain Using MIP From line 52680
+B 36 Solution Report     SOLVE modelAGspain Using MIP From line 52680
+F 86 Bcalc
+F 87 Bcalc1
+F 88 Bcalc2
+F 90 balance
+F 8855 r1
+F 17620 r2
+F 26385 r3
+F 35150 r4
+F 43915 r5
+F 52680 r6
+F 61447 r7
+F 61448 r8
+F 61449 r9
+F 61450 r10
+F 61451 r11
+F 61452 r12
+F 61453 r13
+F 61454 r14
+F 61455 r15
+F 61456 r16
+G 61460 Benefit
+G 61461 Capacity
+G 61462 Energy
+G 61463 CashFlow
+G 61464 npv
+G 61465 Base
+G 61474 SOC
+G 70239 Pd
+G 79004 Pc
+G 87769 Pb
+G 96534 Ps
+G 105301 Investment
+G 105302 Wload
+G 105303 Wpvtot
+G 105304 Wimport
+G 105305 Wexport
+G 105306 WcargaBESS
+G 105307 WdescargaBESS
+G 105317 w1
+G 114082 w3
+B 122853 E x e c u t i o n
