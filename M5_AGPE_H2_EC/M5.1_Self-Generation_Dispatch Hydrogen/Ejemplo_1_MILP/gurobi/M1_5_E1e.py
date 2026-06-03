@@ -91,10 +91,10 @@ eta_H2O   = 0.015          # m³ agua / kg H₂
 H2_price  = 4          # €/kg (escenario)
 H2O_price = 2.5            # €/m³
 Capacity0 = -31713.9
-CAPEXpv = 700
-CAPEX_BESS = 200
-CAPEX_BESS_inverter = 80
-CAPEXe = 400
+CAPEXpv = 400
+CAPEX_BESS = 150
+CAPEX_BESS_inverter = 50
+CAPEXe = 300
 crf       = 0.08024258719069
 
 # ── Límites SOC batería

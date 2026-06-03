@@ -1,4 +1,4 @@
-GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:50:00 Page 1
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/02/26 19:46:37 Page 1
 Despacho óptimo Industria + BESS + PV + Electrolizador (España)
 C o m p i l a t i o n
 
@@ -215,7 +215,7 @@ C o m p i l a t i o n
 
 
 COMPILATION TIME     =        0.000 SECONDS      3 MB  51.4.0 91cb996b WEX-WEI
-GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:50:00 Page 2
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/02/26 19:46:37 Page 2
 Despacho óptimo Industria + BESS + PV + Electrolizador (España)
 Equation Listing    SOLVE AGPE_ES_H2 Using MIP From line 208
 
@@ -575,7 +575,7 @@ r44..  - 365*Pd(t1) - 365*Pd(t2) - 365*Pd(t3) - 365*Pd(t4) - 365*Pd(t5) - 365*Pd
 
 r45..  - 365*P_E(t1) - 365*P_E(t2) - 365*P_E(t3) - 365*P_E(t4) - 365*P_E(t5) - 365*P_E(t6) - 365*P_E(t7) - 365*P_E(t8) - 365*P_E(t9) - 365*P_E(t10) - 365*P_E(t11) - 365*P_E(t12) - 365*P_E(t13) - 365*P_E(t14) - 365*P_E(t15) - 365*P_E(t16) - 365*P_E(t17) - 365*P_E(t18) - 365*P_E(t19) - 365*P_E(t20) - 365*P_E(t21) - 365*P_E(t22) - 365*P_E(t23) - 365*P_E(t24) + Welectrolizador =E= 0 ; (LHS = 0)
      
-GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:50:00 Page 3
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/02/26 19:46:37 Page 3
 Despacho óptimo Industria + BESS + PV + Electrolizador (España)
 Column Listing      SOLVE AGPE_ES_H2 Using MIP From line 208
 
@@ -1111,7 +1111,7 @@ Welectrolizador
                 (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
         1       r45
 
-GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:50:00 Page 4
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/02/26 19:46:37 Page 4
 Despacho óptimo Industria + BESS + PV + Electrolizador (España)
 Range Statistics    SOLVE AGPE_ES_H2 Using MIP From line 208
 
@@ -1122,7 +1122,7 @@ RHS       [min, max] : [ 1.000E+00, 9.596E+05] - Zero values observed as well
 Bound     [min, max] : [ 1.000E+00, 1.900E+03] - Zero values observed as well
 Matrix    [min, max] : [ 1.500E-02, 1.460E+03]
 
-GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:50:00 Page 5
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/02/26 19:46:37 Page 5
 Despacho óptimo Industria + BESS + PV + Electrolizador (España)
 Model Statistics    SOLVE AGPE_ES_H2 Using MIP From line 208
 
@@ -1134,8 +1134,8 @@ BLOCKS OF VARIABLES          35     SINGLE VARIABLES          401  23 projected
 NON ZERO ELEMENTS         1,413     DISCRETE VARIABLES        166
 
 
-GENERATION TIME      =        0.032 SECONDS      4 MB  51.4.0 91cb996b WEX-WEI
-GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:50:00 Page 6
+GENERATION TIME      =        0.312 SECONDS      4 MB  51.4.0 91cb996b WEX-WEI
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/02/26 19:46:37 Page 6
 Despacho óptimo Industria + BESS + PV + Electrolizador (España)
 Solution Report     SOLVE AGPE_ES_H2 Using MIP From line 208
 
@@ -1150,7 +1150,7 @@ Solution Report     SOLVE AGPE_ES_H2 Using MIP From line 208
 **** MODEL STATUS      1 Optimal
 **** OBJECTIVE VALUE           -16651.9085
 
- RESOURCE USAGE, LIMIT          0.099 10000000000.000
+ RESOURCE USAGE, LIMIT          0.124 10000000000.000
  ITERATION COUNT, LIMIT       174    2147483647
 
     Gurobi           51.4.0 91cb996b Nov 10, 2025          WEI x86 64bit/MS Window
@@ -1180,7 +1180,7 @@ Solution Report     SOLVE AGPE_ES_H2 Using MIP From line 208
     Variable types: 136 continuous, 135 integer (135 binary)
     Found heuristic solution: objective -55863.65923
     
-    Root relaxation: objective -1.663017e+04, 117 iterations, 0.02 seconds (0.00 work units)
+    Root relaxation: objective -1.663017e+04, 117 iterations, 0.00 seconds (0.00 work units)
     
         Nodes    |    Current Node    |     Objective Bounds      |     Work
      Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
@@ -1199,7 +1199,7 @@ Solution Report     SOLVE AGPE_ES_H2 Using MIP From line 208
       Implied bound: 2
       Relax-and-lift: 2
     
-    Explored 1 nodes (152 simplex iterations) in 0.09 seconds (0.01 work units)
+    Explored 1 nodes (152 simplex iterations) in 0.10 seconds (0.01 work units)
     Thread count was 8 (of 8 available processors)
     
     Solution count 7: -16651.9 -16651.9 -16658.4 ... -55863.7
@@ -1207,7 +1207,7 @@ Solution Report     SOLVE AGPE_ES_H2 Using MIP From line 208
     Optimal solution found (tolerance 1.00e-04)
     Best objective -1.665190845394e+04, best bound -1.665166903200e+04, gap 0.0014%
     
-    User-callback calls 603, time in user-callback 0.00 sec
+    User-callback calls 616, time in user-callback 0.00 sec
 
 ... Solving fixed model...
 
@@ -2391,12 +2391,12 @@ t24          .              .             1.0000         EPS
 **** REPORT SUMMARY :        0     NONOPT
                              0 INFEASIBLE
                              0  UNBOUNDED
-GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/01/26 17:50:00 Page 7
+GAMS 51.4.0  91cb996b Nov 10, 2025          WEX-WEI x86 64bit/MS Windows - 06/02/26 19:46:37 Page 7
 Despacho óptimo Industria + BESS + PV + Electrolizador (España)
 E x e c u t i o n
 
 
-EXECUTION TIME       =        0.250 SECONDS      4 MB  51.4.0 91cb996b WEX-WEI
+EXECUTION TIME       =        1.171 SECONDS      4 MB  51.4.0 91cb996b WEX-WEI
 
 
 USER: Academic User                                  G260505+0003Ac-GEN
