@@ -1,0 +1,22 @@
+--- Job M1_6_E1eL.gms Start 11/22/25 15:03:57 51.2.1 5fb43f63 DEX-DEG x86 64bit/macOS
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/51/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input /Users/pm.deoliveiradejes/Desktop/M6_AGPE_sizing_models/Ejemplo_1_MINLP_L/gams/M1_6_E1eL.gms
+    XSave /Users/pm.deoliveiradejes/Desktop/M6_AGPE_sizing_models/Ejemplo_1_MINLP_L/gams/M1_6_E1eL.g0?
+    PageSize 0
+    Action C
+    ScrDir /Users/pm.deoliveiradejes/Desktop/M6_AGPE_sizing_models/Ejemplo_1_MINLP_L/gams/225a/
+    SysDir /Library/Frameworks/GAMS.framework/Versions/51/Resources/
+    LogOption 3
+    AppendLog 1
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+    PreviousWork 1
+Licensee: GAMS Demo, for EULA and demo limitations see   G250826+0003Cc-GEN
+          https://www.gams.com/latest/docs/UG%5FLicense.html         DC0000
+          /Users/pm.deoliveiradejes/Library/Application Support/GAMS/gamslice.txt
+          v:2                                                              
+          Demo license for demonstration and instructional purposes only

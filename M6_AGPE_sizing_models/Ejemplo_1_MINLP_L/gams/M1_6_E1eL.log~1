@@ -1,0 +1,49 @@
+--- Job M1_6_E1eL.gms Start 11/27/25 18:40:11 51.2.1 5fb43f63 DEX-DEG x86 64bit/macOS
+--- Applying:
+    /Library/Frameworks/GAMS.framework/Versions/51/Resources/gmsprmun.txt
+--- GAMS Parameters defined
+    Input "/Users/pm.deoliveiradejes/Dropbox (Personal)/Curso EDCO/AC&CE/GitHub AGyCE/AGyCE-main/M6_AGPE_sizing_models/Ejemplo_1_MINLP_L/gams/M1_6_E1eL.gms"
+    PageSize 0
+    ScrDir "/Users/pm.deoliveiradejes/Dropbox (Personal)/Curso EDCO/AC&CE/GitHub AGyCE/AGyCE-main/M6_AGPE_sizing_models/Ejemplo_1_MINLP_L/gams/225a/"
+    SysDir /Library/Frameworks/GAMS.framework/Versions/51/Resources/
+    LogOption 3
+    AppendLog 1
+    ErrMsg 1
+    ErrorLog 99
+    IDE 1
+    LstTitleLeftAligned 1
+Licensee: GAMS Demo, for EULA and demo limitations see   G250826+0003Cc-GEN
+          https://www.gams.com/latest/docs/UG%5FLicense.html         DC0000
+          /Users/pm.deoliveiradejes/Library/Application Support/GAMS/gamslice.txt
+          v:2                                                              
+          Demo license for demonstration and instructional purposes only
+System information: 4 physical cores and 16 Gb physical memory detected
+GAMS 51.2.1   Copyright (C) 1987-2025 GAMS Development. All rights reserved
+--- Starting compilation
+--- M1_6_E1eL.gms(4) 3 Mb
+--- . lambda.inc(8763) 4 Mb
+--- M1_6_E1eL.gms(5) 4 Mb
+--- . psi.inc(8763) 5 Mb
+--- M1_6_E1eL.gms(9) 5 Mb
+--- . PpvuC.inc(8763) 5 Mb
+--- M1_6_E1eL.gms(11) 5 Mb
+--- . Plu.inc(8763) 6 Mb
+--- M1_6_E1eL.gms(17633) 8 Mb
+--- Starting execution: elapsed 0:00:00.635
+--- Generating MINLP model modelAGSizingspain
+--- M1_6_E1eL.gms(52685) 30 Mb
+---   78,852 rows  61,337 columns  231,702 non-zeroes
+---   105,120 nl-code  35,040 nl-non-zeroes
+---   17,520 discrete-columns
+--- Range statistics (absolute non-zero finite values)
+--- RHS       [min, max] : [ 1.000E+00, 1.203E+05] - Zero values observed as well
+--- Bound     [min, max] : [ 1.000E+00, 1.000E+00] - Zero values observed as well
+--- Matrix    [min, max] : [ 1.000E-05, 7.000E+02] - Zero values observed as well
+*** The model exceeds the demo license limits for nonlinear models of more than 1000 rows or columns
+    As an academic user, you can submit large models to the NEOS service for free (see https://www.gams.com/neos)
+    Alternatively, feel free to contact sales@gams.com to discuss your options
+--- M1_6_E1eL.gms(52685) 28 Mb
+*** Status: Terminated due to a licensing error
+***         License file: /Users/pm.deoliveiradejes/Library/Application Support/GAMS/gamslice.txt
+***         Inspect listing file for more information.
+--- Job M1_6_E1eL.gms Stop 11/27/25 18:40:14 elapsed 0:00:03.097
